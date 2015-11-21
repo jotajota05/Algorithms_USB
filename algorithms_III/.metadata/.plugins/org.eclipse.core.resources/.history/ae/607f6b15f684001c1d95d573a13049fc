@@ -1,0 +1,17 @@
+class Edge
+{ 
+    int v, w;
+
+    Edge(int v, int w){ 
+    	this.v = v; 
+    	this.w = w; 
+    }
+    
+    public int other(int  v) {
+    	return 0;
+    }
+    
+    public double wt() {
+    	return 0;
+    }
+}

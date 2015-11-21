@@ -1,0 +1,81 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
+public class Archivo {
+
+	public String file;
+	
+	public Archivo(String file) {
+		this.file = file;
+	}
+	
+	public Grafo leerGrafo() throws IOException {
+		Grafo G;
+		int i;
+		int n=0;
+		int p;
+		String id, vertI, vertF;
+		boolean digrafo = false;
+		Lado lado;
+		Vertice v, w;
+
+		// Se pasa el nombre del archivo por la linea de comando
+		BufferedReader in = new BufferedReader( new FileReader(file) );
+		String s;
+		String[] tok;
+			
+		// Se lee si el grafo es dirigido o no 
+		if( (s = in.readLine()) != null ){
+		    tok = s.split("\\b\\s");
+		    System.out.println( tok[0].trim() );
+		    if( tok[0].trim().equals("d") )
+			digrafo = true;
+		}
+		
+		if (digrafo) G=new DIGrafo();
+		else G=new NDGrafo();
+		
+		// Se lee el numero de nodos
+		if( (s = in.readLine()) != null ){
+		    tok = s.split("\\b\\s");
+		    n = Integer.valueOf( tok[0].trim() ).intValue();
+		    System.out.println( tok[0].trim() );
+		}
+		
+		// Se lee el numero de lados
+		if( (s = in.readLine()) != null ){
+		    tok = s.split("\\b\\s");
+		    n = Integer.valueOf( tok[0].trim() ).intValue();
+		    System.out.println( tok[0].trim() );
+		}
+		
+		// Se leen los arcos del grafo
+		for( i = 0; i < n; i++ ){
+		    if( (s = in.readLine()) != null ){
+			tok = s.split("\\b\\s");
+			System.out.println( tok[0].trim()+" "+tok[1].trim()
+								+" "+tok[2].trim()+" "+tok[3].trim());
+			vertI = tok[0].trim();
+			vertF = tok[1].trim();
+			id = tok[2].trim();
+			p = (new Integer(tok[3].trim())).intValue();
+			v=new Vertice(vertI);
+			w=new Vertice(vertF);
+			if (!G.Vertices().contains(v)) {
+				G.agregarVertice(v);
+			}
+			if (!G.Vertices().contains(w)) {
+				G.agregarVertice(w);
+			}
+			if (digrafo) lado=new Arco(id,v,w,p);
+			else lado=new Arista(id,v,w,p);
+			G.agregarLado(lado);
+		    }
+		}
+		System.out.println( "\n*** Fin de la lectura del archivo " +this.file+" ***\n" );
+		in.close();
+		
+		return G;
+	    }
+}

@@ -1,0 +1,24 @@
+\select@language {spanish}
+\contentsline {section}{\numberline {1}Introducci\'on}{3}
+\contentsline {subsection}{\numberline {1.1}Breve descripci\'on del problema}{3}
+\contentsline {section}{\numberline {2}Dise\~no}{4}
+\contentsline {subsection}{\numberline {2.1}Modelo utilizado para representar el problema}{4}
+\contentsline {subsection}{\numberline {2.2}Estructuras y algoritmos involucrados en la aplicaci\'on}{4}
+\contentsline {subsubsection}{\numberline {2.2.1}Clase Piece}{5}
+\contentsline {subsubsection}{\numberline {2.2.2}Clase Pattern}{5}
+\contentsline {subsection}{\numberline {2.3}Representaci\'on de la soluci\'on}{7}
+\contentsline {subsection}{\numberline {2.4}Funci\'on Objetivo}{7}
+\contentsline {subsection}{\numberline {2.5}Operadores}{8}
+\contentsline {section}{\numberline {3}Detalles de implementaci\'on}{9}
+\contentsline {subsection}{\numberline {3.1}Pseudocodigo de las estructuras}{9}
+\contentsline {subsubsection}{\numberline {3.1.1}Algoritmo de Local Search}{9}
+\contentsline {subsubsection}{\numberline {3.1.2}Algoritmo de Local Search - Mejor Mejor}{9}
+\contentsline {subsubsection}{\numberline {3.1.3}Algoritmo de ILS}{10}
+\contentsline {section}{\numberline {4}Instrucciones de operaci\'on}{11}
+\contentsline {section}{\numberline {5}Estado actual}{11}
+\contentsline {subsection}{\numberline {5.1}Estado final de la aplicaci\'on}{11}
+\contentsline {subsection}{\numberline {5.2}Errores}{11}
+\contentsline {section}{\numberline {6}Conclusiones y recomendaciones}{12}
+\contentsline {subsection}{\numberline {6.1}Mejoras}{12}
+\contentsline {section}{\numberline {7}Tablas}{13}
+\contentsline {section}{\numberline {8}Referencias bibliogr\'aficas}{14}

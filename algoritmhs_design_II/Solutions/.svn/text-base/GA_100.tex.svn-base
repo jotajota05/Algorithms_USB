@@ -1,0 +1,78 @@
+\documentstyle[12pt]{article}
+\begin{document}
+\begin{table}
+\caption{Tabla GA con 100 piezas}
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+ & {\bf Sol Inicial} & {\bf Sol Obtenida} & {\bf Tiempo (seg)} \\
+\hline
+Ejec1 & -- & 12  & 1.12 \\
+\hline
+Ejec2 & -- & 20  & 1.13 \\
+\hline
+Ejec3 & -- & 20  & 1.11 \\
+\hline
+Ejec4 & -- & 28  & 1.12 \\
+\hline
+Ejec5 & -- & 28  & 1.12 \\
+\hline
+Ejec6 & -- & 20  & 1.17 \\
+\hline
+Ejec7 & -- & 28  & 1.13 \\
+\hline
+Ejec8 & -- & 12  & 1.12 \\
+\hline
+Ejec9 & -- & 20  & 1.13 \\
+\hline
+Ejec10 & -- & 4  & 1.1 \\
+\hline
+Ejec11 & -- & 28  & 1.13 \\
+\hline
+Ejec12 & -- & 12  & 1.12 \\
+\hline
+Ejec13 & -- & 28  & 1.11 \\
+\hline
+Ejec14 & -- & 12  & 1.14 \\
+\hline
+Ejec15 & -- & 20  & 1.11 \\
+\hline
+Ejec16 & -- & 20  & 1.13 \\
+\hline
+Ejec17 & -- & 20  & 1.15 \\
+\hline
+Ejec18 & -- & 20  & 1.12 \\
+\hline
+Ejec19 & -- & 20  & 1.13 \\
+\hline
+Ejec20 & -- & 20  & 1.12 \\
+\hline
+Ejec21 & -- & 20  & 1.15 \\
+\hline
+Ejec22 & -- & 20  & 1.15 \\
+\hline
+Ejec23 & -- & 12  & 1.12 \\
+\hline
+Ejec24 & -- & 28  & 1.12 \\
+\hline
+Ejec25 & -- & 20  & 1.13 \\
+\hline
+Ejec26 & -- & 12  & 1.12 \\
+\hline
+Ejec27 & -- & 20  & 1.13 \\
+\hline
+Ejec28 & -- & 20  & 1.11 \\
+\hline
+Ejec29 & -- & 20  & 1.12 \\
+\hline
+Ejec30 & -- & 28  & 1.12 \\
+\hline
+{\bf Mejor} & {\bf -- } & {\bf 4} & {\bf 1.1} \\
+\hline
+{\bf Promedio} & {\bf -- } & {\bf 19.7333333333} & {\bf 1.126} \\
+\hline
+{\bf Peor} & {\bf -- } & {\bf 28} & {\bf 1.17} \\
+\hline
+\end{tabular}
+\end{table}
+\end{document}

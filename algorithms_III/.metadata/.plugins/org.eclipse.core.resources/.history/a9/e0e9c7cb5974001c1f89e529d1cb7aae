@@ -1,0 +1,30 @@
+
+public class Arco extends Lado {
+
+	public String id;
+	public Vertice vertInicial;
+	public Vertice vertFinal;
+	public int peso;
+	
+	public Arco(String id,Vertice v,Vertice w,int p) {
+		this.id = id;
+		vertInicial = v;
+		vertFinal = w;
+		peso = p;
+	}
+	
+	public String identificador() {
+		return id;
+	}
+	
+	public Vertice vertIni() {
+		return vertInicial;
+	}
+	public Vertice vertFin() {
+		return vertInicial;
+	}
+	
+	public int peso() {
+		return peso;
+	}
+}

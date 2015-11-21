@@ -1,0 +1,34 @@
+#ifndef PATTERN
+#define PATTERN
+
+using namespace std;
+
+class Pattern {
+
+ public:
+  int width;
+  int height;
+  int num_pieces;
+  list<Piece *> pieces[];
+  int area_ocup;
+  int area_no_ocup;
+  int lines;
+  Pattern();
+  Pattern(int, int);
+  Pattern(list<Piece *>, int, int);
+  Pattern perturbar(Pattern);
+  int quality();
+  int distance(Pattern);
+  list<Pattern> vicinity();
+  Pattern vicinityNext();
+  void updateHeight();
+ private:
+  int x;
+  int y;
+  int x2;
+  int y2;
+  int x21;
+  int y21;
+};
+
+#endif

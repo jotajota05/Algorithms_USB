@@ -1,0 +1,1384 @@
+ /* No modifique este archivo, será regenerado en cada compilación */
+ /* Obligaciones de prueba:
+  * Línea 533. Los guardias están definidos - 1/2. id=1
+  * [salida=null :: 1 < length(salida,0)]
+  * Línea 533. Los guardias están definidos - 2/2. id=1
+  * [salida=null :: 0 < length(salida,0)]
+  * Línea 465: El invariante se mantiene y decrece la cota - 1/2. id=2
+  * [k:int :: k < 8 ==> 0 <= 8 - (k + 1)]
+  * Línea 465: El invariante se mantiene y decrece la cota - 2/2. id=2
+  * [k:int :: k < 8 ==> 8 - (k + 1) < 8 - k]
+  * Línea 445: El invariante se mantiene y decrece la cota - 1/14. id=3
+  * [opcion:int :: 
+  *  opcion <= 0 ==> 
+  *   readInt("Opcion: ") <= 0 \\/ 
+  *    readInt("Opcion: ") > 4 \\/ 
+  *     0 < readInt("Opcion: ") /\\ readInt("Opcion: ") <= 4]
+  * Línea 445: El invariante se mantiene y decrece la cota - 2/14. id=3
+  * [k:int, opcion:int :: 
+  *  opcion <= 0 /\\ readInt("Opcion: ") <= 0 ==> 0 <= 10 - (k + 1)]
+  * Línea 445: El invariante se mantiene y decrece la cota - 3/14. id=3
+  * [k:int, opcion:int :: 
+  *  opcion <= 0 /\\ readInt("Opcion: ") > 4 ==> 0 <= 10 - (k + 1)]
+  * Línea 445: El invariante se mantiene y decrece la cota - 4/14. id=3
+  * [k:int, opcion:int :: 
+  *  opcion <= 0 /\\ readInt("Opcion: ") <= 0 ==> 10 - (k + 1) < 10 - k]
+  * Línea 445: El invariante se mantiene y decrece la cota - 5/14. id=3
+  * [k:int, opcion:int :: 
+  *  opcion <= 0 /\\ readInt("Opcion: ") > 4 ==> 10 - (k + 1) < 10 - k]
+  * Línea 445: El invariante se mantiene y decrece la cota - 6/14. id=3
+  * [k:int, opcion:int :: 
+  *  opcion <= 0 /\\ 0 < readInt("Opcion: ") /\\ readInt("Opcion: ") <= 4 ==> 
+  *   0 <= 10 - (k + 1)]
+  * Línea 445: El invariante se mantiene y decrece la cota - 7/14. id=3
+  * [k:int, opcion:int :: 
+  *  opcion <= 0 /\\ 0 < readInt("Opcion: ") /\\ readInt("Opcion: ") <= 4 ==> 
+  *   10 - (k + 1) < 10 - k]
+  * Línea 445: El invariante se mantiene y decrece la cota - 8/14. id=3
+  * [opcion:int :: 
+  *  opcion > 4 ==> 
+  *   readInt("Opcion: ") <= 0 \\/ 
+  *    readInt("Opcion: ") > 4 \\/ 
+  *     0 < readInt("Opcion: ") /\\ readInt("Opcion: ") <= 4]
+  * Línea 445: El invariante se mantiene y decrece la cota - 9/14. id=3
+  * [k:int, opcion:int :: 
+  *  opcion > 4 /\\ readInt("Opcion: ") <= 0 ==> 0 <= 10 - (k + 1)]
+  * Línea 445: El invariante se mantiene y decrece la cota - 10/14. id=3
+  * [k:int, opcion:int :: 
+  *  opcion > 4 /\\ readInt("Opcion: ") > 4 ==> 0 <= 10 - (k + 1)]
+  * Línea 445: El invariante se mantiene y decrece la cota - 11/14. id=3
+  * [k:int, opcion:int :: 
+  *  opcion > 4 /\\ readInt("Opcion: ") <= 0 ==> 10 - (k + 1) < 10 - k]
+  * Línea 445: El invariante se mantiene y decrece la cota - 12/14. id=3
+  * [k:int, opcion:int :: 
+  *  opcion > 4 /\\ readInt("Opcion: ") > 4 ==> 10 - (k + 1) < 10 - k]
+  * Línea 445: El invariante se mantiene y decrece la cota - 13/14. id=3
+  * [k:int, opcion:int :: 
+  *  opcion > 4 /\\ 0 < readInt("Opcion: ") /\\ readInt("Opcion: ") <= 4 ==> 
+  *   0 <= 10 - (k + 1)]
+  * Línea 445: El invariante se mantiene y decrece la cota - 14/14. id=3
+  * [k:int, opcion:int :: 
+  *  opcion > 4 /\\ 0 < readInt("Opcion: ") /\\ readInt("Opcion: ") <= 4 ==> 
+  *   10 - (k + 1) < 10 - k]
+  * Línea 423: El invariante se mantiene y decrece la cota - 1/2. id=4
+  * [k:int :: k < 8 ==> 0 <= 8 - (k + 1)]
+  * Línea 423: El invariante se mantiene y decrece la cota - 2/2. id=4
+  * [k:int :: k < 8 ==> 8 - (k + 1) < 8 - k]
+  * Corrección de la función darcarta - 1/2. id=5
+  * [x:int :: 0 <= x]
+  * Corrección de la función darcarta - 2/2. id=5
+  * [mazo=null, x:int :: x < length(mazo,0)]
+  * Línea 394: El invariante se mantiene y decrece la cota - 1/10. id=6
+  * [apuestavalida:boolean, credito:int, k:int, nombre:String :: 
+  *  k >= 0 /\\ ! apuestavalida ==> 
+  *   readInt(nombre + " Cuanto deseas apostar?:") < 5 \\/ 
+  *    readInt(nombre + " Cuanto deseas apostar?:") > credito \\/ 
+  *     5 <= readInt(nombre + " Cuanto deseas apostar?:") /\\ 
+  *      readInt(nombre + " Cuanto deseas apostar?:") <= credito]
+  * Línea 394: El invariante se mantiene y decrece la cota - 2/10. id=6
+  * [apuestavalida:boolean, k:int, nombre:String :: 
+  *  k >= 0 /\\ 
+  *    ! apuestavalida /\\ readInt(nombre + " Cuanto deseas apostar?:") < 5 ==> 
+  *   k + 1 >= 0]
+  * Línea 394: El invariante se mantiene y decrece la cota - 3/10. id=6
+  * [apuestavalida:boolean, k:int, nombre:String :: 
+  *  k >= 0 /\\ 
+  *    ! apuestavalida /\\ readInt(nombre + " Cuanto deseas apostar?:") < 5 ==> 
+  *   0 <= 100 - (k + 1)]
+  * Línea 394: El invariante se mantiene y decrece la cota - 4/10. id=6
+  * [apuestavalida:boolean, k:int, nombre:String :: 
+  *  k >= 0 /\\ 
+  *    ! apuestavalida /\\ readInt(nombre + " Cuanto deseas apostar?:") < 5 ==> 
+  *   100 - (k + 1) < 100 - k]
+  * Línea 394: El invariante se mantiene y decrece la cota - 5/10. id=6
+  * [apuestavalida:boolean, credito:int, k:int, nombre:String :: 
+  *  k >= 0 /\\ 
+  *    ! apuestavalida /\\ readInt(nombre + " Cuanto deseas apostar?:") > credito ==> 
+  *   k + 1 >= 0]
+  * Línea 394: El invariante se mantiene y decrece la cota - 6/10. id=6
+  * [apuestavalida:boolean, credito:int, k:int, nombre:String :: 
+  *  k >= 0 /\\ 
+  *    ! apuestavalida /\\ readInt(nombre + " Cuanto deseas apostar?:") > credito ==> 
+  *   0 <= 100 - (k + 1)]
+  * Línea 394: El invariante se mantiene y decrece la cota - 7/10. id=6
+  * [apuestavalida:boolean, credito:int, k:int, nombre:String :: 
+  *  k >= 0 /\\ 
+  *    ! apuestavalida /\\ readInt(nombre + " Cuanto deseas apostar?:") > credito ==> 
+  *   100 - (k + 1) < 100 - k]
+  * Línea 394: El invariante se mantiene y decrece la cota - 8/10. id=6
+  * [apuestavalida:boolean, credito:int, k:int, nombre:String :: 
+  *  k >= 0 /\\ 
+  *    ! apuestavalida /\\ 
+  *     5 <= readInt(nombre + " Cuanto deseas apostar?:") /\\ 
+  *      readInt(nombre + " Cuanto deseas apostar?:") <= credito ==> 
+  *   k + 1 >= 0]
+  * Línea 394: El invariante se mantiene y decrece la cota - 9/10. id=6
+  * [apuestavalida:boolean, credito:int, k:int, nombre:String :: 
+  *  k >= 0 /\\ 
+  *    ! apuestavalida /\\ 
+  *     5 <= readInt(nombre + " Cuanto deseas apostar?:") /\\ 
+  *      readInt(nombre + " Cuanto deseas apostar?:") <= credito ==> 
+  *   0 <= 100 - (k + 1)]
+  * Línea 394: El invariante se mantiene y decrece la cota - 10/10. id=6
+  * [apuestavalida:boolean, credito:int, k:int, nombre:String :: 
+  *  k >= 0 /\\ 
+  *    ! apuestavalida /\\ 
+  *     5 <= readInt(nombre + " Cuanto deseas apostar?:") /\\ 
+  *      readInt(nombre + " Cuanto deseas apostar?:") <= credito ==> 
+  *   100 - (k + 1) < 100 - k]
+  * Línea 294: El invariante se mantiene y decrece la cota - 1/3. id=7
+  * [k:int, lineas:int :: k >= 0 /\\ k <= lineas ==> k + 1 >= 0]
+  * Línea 294: El invariante se mantiene y decrece la cota - 2/3. id=7
+  * [k:int, lineas:int :: k >= 0 /\\ k <= lineas ==> 0 <= lineas + 1 - (k + 1)]
+  * Línea 294: El invariante se mantiene y decrece la cota - 3/3. id=7
+  * [k:int, lineas:int :: 
+  *  k >= 0 /\\ k <= lineas ==> lineas + 1 - (k + 1) < lineas + 1 - k]
+  * Línea 114: El invariante garantiza la postcondición a la salida - 1/4. id=8
+  * [k:int, x1:int, xi:int :: k >= 0 /\\ xi >= x1 + 25 /\\ k > 40 ==> x1 >= - 400]
+  * Línea 114: El invariante garantiza la postcondición a la salida - 2/4. id=8
+  * [k:int, x1:int, xi:int :: k >= 0 /\\ xi >= x1 + 25 /\\ k > 40 ==> x1 >= - 400]
+  * Línea 114: El invariante garantiza la postcondición a la salida - 3/4. id=8
+  * [k:int, x1:int, xi:int, y1:int :: 
+  *  k >= 0 /\\ xi >= x1 + 25 /\\ k > 40 ==> y1 >= - 250]
+  * Línea 114: El invariante garantiza la postcondición a la salida - 4/4. id=8
+  * [k:int, x1:int, xi:int, y2:int :: 
+  *  k >= 0 /\\ xi >= x1 + 25 /\\ k > 40 ==> y2 >= - 250]
+  * Línea 114: El invariante se mantiene y decrece la cota - 1/4. id=9
+  * [k:int, x1:int, xi:int :: k >= 0 /\\ xi >= x1 + 25 /\\ k <= 40 ==> k + 1 >= 0]
+  * Línea 114: El invariante se mantiene y decrece la cota - 2/4. id=9
+  * [k:int, x1:int, xi:int :: 
+  *  k >= 0 /\\ xi >= x1 + 25 /\\ k <= 40 ==> xi + 1 >= x1 + 25]
+  * Línea 114: El invariante se mantiene y decrece la cota - 3/4. id=9
+  * [k:int, x1:int, xi:int :: 
+  *  k >= 0 /\\ xi >= x1 + 25 /\\ k <= 40 ==> 0 <= 41 - (k + 1)]
+  * Línea 114: El invariante se mantiene y decrece la cota - 4/4. id=9
+  * [k:int, x1:int, xi:int :: 
+  *  k >= 0 /\\ xi >= x1 + 25 /\\ k <= 40 ==> 41 - (k + 1) < 41 - k]
+  * Línea 125: El invariante se mantiene y decrece la cota - 1/4. id=10
+  * [k:int, x1:int, xi:int :: k >= 0 /\\ xi >= x1 + 25 /\\ k <= 40 ==> k + 1 >= 0]
+  * Línea 125: El invariante se mantiene y decrece la cota - 2/4. id=10
+  * [k:int, x1:int, xi:int :: 
+  *  k >= 0 /\\ xi >= x1 + 25 /\\ k <= 40 ==> xi + 1 >= x1 + 25]
+  * Línea 125: El invariante se mantiene y decrece la cota - 3/4. id=10
+  * [k:int, x1:int, xi:int :: 
+  *  k >= 0 /\\ xi >= x1 + 25 /\\ k <= 40 ==> 0 <= 41 - (k + 1)]
+  * Línea 125: El invariante se mantiene y decrece la cota - 4/4. id=10
+  * [k:int, x1:int, xi:int :: 
+  *  k >= 0 /\\ xi >= x1 + 25 /\\ k <= 40 ==> 41 - (k + 1) < 41 - k]
+  * Línea 131: El invariante garantiza la postcondición a la salida - 1/4. id=11
+  * [k:int, x1:int, xi:int :: k >= 0 /\\ xi >= x1 + 25 /\\ k > 40 ==> x1 >= - 400]
+  * Línea 131: El invariante garantiza la postcondición a la salida - 2/4. id=11
+  * [k:int, x1:int, xi:int :: k >= 0 /\\ xi >= x1 + 25 /\\ k > 40 ==> x1 >= - 400]
+  * Línea 131: El invariante garantiza la postcondición a la salida - 3/4. id=11
+  * [k:int, x1:int, xi:int, y1:int :: 
+  *  k >= 0 /\\ xi >= x1 + 25 /\\ k > 40 ==> y1 >= - 250]
+  * Línea 131: El invariante garantiza la postcondición a la salida - 4/4. id=11
+  * [k:int, x1:int, xi:int, y2:int :: 
+  *  k >= 0 /\\ xi >= x1 + 25 /\\ k > 40 ==> y2 >= - 250]
+  * Línea 131: El invariante se mantiene y decrece la cota - 1/4. id=12
+  * [k:int, x1:int, xi:int :: k >= 0 /\\ xi >= x1 + 25 /\\ k <= 40 ==> k + 1 >= 0]
+  * Línea 131: El invariante se mantiene y decrece la cota - 2/4. id=12
+  * [k:int, x1:int, xi:int :: 
+  *  k >= 0 /\\ xi >= x1 + 25 /\\ k <= 40 ==> xi + 1 >= x1 + 25]
+  * Línea 131: El invariante se mantiene y decrece la cota - 3/4. id=12
+  * [k:int, x1:int, xi:int :: 
+  *  k >= 0 /\\ xi >= x1 + 25 /\\ k <= 40 ==> 0 <= 41 - (k + 1)]
+  * Línea 131: El invariante se mantiene y decrece la cota - 4/4. id=12
+  * [k:int, x1:int, xi:int :: 
+  *  k >= 0 /\\ xi >= x1 + 25 /\\ k <= 40 ==> 41 - (k + 1) < 41 - k]
+  * Línea 145: El invariante garantiza la postcondición a la salida - 1/4. id=13
+  * [k:int, x1:int, xi:int :: k >= 0 /\\ xi >= x1 + 40 /\\ k > 10 ==> x1 >= - 400]
+  * Línea 145: El invariante garantiza la postcondición a la salida - 2/4. id=13
+  * [k:int, x1:int, xi:int :: k >= 0 /\\ xi >= x1 + 40 /\\ k > 10 ==> x1 >= - 400]
+  * Línea 145: El invariante garantiza la postcondición a la salida - 3/4. id=13
+  * [k:int, x1:int, xi:int, y1:int :: 
+  *  k >= 0 /\\ xi >= x1 + 40 /\\ k > 10 ==> y1 >= - 250]
+  * Línea 145: El invariante garantiza la postcondición a la salida - 4/4. id=13
+  * [k:int, x1:int, xi:int, y2:int :: 
+  *  k >= 0 /\\ xi >= x1 + 40 /\\ k > 10 ==> y2 >= - 250]
+  * Línea 145: El invariante se mantiene y decrece la cota - 1/4. id=14
+  * [k:int, x1:int, xi:int :: k >= 0 /\\ xi >= x1 + 40 /\\ k <= 10 ==> k + 1 >= 0]
+  * Línea 145: El invariante se mantiene y decrece la cota - 2/4. id=14
+  * [k:int, x1:int, xi:int :: 
+  *  k >= 0 /\\ xi >= x1 + 40 /\\ k <= 10 ==> xi + 1 >= x1 + 40]
+  * Línea 145: El invariante se mantiene y decrece la cota - 3/4. id=14
+  * [k:int, x1:int, xi:int :: 
+  *  k >= 0 /\\ xi >= x1 + 40 /\\ k <= 10 ==> 0 <= 11 - (k + 1)]
+  * Línea 145: El invariante se mantiene y decrece la cota - 4/4. id=14
+  * [k:int, x1:int, xi:int :: 
+  *  k >= 0 /\\ xi >= x1 + 40 /\\ k <= 10 ==> 11 - (k + 1) < 11 - k]
+  * Línea 158: El invariante se mantiene y decrece la cota - 1/4. id=15
+  * [k:int, x1:int, xi:int :: k >= 0 /\\ xi >= x1 + 25 /\\ k <= 40 ==> k + 1 >= 0]
+  * Línea 158: El invariante se mantiene y decrece la cota - 2/4. id=15
+  * [k:int, x1:int, xi:int :: 
+  *  k >= 0 /\\ xi >= x1 + 25 /\\ k <= 40 ==> xi + 1 >= x1 + 25]
+  * Línea 158: El invariante se mantiene y decrece la cota - 3/4. id=15
+  * [k:int, x1:int, xi:int :: 
+  *  k >= 0 /\\ xi >= x1 + 25 /\\ k <= 40 ==> 0 <= 41 - (k + 1)]
+  * Línea 158: El invariante se mantiene y decrece la cota - 4/4. id=15
+  * [k:int, x1:int, xi:int :: 
+  *  k >= 0 /\\ xi >= x1 + 25 /\\ k <= 40 ==> 41 - (k + 1) < 41 - k]
+  * Línea 164: El invariante garantiza la postcondición a la salida - 1/4. id=16
+  * [k:int, x1:int, xi:int :: k >= 0 /\\ xi >= x1 + 40 /\\ k > 10 ==> x1 >= - 400]
+  * Línea 164: El invariante garantiza la postcondición a la salida - 2/4. id=16
+  * [k:int, x1:int, xi:int :: k >= 0 /\\ xi >= x1 + 40 /\\ k > 10 ==> x1 >= - 400]
+  * Línea 164: El invariante garantiza la postcondición a la salida - 3/4. id=16
+  * [k:int, x1:int, xi:int, y1:int :: 
+  *  k >= 0 /\\ xi >= x1 + 40 /\\ k > 10 ==> y1 >= - 250]
+  * Línea 164: El invariante garantiza la postcondición a la salida - 4/4. id=16
+  * [k:int, x1:int, xi:int, y2:int :: 
+  *  k >= 0 /\\ xi >= x1 + 40 /\\ k > 10 ==> y2 >= - 250]
+  * Línea 164: El invariante se mantiene y decrece la cota - 1/4. id=17
+  * [k:int, x1:int, xi:int :: k >= 0 /\\ xi >= x1 + 40 /\\ k <= 10 ==> k + 1 >= 0]
+  * Línea 164: El invariante se mantiene y decrece la cota - 2/4. id=17
+  * [k:int, x1:int, xi:int :: 
+  *  k >= 0 /\\ xi >= x1 + 40 /\\ k <= 10 ==> xi + 1 >= x1 + 40]
+  * Línea 164: El invariante se mantiene y decrece la cota - 3/4. id=17
+  * [k:int, x1:int, xi:int :: 
+  *  k >= 0 /\\ xi >= x1 + 40 /\\ k <= 10 ==> 0 <= 11 - (k + 1)]
+  * Línea 164: El invariante se mantiene y decrece la cota - 4/4. id=17
+  * [k:int, x1:int, xi:int :: 
+  *  k >= 0 /\\ xi >= x1 + 40 /\\ k <= 10 ==> 11 - (k + 1) < 11 - k]
+  * Línea 566: El invariante garantiza la postcondición a la salida - 1/74. id=18
+  * [_C11=null, finmano:boolean, manocrupier=null, n:int, numerodepartidasmax:int, 
+  *   salirjuego:boolean, valormanocrupier:int, valormanojugador:int :: 
+  *  salirjuego ==> 
+  *   (! finmano \\/ finmano) /\\ 
+  *    (! finmano ==> 0 < length(manocrupier,0)) /\\ 
+  *     (finmano ==> 
+  *       (! finmano \\/ finmano) /\\ 
+  *        (! finmano ==> 
+  *           (valormanocrupier = valormanojugador \\/ 
+  *              valormanocrupier < valormanojugador \\/ 
+  *               valormanocrupier > valormanojugador) /\\ 
+  *            (valormanocrupier = valormanojugador ==> 
+  *               (salirjuego \\/ ! salirjuego) /\\ 
+  *                (salirjuego ==> 
+  *                   (readString("") = "s" \\/ 
+  *                      readString("") = "S" \\/ 
+  *                       readString("") = "" \\/ 
+  *                        readString("") = "n" \\/ readString("") = "N") /\\ 
+  *                    (readString("") = "s" \\/ 
+  *                        readString("") = "S" \\/ readString("") = "" ==> 
+  *                       0 <= numerodepartidasmax - (n + 1) /\\ 
+  *                        numerodepartidasmax - (n + 1) < _C11) /\\ 
+  *                     (readString("") = "n" \\/ readString("") = "N" ==> 
+  *                       0 <= numerodepartidasmax - (n + 1) /\\ 
+  *                        numerodepartidasmax - (n + 1) < _C11)) /\\ 
+  *                 (! salirjuego ==> 
+  *                   0 <= numerodepartidasmax - (n + 1) /\\ 
+  *                    numerodepartidasmax - (n + 1) < _C11)) /\\ 
+  *             (valormanocrupier < valormanojugador ==> 
+  *                (salirjuego \\/ ! salirjuego) /\\ 
+  *                 (salirjuego ==> 
+  *                    (readString("") = "s" \\/ 
+  *                       readString("") = "S" \\/ 
+  *                        readString("") = "" \\/ 
+  *                         readString("") = "n" \\/ readString("") = "N") /\\ 
+  *                     (readString("") = "s" \\/ 
+  *                         readString("") = "S" \\/ readString("") = "" ==> 
+  *                        0 <= numerodepartidasmax - (n + 1) /\\ 
+  *                         numerodepartidasmax - (n + 1) < _C11) /\\ 
+  *                      (readString("") = "n" \\/ readString("") = "N" ==> 
+  *                        0 <= numerodepartidasmax - (n + 1) /\\ 
+  *                         numerodepartidasmax - (n + 1) < _C11)) /\\ 
+  *                  (! salirjuego ==> 
+  *                    0 <= numerodepartidasmax - (n + 1) /\\ 
+  *                     numerodepartidasmax - (n + 1) < _C11)) /\\ 
+  *              (valormanocrupier > valormanojugador ==> 
+  *                (salirjuego \\/ ! salirjuego) /\\ 
+  *                 (salirjuego ==> 
+  *                    (readString("") = "s" \\/ 
+  *                       readString("") = "S" \\/ 
+  *                        readString("") = "" \\/ 
+  *                         readString("") = "n" \\/ readString("") = "N") /\\ 
+  *                     (readString("") = "s" \\/ 
+  *                         readString("") = "S" \\/ readString("") = "" ==> 
+  *                        0 <= numerodepartidasmax - (n + 1) /\\ 
+  *                         numerodepartidasmax - (n + 1) < _C11) /\\ 
+  *                      (readString("") = "n" \\/ readString("") = "N" ==> 
+  *                        0 <= numerodepartidasmax - (n + 1) /\\ 
+  *                         numerodepartidasmax - (n + 1) < _C11)) /\\ 
+  *                  (! salirjuego ==> 
+  *                    0 <= numerodepartidasmax - (n + 1) /\\ 
+  *                     numerodepartidasmax - (n + 1) < _C11))) /\\ 
+  *         (finmano ==> 
+  *           (salirjuego \\/ ! salirjuego) /\\ 
+  *            (salirjuego ==> 
+  *               (readString("") = "s" \\/ 
+  *                  readString("") = "S" \\/ 
+  *                   readString("") = "" \\/ 
+  *                    readString("") = "n" \\/ readString("") = "N") /\\ 
+  *                (readString("") = "s" \\/ 
+  *                    readString("") = "S" \\/ readString("") = "" ==> 
+  *                   0 <= numerodepartidasmax - (n + 1) /\\ 
+  *                    numerodepartidasmax - (n + 1) < _C11) /\\ 
+  *                 (readString("") = "n" \\/ readString("") = "N" ==> 
+  *                   0 <= numerodepartidasmax - (n + 1) /\\ 
+  *                    numerodepartidasmax - (n + 1) < _C11)) /\\ 
+  *             (! salirjuego ==> 
+  *               0 <= numerodepartidasmax - (n + 1) /\\ 
+  *                numerodepartidasmax - (n + 1) < _C11)))]
+  * Línea 566: El invariante garantiza la postcondición a la salida - 2/74. id=18
+  * [_C11=null, finmano:boolean, manocrupier=null, n:int, numerodepartidasmax:int, 
+  *   salirjuego:boolean, valormanocrupier:int, valormanojugador:int :: 
+  *  finmano ==> 
+  *   (! finmano \\/ finmano) /\\ 
+  *    (! finmano ==> 0 < length(manocrupier,0)) /\\ 
+  *     (finmano ==> 
+  *       (! finmano \\/ finmano) /\\ 
+  *        (! finmano ==> 
+  *           (valormanocrupier = valormanojugador \\/ 
+  *              valormanocrupier < valormanojugador \\/ 
+  *               valormanocrupier > valormanojugador) /\\ 
+  *            (valormanocrupier = valormanojugador ==> 
+  *               (salirjuego \\/ ! salirjuego) /\\ 
+  *                (salirjuego ==> 
+  *                   (readString("") = "s" \\/ 
+  *                      readString("") = "S" \\/ 
+  *                       readString("") = "" \\/ 
+  *                        readString("") = "n" \\/ readString("") = "N") /\\ 
+  *                    (readString("") = "s" \\/ 
+  *                        readString("") = "S" \\/ readString("") = "" ==> 
+  *                       0 <= numerodepartidasmax - (n + 1) /\\ 
+  *                        numerodepartidasmax - (n + 1) < _C11) /\\ 
+  *                     (readString("") = "n" \\/ readString("") = "N" ==> 
+  *                       0 <= numerodepartidasmax - (n + 1) /\\ 
+  *                        numerodepartidasmax - (n + 1) < _C11)) /\\ 
+  *                 (! salirjuego ==> 
+  *                   0 <= numerodepartidasmax - (n + 1) /\\ 
+  *                    numerodepartidasmax - (n + 1) < _C11)) /\\ 
+  *             (valormanocrupier < valormanojugador ==> 
+  *                (salirjuego \\/ ! salirjuego) /\\ 
+  *                 (salirjuego ==> 
+  *                    (readString("") = "s" \\/ 
+  *                       readString("") = "S" \\/ 
+  *                        readString("") = "" \\/ 
+  *                         readString("") = "n" \\/ readString("") = "N") /\\ 
+  *                     (readString("") = "s" \\/ 
+  *                         readString("") = "S" \\/ readString("") = "" ==> 
+  *                        0 <= numerodepartidasmax - (n + 1) /\\ 
+  *                         numerodepartidasmax - (n + 1) < _C11) /\\ 
+  *                      (readString("") = "n" \\/ readString("") = "N" ==> 
+  *                        0 <= numerodepartidasmax - (n + 1) /\\ 
+  *                         numerodepartidasmax - (n + 1) < _C11)) /\\ 
+  *                  (! salirjuego ==> 
+  *                    0 <= numerodepartidasmax - (n + 1) /\\ 
+  *                     numerodepartidasmax - (n + 1) < _C11)) /\\ 
+  *              (valormanocrupier > valormanojugador ==> 
+  *                (salirjuego \\/ ! salirjuego) /\\ 
+  *                 (salirjuego ==> 
+  *                    (readString("") = "s" \\/ 
+  *                       readString("") = "S" \\/ 
+  *                        readString("") = "" \\/ 
+  *                         readString("") = "n" \\/ readString("") = "N") /\\ 
+  *                     (readString("") = "s" \\/ 
+  *                         readString("") = "S" \\/ readString("") = "" ==> 
+  *                        0 <= numerodepartidasmax - (n + 1) /\\ 
+  *                         numerodepartidasmax - (n + 1) < _C11) /\\ 
+  *                      (readString("") = "n" \\/ readString("") = "N" ==> 
+  *                        0 <= numerodepartidasmax - (n + 1) /\\ 
+  *                         numerodepartidasmax - (n + 1) < _C11)) /\\ 
+  *                  (! salirjuego ==> 
+  *                    0 <= numerodepartidasmax - (n + 1) /\\ 
+  *                     numerodepartidasmax - (n + 1) < _C11))) /\\ 
+  *         (finmano ==> 
+  *           (salirjuego \\/ ! salirjuego) /\\ 
+  *            (salirjuego ==> 
+  *               (readString("") = "s" \\/ 
+  *                  readString("") = "S" \\/ 
+  *                   readString("") = "" \\/ 
+  *                    readString("") = "n" \\/ readString("") = "N") /\\ 
+  *                (readString("") = "s" \\/ 
+  *                    readString("") = "S" \\/ readString("") = "" ==> 
+  *                   0 <= numerodepartidasmax - (n + 1) /\\ 
+  *                    numerodepartidasmax - (n + 1) < _C11) /\\ 
+  *                 (readString("") = "n" \\/ readString("") = "N" ==> 
+  *                   0 <= numerodepartidasmax - (n + 1) /\\ 
+  *                    numerodepartidasmax - (n + 1) < _C11)) /\\ 
+  *             (! salirjuego ==> 
+  *               0 <= numerodepartidasmax - (n + 1) /\\ 
+  *                numerodepartidasmax - (n + 1) < _C11)))]
+  * Línea 566: El invariante garantiza la postcondición a la salida - 3/74. id=18
+  * [finmano:boolean, opcion:int :: opcion = 2 ==> ! finmano \\/ finmano]
+  * Línea 566: El invariante garantiza la postcondición a la salida - 4/74. id=18
+  * [finmano:boolean, manocrupier=null, opcion:int :: 
+  *  opcion = 2 /\\ ! finmano ==> 0 < length(manocrupier,0)]
+  * Línea 566: El invariante garantiza la postcondición a la salida - 5/74. id=18
+  * [finmano:boolean, opcion:int :: opcion = 2 /\\ finmano ==> ! finmano \\/ finmano
+  * ]
+  * Línea 566: El invariante garantiza la postcondición a la salida - 6/74. id=18
+  * [finmano:boolean, opcion:int, valormanocrupier:int, valormanojugador:int :: 
+  *  opcion = 2 /\\ finmano /\\ ! finmano ==> 
+  *   valormanocrupier = valormanojugador \\/ 
+  *    valormanocrupier < valormanojugador \\/ valormanocrupier > valormanojugador]
+  * Línea 566: El invariante garantiza la postcondición a la salida - 7/74. id=18
+  * [finmano:boolean, opcion:int, salirjuego:boolean, valormanocrupier:int, 
+  *   valormanojugador:int :: 
+  *  opcion = 2 /\\ finmano /\\ ! finmano /\\ valormanocrupier = valormanojugador ==> 
+  *   salirjuego \\/ ! salirjuego]
+  * Línea 566: El invariante garantiza la postcondición a la salida - 8/74. id=18
+  * [finmano:boolean, opcion:int, salirjuego:boolean, valormanocrupier:int, 
+  *   valormanojugador:int :: 
+  *  opcion = 2 /\\ 
+  *    finmano /\\ ! finmano /\\ valormanocrupier = valormanojugador /\\ salirjuego ==> 
+  *   readString("") = "s" \\/ 
+  *    readString("") = "S" \\/ 
+  *     readString("") = "" \\/ 
+  *      readString("") = "n" \\/ readString("") = "N"]
+  * Línea 566: El invariante garantiza la postcondición a la salida - 9/74. id=18
+  * [finmano:boolean, n:int, numerodepartidasmax:int, opcion:int, salirjuego:boolean, 
+  *   valormanocrupier:int, valormanojugador:int :: 
+  *  opcion = 2 /\\ 
+  *    finmano /\\ 
+  *     ! finmano /\\ 
+  *      valormanocrupier = valormanojugador /\\ 
+  *       salirjuego /\\ 
+  *        (readString("") = "s" \\/ 
+  *          readString("") = "S" \\/ readString("") = "") ==> 
+  *   0 <= numerodepartidasmax - (n + 1)]
+  * Línea 566: El invariante garantiza la postcondición a la salida - 10/74. id=18
+  * [_C11=null, finmano:boolean, n:int, numerodepartidasmax:int, opcion:int, 
+  *   salirjuego:boolean, valormanocrupier:int, valormanojugador:int :: 
+  *  opcion = 2 /\\ 
+  *    finmano /\\ 
+  *     ! finmano /\\ 
+  *      valormanocrupier = valormanojugador /\\ 
+  *       salirjuego /\\ 
+  *        (readString("") = "s" \\/ 
+  *          readString("") = "S" \\/ readString("") = "") ==> 
+  *   numerodepartidasmax - (n + 1) < _C11]
+  * Línea 566: El invariante garantiza la postcondición a la salida - 11/74. id=18
+  * [finmano:boolean, n:int, numerodepartidasmax:int, opcion:int, salirjuego:boolean, 
+  *   valormanocrupier:int, valormanojugador:int :: 
+  *  opcion = 2 /\\ 
+  *    finmano /\\ 
+  *     ! finmano /\\ 
+  *      valormanocrupier = valormanojugador /\\ 
+  *       salirjuego /\\ (readString("") = "n" \\/ readString("") = "N") ==> 
+  *   0 <= numerodepartidasmax - (n + 1)]
+  * Línea 566: El invariante garantiza la postcondición a la salida - 12/74. id=18
+  * [_C11=null, finmano:boolean, n:int, numerodepartidasmax:int, opcion:int, 
+  *   salirjuego:boolean, valormanocrupier:int, valormanojugador:int :: 
+  *  opcion = 2 /\\ 
+  *    finmano /\\ 
+  *     ! finmano /\\ 
+  *      valormanocrupier = valormanojugador /\\ 
+  *       salirjuego /\\ (readString("") = "n" \\/ readString("") = "N") ==> 
+  *   numerodepartidasmax - (n + 1) < _C11]
+  * Línea 566: El invariante garantiza la postcondición a la salida - 13/74. id=18
+  * [finmano:boolean, n:int, numerodepartidasmax:int, opcion:int, salirjuego:boolean, 
+  *   valormanocrupier:int, valormanojugador:int :: 
+  *  opcion = 2 /\\ 
+  *    finmano /\\ 
+  *     ! finmano /\\ valormanocrupier = valormanojugador /\\ ! salirjuego ==> 
+  *   0 <= numerodepartidasmax - (n + 1)]
+  * Línea 566: El invariante garantiza la postcondición a la salida - 14/74. id=18
+  * [_C11=null, finmano:boolean, n:int, numerodepartidasmax:int, opcion:int, 
+  *   salirjuego:boolean, valormanocrupier:int, valormanojugador:int :: 
+  *  opcion = 2 /\\ 
+  *    finmano /\\ 
+  *     ! finmano /\\ valormanocrupier = valormanojugador /\\ ! salirjuego ==> 
+  *   numerodepartidasmax - (n + 1) < _C11]
+  * Línea 566: El invariante garantiza la postcondición a la salida - 15/74. id=18
+  * [finmano:boolean, opcion:int, salirjuego:boolean, valormanocrupier:int, 
+  *   valormanojugador:int :: 
+  *  opcion = 2 /\\ finmano /\\ ! finmano /\\ valormanocrupier < valormanojugador ==> 
+  *   salirjuego \\/ ! salirjuego]
+  * Línea 566: El invariante garantiza la postcondición a la salida - 16/74. id=18
+  * [finmano:boolean, opcion:int, salirjuego:boolean, valormanocrupier:int, 
+  *   valormanojugador:int :: 
+  *  opcion = 2 /\\ 
+  *    finmano /\\ ! finmano /\\ valormanocrupier < valormanojugador /\\ salirjuego ==> 
+  *   readString("") = "s" \\/ 
+  *    readString("") = "S" \\/ 
+  *     readString("") = "" \\/ 
+  *      readString("") = "n" \\/ readString("") = "N"]
+  * Línea 566: El invariante garantiza la postcondición a la salida - 17/74. id=18
+  * [finmano:boolean, n:int, numerodepartidasmax:int, opcion:int, salirjuego:boolean, 
+  *   valormanocrupier:int, valormanojugador:int :: 
+  *  opcion = 2 /\\ 
+  *    finmano /\\ 
+  *     ! finmano /\\ 
+  *      valormanocrupier < valormanojugador /\\ 
+  *       salirjuego /\\ 
+  *        (readString("") = "s" \\/ 
+  *          readString("") = "S" \\/ readString("") = "") ==> 
+  *   0 <= numerodepartidasmax - (n + 1)]
+  * Línea 566: El invariante garantiza la postcondición a la salida - 18/74. id=18
+  * [_C11=null, finmano:boolean, n:int, numerodepartidasmax:int, opcion:int, 
+  *   salirjuego:boolean, valormanocrupier:int, valormanojugador:int :: 
+  *  opcion = 2 /\\ 
+  *    finmano /\\ 
+  *     ! finmano /\\ 
+  *      valormanocrupier < valormanojugador /\\ 
+  *       salirjuego /\\ 
+  *        (readString("") = "s" \\/ 
+  *          readString("") = "S" \\/ readString("") = "") ==> 
+  *   numerodepartidasmax - (n + 1) < _C11]
+  * Línea 566: El invariante garantiza la postcondición a la salida - 19/74. id=18
+  * [finmano:boolean, n:int, numerodepartidasmax:int, opcion:int, salirjuego:boolean, 
+  *   valormanocrupier:int, valormanojugador:int :: 
+  *  opcion = 2 /\\ 
+  *    finmano /\\ 
+  *     ! finmano /\\ 
+  *      valormanocrupier < valormanojugador /\\ 
+  *       salirjuego /\\ (readString("") = "n" \\/ readString("") = "N") ==> 
+  *   0 <= numerodepartidasmax - (n + 1)]
+  * Línea 566: El invariante garantiza la postcondición a la salida - 20/74. id=18
+  * [_C11=null, finmano:boolean, n:int, numerodepartidasmax:int, opcion:int, 
+  *   salirjuego:boolean, valormanocrupier:int, valormanojugador:int :: 
+  *  opcion = 2 /\\ 
+  *    finmano /\\ 
+  *     ! finmano /\\ 
+  *      valormanocrupier < valormanojugador /\\ 
+  *       salirjuego /\\ (readString("") = "n" \\/ readString("") = "N") ==> 
+  *   numerodepartidasmax - (n + 1) < _C11]
+  * Línea 566: El invariante garantiza la postcondición a la salida - 21/74. id=18
+  * [finmano:boolean, n:int, numerodepartidasmax:int, opcion:int, salirjuego:boolean, 
+  *   valormanocrupier:int, valormanojugador:int :: 
+  *  opcion = 2 /\\ 
+  *    finmano /\\ 
+  *     ! finmano /\\ valormanocrupier < valormanojugador /\\ ! salirjuego ==> 
+  *   0 <= numerodepartidasmax - (n + 1)]
+  * Línea 566: El invariante garantiza la postcondición a la salida - 22/74. id=18
+  * [_C11=null, finmano:boolean, n:int, numerodepartidasmax:int, opcion:int, 
+  *   salirjuego:boolean, valormanocrupier:int, valormanojugador:int :: 
+  *  opcion = 2 /\\ 
+  *    finmano /\\ 
+  *     ! finmano /\\ valormanocrupier < valormanojugador /\\ ! salirjuego ==> 
+  *   numerodepartidasmax - (n + 1) < _C11]
+  * Línea 566: El invariante garantiza la postcondición a la salida - 23/74. id=18
+  * [finmano:boolean, opcion:int, salirjuego:boolean, valormanocrupier:int, 
+  *   valormanojugador:int :: 
+  *  opcion = 2 /\\ finmano /\\ ! finmano /\\ valormanocrupier > valormanojugador ==> 
+  *   salirjuego \\/ ! salirjuego]
+  * Línea 566: El invariante garantiza la postcondición a la salida - 24/74. id=18
+  * [finmano:boolean, opcion:int, salirjuego:boolean, valormanocrupier:int, 
+  *   valormanojugador:int :: 
+  *  opcion = 2 /\\ 
+  *    finmano /\\ ! finmano /\\ valormanocrupier > valormanojugador /\\ salirjuego ==> 
+  *   readString("") = "s" \\/ 
+  *    readString("") = "S" \\/ 
+  *     readString("") = "" \\/ 
+  *      readString("") = "n" \\/ readString("") = "N"]
+  * Línea 566: El invariante garantiza la postcondición a la salida - 25/74. id=18
+  * [finmano:boolean, n:int, numerodepartidasmax:int, opcion:int, salirjuego:boolean, 
+  *   valormanocrupier:int, valormanojugador:int :: 
+  *  opcion = 2 /\\ 
+  *    finmano /\\ 
+  *     ! finmano /\\ 
+  *      valormanocrupier > valormanojugador /\\ 
+  *       salirjuego /\\ 
+  *        (readString("") = "s" \\/ 
+  *          readString("") = "S" \\/ readString("") = "") ==> 
+  *   0 <= numerodepartidasmax - (n + 1)]
+  * Línea 566: El invariante garantiza la postcondición a la salida - 26/74. id=18
+  * [_C11=null, finmano:boolean, n:int, numerodepartidasmax:int, opcion:int, 
+  *   salirjuego:boolean, valormanocrupier:int, valormanojugador:int :: 
+  *  opcion = 2 /\\ 
+  *    finmano /\\ 
+  *     ! finmano /\\ 
+  *      valormanocrupier > valormanojugador /\\ 
+  *       salirjuego /\\ 
+  *        (readString("") = "s" \\/ 
+  *          readString("") = "S" \\/ readString("") = "") ==> 
+  *   numerodepartidasmax - (n + 1) < _C11]
+  * Línea 566: El invariante garantiza la postcondición a la salida - 27/74. id=18
+  * [finmano:boolean, n:int, numerodepartidasmax:int, opcion:int, salirjuego:boolean, 
+  *   valormanocrupier:int, valormanojugador:int :: 
+  *  opcion = 2 /\\ 
+  *    finmano /\\ 
+  *     ! finmano /\\ 
+  *      valormanocrupier > valormanojugador /\\ 
+  *       salirjuego /\\ (readString("") = "n" \\/ readString("") = "N") ==> 
+  *   0 <= numerodepartidasmax - (n + 1)]
+  * Línea 566: El invariante garantiza la postcondición a la salida - 28/74. id=18
+  * [_C11=null, finmano:boolean, n:int, numerodepartidasmax:int, opcion:int, 
+  *   salirjuego:boolean, valormanocrupier:int, valormanojugador:int :: 
+  *  opcion = 2 /\\ 
+  *    finmano /\\ 
+  *     ! finmano /\\ 
+  *      valormanocrupier > valormanojugador /\\ 
+  *       salirjuego /\\ (readString("") = "n" \\/ readString("") = "N") ==> 
+  *   numerodepartidasmax - (n + 1) < _C11]
+  * Línea 566: El invariante garantiza la postcondición a la salida - 29/74. id=18
+  * [finmano:boolean, n:int, numerodepartidasmax:int, opcion:int, salirjuego:boolean, 
+  *   valormanocrupier:int, valormanojugador:int :: 
+  *  opcion = 2 /\\ 
+  *    finmano /\\ 
+  *     ! finmano /\\ valormanocrupier > valormanojugador /\\ ! salirjuego ==> 
+  *   0 <= numerodepartidasmax - (n + 1)]
+  * Línea 566: El invariante garantiza la postcondición a la salida - 30/74. id=18
+  * [_C11=null, finmano:boolean, n:int, numerodepartidasmax:int, opcion:int, 
+  *   salirjuego:boolean, valormanocrupier:int, valormanojugador:int :: 
+  *  opcion = 2 /\\ 
+  *    finmano /\\ 
+  *     ! finmano /\\ valormanocrupier > valormanojugador /\\ ! salirjuego ==> 
+  *   numerodepartidasmax - (n + 1) < _C11]
+  * Línea 566: El invariante garantiza la postcondición a la salida - 31/74. id=18
+  * [finmano:boolean, opcion:int, salirjuego:boolean :: 
+  *  opcion = 2 /\\ finmano ==> salirjuego \\/ ! salirjuego]
+  * Línea 566: El invariante garantiza la postcondición a la salida - 32/74. id=18
+  * [finmano:boolean, opcion:int, salirjuego:boolean :: 
+  *  opcion = 2 /\\ finmano /\\ salirjuego ==> 
+  *   readString("") = "s" \\/ 
+  *    readString("") = "S" \\/ 
+  *     readString("") = "" \\/ 
+  *      readString("") = "n" \\/ readString("") = "N"]
+  * Línea 566: El invariante garantiza la postcondición a la salida - 33/74. id=18
+  * [finmano:boolean, n:int, numerodepartidasmax:int, opcion:int, salirjuego:boolean :: 
+  *  opcion = 2 /\\ 
+  *    finmano /\\ 
+  *     salirjuego /\\ 
+  *      (readString("") = "s" \\/ 
+  *        readString("") = "S" \\/ readString("") = "") ==> 
+  *   0 <= numerodepartidasmax - (n + 1)]
+  * Línea 566: El invariante garantiza la postcondición a la salida - 34/74. id=18
+  * [_C11=null, finmano:boolean, n:int, numerodepartidasmax:int, opcion:int, 
+  *   salirjuego:boolean :: 
+  *  opcion = 2 /\\ 
+  *    finmano /\\ 
+  *     salirjuego /\\ 
+  *      (readString("") = "s" \\/ 
+  *        readString("") = "S" \\/ readString("") = "") ==> 
+  *   numerodepartidasmax - (n + 1) < _C11]
+  * Línea 566: El invariante garantiza la postcondición a la salida - 35/74. id=18
+  * [finmano:boolean, n:int, numerodepartidasmax:int, opcion:int, salirjuego:boolean :: 
+  *  opcion = 2 /\\ 
+  *    finmano /\\ 
+  *     salirjuego /\\ (readString("") = "n" \\/ readString("") = "N") ==> 
+  *   0 <= numerodepartidasmax - (n + 1)]
+  * Línea 566: El invariante garantiza la postcondición a la salida - 36/74. id=18
+  * [_C11=null, finmano:boolean, n:int, numerodepartidasmax:int, opcion:int, 
+  *   salirjuego:boolean :: 
+  *  opcion = 2 /\\ 
+  *    finmano /\\ 
+  *     salirjuego /\\ (readString("") = "n" \\/ readString("") = "N") ==> 
+  *   numerodepartidasmax - (n + 1) < _C11]
+  * Línea 566: El invariante garantiza la postcondición a la salida - 37/74. id=18
+  * [finmano:boolean, n:int, numerodepartidasmax:int, opcion:int, salirjuego:boolean :: 
+  *  opcion = 2 /\\ finmano /\\ ! salirjuego ==> 0 <= numerodepartidasmax - (n + 1)]
+  * Línea 566: El invariante garantiza la postcondición a la salida - 38/74. id=18
+  * [_C11=null, finmano:boolean, n:int, numerodepartidasmax:int, opcion:int, 
+  *   salirjuego:boolean :: 
+  *  opcion = 2 /\\ finmano /\\ ! salirjuego ==> 
+  *   numerodepartidasmax - (n + 1) < _C11]
+  * Línea 566: El invariante garantiza la postcondición a la salida - 39/74. id=18
+  * [finmano:boolean, opcion:int, valormanojugador:int :: 
+  *  opcion = 1 /\\ valormanojugador = 21 ==> ! finmano \\/ finmano]
+  * Línea 566: El invariante garantiza la postcondición a la salida - 40/74. id=18
+  * [finmano:boolean, manocrupier=null, opcion:int, valormanojugador:int :: 
+  *  opcion = 1 /\\ valormanojugador = 21 /\\ ! finmano ==> 
+  *   0 < length(manocrupier,0)]
+  * Línea 566: El invariante garantiza la postcondición a la salida - 41/74. id=18
+  * [finmano:boolean, opcion:int, valormanojugador:int :: 
+  *  opcion = 1 /\\ valormanojugador = 21 /\\ finmano ==> ! finmano \\/ finmano]
+  * Línea 566: El invariante garantiza la postcondición a la salida - 42/74. id=18
+  * [finmano:boolean, opcion:int, valormanocrupier:int, valormanojugador:int :: 
+  *  opcion = 1 /\\ valormanojugador = 21 /\\ finmano /\\ ! finmano ==> 
+  *   valormanocrupier = valormanojugador \\/ 
+  *    valormanocrupier < valormanojugador \\/ valormanocrupier > valormanojugador]
+  * Línea 566: El invariante garantiza la postcondición a la salida - 43/74. id=18
+  * [finmano:boolean, opcion:int, salirjuego:boolean, valormanocrupier:int, 
+  *   valormanojugador:int :: 
+  *  opcion = 1 /\\ 
+  *    valormanojugador = 21 /\\ 
+  *     finmano /\\ ! finmano /\\ valormanocrupier = valormanojugador ==> 
+  *   salirjuego \\/ ! salirjuego]
+  * Línea 566: El invariante garantiza la postcondición a la salida - 44/74. id=18
+  * [finmano:boolean, opcion:int, salirjuego:boolean, valormanocrupier:int, 
+  *   valormanojugador:int :: 
+  *  opcion = 1 /\\ 
+  *    valormanojugador = 21 /\\ 
+  *     finmano /\\ ! finmano /\\ valormanocrupier = valormanojugador /\\ salirjuego ==> 
+  *   readString("") = "s" \\/ 
+  *    readString("") = "S" \\/ 
+  *     readString("") = "" \\/ 
+  *      readString("") = "n" \\/ readString("") = "N"]
+  * Línea 566: El invariante garantiza la postcondición a la salida - 45/74. id=18
+  * [finmano:boolean, n:int, numerodepartidasmax:int, opcion:int, salirjuego:boolean, 
+  *   valormanocrupier:int, valormanojugador:int :: 
+  *  opcion = 1 /\\ 
+  *    valormanojugador = 21 /\\ 
+  *     finmano /\\ 
+  *      ! finmano /\\ 
+  *       valormanocrupier = valormanojugador /\\ 
+  *        salirjuego /\\ 
+  *         (readString("") = "s" \\/ 
+  *           readString("") = "S" \\/ readString("") = "") ==> 
+  *   0 <= numerodepartidasmax - (n + 1)]
+  * Línea 566: El invariante garantiza la postcondición a la salida - 46/74. id=18
+  * [_C11=null, finmano:boolean, n:int, numerodepartidasmax:int, opcion:int, 
+  *   salirjuego:boolean, valormanocrupier:int, valormanojugador:int :: 
+  *  opcion = 1 /\\ 
+  *    valormanojugador = 21 /\\ 
+  *     finmano /\\ 
+  *      ! finmano /\\ 
+  *       valormanocrupier = valormanojugador /\\ 
+  *        salirjuego /\\ 
+  *         (readString("") = "s" \\/ 
+  *           readString("") = "S" \\/ readString("") = "") ==> 
+  *   numerodepartidasmax - (n + 1) < _C11]
+  * Línea 566: El invariante garantiza la postcondición a la salida - 47/74. id=18
+  * [finmano:boolean, n:int, numerodepartidasmax:int, opcion:int, salirjuego:boolean, 
+  *   valormanocrupier:int, valormanojugador:int :: 
+  *  opcion = 1 /\\ 
+  *    valormanojugador = 21 /\\ 
+  *     finmano /\\ 
+  *      ! finmano /\\ 
+  *       valormanocrupier = valormanojugador /\\ 
+  *        salirjuego /\\ (readString("") = "n" \\/ readString("") = "N") ==> 
+  *   0 <= numerodepartidasmax - (n + 1)]
+  * Línea 566: El invariante garantiza la postcondición a la salida - 48/74. id=18
+  * [_C11=null, finmano:boolean, n:int, numerodepartidasmax:int, opcion:int, 
+  *   salirjuego:boolean, valormanocrupier:int, valormanojugador:int :: 
+  *  opcion = 1 /\\ 
+  *    valormanojugador = 21 /\\ 
+  *     finmano /\\ 
+  *      ! finmano /\\ 
+  *       valormanocrupier = valormanojugador /\\ 
+  *        salirjuego /\\ (readString("") = "n" \\/ readString("") = "N") ==> 
+  *   numerodepartidasmax - (n + 1) < _C11]
+  * Línea 566: El invariante garantiza la postcondición a la salida - 49/74. id=18
+  * [finmano:boolean, n:int, numerodepartidasmax:int, opcion:int, salirjuego:boolean, 
+  *   valormanocrupier:int, valormanojugador:int :: 
+  *  opcion = 1 /\\ 
+  *    valormanojugador = 21 /\\ 
+  *     finmano /\\ 
+  *      ! finmano /\\ valormanocrupier = valormanojugador /\\ ! salirjuego ==> 
+  *   0 <= numerodepartidasmax - (n + 1)]
+  * Línea 566: El invariante garantiza la postcondición a la salida - 50/74. id=18
+  * [_C11=null, finmano:boolean, n:int, numerodepartidasmax:int, opcion:int, 
+  *   salirjuego:boolean, valormanocrupier:int, valormanojugador:int :: 
+  *  opcion = 1 /\\ 
+  *    valormanojugador = 21 /\\ 
+  *     finmano /\\ 
+  *      ! finmano /\\ valormanocrupier = valormanojugador /\\ ! salirjuego ==> 
+  *   numerodepartidasmax - (n + 1) < _C11]
+  * Línea 566: El invariante garantiza la postcondición a la salida - 51/74. id=18
+  * [finmano:boolean, opcion:int, salirjuego:boolean, valormanocrupier:int, 
+  *   valormanojugador:int :: 
+  *  opcion = 1 /\\ 
+  *    valormanojugador = 21 /\\ 
+  *     finmano /\\ ! finmano /\\ valormanocrupier < valormanojugador ==> 
+  *   salirjuego \\/ ! salirjuego]
+  * Línea 566: El invariante garantiza la postcondición a la salida - 52/74. id=18
+  * [finmano:boolean, opcion:int, salirjuego:boolean, valormanocrupier:int, 
+  *   valormanojugador:int :: 
+  *  opcion = 1 /\\ 
+  *    valormanojugador = 21 /\\ 
+  *     finmano /\\ ! finmano /\\ valormanocrupier < valormanojugador /\\ salirjuego ==> 
+  *   readString("") = "s" \\/ 
+  *    readString("") = "S" \\/ 
+  *     readString("") = "" \\/ 
+  *      readString("") = "n" \\/ readString("") = "N"]
+  * Línea 566: El invariante garantiza la postcondición a la salida - 53/74. id=18
+  * [finmano:boolean, n:int, numerodepartidasmax:int, opcion:int, salirjuego:boolean, 
+  *   valormanocrupier:int, valormanojugador:int :: 
+  *  opcion = 1 /\\ 
+  *    valormanojugador = 21 /\\ 
+  *     finmano /\\ 
+  *      ! finmano /\\ 
+  *       valormanocrupier < valormanojugador /\\ 
+  *        salirjuego /\\ 
+  *         (readString("") = "s" \\/ 
+  *           readString("") = "S" \\/ readString("") = "") ==> 
+  *   0 <= numerodepartidasmax - (n + 1)]
+  * Línea 566: El invariante garantiza la postcondición a la salida - 54/74. id=18
+  * [_C11=null, finmano:boolean, n:int, numerodepartidasmax:int, opcion:int, 
+  *   salirjuego:boolean, valormanocrupier:int, valormanojugador:int :: 
+  *  opcion = 1 /\\ 
+  *    valormanojugador = 21 /\\ 
+  *     finmano /\\ 
+  *      ! finmano /\\ 
+  *       valormanocrupier < valormanojugador /\\ 
+  *        salirjuego /\\ 
+  *         (readString("") = "s" \\/ 
+  *           readString("") = "S" \\/ readString("") = "") ==> 
+  *   numerodepartidasmax - (n + 1) < _C11]
+  * Línea 566: El invariante garantiza la postcondición a la salida - 55/74. id=18
+  * [finmano:boolean, n:int, numerodepartidasmax:int, opcion:int, salirjuego:boolean, 
+  *   valormanocrupier:int, valormanojugador:int :: 
+  *  opcion = 1 /\\ 
+  *    valormanojugador = 21 /\\ 
+  *     finmano /\\ 
+  *      ! finmano /\\ 
+  *       valormanocrupier < valormanojugador /\\ 
+  *        salirjuego /\\ (readString("") = "n" \\/ readString("") = "N") ==> 
+  *   0 <= numerodepartidasmax - (n + 1)]
+  * Línea 566: El invariante garantiza la postcondición a la salida - 56/74. id=18
+  * [_C11=null, finmano:boolean, n:int, numerodepartidasmax:int, opcion:int, 
+  *   salirjuego:boolean, valormanocrupier:int, valormanojugador:int :: 
+  *  opcion = 1 /\\ 
+  *    valormanojugador = 21 /\\ 
+  *     finmano /\\ 
+  *      ! finmano /\\ 
+  *       valormanocrupier < valormanojugador /\\ 
+  *        salirjuego /\\ (readString("") = "n" \\/ readString("") = "N") ==> 
+  *   numerodepartidasmax - (n + 1) < _C11]
+  * Línea 566: El invariante garantiza la postcondición a la salida - 57/74. id=18
+  * [finmano:boolean, n:int, numerodepartidasmax:int, opcion:int, salirjuego:boolean, 
+  *   valormanocrupier:int, valormanojugador:int :: 
+  *  opcion = 1 /\\ 
+  *    valormanojugador = 21 /\\ 
+  *     finmano /\\ 
+  *      ! finmano /\\ valormanocrupier < valormanojugador /\\ ! salirjuego ==> 
+  *   0 <= numerodepartidasmax - (n + 1)]
+  * Línea 566: El invariante garantiza la postcondición a la salida - 58/74. id=18
+  * [_C11=null, finmano:boolean, n:int, numerodepartidasmax:int, opcion:int, 
+  *   salirjuego:boolean, valormanocrupier:int, valormanojugador:int :: 
+  *  opcion = 1 /\\ 
+  *    valormanojugador = 21 /\\ 
+  *     finmano /\\ 
+  *      ! finmano /\\ valormanocrupier < valormanojugador /\\ ! salirjuego ==> 
+  *   numerodepartidasmax - (n + 1) < _C11]
+  * Línea 566: El invariante garantiza la postcondición a la salida - 59/74. id=18
+  * [finmano:boolean, opcion:int, salirjuego:boolean, valormanocrupier:int, 
+  *   valormanojugador:int :: 
+  *  opcion = 1 /\\ 
+  *    valormanojugador = 21 /\\ 
+  *     finmano /\\ ! finmano /\\ valormanocrupier > valormanojugador ==> 
+  *   salirjuego \\/ ! salirjuego]
+  * Línea 566: El invariante garantiza la postcondición a la salida - 60/74. id=18
+  * [finmano:boolean, opcion:int, salirjuego:boolean, valormanocrupier:int, 
+  *   valormanojugador:int :: 
+  *  opcion = 1 /\\ 
+  *    valormanojugador = 21 /\\ 
+  *     finmano /\\ ! finmano /\\ valormanocrupier > valormanojugador /\\ salirjuego ==> 
+  *   readString("") = "s" \\/ 
+  *    readString("") = "S" \\/ 
+  *     readString("") = "" \\/ 
+  *      readString("") = "n" \\/ readString("") = "N"]
+  * Línea 566: El invariante garantiza la postcondición a la salida - 61/74. id=18
+  * [finmano:boolean, n:int, numerodepartidasmax:int, opcion:int, salirjuego:boolean, 
+  *   valormanocrupier:int, valormanojugador:int :: 
+  *  opcion = 1 /\\ 
+  *    valormanojugador = 21 /\\ 
+  *     finmano /\\ 
+  *      ! finmano /\\ 
+  *       valormanocrupier > valormanojugador /\\ 
+  *        salirjuego /\\ 
+  *         (readString("") = "s" \\/ 
+  *           readString("") = "S" \\/ readString("") = "") ==> 
+  *   0 <= numerodepartidasmax - (n + 1)]
+  * Línea 566: El invariante garantiza la postcondición a la salida - 62/74. id=18
+  * [_C11=null, finmano:boolean, n:int, numerodepartidasmax:int, opcion:int, 
+  *   salirjuego:boolean, valormanocrupier:int, valormanojugador:int :: 
+  *  opcion = 1 /\\ 
+  *    valormanojugador = 21 /\\ 
+  *     finmano /\\ 
+  *      ! finmano /\\ 
+  *       valormanocrupier > valormanojugador /\\ 
+  *        salirjuego /\\ 
+  *         (readString("") = "s" \\/ 
+  *           readString("") = "S" \\/ readString("") = "") ==> 
+  *   numerodepartidasmax - (n + 1) < _C11]
+  * Línea 566: El invariante garantiza la postcondición a la salida - 63/74. id=18
+  * [finmano:boolean, n:int, numerodepartidasmax:int, opcion:int, salirjuego:boolean, 
+  *   valormanocrupier:int, valormanojugador:int :: 
+  *  opcion = 1 /\\ 
+  *    valormanojugador = 21 /\\ 
+  *     finmano /\\ 
+  *      ! finmano /\\ 
+  *       valormanocrupier > valormanojugador /\\ 
+  *        salirjuego /\\ (readString("") = "n" \\/ readString("") = "N") ==> 
+  *   0 <= numerodepartidasmax - (n + 1)]
+  * Línea 566: El invariante garantiza la postcondición a la salida - 64/74. id=18
+  * [_C11=null, finmano:boolean, n:int, numerodepartidasmax:int, opcion:int, 
+  *   salirjuego:boolean, valormanocrupier:int, valormanojugador:int :: 
+  *  opcion = 1 /\\ 
+  *    valormanojugador = 21 /\\ 
+  *     finmano /\\ 
+  *      ! finmano /\\ 
+  *       valormanocrupier > valormanojugador /\\ 
+  *        salirjuego /\\ (readString("") = "n" \\/ readString("") = "N") ==> 
+  *   numerodepartidasmax - (n + 1) < _C11]
+  * Línea 566: El invariante garantiza la postcondición a la salida - 65/74. id=18
+  * [finmano:boolean, n:int, numerodepartidasmax:int, opcion:int, salirjuego:boolean, 
+  *   valormanocrupier:int, valormanojugador:int :: 
+  *  opcion = 1 /\\ 
+  *    valormanojugador = 21 /\\ 
+  *     finmano /\\ 
+  *      ! finmano /\\ valormanocrupier > valormanojugador /\\ ! salirjuego ==> 
+  *   0 <= numerodepartidasmax - (n + 1)]
+  * Línea 566: El invariante garantiza la postcondición a la salida - 66/74. id=18
+  * [_C11=null, finmano:boolean, n:int, numerodepartidasmax:int, opcion:int, 
+  *   salirjuego:boolean, valormanocrupier:int, valormanojugador:int :: 
+  *  opcion = 1 /\\ 
+  *    valormanojugador = 21 /\\ 
+  *     finmano /\\ 
+  *      ! finmano /\\ valormanocrupier > valormanojugador /\\ ! salirjuego ==> 
+  *   numerodepartidasmax - (n + 1) < _C11]
+  * Línea 566: El invariante garantiza la postcondición a la salida - 67/74. id=18
+  * [finmano:boolean, opcion:int, salirjuego:boolean, valormanojugador:int :: 
+  *  opcion = 1 /\\ valormanojugador = 21 /\\ finmano ==> 
+  *   salirjuego \\/ ! salirjuego]
+  * Línea 566: El invariante garantiza la postcondición a la salida - 68/74. id=18
+  * [finmano:boolean, opcion:int, salirjuego:boolean, valormanojugador:int :: 
+  *  opcion = 1 /\\ valormanojugador = 21 /\\ finmano /\\ salirjuego ==> 
+  *   readString("") = "s" \\/ 
+  *    readString("") = "S" \\/ 
+  *     readString("") = "" \\/ 
+  *      readString("") = "n" \\/ readString("") = "N"]
+  * Línea 566: El invariante garantiza la postcondición a la salida - 69/74. id=18
+  * [finmano:boolean, n:int, numerodepartidasmax:int, opcion:int, salirjuego:boolean, 
+  *   valormanojugador:int :: 
+  *  opcion = 1 /\\ 
+  *    valormanojugador = 21 /\\ 
+  *     finmano /\\ 
+  *      salirjuego /\\ 
+  *       (readString("") = "s" \\/ 
+  *         readString("") = "S" \\/ readString("") = "") ==> 
+  *   0 <= numerodepartidasmax - (n + 1)]
+  * Línea 566: El invariante garantiza la postcondición a la salida - 70/74. id=18
+  * [_C11=null, finmano:boolean, n:int, numerodepartidasmax:int, opcion:int, 
+  *   salirjuego:boolean, valormanojugador:int :: 
+  *  opcion = 1 /\\ 
+  *    valormanojugador = 21 /\\ 
+  *     finmano /\\ 
+  *      salirjuego /\\ 
+  *       (readString("") = "s" \\/ 
+  *         readString("") = "S" \\/ readString("") = "") ==> 
+  *   numerodepartidasmax - (n + 1) < _C11]
+  * Línea 566: El invariante garantiza la postcondición a la salida - 71/74. id=18
+  * [finmano:boolean, n:int, numerodepartidasmax:int, opcion:int, salirjuego:boolean, 
+  *   valormanojugador:int :: 
+  *  opcion = 1 /\\ 
+  *    valormanojugador = 21 /\\ 
+  *     finmano /\\ 
+  *      salirjuego /\\ (readString("") = "n" \\/ readString("") = "N") ==> 
+  *   0 <= numerodepartidasmax - (n + 1)]
+  * Línea 566: El invariante garantiza la postcondición a la salida - 72/74. id=18
+  * [_C11=null, finmano:boolean, n:int, numerodepartidasmax:int, opcion:int, 
+  *   salirjuego:boolean, valormanojugador:int :: 
+  *  opcion = 1 /\\ 
+  *    valormanojugador = 21 /\\ 
+  *     finmano /\\ 
+  *      salirjuego /\\ (readString("") = "n" \\/ readString("") = "N") ==> 
+  *   numerodepartidasmax - (n + 1) < _C11]
+  * Línea 566: El invariante garantiza la postcondición a la salida - 73/74. id=18
+  * [finmano:boolean, n:int, numerodepartidasmax:int, opcion:int, salirjuego:boolean, 
+  *   valormanojugador:int :: 
+  *  opcion = 1 /\\ valormanojugador = 21 /\\ finmano /\\ ! salirjuego ==> 
+  *   0 <= numerodepartidasmax - (n + 1)]
+  * Línea 566: El invariante garantiza la postcondición a la salida - 74/74. id=18
+  * [_C11=null, finmano:boolean, n:int, numerodepartidasmax:int, opcion:int, 
+  *   salirjuego:boolean, valormanojugador:int :: 
+  *  opcion = 1 /\\ valormanojugador = 21 /\\ finmano /\\ ! salirjuego ==> 
+  *   numerodepartidasmax - (n + 1) < _C11]
+  * Línea 566: El invariante se mantiene y decrece la cota - 1/9. id=19
+  * [finmano:boolean, opcion:int, salirjuego:boolean, valormanojugador:int :: 
+  *  ! salirjuego /\\ 
+  *    ! finmano /\\ opcion != 2 /\\ ! (opcion = 1 /\\ valormanojugador = 21) ==> 
+  *   valormanojugador = 21 \\/ valormanojugador < 21 \\/ valormanojugador > 21]
+  * Línea 566: El invariante se mantiene y decrece la cota - 2/9. id=19
+  * [finmano:boolean, manocrupier=null, opcion:int, salirjuego:boolean, 
+  *   valormanojugador:int :: 
+  *  ! salirjuego /\\ 
+  *    ! finmano /\\ 
+  *     opcion != 2 /\\ 
+  *      ! (opcion = 1 /\\ valormanojugador = 21) /\\ valormanojugador = 21 ==> 
+  *   0 < length(manocrupier,0)]
+  * Línea 566: El invariante se mantiene y decrece la cota - 3/9. id=19
+  * [finmano:boolean, manocrupier:array[] of String, opcion:int, salirjuego:boolean, 
+  *   valormanojugador:int :: 
+  *  ! salirjuego /\\ 
+  *    ! finmano /\\ 
+  *     opcion != 2 /\\ 
+  *      ! (opcion = 1 /\\ valormanojugador = 21) /\\ valormanojugador = 21 ==> 
+  *   calcularvalormano(manocrupier) = 21 \\/ calcularvalormano(manocrupier) < 21]
+  * Línea 566: El invariante se mantiene y decrece la cota - 4/9. id=19
+  * [finmano:boolean, manocrupier:array[] of String, opcion:int, salirjuego:boolean, 
+  *   valormanojugador:int, w:int :: 
+  *  ! salirjuego /\\ 
+  *    ! finmano /\\ 
+  *     opcion != 2 /\\ 
+  *      ! (opcion = 1 /\\ valormanojugador = 21) /\\ 
+  *       valormanojugador = 21 /\\ calcularvalormano(manocrupier) = 21 ==> 
+  *   0 <= 50 - (w + 1)]
+  * Línea 566: El invariante se mantiene y decrece la cota - 5/9. id=19
+  * [finmano:boolean, manocrupier:array[] of String, opcion:int, salirjuego:boolean, 
+  *   valormanojugador:int, w:int :: 
+  *  ! salirjuego /\\ 
+  *    ! finmano /\\ 
+  *     opcion != 2 /\\ 
+  *      ! (opcion = 1 /\\ valormanojugador = 21) /\\ 
+  *       valormanojugador = 21 /\\ calcularvalormano(manocrupier) = 21 ==> 
+  *   50 - (w + 1) < 50 - w]
+  * Línea 566: El invariante se mantiene y decrece la cota - 6/9. id=19
+  * [finmano:boolean, manocrupier:array[] of String, opcion:int, salirjuego:boolean, 
+  *   valormanojugador:int, w:int :: 
+  *  ! salirjuego /\\ 
+  *    ! finmano /\\ 
+  *     opcion != 2 /\\ 
+  *      ! (opcion = 1 /\\ valormanojugador = 21) /\\ 
+  *       valormanojugador = 21 /\\ calcularvalormano(manocrupier) < 21 ==> 
+  *   0 <= 50 - (w + 1)]
+  * Línea 566: El invariante se mantiene y decrece la cota - 7/9. id=19
+  * [finmano:boolean, manocrupier:array[] of String, opcion:int, salirjuego:boolean, 
+  *   valormanojugador:int, w:int :: 
+  *  ! salirjuego /\\ 
+  *    ! finmano /\\ 
+  *     opcion != 2 /\\ 
+  *      ! (opcion = 1 /\\ valormanojugador = 21) /\\ 
+  *       valormanojugador = 21 /\\ calcularvalormano(manocrupier) < 21 ==> 
+  *   50 - (w + 1) < 50 - w]
+  * Línea 566: El invariante se mantiene y decrece la cota - 8/9. id=19
+  * [finmano:boolean, opcion:int, salirjuego:boolean, valormanojugador:int, w:int :: 
+  *  ! salirjuego /\\ 
+  *    ! finmano /\\ 
+  *     opcion != 2 /\\ 
+  *      ! (opcion = 1 /\\ valormanojugador = 21) /\\ valormanojugador > 21 ==> 
+  *   0 <= 50 - (w + 1)]
+  * Línea 566: El invariante se mantiene y decrece la cota - 9/9. id=19
+  * [finmano:boolean, opcion:int, salirjuego:boolean, valormanojugador:int, w:int :: 
+  *  ! salirjuego /\\ 
+  *    ! finmano /\\ 
+  *     opcion != 2 /\\ 
+  *      ! (opcion = 1 /\\ valormanojugador = 21) /\\ valormanojugador > 21 ==> 
+  *   50 - (w + 1) < 50 - w]
+  * Línea 639: El invariante garantiza la postcondición a la salida - 1/2. id=20
+  * [_C11=null, finmano:boolean, n:int, numerodepartidasmax:int, salirjuego:boolean, 
+  *   valormanocrupier:int, valormanojugador:int :: 
+  *  finmano ==> 
+  *   (! finmano \\/ finmano) /\\ 
+  *    (! finmano ==> 
+  *       (valormanocrupier = valormanojugador \\/ 
+  *          valormanocrupier < valormanojugador \\/ 
+  *           valormanocrupier > valormanojugador) /\\ 
+  *        (valormanocrupier = valormanojugador ==> 
+  *           (salirjuego \\/ ! salirjuego) /\\ 
+  *            (salirjuego ==> 
+  *               (readString("") = "s" \\/ 
+  *                  readString("") = "S" \\/ 
+  *                   readString("") = "" \\/ 
+  *                    readString("") = "n" \\/ readString("") = "N") /\\ 
+  *                (readString("") = "s" \\/ 
+  *                    readString("") = "S" \\/ readString("") = "" ==> 
+  *                   0 <= numerodepartidasmax - (n + 1) /\\ 
+  *                    numerodepartidasmax - (n + 1) < _C11) /\\ 
+  *                 (readString("") = "n" \\/ readString("") = "N" ==> 
+  *                   0 <= numerodepartidasmax - (n + 1) /\\ 
+  *                    numerodepartidasmax - (n + 1) < _C11)) /\\ 
+  *             (! salirjuego ==> 
+  *               0 <= numerodepartidasmax - (n + 1) /\\ 
+  *                numerodepartidasmax - (n + 1) < _C11)) /\\ 
+  *         (valormanocrupier < valormanojugador ==> 
+  *            (salirjuego \\/ ! salirjuego) /\\ 
+  *             (salirjuego ==> 
+  *                (readString("") = "s" \\/ 
+  *                   readString("") = "S" \\/ 
+  *                    readString("") = "" \\/ 
+  *                     readString("") = "n" \\/ readString("") = "N") /\\ 
+  *                 (readString("") = "s" \\/ 
+  *                     readString("") = "S" \\/ readString("") = "" ==> 
+  *                    0 <= numerodepartidasmax - (n + 1) /\\ 
+  *                     numerodepartidasmax - (n + 1) < _C11) /\\ 
+  *                  (readString("") = "n" \\/ readString("") = "N" ==> 
+  *                    0 <= numerodepartidasmax - (n + 1) /\\ 
+  *                     numerodepartidasmax - (n + 1) < _C11)) /\\ 
+  *              (! salirjuego ==> 
+  *                0 <= numerodepartidasmax - (n + 1) /\\ 
+  *                 numerodepartidasmax - (n + 1) < _C11)) /\\ 
+  *          (valormanocrupier > valormanojugador ==> 
+  *            (salirjuego \\/ ! salirjuego) /\\ 
+  *             (salirjuego ==> 
+  *                (readString("") = "s" \\/ 
+  *                   readString("") = "S" \\/ 
+  *                    readString("") = "" \\/ 
+  *                     readString("") = "n" \\/ readString("") = "N") /\\ 
+  *                 (readString("") = "s" \\/ 
+  *                     readString("") = "S" \\/ readString("") = "" ==> 
+  *                    0 <= numerodepartidasmax - (n + 1) /\\ 
+  *                     numerodepartidasmax - (n + 1) < _C11) /\\ 
+  *                  (readString("") = "n" \\/ readString("") = "N" ==> 
+  *                    0 <= numerodepartidasmax - (n + 1) /\\ 
+  *                     numerodepartidasmax - (n + 1) < _C11)) /\\ 
+  *              (! salirjuego ==> 
+  *                0 <= numerodepartidasmax - (n + 1) /\\ 
+  *                 numerodepartidasmax - (n + 1) < _C11))) /\\ 
+  *     (finmano ==> 
+  *       (salirjuego \\/ ! salirjuego) /\\ 
+  *        (salirjuego ==> 
+  *           (readString("") = "s" \\/ 
+  *              readString("") = "S" \\/ 
+  *               readString("") = "" \\/ 
+  *                readString("") = "n" \\/ readString("") = "N") /\\ 
+  *            (readString("") = "s" \\/ 
+  *                readString("") = "S" \\/ readString("") = "" ==> 
+  *               0 <= numerodepartidasmax - (n + 1) /\\ 
+  *                numerodepartidasmax - (n + 1) < _C11) /\\ 
+  *             (readString("") = "n" \\/ readString("") = "N" ==> 
+  *               0 <= numerodepartidasmax - (n + 1) /\\ 
+  *                numerodepartidasmax - (n + 1) < _C11)) /\\ 
+  *         (! salirjuego ==> 
+  *           0 <= numerodepartidasmax - (n + 1) /\\ 
+  *            numerodepartidasmax - (n + 1) < _C11))]
+  * Línea 639: El invariante garantiza la postcondición a la salida - 2/2. id=20
+  * [_C11=null, finmano:boolean, n:int, numerodepartidasmax:int, salirjuego:boolean, 
+  *   terminodejugar:boolean, valormanocrupier:int, valormanojugador:int :: 
+  *  terminodejugar ==> 
+  *   (! finmano \\/ finmano) /\\ 
+  *    (! finmano ==> 
+  *       (valormanocrupier = valormanojugador \\/ 
+  *          valormanocrupier < valormanojugador \\/ 
+  *           valormanocrupier > valormanojugador) /\\ 
+  *        (valormanocrupier = valormanojugador ==> 
+  *           (salirjuego \\/ ! salirjuego) /\\ 
+  *            (salirjuego ==> 
+  *               (readString("") = "s" \\/ 
+  *                  readString("") = "S" \\/ 
+  *                   readString("") = "" \\/ 
+  *                    readString("") = "n" \\/ readString("") = "N") /\\ 
+  *                (readString("") = "s" \\/ 
+  *                    readString("") = "S" \\/ readString("") = "" ==> 
+  *                   0 <= numerodepartidasmax - (n + 1) /\\ 
+  *                    numerodepartidasmax - (n + 1) < _C11) /\\ 
+  *                 (readString("") = "n" \\/ readString("") = "N" ==> 
+  *                   0 <= numerodepartidasmax - (n + 1) /\\ 
+  *                    numerodepartidasmax - (n + 1) < _C11)) /\\ 
+  *             (! salirjuego ==> 
+  *               0 <= numerodepartidasmax - (n + 1) /\\ 
+  *                numerodepartidasmax - (n + 1) < _C11)) /\\ 
+  *         (valormanocrupier < valormanojugador ==> 
+  *            (salirjuego \\/ ! salirjuego) /\\ 
+  *             (salirjuego ==> 
+  *                (readString("") = "s" \\/ 
+  *                   readString("") = "S" \\/ 
+  *                    readString("") = "" \\/ 
+  *                     readString("") = "n" \\/ readString("") = "N") /\\ 
+  *                 (readString("") = "s" \\/ 
+  *                     readString("") = "S" \\/ readString("") = "" ==> 
+  *                    0 <= numerodepartidasmax - (n + 1) /\\ 
+  *                     numerodepartidasmax - (n + 1) < _C11) /\\ 
+  *                  (readString("") = "n" \\/ readString("") = "N" ==> 
+  *                    0 <= numerodepartidasmax - (n + 1) /\\ 
+  *                     numerodepartidasmax - (n + 1) < _C11)) /\\ 
+  *              (! salirjuego ==> 
+  *                0 <= numerodepartidasmax - (n + 1) /\\ 
+  *                 numerodepartidasmax - (n + 1) < _C11)) /\\ 
+  *          (valormanocrupier > valormanojugador ==> 
+  *            (salirjuego \\/ ! salirjuego) /\\ 
+  *             (salirjuego ==> 
+  *                (readString("") = "s" \\/ 
+  *                   readString("") = "S" \\/ 
+  *                    readString("") = "" \\/ 
+  *                     readString("") = "n" \\/ readString("") = "N") /\\ 
+  *                 (readString("") = "s" \\/ 
+  *                     readString("") = "S" \\/ readString("") = "" ==> 
+  *                    0 <= numerodepartidasmax - (n + 1) /\\ 
+  *                     numerodepartidasmax - (n + 1) < _C11) /\\ 
+  *                  (readString("") = "n" \\/ readString("") = "N" ==> 
+  *                    0 <= numerodepartidasmax - (n + 1) /\\ 
+  *                     numerodepartidasmax - (n + 1) < _C11)) /\\ 
+  *              (! salirjuego ==> 
+  *                0 <= numerodepartidasmax - (n + 1) /\\ 
+  *                 numerodepartidasmax - (n + 1) < _C11))) /\\ 
+  *     (finmano ==> 
+  *       (salirjuego \\/ ! salirjuego) /\\ 
+  *        (salirjuego ==> 
+  *           (readString("") = "s" \\/ 
+  *              readString("") = "S" \\/ 
+  *               readString("") = "" \\/ 
+  *                readString("") = "n" \\/ readString("") = "N") /\\ 
+  *            (readString("") = "s" \\/ 
+  *                readString("") = "S" \\/ readString("") = "" ==> 
+  *               0 <= numerodepartidasmax - (n + 1) /\\ 
+  *                numerodepartidasmax - (n + 1) < _C11) /\\ 
+  *             (readString("") = "n" \\/ readString("") = "N" ==> 
+  *               0 <= numerodepartidasmax - (n + 1) /\\ 
+  *                numerodepartidasmax - (n + 1) < _C11)) /\\ 
+  *         (! salirjuego ==> 
+  *           0 <= numerodepartidasmax - (n + 1) /\\ 
+  *            numerodepartidasmax - (n + 1) < _C11))]
+  * Línea 639: El invariante se mantiene y decrece la cota - 1/9. id=21
+  * [finmano:boolean, opcion:int, terminodejugar:boolean, valormanocrupier:int :: 
+  *  ! finmano /\\ ! terminodejugar ==> 
+  *   valormanocrupier < 17 \\/ 
+  *    17 <= valormanocrupier /\\ valormanocrupier <= 21 \\/ 
+  *     valormanocrupier > 21 /\\ (opcion != 3 \\/ opcion = 3)]
+  * Línea 639: El invariante se mantiene y decrece la cota - 2/9. id=21
+  * [finmano:boolean, p:int, terminodejugar:boolean, valormanocrupier:int :: 
+  *  ! finmano /\\ ! terminodejugar /\\ valormanocrupier < 17 ==> 0 <= p]
+  * Línea 639: El invariante se mantiene y decrece la cota - 3/9. id=21
+  * [finmano:boolean, manocrupier=null, p:int, terminodejugar:boolean, 
+  *   valormanocrupier:int :: 
+  *  ! finmano /\\ ! terminodejugar /\\ valormanocrupier < 17 ==> 
+  *   p < length(manocrupier,0)]
+  * Línea 639: El invariante se mantiene y decrece la cota - 4/9. id=21
+  * [finmano:boolean, terminodejugar:boolean, valormanocrupier:int, z:int :: 
+  *  ! finmano /\\ ! terminodejugar /\\ valormanocrupier < 17 ==> 0 <= 20 - (z + 1)]
+  * Línea 639: El invariante se mantiene y decrece la cota - 5/9. id=21
+  * [finmano:boolean, terminodejugar:boolean, valormanocrupier:int, z:int :: 
+  *  ! finmano /\\ ! terminodejugar /\\ valormanocrupier < 17 ==> 
+  *   20 - (z + 1) < 20 - z]
+  * Línea 639: El invariante se mantiene y decrece la cota - 6/9. id=21
+  * [finmano:boolean, terminodejugar:boolean, valormanocrupier:int, z:int :: 
+  *  ! finmano /\\ 
+  *    ! terminodejugar /\\ 17 <= valormanocrupier /\\ valormanocrupier <= 21 ==> 
+  *   0 <= 20 - (z + 1)]
+  * Línea 639: El invariante se mantiene y decrece la cota - 7/9. id=21
+  * [finmano:boolean, terminodejugar:boolean, valormanocrupier:int, z:int :: 
+  *  ! finmano /\\ 
+  *    ! terminodejugar /\\ 17 <= valormanocrupier /\\ valormanocrupier <= 21 ==> 
+  *   20 - (z + 1) < 20 - z]
+  * Línea 639: El invariante se mantiene y decrece la cota - 8/9. id=21
+  * [finmano:boolean, opcion:int, terminodejugar:boolean, valormanocrupier:int, 
+  *   z:int :: 
+  *  ! finmano /\\ 
+  *    ! terminodejugar /\\ valormanocrupier > 21 /\\ (opcion != 3 \\/ opcion = 3) ==> 
+  *   0 <= 20 - (z + 1)]
+  * Línea 639: El invariante se mantiene y decrece la cota - 9/9. id=21
+  * [finmano:boolean, opcion:int, terminodejugar:boolean, valormanocrupier:int, 
+  *   z:int :: 
+  *  ! finmano /\\ 
+  *    ! terminodejugar /\\ valormanocrupier > 21 /\\ (opcion != 3 \\/ opcion = 3) ==> 
+  *   20 - (z + 1) < 20 - z]
+  * Línea 582: El invariante garantiza la postcondición a la salida - 1/4. id=22
+  * [valormanojugador:int, w:int :: valormanojugador >= 21 ==> 0 <= 50 - (w + 1)]
+  * Línea 582: El invariante garantiza la postcondición a la salida - 2/4. id=22
+  * [_C13=null, valormanojugador:int, w:int :: 
+  *  valormanojugador >= 21 ==> 50 - (w + 1) < _C13]
+  * Línea 582: El invariante garantiza la postcondición a la salida - 3/4. id=22
+  * [opcion:int, w:int :: opcion != 0 /\\ opcion != 1 ==> 0 <= 50 - (w + 1)]
+  * Línea 582: El invariante garantiza la postcondición a la salida - 4/4. id=22
+  * [_C13=null, opcion:int, w:int :: 
+  *  opcion != 0 /\\ opcion != 1 ==> 50 - (w + 1) < _C13]
+  * Línea 582: El invariante se mantiene y decrece la cota - 1/23. id=23
+  * [opcion:int, valormanojugador:int :: 
+  *  valormanojugador < 21 /\\ (opcion = 0 \\/ opcion = 1) ==> 
+  *   opcion = 1 \\/ opcion = 2 \\/ opcion = 3 \\/ opcion = 4]
+  * Línea 582: El invariante se mantiene y decrece la cota - 2/23. id=23
+  * [opcion:int, p:int, valormanojugador:int :: 
+  *  valormanojugador < 21 /\\ (opcion = 0 \\/ opcion = 1) /\\ opcion = 1 ==> 0 <= p
+  * ]
+  * Línea 582: El invariante se mantiene y decrece la cota - 3/23. id=23
+  * [manojugador=null, opcion:int, p:int, valormanojugador:int :: 
+  *  valormanojugador < 21 /\\ (opcion = 0 \\/ opcion = 1) /\\ opcion = 1 ==> 
+  *   p < length(manojugador,0)]
+  * Línea 582: El invariante se mantiene y decrece la cota - 4/23. id=23
+  * [opcion:int, valormanojugador:int, z:int :: 
+  *  valormanojugador < 21 /\\ (opcion = 0 \\/ opcion = 1) /\\ opcion = 1 ==> 
+  *   0 <= 20 - (z + 1)]
+  * Línea 582: El invariante se mantiene y decrece la cota - 5/23. id=23
+  * [opcion:int, valormanojugador:int, z:int :: 
+  *  valormanojugador < 21 /\\ (opcion = 0 \\/ opcion = 1) /\\ opcion = 1 ==> 
+  *   20 - (z + 1) < 20 - z]
+  * Línea 582: El invariante se mantiene y decrece la cota - 6/23. id=23
+  * [opcion:int, valormanojugador:int, z:int :: 
+  *  valormanojugador < 21 /\\ (opcion = 0 \\/ opcion = 1) /\\ opcion = 2 ==> 
+  *   0 <= 20 - (z + 1)]
+  * Línea 582: El invariante se mantiene y decrece la cota - 7/23. id=23
+  * [opcion:int, valormanojugador:int, z:int :: 
+  *  valormanojugador < 21 /\\ (opcion = 0 \\/ opcion = 1) /\\ opcion = 2 ==> 
+  *   20 - (z + 1) < 20 - z]
+  * Línea 582: El invariante se mantiene y decrece la cota - 8/23. id=23
+  * [manojugador=null, opcion:int, valormanojugador:int :: 
+  *  valormanojugador < 21 /\\ (opcion = 0 \\/ opcion = 1) /\\ opcion = 3 ==> 
+  *   2 < length(manojugador,0)]
+  * Línea 582: El invariante se mantiene y decrece la cota - 9/23. id=23
+  * [manojugador:array[] of String, opcion:int, valormanojugador:int :: 
+  *  valormanojugador < 21 /\\ (opcion = 0 \\/ opcion = 1) /\\ opcion = 3 ==> 
+  *   9 <= valormanojugador \\/ 
+  *    (valormanojugador < 9 \\/ valormanojugador > 11) /\\ manojugador[2] = "" \\/ 
+  *     manojugador[2] != ""]
+  * Línea 582: El invariante se mantiene y decrece la cota - 10/23. id=23
+  * [manojugador:array[] of String, opcion:int, valormanojugador:int :: 
+  *  valormanojugador < 21 /\\ (opcion = 0 \\/ opcion = 1) /\\ opcion = 3 ==> 
+  *   valormanojugador <= 11 \\/ 
+  *    (valormanojugador < 9 \\/ valormanojugador > 11) /\\ manojugador[2] = "" \\/ 
+  *     manojugador[2] != ""]
+  * Línea 582: El invariante se mantiene y decrece la cota - 11/23. id=23
+  * [manojugador:array[] of String, opcion:int, valormanojugador:int :: 
+  *  valormanojugador < 21 /\\ (opcion = 0 \\/ opcion = 1) /\\ opcion = 3 ==> 
+  *   manojugador[2] = "" \\/ 
+  *    (valormanojugador < 9 \\/ valormanojugador > 11) /\\ manojugador[2] = "" \\/ 
+  *     manojugador[2] != ""]
+  * Línea 582: El invariante se mantiene y decrece la cota - 12/23. id=23
+  * [apuesta:int, credito:int, manojugador:array[] of String, opcion:int, 
+  *   valormanojugador:int :: 
+  *  valormanojugador < 21 /\\ 
+  *    (opcion = 0 \\/ opcion = 1) /\\ 
+  *     opcion = 3 /\\ 
+  *      (9 <= valormanojugador /\\ valormanojugador <= 11) /\\ 
+  *       manojugador[2] = "" ==> 
+  *   credito >= apuesta \\/ credito < apuesta]
+  * Línea 582: El invariante se mantiene y decrece la cota - 13/23. id=23
+  * [apuesta:int, credito:int, manojugador:array[] of String, opcion:int, 
+  *   valormanojugador:int :: 
+  *  valormanojugador < 21 /\\ 
+  *    (opcion = 0 \\/ opcion = 1) /\\ 
+  *     opcion = 3 /\\ 
+  *      9 <= valormanojugador /\\ 
+  *       valormanojugador <= 11 /\\ manojugador[2] = "" /\\ credito >= apuesta ==> 
+  *   2 < length(manojugador,0)]
+  * Línea 582: El invariante se mantiene y decrece la cota - 14/23. id=23
+  * [apuesta:int, credito:int, manojugador:array[] of String, opcion:int, 
+  *   valormanojugador:int, z:int :: 
+  *  valormanojugador < 21 /\\ 
+  *    (opcion = 0 \\/ opcion = 1) /\\ 
+  *     opcion = 3 /\\ 
+  *      9 <= valormanojugador /\\ 
+  *       valormanojugador <= 11 /\\ manojugador[2] = "" /\\ credito >= apuesta ==> 
+  *   0 <= 20 - (z + 1)]
+  * Línea 582: El invariante se mantiene y decrece la cota - 15/23. id=23
+  * [apuesta:int, credito:int, manojugador:array[] of String, opcion:int, 
+  *   valormanojugador:int, z:int :: 
+  *  valormanojugador < 21 /\\ 
+  *    (opcion = 0 \\/ opcion = 1) /\\ 
+  *     opcion = 3 /\\ 
+  *      9 <= valormanojugador /\\ 
+  *       valormanojugador <= 11 /\\ manojugador[2] = "" /\\ credito >= apuesta ==> 
+  *   20 - (z + 1) < 20 - z]
+  * Línea 582: El invariante se mantiene y decrece la cota - 16/23. id=23
+  * [apuesta:int, credito:int, manojugador:array[] of String, opcion:int, 
+  *   valormanojugador:int, z:int :: 
+  *  valormanojugador < 21 /\\ 
+  *    (opcion = 0 \\/ opcion = 1) /\\ 
+  *     opcion = 3 /\\ 
+  *      9 <= valormanojugador /\\ 
+  *       valormanojugador <= 11 /\\ manojugador[2] = "" /\\ credito < apuesta ==> 
+  *   0 <= 20 - (z + 1)]
+  * Línea 582: El invariante se mantiene y decrece la cota - 17/23. id=23
+  * [apuesta:int, credito:int, manojugador:array[] of String, opcion:int, 
+  *   valormanojugador:int, z:int :: 
+  *  valormanojugador < 21 /\\ 
+  *    (opcion = 0 \\/ opcion = 1) /\\ 
+  *     opcion = 3 /\\ 
+  *      9 <= valormanojugador /\\ 
+  *       valormanojugador <= 11 /\\ manojugador[2] = "" /\\ credito < apuesta ==> 
+  *   20 - (z + 1) < 20 - z]
+  * Línea 582: El invariante se mantiene y decrece la cota - 18/23. id=23
+  * [manojugador:array[] of String, opcion:int, valormanojugador:int, z:int :: 
+  *  valormanojugador < 21 /\\ 
+  *    (opcion = 0 \\/ opcion = 1) /\\ 
+  *     opcion = 3 /\\ 
+  *      (valormanojugador < 9 \\/ valormanojugador > 11) /\\ manojugador[2] = "" ==> 
+  *   0 <= 20 - (z + 1)]
+  * Línea 582: El invariante se mantiene y decrece la cota - 19/23. id=23
+  * [manojugador:array[] of String, opcion:int, valormanojugador:int, z:int :: 
+  *  valormanojugador < 21 /\\ 
+  *    (opcion = 0 \\/ opcion = 1) /\\ 
+  *     opcion = 3 /\\ 
+  *      (valormanojugador < 9 \\/ valormanojugador > 11) /\\ manojugador[2] = "" ==> 
+  *   20 - (z + 1) < 20 - z]
+  * Línea 582: El invariante se mantiene y decrece la cota - 20/23. id=23
+  * [manojugador:array[] of String, opcion:int, valormanojugador:int, z:int :: 
+  *  valormanojugador < 21 /\\ 
+  *    (opcion = 0 \\/ opcion = 1) /\\ opcion = 3 /\\ manojugador[2] != "" ==> 
+  *   0 <= 20 - (z + 1)]
+  * Línea 582: El invariante se mantiene y decrece la cota - 21/23. id=23
+  * [manojugador:array[] of String, opcion:int, valormanojugador:int, z:int :: 
+  *  valormanojugador < 21 /\\ 
+  *    (opcion = 0 \\/ opcion = 1) /\\ opcion = 3 /\\ manojugador[2] != "" ==> 
+  *   20 - (z + 1) < 20 - z]
+  * Línea 582: El invariante se mantiene y decrece la cota - 22/23. id=23
+  * [opcion:int, valormanojugador:int, z:int :: 
+  *  valormanojugador < 21 /\\ (opcion = 0 \\/ opcion = 1) /\\ opcion = 4 ==> 
+  *   0 <= 20 - (z + 1)]
+  * Línea 582: El invariante se mantiene y decrece la cota - 23/23. id=23
+  * [opcion:int, valormanojugador:int, z:int :: 
+  *  valormanojugador < 21 /\\ (opcion = 0 \\/ opcion = 1) /\\ opcion = 4 ==> 
+  *   20 - (z + 1) < 20 - z]
+  */

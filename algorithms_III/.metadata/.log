@@ -1,0 +1,591 @@
+!SESSION 2007-09-24 21:07:05.984 -----------------------------------------------
+eclipse.buildId=I20070625-1500
+java.version=1.6.0_02
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=es_VE
+Command-line arguments:  -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.ui.workbench 4 0 2007-09-24 21:07:38.390
+!MESSAGE WARNING: Prevented recursive attempt to activate part org.eclipse.jdt.ui.PackageExplorer while still in the middle of activating part org.eclipse.jdt.ui.CompilationUnitEditor
+!STACK 0
+java.lang.RuntimeException: WARNING: Prevented recursive attempt to activate part org.eclipse.jdt.ui.PackageExplorer while still in the middle of activating part org.eclipse.jdt.ui.CompilationUnitEditor
+	at org.eclipse.ui.internal.WorkbenchPage.setActivePart(WorkbenchPage.java:3334)
+	at org.eclipse.ui.internal.WorkbenchPage.requestActivation(WorkbenchPage.java:2928)
+	at org.eclipse.ui.internal.PartPane.requestActivation(PartPane.java:265)
+	at org.eclipse.ui.internal.PartPane.handleEvent(PartPane.java:229)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:66)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:938)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:962)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:943)
+	at org.eclipse.swt.widgets.Shell.setActiveControl(Shell.java:1273)
+	at org.eclipse.swt.widgets.Control.sendFocusEvent(Control.java:2366)
+	at org.eclipse.swt.widgets.Widget.wmSetFocus(Widget.java:2176)
+	at org.eclipse.swt.widgets.Control.WM_SETFOCUS(Control.java:4282)
+	at org.eclipse.swt.widgets.Tree.WM_SETFOCUS(Tree.java:6366)
+	at org.eclipse.swt.widgets.Control.windowProc(Control.java:3738)
+	at org.eclipse.swt.widgets.Tree.windowProc(Tree.java:5370)
+	at org.eclipse.swt.widgets.Display.windowProc(Display.java:4351)
+	at org.eclipse.swt.internal.win32.OS.SetFocus(Native Method)
+	at org.eclipse.swt.widgets.Control.forceFocus(Control.java:963)
+	at org.eclipse.swt.widgets.Control.setSavedFocus(Control.java:2966)
+	at org.eclipse.swt.widgets.Decorations.restoreFocus(Decorations.java:819)
+	at org.eclipse.swt.widgets.Decorations.WM_ACTIVATE(Decorations.java:1625)
+	at org.eclipse.swt.widgets.Shell.WM_ACTIVATE(Shell.java:1833)
+	at org.eclipse.swt.widgets.Control.windowProc(Control.java:3670)
+	at org.eclipse.swt.widgets.Canvas.windowProc(Canvas.java:291)
+	at org.eclipse.swt.widgets.Decorations.windowProc(Decorations.java:1584)
+	at org.eclipse.swt.widgets.Shell.windowProc(Shell.java:1753)
+	at org.eclipse.swt.widgets.Display.windowProc(Display.java:4351)
+	at org.eclipse.swt.internal.win32.OS.DestroyWindow(Native Method)
+	at org.eclipse.swt.widgets.Control.destroyWidget(Control.java:652)
+	at org.eclipse.swt.widgets.Shell.destroyWidget(Shell.java:636)
+	at org.eclipse.swt.widgets.Widget.release(Widget.java:750)
+	at org.eclipse.swt.widgets.Widget.dispose(Widget.java:410)
+	at org.eclipse.swt.widgets.Decorations.dispose(Decorations.java:457)
+	at org.eclipse.swt.widgets.Shell.dispose(Shell.java:653)
+	at org.eclipse.jface.window.Window.close(Window.java:330)
+	at org.eclipse.jface.dialogs.Dialog.close(Dialog.java:971)
+	at org.eclipse.jface.dialogs.MessageDialog.buttonPressed(MessageDialog.java:167)
+	at org.eclipse.jface.dialogs.Dialog$2.widgetSelected(Dialog.java:616)
+	at org.eclipse.swt.widgets.TypedListener.handleEvent(TypedListener.java:227)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:66)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:938)
+	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:3682)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3293)
+	at org.eclipse.jface.window.Window.runEventLoop(Window.java:820)
+	at org.eclipse.jface.window.Window.open(Window.java:796)
+	at org.eclipse.jface.dialogs.MessageDialog.openQuestion(MessageDialog.java:371)
+	at org.eclipse.ui.texteditor.AbstractTextEditor.handleEditorInputChanged(AbstractTextEditor.java:4425)
+	at org.eclipse.ui.texteditor.StatusTextEditor.handleEditorInputChanged(StatusTextEditor.java:220)
+	at org.eclipse.ui.texteditor.AbstractTextEditor.sanityCheckState(AbstractTextEditor.java:4555)
+	at org.eclipse.ui.texteditor.StatusTextEditor.sanityCheckState(StatusTextEditor.java:210)
+	at org.eclipse.ui.texteditor.AbstractTextEditor.safelySanityCheckState(AbstractTextEditor.java:4533)
+	at org.eclipse.ui.texteditor.AbstractTextEditor$ActivationListener.handleActivation(AbstractTextEditor.java:921)
+	at org.eclipse.ui.texteditor.AbstractTextEditor$ActivationListener.partActivated(AbstractTextEditor.java:879)
+	at org.eclipse.ui.internal.PartListenerList$1.run(PartListenerList.java:72)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:37)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:857)
+	at org.eclipse.ui.internal.PartListenerList.fireEvent(PartListenerList.java:57)
+	at org.eclipse.ui.internal.PartListenerList.firePartActivated(PartListenerList.java:70)
+	at org.eclipse.ui.internal.PartService.firePartActivated(PartService.java:73)
+	at org.eclipse.ui.internal.PartService.setActivePart(PartService.java:171)
+	at org.eclipse.ui.internal.WWinPartService.updateActivePart(WWinPartService.java:124)
+	at org.eclipse.ui.internal.WWinPartService.access$0(WWinPartService.java:115)
+	at org.eclipse.ui.internal.WWinPartService$1.partDeactivated(WWinPartService.java:48)
+	at org.eclipse.ui.internal.PartListenerList2$4.run(PartListenerList2.java:113)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:37)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:857)
+	at org.eclipse.ui.internal.PartListenerList2.fireEvent(PartListenerList2.java:53)
+	at org.eclipse.ui.internal.PartListenerList2.firePartDeactivated(PartListenerList2.java:111)
+	at org.eclipse.ui.internal.PartService.firePartDeactivated(PartService.java:116)
+	at org.eclipse.ui.internal.PartService.setActivePart(PartService.java:165)
+	at org.eclipse.ui.internal.WorkbenchPagePartList.fireActivePartChanged(WorkbenchPagePartList.java:56)
+	at org.eclipse.ui.internal.PartList.setActivePart(PartList.java:126)
+	at org.eclipse.ui.internal.WorkbenchPage.setActivePart(WorkbenchPage.java:3384)
+	at org.eclipse.ui.internal.WorkbenchPage.activate(WorkbenchPage.java:602)
+	at org.eclipse.ui.internal.WorkbenchPage.showEditor(WorkbenchPage.java:2804)
+	at org.eclipse.ui.internal.WorkbenchPage.busyOpenEditorBatched(WorkbenchPage.java:2710)
+	at org.eclipse.ui.internal.WorkbenchPage.busyOpenEditor(WorkbenchPage.java:2633)
+	at org.eclipse.ui.internal.WorkbenchPage.access$12(WorkbenchPage.java:2625)
+	at org.eclipse.ui.internal.WorkbenchPage$10.run(WorkbenchPage.java:2577)
+	at org.eclipse.swt.custom.BusyIndicator.showWhile(BusyIndicator.java:67)
+	at org.eclipse.ui.internal.WorkbenchPage.openEditor(WorkbenchPage.java:2572)
+	at org.eclipse.ui.internal.WorkbenchPage.openEditor(WorkbenchPage.java:2556)
+	at org.eclipse.ui.internal.WorkbenchPage.openEditor(WorkbenchPage.java:2547)
+	at org.eclipse.jdt.internal.ui.javaeditor.EditorUtility.openInEditor(EditorUtility.java:298)
+	at org.eclipse.jdt.internal.ui.javaeditor.EditorUtility.openInEditor(EditorUtility.java:172)
+	at org.eclipse.jdt.ui.actions.OpenAction.run(OpenAction.java:194)
+	at org.eclipse.jdt.ui.actions.OpenAction.run(OpenAction.java:175)
+	at org.eclipse.jdt.ui.actions.SelectionDispatchAction.dispatchRun(SelectionDispatchAction.java:268)
+	at org.eclipse.jdt.ui.actions.SelectionDispatchAction.run(SelectionDispatchAction.java:244)
+	at org.eclipse.jdt.internal.ui.packageview.PackageExplorerActionGroup.handleOpen(PackageExplorerActionGroup.java:316)
+	at org.eclipse.jdt.internal.ui.packageview.PackageExplorerPart$5.open(PackageExplorerPart.java:613)
+	at org.eclipse.jface.viewers.StructuredViewer$2.run(StructuredViewer.java:820)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:37)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:857)
+	at org.eclipse.ui.internal.JFaceUtil$1.run(JFaceUtil.java:46)
+	at org.eclipse.jface.util.SafeRunnable.run(SafeRunnable.java:193)
+	at org.eclipse.jface.viewers.StructuredViewer.fireOpen(StructuredViewer.java:818)
+	at org.eclipse.jface.viewers.StructuredViewer.handleOpen(StructuredViewer.java:1079)
+	at org.eclipse.jface.viewers.StructuredViewer$6.handleOpen(StructuredViewer.java:1183)
+	at org.eclipse.jface.util.OpenStrategy.fireOpenEvent(OpenStrategy.java:263)
+	at org.eclipse.jface.util.OpenStrategy.access$2(OpenStrategy.java:257)
+	at org.eclipse.jface.util.OpenStrategy$1.handleEvent(OpenStrategy.java:297)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:66)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:938)
+	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:3682)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3293)
+	at org.eclipse.ui.internal.Workbench.runEventLoop(Workbench.java:2389)
+	at org.eclipse.ui.internal.Workbench.runUI(Workbench.java:2353)
+	at org.eclipse.ui.internal.Workbench.access$4(Workbench.java:2219)
+	at org.eclipse.ui.internal.Workbench$4.run(Workbench.java:466)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:289)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:461)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:149)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:106)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:153)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:106)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:76)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:363)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:176)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:504)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:443)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1169)
+!SESSION 2007-09-24 21:25:55.765 -----------------------------------------------
+eclipse.buildId=I20070625-1500
+java.version=1.6.0_02
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=es_VE
+Command-line arguments:  -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.ui.workbench 4 0 2007-09-24 21:26:08.234
+!MESSAGE WARNING: Prevented recursive attempt to activate part org.eclipse.jdt.ui.PackageExplorer while still in the middle of activating part org.eclipse.ui.DefaultTextEditor
+!STACK 0
+java.lang.RuntimeException: WARNING: Prevented recursive attempt to activate part org.eclipse.jdt.ui.PackageExplorer while still in the middle of activating part org.eclipse.ui.DefaultTextEditor
+	at org.eclipse.ui.internal.WorkbenchPage.setActivePart(WorkbenchPage.java:3334)
+	at org.eclipse.ui.internal.WorkbenchPage.requestActivation(WorkbenchPage.java:2928)
+	at org.eclipse.ui.internal.PartPane.requestActivation(PartPane.java:265)
+	at org.eclipse.ui.internal.PartPane.handleEvent(PartPane.java:229)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:66)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:938)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:962)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:943)
+	at org.eclipse.swt.widgets.Shell.setActiveControl(Shell.java:1273)
+	at org.eclipse.swt.widgets.Control.sendFocusEvent(Control.java:2366)
+	at org.eclipse.swt.widgets.Widget.wmSetFocus(Widget.java:2176)
+	at org.eclipse.swt.widgets.Control.WM_SETFOCUS(Control.java:4282)
+	at org.eclipse.swt.widgets.Tree.WM_SETFOCUS(Tree.java:6366)
+	at org.eclipse.swt.widgets.Control.windowProc(Control.java:3738)
+	at org.eclipse.swt.widgets.Tree.windowProc(Tree.java:5370)
+	at org.eclipse.swt.widgets.Display.windowProc(Display.java:4351)
+	at org.eclipse.swt.internal.win32.OS.SetFocus(Native Method)
+	at org.eclipse.swt.widgets.Control.forceFocus(Control.java:963)
+	at org.eclipse.swt.widgets.Control.setSavedFocus(Control.java:2966)
+	at org.eclipse.swt.widgets.Decorations.restoreFocus(Decorations.java:819)
+	at org.eclipse.swt.widgets.Decorations.WM_ACTIVATE(Decorations.java:1625)
+	at org.eclipse.swt.widgets.Shell.WM_ACTIVATE(Shell.java:1833)
+	at org.eclipse.swt.widgets.Control.windowProc(Control.java:3670)
+	at org.eclipse.swt.widgets.Canvas.windowProc(Canvas.java:291)
+	at org.eclipse.swt.widgets.Decorations.windowProc(Decorations.java:1584)
+	at org.eclipse.swt.widgets.Shell.windowProc(Shell.java:1753)
+	at org.eclipse.swt.widgets.Display.windowProc(Display.java:4351)
+	at org.eclipse.swt.internal.win32.OS.DestroyWindow(Native Method)
+	at org.eclipse.swt.widgets.Control.destroyWidget(Control.java:652)
+	at org.eclipse.swt.widgets.Shell.destroyWidget(Shell.java:636)
+	at org.eclipse.swt.widgets.Widget.release(Widget.java:750)
+	at org.eclipse.swt.widgets.Widget.dispose(Widget.java:410)
+	at org.eclipse.swt.widgets.Decorations.dispose(Decorations.java:457)
+	at org.eclipse.swt.widgets.Shell.dispose(Shell.java:653)
+	at org.eclipse.jface.window.Window.close(Window.java:330)
+	at org.eclipse.jface.dialogs.Dialog.close(Dialog.java:971)
+	at org.eclipse.jface.dialogs.MessageDialog.buttonPressed(MessageDialog.java:167)
+	at org.eclipse.jface.dialogs.Dialog$2.widgetSelected(Dialog.java:616)
+	at org.eclipse.swt.widgets.TypedListener.handleEvent(TypedListener.java:227)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:66)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:938)
+	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:3682)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3293)
+	at org.eclipse.jface.window.Window.runEventLoop(Window.java:820)
+	at org.eclipse.jface.window.Window.open(Window.java:796)
+	at org.eclipse.jface.dialogs.MessageDialog.openQuestion(MessageDialog.java:371)
+	at org.eclipse.ui.texteditor.AbstractTextEditor.handleEditorInputChanged(AbstractTextEditor.java:4425)
+	at org.eclipse.ui.texteditor.StatusTextEditor.handleEditorInputChanged(StatusTextEditor.java:220)
+	at org.eclipse.ui.texteditor.AbstractTextEditor.sanityCheckState(AbstractTextEditor.java:4555)
+	at org.eclipse.ui.texteditor.StatusTextEditor.sanityCheckState(StatusTextEditor.java:210)
+	at org.eclipse.ui.texteditor.AbstractTextEditor.safelySanityCheckState(AbstractTextEditor.java:4533)
+	at org.eclipse.ui.texteditor.AbstractTextEditor$ActivationListener.handleActivation(AbstractTextEditor.java:921)
+	at org.eclipse.ui.texteditor.AbstractTextEditor$ActivationListener.partActivated(AbstractTextEditor.java:879)
+	at org.eclipse.ui.internal.PartListenerList$1.run(PartListenerList.java:72)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:37)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:857)
+	at org.eclipse.ui.internal.PartListenerList.fireEvent(PartListenerList.java:57)
+	at org.eclipse.ui.internal.PartListenerList.firePartActivated(PartListenerList.java:70)
+	at org.eclipse.ui.internal.PartService.firePartActivated(PartService.java:73)
+	at org.eclipse.ui.internal.PartService.setActivePart(PartService.java:171)
+	at org.eclipse.ui.internal.WWinPartService.updateActivePart(WWinPartService.java:124)
+	at org.eclipse.ui.internal.WWinPartService.access$0(WWinPartService.java:115)
+	at org.eclipse.ui.internal.WWinPartService$1.partDeactivated(WWinPartService.java:48)
+	at org.eclipse.ui.internal.PartListenerList2$4.run(PartListenerList2.java:113)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:37)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:857)
+	at org.eclipse.ui.internal.PartListenerList2.fireEvent(PartListenerList2.java:53)
+	at org.eclipse.ui.internal.PartListenerList2.firePartDeactivated(PartListenerList2.java:111)
+	at org.eclipse.ui.internal.PartService.firePartDeactivated(PartService.java:116)
+	at org.eclipse.ui.internal.PartService.setActivePart(PartService.java:165)
+	at org.eclipse.ui.internal.WorkbenchPagePartList.fireActivePartChanged(WorkbenchPagePartList.java:56)
+	at org.eclipse.ui.internal.PartList.setActivePart(PartList.java:126)
+	at org.eclipse.ui.internal.WorkbenchPage.setActivePart(WorkbenchPage.java:3384)
+	at org.eclipse.ui.internal.WorkbenchPage.activate(WorkbenchPage.java:602)
+	at org.eclipse.ui.internal.WorkbenchPage.busyOpenEditorBatched(WorkbenchPage.java:2730)
+	at org.eclipse.ui.internal.WorkbenchPage.busyOpenEditor(WorkbenchPage.java:2633)
+	at org.eclipse.ui.internal.WorkbenchPage.access$12(WorkbenchPage.java:2625)
+	at org.eclipse.ui.internal.WorkbenchPage$10.run(WorkbenchPage.java:2577)
+	at org.eclipse.swt.custom.BusyIndicator.showWhile(BusyIndicator.java:67)
+	at org.eclipse.ui.internal.WorkbenchPage.openEditor(WorkbenchPage.java:2572)
+	at org.eclipse.ui.internal.WorkbenchPage.openEditor(WorkbenchPage.java:2556)
+	at org.eclipse.ui.internal.WorkbenchPage.openEditor(WorkbenchPage.java:2547)
+	at org.eclipse.ui.ide.IDE.openEditor(IDE.java:644)
+	at org.eclipse.ui.ide.IDE.openEditor(IDE.java:603)
+	at org.eclipse.jdt.internal.ui.javaeditor.EditorUtility.openInEditor(EditorUtility.java:285)
+	at org.eclipse.jdt.internal.ui.javaeditor.EditorUtility.openInEditor(EditorUtility.java:138)
+	at org.eclipse.jdt.ui.actions.OpenAction.run(OpenAction.java:194)
+	at org.eclipse.jdt.ui.actions.OpenAction.run(OpenAction.java:175)
+	at org.eclipse.jdt.ui.actions.SelectionDispatchAction.dispatchRun(SelectionDispatchAction.java:268)
+	at org.eclipse.jdt.ui.actions.SelectionDispatchAction.run(SelectionDispatchAction.java:244)
+	at org.eclipse.jdt.internal.ui.packageview.PackageExplorerActionGroup.handleOpen(PackageExplorerActionGroup.java:316)
+	at org.eclipse.jdt.internal.ui.packageview.PackageExplorerPart$5.open(PackageExplorerPart.java:613)
+	at org.eclipse.jface.viewers.StructuredViewer$2.run(StructuredViewer.java:820)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:37)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:857)
+	at org.eclipse.ui.internal.JFaceUtil$1.run(JFaceUtil.java:46)
+	at org.eclipse.jface.util.SafeRunnable.run(SafeRunnable.java:193)
+	at org.eclipse.jface.viewers.StructuredViewer.fireOpen(StructuredViewer.java:818)
+	at org.eclipse.jface.viewers.StructuredViewer.handleOpen(StructuredViewer.java:1079)
+	at org.eclipse.jface.viewers.StructuredViewer$6.handleOpen(StructuredViewer.java:1183)
+	at org.eclipse.jface.util.OpenStrategy.fireOpenEvent(OpenStrategy.java:263)
+	at org.eclipse.jface.util.OpenStrategy.access$2(OpenStrategy.java:257)
+	at org.eclipse.jface.util.OpenStrategy$1.handleEvent(OpenStrategy.java:297)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:66)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:938)
+	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:3682)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3293)
+	at org.eclipse.ui.internal.Workbench.runEventLoop(Workbench.java:2389)
+	at org.eclipse.ui.internal.Workbench.runUI(Workbench.java:2353)
+	at org.eclipse.ui.internal.Workbench.access$4(Workbench.java:2219)
+	at org.eclipse.ui.internal.Workbench$4.run(Workbench.java:466)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:289)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:461)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:149)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:106)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:153)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:106)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:76)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:363)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:176)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:504)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:443)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1169)
+!SESSION 2007-10-01 17:36:59.390 -----------------------------------------------
+eclipse.buildId=I20070625-1500
+java.version=1.6.0_02
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=es_VE
+Command-line arguments:  -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2007-10-01 20:02:24.750
+!MESSAGE Internal Error
+!STACK 0
+org.eclipse.jface.text.BadLocationException
+	at org.eclipse.jface.text.AbstractDocument.computePartitioning(AbstractDocument.java:1296)
+	at org.eclipse.jface.text.TextUtilities.computePartitioning(TextUtilities.java:428)
+	at org.eclipse.jdt.internal.ui.text.spelling.JavaSpellingEngine.check(JavaSpellingEngine.java:55)
+	at org.eclipse.jdt.internal.ui.text.spelling.SpellingEngine.check(SpellingEngine.java:77)
+	at org.eclipse.jdt.internal.ui.text.spelling.DefaultSpellingEngine.check(DefaultSpellingEngine.java:75)
+	at org.eclipse.ui.texteditor.spelling.SpellingService$1.run(SpellingService.java:103)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:37)
+	at org.eclipse.ui.texteditor.spelling.SpellingService.check(SpellingService.java:108)
+	at org.eclipse.ui.texteditor.spelling.SpellingService.check(SpellingService.java:80)
+	at org.eclipse.ui.texteditor.spelling.SpellingReconcileStrategy.reconcile(SpellingReconcileStrategy.java:176)
+	at org.eclipse.jdt.internal.ui.text.spelling.JavaSpellingReconcileStrategy.reconcile(JavaSpellingReconcileStrategy.java:125)
+	at org.eclipse.jdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:86)
+	at org.eclipse.jdt.internal.ui.text.JavaCompositeReconcilingStrategy.reconcile(JavaCompositeReconcilingStrategy.java:96)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:75)
+	at org.eclipse.jdt.internal.ui.text.JavaReconciler.process(JavaReconciler.java:378)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:204)
+!SESSION 2007-10-06 09:29:58.015 -----------------------------------------------
+eclipse.buildId=I20070625-1500
+java.version=1.6.0_02
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=es_VE
+Command-line arguments:  -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2007-10-06 13:46:55.406
+!MESSAGE Internal Error
+!STACK 0
+org.eclipse.jface.text.BadLocationException
+	at org.eclipse.jface.text.AbstractDocument.computePartitioning(AbstractDocument.java:1296)
+	at org.eclipse.jface.text.TextUtilities.computePartitioning(TextUtilities.java:428)
+	at org.eclipse.jdt.internal.ui.text.spelling.JavaSpellingEngine.check(JavaSpellingEngine.java:55)
+	at org.eclipse.jdt.internal.ui.text.spelling.SpellingEngine.check(SpellingEngine.java:77)
+	at org.eclipse.jdt.internal.ui.text.spelling.DefaultSpellingEngine.check(DefaultSpellingEngine.java:75)
+	at org.eclipse.ui.texteditor.spelling.SpellingService$1.run(SpellingService.java:103)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:37)
+	at org.eclipse.ui.texteditor.spelling.SpellingService.check(SpellingService.java:108)
+	at org.eclipse.ui.texteditor.spelling.SpellingService.check(SpellingService.java:80)
+	at org.eclipse.ui.texteditor.spelling.SpellingReconcileStrategy.reconcile(SpellingReconcileStrategy.java:176)
+	at org.eclipse.jdt.internal.ui.text.spelling.JavaSpellingReconcileStrategy.reconcile(JavaSpellingReconcileStrategy.java:125)
+	at org.eclipse.jdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:86)
+	at org.eclipse.jdt.internal.ui.text.JavaCompositeReconcilingStrategy.reconcile(JavaCompositeReconcilingStrategy.java:96)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:75)
+	at org.eclipse.jdt.internal.ui.text.JavaReconciler.process(JavaReconciler.java:378)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:204)
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2007-10-06 16:18:52.109
+!MESSAGE Internal Error
+!STACK 0
+org.eclipse.jface.text.BadLocationException
+	at org.eclipse.jface.text.TreeLineTracker.fail(TreeLineTracker.java:1062)
+	at org.eclipse.jface.text.TreeLineTracker.getLineInformationOfOffset(TreeLineTracker.java:1158)
+	at org.eclipse.jface.text.AbstractLineTracker.getLineInformationOfOffset(AbstractLineTracker.java:145)
+	at org.eclipse.jface.text.AbstractDocument.getLineInformationOfOffset(AbstractDocument.java:863)
+	at org.eclipse.jdt.internal.ui.text.java.JavaAutoIndentStrategy.smartPaste(JavaAutoIndentStrategy.java:644)
+	at org.eclipse.jdt.internal.ui.text.java.JavaAutoIndentStrategy.customizeDocumentCommand(JavaAutoIndentStrategy.java:1174)
+	at org.eclipse.jface.text.TextViewer.customizeDocumentCommand(TextViewer.java:3550)
+	at org.eclipse.jface.text.TextViewer.handleVerifyEvent(TextViewer.java:3572)
+	at org.eclipse.jface.text.source.projection.ProjectionViewer.handleVerifyEvent(ProjectionViewer.java:1251)
+	at org.eclipse.jface.text.TextViewer$TextVerifyListener.verifyText(TextViewer.java:404)
+	at org.eclipse.swt.widgets.TypedListener.handleEvent(TypedListener.java:248)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:66)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:938)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:962)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:947)
+	at org.eclipse.swt.widgets.Widget.notifyListeners(Widget.java:706)
+	at org.eclipse.swt.custom.StyledText.modifyContent(StyledText.java:5725)
+	at org.eclipse.swt.custom.StyledText.sendKeyEvent(StyledText.java:6500)
+	at org.eclipse.swt.custom.StyledText.paste(StyledText.java:5805)
+	at org.eclipse.jface.text.TextViewer.doOperation(TextViewer.java:3722)
+	at org.eclipse.jface.text.source.SourceViewer.doOperation(SourceViewer.java:857)
+	at org.eclipse.jface.text.source.projection.ProjectionViewer.doOperation(ProjectionViewer.java:1512)
+	at org.eclipse.jdt.internal.ui.javaeditor.JavaSourceViewer.doOperation(JavaSourceViewer.java:179)
+	at org.eclipse.jdt.internal.ui.javaeditor.CompilationUnitEditor$AdaptedSourceViewer.doOperation(CompilationUnitEditor.java:193)
+	at org.eclipse.jdt.internal.ui.javaeditor.ClipboardOperationAction.doPasteWithImportsOperation(ClipboardOperationAction.java:492)
+	at org.eclipse.jdt.internal.ui.javaeditor.ClipboardOperationAction.internalDoOperation(ClipboardOperationAction.java:277)
+	at org.eclipse.jdt.internal.ui.javaeditor.ClipboardOperationAction$1.run(ClipboardOperationAction.java:248)
+	at org.eclipse.swt.custom.BusyIndicator.showWhile(BusyIndicator.java:67)
+	at org.eclipse.jdt.internal.ui.javaeditor.ClipboardOperationAction.run(ClipboardOperationAction.java:246)
+	at org.eclipse.jface.action.Action.runWithEvent(Action.java:498)
+	at org.eclipse.jface.action.ActionContributionItem.handleWidgetSelection(ActionContributionItem.java:545)
+	at org.eclipse.jface.action.ActionContributionItem.access$2(ActionContributionItem.java:490)
+	at org.eclipse.jface.action.ActionContributionItem$5.handleEvent(ActionContributionItem.java:402)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:66)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:938)
+	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:3682)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3293)
+	at org.eclipse.ui.internal.Workbench.runEventLoop(Workbench.java:2389)
+	at org.eclipse.ui.internal.Workbench.runUI(Workbench.java:2353)
+	at org.eclipse.ui.internal.Workbench.access$4(Workbench.java:2219)
+	at org.eclipse.ui.internal.Workbench$4.run(Workbench.java:466)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:289)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:461)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:149)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:106)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:153)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:106)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:76)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:363)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:176)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:504)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:443)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1169)
+!SESSION 2007-10-06 20:39:02.703 -----------------------------------------------
+eclipse.buildId=I20070625-1500
+java.version=1.6.0_02
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=es_VE
+Command-line arguments:  -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.core.resources 2 10035 2007-10-06 20:39:04.500
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+!SESSION 2007-10-08 21:29:25.718 -----------------------------------------------
+eclipse.buildId=I20070625-1500
+java.version=1.6.0_03
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=es_VE
+Command-line arguments:  -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.ui.workbench 4 0 2007-10-08 21:44:09.687
+!MESSAGE WARNING: Prevented recursive attempt to activate part org.eclipse.jdt.ui.PackageExplorer while still in the middle of activating part org.eclipse.jdt.ui.CompilationUnitEditor
+!STACK 0
+java.lang.RuntimeException: WARNING: Prevented recursive attempt to activate part org.eclipse.jdt.ui.PackageExplorer while still in the middle of activating part org.eclipse.jdt.ui.CompilationUnitEditor
+	at org.eclipse.ui.internal.WorkbenchPage.setActivePart(WorkbenchPage.java:3334)
+	at org.eclipse.ui.internal.WorkbenchPage.requestActivation(WorkbenchPage.java:2928)
+	at org.eclipse.ui.internal.PartPane.requestActivation(PartPane.java:265)
+	at org.eclipse.ui.internal.PartPane.handleEvent(PartPane.java:229)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:66)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:938)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:962)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:943)
+	at org.eclipse.swt.widgets.Shell.setActiveControl(Shell.java:1273)
+	at org.eclipse.swt.widgets.Control.sendFocusEvent(Control.java:2366)
+	at org.eclipse.swt.widgets.Widget.wmSetFocus(Widget.java:2176)
+	at org.eclipse.swt.widgets.Control.WM_SETFOCUS(Control.java:4282)
+	at org.eclipse.swt.widgets.Tree.WM_SETFOCUS(Tree.java:6366)
+	at org.eclipse.swt.widgets.Control.windowProc(Control.java:3738)
+	at org.eclipse.swt.widgets.Tree.windowProc(Tree.java:5370)
+	at org.eclipse.swt.widgets.Display.windowProc(Display.java:4351)
+	at org.eclipse.swt.internal.win32.OS.SetFocus(Native Method)
+	at org.eclipse.swt.widgets.Control.forceFocus(Control.java:963)
+	at org.eclipse.swt.widgets.Control.setSavedFocus(Control.java:2966)
+	at org.eclipse.swt.widgets.Decorations.restoreFocus(Decorations.java:819)
+	at org.eclipse.swt.widgets.Decorations.WM_ACTIVATE(Decorations.java:1625)
+	at org.eclipse.swt.widgets.Shell.WM_ACTIVATE(Shell.java:1833)
+	at org.eclipse.swt.widgets.Control.windowProc(Control.java:3670)
+	at org.eclipse.swt.widgets.Canvas.windowProc(Canvas.java:291)
+	at org.eclipse.swt.widgets.Decorations.windowProc(Decorations.java:1584)
+	at org.eclipse.swt.widgets.Shell.windowProc(Shell.java:1753)
+	at org.eclipse.swt.widgets.Display.windowProc(Display.java:4351)
+	at org.eclipse.swt.internal.win32.OS.DestroyWindow(Native Method)
+	at org.eclipse.swt.widgets.Control.destroyWidget(Control.java:652)
+	at org.eclipse.swt.widgets.Shell.destroyWidget(Shell.java:636)
+	at org.eclipse.swt.widgets.Widget.release(Widget.java:750)
+	at org.eclipse.swt.widgets.Widget.dispose(Widget.java:410)
+	at org.eclipse.swt.widgets.Decorations.dispose(Decorations.java:457)
+	at org.eclipse.swt.widgets.Shell.dispose(Shell.java:653)
+	at org.eclipse.jface.window.Window.close(Window.java:330)
+	at org.eclipse.jface.dialogs.Dialog.close(Dialog.java:971)
+	at org.eclipse.jface.dialogs.MessageDialog.buttonPressed(MessageDialog.java:167)
+	at org.eclipse.jface.dialogs.Dialog$2.widgetSelected(Dialog.java:616)
+	at org.eclipse.swt.widgets.TypedListener.handleEvent(TypedListener.java:227)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:66)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:938)
+	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:3682)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3293)
+	at org.eclipse.jface.window.Window.runEventLoop(Window.java:820)
+	at org.eclipse.jface.window.Window.open(Window.java:796)
+	at org.eclipse.jface.dialogs.MessageDialog.openQuestion(MessageDialog.java:371)
+	at org.eclipse.ui.texteditor.AbstractTextEditor.handleEditorInputChanged(AbstractTextEditor.java:4425)
+	at org.eclipse.ui.texteditor.StatusTextEditor.handleEditorInputChanged(StatusTextEditor.java:220)
+	at org.eclipse.ui.texteditor.AbstractTextEditor.sanityCheckState(AbstractTextEditor.java:4555)
+	at org.eclipse.ui.texteditor.StatusTextEditor.sanityCheckState(StatusTextEditor.java:210)
+	at org.eclipse.ui.texteditor.AbstractTextEditor.safelySanityCheckState(AbstractTextEditor.java:4533)
+	at org.eclipse.ui.texteditor.AbstractTextEditor$ActivationListener.handleActivation(AbstractTextEditor.java:921)
+	at org.eclipse.ui.texteditor.AbstractTextEditor$ActivationListener.partActivated(AbstractTextEditor.java:879)
+	at org.eclipse.ui.internal.PartListenerList$1.run(PartListenerList.java:72)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:37)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:857)
+	at org.eclipse.ui.internal.PartListenerList.fireEvent(PartListenerList.java:57)
+	at org.eclipse.ui.internal.PartListenerList.firePartActivated(PartListenerList.java:70)
+	at org.eclipse.ui.internal.PartService.firePartActivated(PartService.java:73)
+	at org.eclipse.ui.internal.PartService.setActivePart(PartService.java:171)
+	at org.eclipse.ui.internal.WWinPartService.updateActivePart(WWinPartService.java:124)
+	at org.eclipse.ui.internal.WWinPartService.access$0(WWinPartService.java:115)
+	at org.eclipse.ui.internal.WWinPartService$1.partDeactivated(WWinPartService.java:48)
+	at org.eclipse.ui.internal.PartListenerList2$4.run(PartListenerList2.java:113)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:37)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:857)
+	at org.eclipse.ui.internal.PartListenerList2.fireEvent(PartListenerList2.java:53)
+	at org.eclipse.ui.internal.PartListenerList2.firePartDeactivated(PartListenerList2.java:111)
+	at org.eclipse.ui.internal.PartService.firePartDeactivated(PartService.java:116)
+	at org.eclipse.ui.internal.PartService.setActivePart(PartService.java:165)
+	at org.eclipse.ui.internal.WorkbenchPagePartList.fireActivePartChanged(WorkbenchPagePartList.java:56)
+	at org.eclipse.ui.internal.PartList.setActivePart(PartList.java:126)
+	at org.eclipse.ui.internal.WorkbenchPage.setActivePart(WorkbenchPage.java:3384)
+	at org.eclipse.ui.internal.WorkbenchPage.activate(WorkbenchPage.java:602)
+	at org.eclipse.ui.internal.WorkbenchPage.showEditor(WorkbenchPage.java:2804)
+	at org.eclipse.ui.internal.WorkbenchPage.busyOpenEditorBatched(WorkbenchPage.java:2710)
+	at org.eclipse.ui.internal.WorkbenchPage.busyOpenEditor(WorkbenchPage.java:2633)
+	at org.eclipse.ui.internal.WorkbenchPage.access$12(WorkbenchPage.java:2625)
+	at org.eclipse.ui.internal.WorkbenchPage$10.run(WorkbenchPage.java:2577)
+	at org.eclipse.swt.custom.BusyIndicator.showWhile(BusyIndicator.java:67)
+	at org.eclipse.ui.internal.WorkbenchPage.openEditor(WorkbenchPage.java:2572)
+	at org.eclipse.ui.internal.WorkbenchPage.openEditor(WorkbenchPage.java:2556)
+	at org.eclipse.ui.internal.WorkbenchPage.openEditor(WorkbenchPage.java:2547)
+	at org.eclipse.jdt.internal.ui.javaeditor.EditorUtility.openInEditor(EditorUtility.java:298)
+	at org.eclipse.jdt.internal.ui.javaeditor.EditorUtility.openInEditor(EditorUtility.java:172)
+	at org.eclipse.jdt.ui.actions.OpenAction.run(OpenAction.java:194)
+	at org.eclipse.jdt.ui.actions.OpenAction.run(OpenAction.java:175)
+	at org.eclipse.jdt.ui.actions.SelectionDispatchAction.dispatchRun(SelectionDispatchAction.java:268)
+	at org.eclipse.jdt.ui.actions.SelectionDispatchAction.run(SelectionDispatchAction.java:244)
+	at org.eclipse.jdt.internal.ui.packageview.PackageExplorerActionGroup.handleOpen(PackageExplorerActionGroup.java:316)
+	at org.eclipse.jdt.internal.ui.packageview.PackageExplorerPart$5.open(PackageExplorerPart.java:613)
+	at org.eclipse.jface.viewers.StructuredViewer$2.run(StructuredViewer.java:820)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:37)
+	at org.eclipse.core.runtime.Platform.run(Platform.java:857)
+	at org.eclipse.ui.internal.JFaceUtil$1.run(JFaceUtil.java:46)
+	at org.eclipse.jface.util.SafeRunnable.run(SafeRunnable.java:193)
+	at org.eclipse.jface.viewers.StructuredViewer.fireOpen(StructuredViewer.java:818)
+	at org.eclipse.jface.viewers.StructuredViewer.handleOpen(StructuredViewer.java:1079)
+	at org.eclipse.jface.viewers.StructuredViewer$6.handleOpen(StructuredViewer.java:1183)
+	at org.eclipse.jface.util.OpenStrategy.fireOpenEvent(OpenStrategy.java:263)
+	at org.eclipse.jface.util.OpenStrategy.access$2(OpenStrategy.java:257)
+	at org.eclipse.jface.util.OpenStrategy$1.handleEvent(OpenStrategy.java:297)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:66)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:938)
+	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:3682)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3293)
+	at org.eclipse.ui.internal.Workbench.runEventLoop(Workbench.java:2389)
+	at org.eclipse.ui.internal.Workbench.runUI(Workbench.java:2353)
+	at org.eclipse.ui.internal.Workbench.access$4(Workbench.java:2219)
+	at org.eclipse.ui.internal.Workbench$4.run(Workbench.java:466)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:289)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:461)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:149)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:106)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:153)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:106)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:76)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:363)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:176)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:504)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:443)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1169)
+!SESSION 2007-10-20 17:30:37.765 -----------------------------------------------
+eclipse.buildId=I20070625-1500
+java.version=1.6.0_03
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=es_VE
+Command-line arguments:  -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.jdt.ui 2 0 2007-10-20 18:55:23.000
+!MESSAGE The 'org.eclipse.jdt.ui.JavaTypeCompletionProposalComputer' proposal computer from the 'org.eclipse.jdt.ui' plug-in did not complete normally. The extension took too long to return from the 'computeContextInformation()' operation.
+!SESSION 2007-10-27 23:49:51.125 -----------------------------------------------
+eclipse.buildId=I20070625-1500
+java.version=1.6.0_03
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=es_VE
+Command-line arguments:  -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.core.resources 2 10035 2007-10-27 23:49:55.140
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+!SESSION 2007-10-27 23:56:39.578 -----------------------------------------------
+eclipse.buildId=I20070625-1500
+java.version=1.6.0_03
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=es_VE
+Command-line arguments:  -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.core.resources 2 10035 2007-10-27 23:56:49.078
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+!SESSION 2007-11-13 16:03:01.734 -----------------------------------------------
+eclipse.buildId=I20070625-1500
+java.version=1.6.0_03
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=es_VE
+Command-line arguments:  -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.jdt.ui 2 0 2007-11-13 16:13:00.109
+!MESSAGE The 'org.eclipse.jdt.ui.JavaTypeCompletionProposalComputer' proposal computer from the 'org.eclipse.jdt.ui' plug-in did not complete normally. The extension took too long to return from the 'computeContextInformation()' operation.
+!SESSION 2007-11-24 12:04:06.890 -----------------------------------------------
+eclipse.buildId=I20070625-1500
+java.version=1.6.0_03
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=es_VE
+Command-line arguments:  -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.jdt.ui 2 0 2007-11-24 16:50:11.781
+!MESSAGE The 'org.eclipse.jdt.ui.JavaTypeCompletionProposalComputer' proposal computer from the 'org.eclipse.jdt.ui' plug-in did not complete normally. The extension took too long to return from the 'computeContextInformation()' operation.
+!SESSION 2007-11-25 09:33:08.671 -----------------------------------------------
+eclipse.buildId=I20070625-1500
+java.version=1.6.0_03
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=es_VE
+Command-line arguments:  -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.jdt.ui 2 0 2007-11-25 10:49:31.359
+!MESSAGE The 'org.eclipse.jdt.ui.JavaTypeCompletionProposalComputer' proposal computer from the 'org.eclipse.jdt.ui' plug-in did not complete normally. The extension took too long to return from the 'computeContextInformation()' operation.

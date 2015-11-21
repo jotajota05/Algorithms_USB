@@ -1,0 +1,12 @@
+class Edge
+{ 
+    int v, w;
+    double p;
+
+    Edge(int v, int w, double p){ 
+    	this.v = v; 
+    	this.w = w; 
+    	this.p = p;
+    }
+    
+}

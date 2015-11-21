@@ -1,0 +1,99 @@
+import java.io.IOException;
+import java.util.*;
+
+public class Problema1 {
+	public NDGrafo G;
+	LinkedList<Vertice> vertices;
+
+	public Problema1(NDGrafo G) {
+		
+		this.G = G;
+		vertices = G.cjtoVertices;
+	}
+	
+	/*Metodo que dados dos vertices determina la distancia
+	  euclidiana entre ellos*/
+	public double distancia(Punto v1,Punto v2){
+		return Math.sqrt(Math.pow(v1.coorX-v2.coorX,2)+Math.pow(v1.coorY-v2.coorY,2));
+	}
+	
+	/*Metodo que dado un vertice determina si hay un lado en el
+	 * grafo con vertice final igual a ese vertice
+	 */
+	public boolean esExtremo(Punto v){
+		boolean esExtremo = false;
+		for (int i=0;i<G.cjtoLados.size()&&!esExtremo;i++){
+			if (G.cjtoLados.get(i).vertFin().obtID().equals(v.obtID()))
+				esExtremo = true;
+		}
+		return esExtremo;
+	}
+	
+	/*Metodo que dado un vertice determina el lado en el grafo cuyo
+	 * vertice final es igual a ese vertice
+	 */
+	public Lado obtExtremo(Punto v){
+		Lado l= null;
+		boolean esExtremo = false;
+		for (int i=0;i<G.cjtoLados.size()&&!esExtremo;i++){
+			if (G.cjtoLados.get(i).vertFin().obtID().equals(v.obtID())){
+				l = G.cjtoLados.get(i);
+				esExtremo = true;
+			}	
+		}
+		return l;
+	}
+	
+	/*Metodo que dado un grafo retorna la longitud minima de
+	 * una cuerda que recorre todos los vertices del grafo.
+	 */
+	public double longitud() {
+		double longitudMinima = 1000000;
+		for(int i=0;i<vertices.size();i++){
+			G.cjtoLados = new LinkedList<Lado>();
+			LinkedList<Punto> abiertos = new LinkedList<Punto>();
+			LinkedList<Punto> cerrados = new LinkedList<Punto>();
+			//System.out.println("tamano abiertos: "+abiertos.size());
+			//System.out.println("tamano cerrados: "+abiertos.size());//
+			Punto Vinicial = (Punto)vertices.get(i);
+			cerrados.addLast(Vinicial);
+			int k = 1;
+			for (int j=0;j<vertices.size();j++){
+				Punto Vady = (Punto)vertices.get(j);
+				if (Vinicial.id!=Vady.id){
+					String ladoID = ""+k;
+					k++;
+					Arista e = new Arista(ladoID,vertices.get(i),vertices.get(j),distancia(Vinicial,Vady));
+					G.agregarLado(e);
+					abiertos.addLast(Vady);
+				}
+			}
+			
+			while (abiertos.size()!=0){
+				Punto Vactual = abiertos.getLast();
+				cerrados.addLast(Vactual);
+				abiertos.removeLast();
+				for (int j=0;j<abiertos.size();j++){
+					if (esExtremo(abiertos.get(j))){
+						if (obtExtremo(abiertos.get(j)).costo()>distancia(abiertos.get(j),Vactual)){
+							String ladoID = obtExtremo(abiertos.get(j)).obtID();
+							G.eliminarLado(obtExtremo(abiertos.get(j)));
+							Arista l = new Arista(ladoID,Vactual,abiertos.get(j),distancia(abiertos.get(j),Vactual));
+							G.agregarLado(l);
+							abiertos.addLast(abiertos.get(j));
+							abiertos.remove(j);
+						}
+					}
+				}
+			}
+			double longitud = G.sumaLados();
+			if (longitud<longitudMinima) longitudMinima = longitud;
+		}
+		return longitudMinima;
+	}
+	
+	public static void main (String[] args)  throws IOException {
+		Archivo A=new Archivo(args[0]);
+		A.leerGrafoProblema1();
+	}
+}

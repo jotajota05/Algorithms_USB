@@ -1,0 +1,32 @@
+import java.util.LinkedList;
+
+
+public class Vertice {
+
+	int s;
+	double c;
+	
+	Vertice(int s, double c){
+		this.s = s;
+		this.c = c;
+	}
+	
+	public Vertice primero(LinkedList<Vertice> L) {
+		Vertice primero=null;
+		boolean menor;
+		boolean elmenor=false;
+		for(int i=0;i<L.size()&&!elmenor;i++) {
+			menor=true;
+			for(int j=0;j<L.size()&&menor;j++) {
+				if (L.get(i).c>L.get(j).c) menor=false;
+			}
+			if (menor) elmenor=true;
+			primero=L.get(i);
+		}
+		return primero;
+	}
+	
+	public void modCosto(Vertice v,double c) {
+		v.c=c;
+	}
+}

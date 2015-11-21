@@ -1,0 +1,40 @@
+import java.io.IOException;
+public class GrafoCliente {
+
+	public static void main (String[] args) throws IOException {
+		
+		Grafo G=new DIGrafo();
+		
+		Vertice V0=new Vertice("v0");
+		Vertice V1=new Vertice("v1");
+		Vertice V2=new Vertice("v2");
+		Vertice V3=new Vertice("v3");
+		Vertice V4=new Vertice("v3");
+	
+		G.agregarVertice(V0);
+		G.agregarVertice(V1);
+		G.agregarVertice(V2);
+		G.agregarVertice(V3);
+		G.agregarVertice(V4);
+		
+		Lado l0=new Arco("l0",V0,V1,1);
+		Lado l1=new Arco("l1",V0,V2,1);
+		Lado l2=new Arco("l2",V0,V3,1);
+		Lado l3=new Arco("l3",V1,V2,1);
+		Lado l4=new Arco("l4",V2,V1,1);
+		Lado l5=new Arco("l5",V4,V3,1);
+		Lado l6=new Arco("l5",V2,V4,1);
+		
+		G.agregarLado(l0);
+		G.agregarLado(l1);
+		G.agregarLado(l2);
+		G.agregarLado(l3);
+		G.agregarLado(l4);
+		G.agregarLado(l5);
+		G.agregarLado(l6);
+		
+		//System.out.println("grado del vertice: "+G.grado(V1));
+		System.out.println("numero de lados: "+G.Lados().size());
+		
+	}
+}

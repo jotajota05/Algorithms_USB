@@ -1,0 +1,8 @@
+
+public abstract class Lado {
+
+	public abstract String identificador();
+	public abstract Vertice vertIni();
+	public abstract Vertice vertFin();
+	
+}

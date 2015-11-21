@@ -1,0 +1,29 @@
+\select@language {spanish}
+\contentsline {section}{\numberline {1}Introducci\'on}{3}
+\contentsline {subsection}{\numberline {1.1}Breve descripci\'on del problema}{3}
+\contentsline {section}{\numberline {2}Dise\~no}{4}
+\contentsline {subsection}{\numberline {2.1}Modelo utilizado para representar el problema}{4}
+\contentsline {subsection}{\numberline {2.2}Estructuras y algoritmos involucrados en la aplicaci\'on}{4}
+\contentsline {subsubsection}{\numberline {2.2.1}Clase Piece}{5}
+\contentsline {subsubsection}{\numberline {2.2.2}Clase Pattern}{5}
+\contentsline {subsubsection}{\numberline {2.2.3}Clase Chromosome}{7}
+\contentsline {subsubsection}{\numberline {2.2.4}Algoritmo de Colonia de Hormigas}{9}
+\contentsline {subsection}{\numberline {2.3}Representaci\'on de la soluci\'on}{12}
+\contentsline {subsection}{\numberline {2.4}Funci\'on Objetivo}{12}
+\contentsline {subsection}{\numberline {2.5}Operadores}{13}
+\contentsline {section}{\numberline {3}Detalles de implementaci\'on}{14}
+\contentsline {subsection}{\numberline {3.1}Pseudoc\'odigo de las Metaheur\'isticas}{14}
+\contentsline {subsubsection}{\numberline {3.1.1}Algoritmo de Local Search}{14}
+\contentsline {subsubsection}{\numberline {3.1.2}Algoritmo de Local Search - Mejor Mejor}{14}
+\contentsline {subsubsection}{\numberline {3.1.3}Algoritmo de ILS}{15}
+\contentsline {subsubsection}{\numberline {3.1.4}Algoritmo de GRASP}{15}
+\contentsline {subsubsection}{\numberline {3.1.5}Algoritmo de Simulated Anneling}{16}
+\contentsline {subsubsection}{\numberline {3.1.6}Algoritmo Gen\'etico}{17}
+\contentsline {section}{\numberline {4}Instrucciones de operaci\'on}{19}
+\contentsline {section}{\numberline {5}Experimentos y an\'alisis de resultados}{19}
+\contentsline {subsection}{\numberline {5.1}Instancias}{19}
+\contentsline {subsection}{\numberline {5.2}Resultados y analisis de las Metaher\'isticas}{20}
+\contentsline {section}{\numberline {6}Estado actual}{21}
+\contentsline {subsection}{\numberline {6.1}Estado final de la aplicaci\'on}{21}
+\contentsline {section}{\numberline {7}Conclusiones y recomendaciones}{22}
+\contentsline {section}{\numberline {8}Referencias bibliogr\'aficas}{23}

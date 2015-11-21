@@ -1,0 +1,26 @@
+
+public class Arista extends Lado {
+
+	public String id;
+	public Vertice v;
+	public Vertice w;
+	public int peso;
+	
+	public Arista(String id,Vertice v,Vertice w,int p) {
+		this.id = id;
+		this.v = v;
+		this.w = w;
+		peso = p;
+	}
+	
+	public String identificador() {
+		return id;
+	}
+	
+	public Vertice vertIni() {
+		return v;
+	}
+	public Vertice vertFin() {
+		return w;
+	}
+}

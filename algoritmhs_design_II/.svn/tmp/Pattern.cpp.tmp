@@ -1,0 +1,272 @@
+/*
+  Proyecto Diseno de Algoritmo II - Objeto Patron
+
+  Juan Garcia 05-38207
+  Federico Flaviani 99-31744
+
+  Compilar con: 
+  Correr con: 
+*/
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <list>
+#include "Piece.h"
+
+using namespace std;
+
+class Pattern {
+
+public:
+  int width;
+  int height;
+  int num_pieces;
+  list<Piece *> pieces[];//recordar construirlo en el constructor
+  int area_ocup;
+  int area_no_ocup;
+  int lines;
+  Pattern();
+  Pattern(int, int);
+  Pattern(list<Piece *>, int, int);
+  Pattern perturbar(Pattern);
+  int quality();
+  int distance(Pattern);
+  Pattern clone();
+  Pattern vicinityFirstLevel();
+  Pattern vicinitySecondLevel();
+  Pattern vicinityThirdLevel();
+  Pattern vicinityNext();
+  list<Pattern> vicinity();
+  void updateHeight();
+<<<<<<< .mine
+private:
+  int x;
+  int y;
+  int x2;
+  int y2;
+  int x21;
+  int y21;
+=======
+private:
+    int x;
+    int y;
+    int x2;
+    int y2;
+    int x21;
+    int y21;
+    int x3;
+    int y3;
+    int x32;
+    int y32;
+    int x31;
+    int y31;
+>>>>>>> .r10
+};
+
+Pattern Pattern::clone()
+{
+    Pattern p=new Pattern();
+    p.area_no_ocup=this->area_no_ocup;
+    p.area_ocup=this->area_ocup;
+    p.height=this->height;
+    p.lines=this->lines;
+    p.num_pieces=this->num_pieces;
+    int i;
+    for(i=0; i<width; i++)
+        p.pieces[i]=this->pieces[i].clone();
+    p.width=this->width;
+    p.x=this->x;
+    p.y=this->y;
+    p.x2=this->x2;
+    p.y2=this->y2;
+    p.x21=this->x21;
+    p.y21=this->y21;
+    p.x3=this->x3;
+    p.y3=this->y3;
+    p.x32=this->x32;
+    p.y32=this->y32;
+    p.x31=this->x31;
+    p.y31=this->y31;
+}
+
+Pattern::Pattern() {
+  num_pieces = 0;
+  area_ocup = 0;
+  area_no_ocup = 0;
+  width = 0;
+  height = 0;
+  lines = 0;
+}
+
+Pattern::Pattern(int w, int h) {
+  num_pieces = 0;
+  area_ocup = 0;
+  width = w;
+  height = h;
+  area_no_ocup = w * h;
+  lines = 0;
+}
+
+Pattern::Pattern(list<Piece *> l_pieces, int w, int h) {
+  int area = 0;
+  num_pieces = l_pieces.size();
+  list<Piece *>::iterator it;
+  for (it = l_pieces.begin(); it != l_pieces.back(); it++) {
+    area += (**it).large;
+  }
+  area_ocup = area;
+  area_no_ocup = w * h - area;
+  lines = 0;
+}
+
+/*Pattern perturbar(Pattern)
+{
+    
+}*/
+
+//Pattern::move(int i){
+    
+// }
+
+int Pattern::quality() {
+  return area_no_ocup;
+}
+
+int Pattern::distance(Pattern p) {
+  int d = this->quality() - p.quality();
+  if (d < 0)
+    return -d;
+  else
+    return d;
+}
+
+list<Pattern> Pattern::vicinity() {
+  list<Pattern> l;
+  return l;
+}
+
+Pattern Pattern::vicinityFirstLevel()
+{
+    if(x=width && y=width)
+        return NULL;
+    Pattern p2=this->clone();
+    Piece p=p2.pieces[x]->back();
+    p2.pieces[x]->pop_back();
+    if(y==width)
+    {
+        x++;
+        y=0;
+    }
+    else
+        y++;
+    pieces[y]->push_back(p);
+}
+
+Pattern Pattern::vicinitySecondLevel()
+{
+    if(x2=width && y2=width && x21=width && y21=width)
+            return NULL;
+    Pattern p2=this->clone();
+    p2.x=this->x21;
+    p2.y=this->y21;
+    Piece p=p2.pieces[x2]->back();
+    p2.pieces[x2]->pop_back();
+    p2=p2.vicinityFirstLevel();
+    this->x21=p2.x;
+    this->y21=p2.y;
+    p2.x=0;
+    p2.y=0;//hacer cero las demas variables de control
+    p2.pieces[y2]->push_back(p);
+    if(p2==NULL)
+    {
+        if(y2==width)
+        {
+            x2++;
+            y2=0;
+            x21=0;
+            y21=0;
+        }
+        else
+        {
+            y2++;
+            x21=0;
+            y21=0;
+        }
+    }
+
+    return p2;
+}
+
+Pattern Pattern::vicinityThirdLevel()
+{
+    if(x3=width && y3=width && x32=width && y32=width && x31=width && y31=width)
+        return NULL;
+    Pattern p2=this->clone();
+    p2.x2=this->x32;
+    p2.y2=this->y32;
+    p2.x21=this->x31;
+    p2.y21=this->y31;
+    Piece p=p2.pieces[x3]->back();
+    p2.pieces[x3]->pop_back();
+    p2=p2.vicinitySecondLevel();
+    this->x32=p2.x2;
+    this->y32=p2.y2;
+    this->x31=p2.x21;
+    this->y31=p2.y21;
+    p2.x=0;
+    p2.y=0;//hacer cero las demas variables de control
+    p2.pieces[y]->push_back(p);
+    if(p2==NULL)
+    {
+        if(y3==width)
+        {
+            x3++;
+            y3=0;
+            x32=0;
+            y32=0
+            x31=0;
+            y31=0;
+        }
+        else
+        {
+            y3++;
+            x32=0;
+            y32=0
+            x31=0;
+            y31=0;
+        }
+    }
+
+    return p2;
+}
+
+Pattern Pattern::vicinityNext()
+{
+    Pattern p=vicinityFirstLevel();
+    if(p==NULL)
+    {
+        p=vicinitySecondLevel();
+        if(p==NULL)
+        {
+            p=vicinityThirdLevel();
+            if(p==NULL)
+                return NULL;
+        }
+        return p;
+    }
+    return p;
+}
+
+Piece Pattern::remove(int i)
+{
+    return exit[i]->pieces->pop_back();
+}
+
+void Pattern::add(int i,Piece pi)
+{
+    pieces[i]->push_back(pi);
+}
+
+void updateHeight() {
+
+}

@@ -1,0 +1,78 @@
+\documentstyle[12pt]{article}
+\begin{document}
+\begin{table}
+\caption{Tabla LS con 150 piezas}
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+ & {\bf Sol Inicial} & {\bf Sol Obtenida} & {\bf Tiempo (seg)} \\
+\hline
+Ejec1 & 83 & 53  & 4.52 \\
+\hline
+Ejec2 & 53 & 33  & 4.49 \\
+\hline
+Ejec3 & 53 & 33  & 4.52 \\
+\hline
+Ejec4 & 113 & 33  & 4.42 \\
+\hline
+Ejec5 & 53 & 33  & 4.54 \\
+\hline
+Ejec6 & 73 & 53  & 4.49 \\
+\hline
+Ejec7 & 103 & 33  & 4.44 \\
+\hline
+Ejec8 & 163 & 33  & 4.08 \\
+\hline
+Ejec9 & 53 & 33  & 4.5 \\
+\hline
+Ejec10 & 53 & 33  & 4.5 \\
+\hline
+Ejec11 & 123 & 33  & 4.33 \\
+\hline
+Ejec12 & 83 & 53  & 4.45 \\
+\hline
+Ejec13 & 53 & 33  & 4.52 \\
+\hline
+Ejec14 & 113 & 53  & 4.52 \\
+\hline
+Ejec15 & 53 & 33  & 4.46 \\
+\hline
+Ejec16 & 83 & 53  & 4.49 \\
+\hline
+Ejec17 & 53 & 33  & 4.43 \\
+\hline
+Ejec18 & 103 & 53  & 4.28 \\
+\hline
+Ejec19 & 53 & 33  & 4.4 \\
+\hline
+Ejec20 & 53 & 33  & 4.46 \\
+\hline
+Ejec21 & 53 & 33  & 4.42 \\
+\hline
+Ejec22 & 83 & 53  & 4.42 \\
+\hline
+Ejec23 & 53 & 33  & 4.41 \\
+\hline
+Ejec24 & 193 & 53  & 4.35 \\
+\hline
+Ejec25 & 53 & 33  & 4.46 \\
+\hline
+Ejec26 & 53 & 33  & 4.42 \\
+\hline
+Ejec27 & 53 & 33  & 4.44 \\
+\hline
+Ejec28 & 113 & 53  & 4.43 \\
+\hline
+Ejec29 & 103 & 53  & 4.36 \\
+\hline
+Ejec30 & 173 & 53  & 4.35 \\
+\hline
+{\bf Mejor} & {\bf 53} & {\bf 33} & {\bf 4.08} \\
+\hline
+{\bf Promedio} & {\bf 83.3333333333} & {\bf 40.3333333333} & {\bf 4.43} \\
+\hline
+{\bf Peor} & {\bf 193} & {\bf 53} & {\bf 4.54} \\
+\hline
+\end{tabular}
+\end{table}
+\end{document}

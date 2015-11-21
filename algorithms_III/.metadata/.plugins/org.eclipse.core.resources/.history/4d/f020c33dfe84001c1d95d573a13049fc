@@ -1,0 +1,11 @@
+
+public class Vertice {
+
+	int s;
+	double c;
+	
+	Vertice(int s, double c){
+		this.s = s;
+		this.c = c;
+	}
+}

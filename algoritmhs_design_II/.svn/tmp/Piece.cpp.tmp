@@ -1,0 +1,55 @@
+/*
+  Proyecto Diseno de Algoritmo II - Objeto Pieza
+
+  Juan Garcia 05-38207
+  Federico Flaviani 99-31744
+
+  Compilar con: 
+  Correr con: 
+*/
+
+#include <stdio.h>
+#include <stdlib.h>
+
+using namespace std;
+
+class Piece {
+
+public:
+  int large;
+  int pos[2][2];
+  Piece(int, int[2][2]);
+  Piece clone();
+};
+
+Piece::Piece(int l,int p[2][2]) {
+  large = l;
+  int i = 0;
+  for (i = 0 ; i < 2 ; i++) {
+    pos[i][0] = p[i][0];
+    pos[i][1] = p[i][1];
+  }
+}
+
+Piece Piece::clone()
+{
+<<<<<<< .mine
+  int array[2][2];
+  int i;
+  for (i = 0 ; i < 2 ; i++) {
+    array[i][0] = pos[i][0];
+    array[i][1] = pos[i][1];
+  }
+  Piece* p = new Piece(large, array);
+=======
+    int array[2][2];
+    int i;
+    for (i = 0 ; i < 2 ; i++) {
+         array[i][0] = pos[i][0];
+         array[i][1] = pos[i][1];
+     }
+    Piece* p=new Piece(large, array);
+>>>>>>> .r12
+
+  return *p;
+}

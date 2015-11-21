@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<session version="1.0">
+<refactoring comment="Copy 1 elements(s) to 'Proy 2/src/(default package)'&#13;&#10;- Original project: 'Proy 1'&#13;&#10;- Destination element: 'Proy 2/src/(default package)'&#13;&#10;- Original element: 'NDGrafo.java'" description="Copy compilation unit" destination="/src&lt;" element1="/src&lt;{NDGrafo.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" log="/src&lt;{NDGrafo.java&#9;true&#9;false" policy="org.eclipse.jdt.ui.copyResources" stamp="1196296440046" units="1" version="1.0"/>
+</session>

@@ -1,0 +1,87 @@
+import java.io.*;
+
+
+public class GraphClient {
+    
+	public static Graph loadGraph( String nameFile ) throws IOException {
+    	Graph G;
+    	int i;
+    	int n = 0;
+    	int l = 0;
+    	boolean digraph = false;
+    	int node_ini, node_end;
+    	double costo;
+
+    	// Se pasa el nombre del archivo por la linea de comando
+    	BufferedReader in = new BufferedReader( new FileReader(nameFile) );
+    	String s;
+    	String[] tok;
+    		
+    	// Se lee si el grafo es dirigido o no 
+    	if( (s = in.readLine()) != null ){
+    	    tok = s.split("\\b\\s");
+    	    System.out.println( tok[0].trim() );
+    	    if( tok[0].trim().equals("d") )
+    		digraph = true;
+    	}
+    	
+    	// Se lee el numero de nodos
+    	if( (s = in.readLine()) != null ){
+    	    tok = s.split("\\b\\s");
+    	    n = Integer.valueOf( tok[0].trim() ).intValue();
+    	    System.out.println( tok[0].trim() );
+    	}
+    	
+    	// Se lee el numero de arcos
+    	if( (s = in.readLine()) != null ){
+    	    tok = s.split("\\b\\s");
+    	    l = Integer.valueOf( tok[0].trim() ).intValue();
+    	    System.out.println( tok[0].trim() );
+    	}
+    	
+    	G = new GraphMatrizAdj( n, l, digraph );
+
+    	// Se leen los arcos del grafo
+    	for( i = 0; i < n; i++ ){
+    	    if( (s = in.readLine()) != null ){
+    		tok = s.split("\\b\\s");
+    		System.out.println( tok[0].trim()+" "+tok[1].trim() );
+    		node_ini = (new Integer(tok[0].trim())).intValue();
+    		node_end = (new Integer(tok[1].trim())).intValue();
+    		costo=(new Double(tok[2].trim())).doubleValue();
+    		G.insert( new Edge( node_ini, node_end, costo ) );
+    	    }
+    	}
+    	System.out.println( "\n*** Fin de la lectura del archivo " + nameFile+" ***\n" );
+    	in.close();
+    	
+    	return G;
+        }
+
+        static void show( Graph G ){
+    	System.out.println("Representacion del Grafo:\n");
+    	for (int s = 0; s < G.V(); s++){
+    	    System.out.print(s + ": ");
+    	    AdjList A = G.getAdjList(s);
+    	    for (int t = A.beg(); !A.end(); t = A.nxt()){ 
+    		System.out.print(t + " "); 
+    	    }
+    	    System.out.println("");
+    	}
+    	System.out.println("");
+        }
+        
+
+        public static void main(String[] args) {
+    	try{
+    	    Graph G;
+    	    G = loadGraph(args[0]);
+    	    show( G );
+    	    
+    	    
+    	} catch(Exception e) {
+    	    System.out.println("Error en la ejecucion del cliente");
+    	    e.printStackTrace();
+    	}
+        }
+    } 

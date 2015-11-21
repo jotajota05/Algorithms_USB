@@ -1,0 +1,78 @@
+\documentstyle[12pt]{article}
+\begin{document}
+\begin{table}
+\caption{Tabla GA con 55 piezas}
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+ & {\bf Sol Inicial} & {\bf Sol Obtenida} & {\bf Tiempo (seg)} \\
+\hline
+Ejec1 & -- & 22  & 1.38 \\
+\hline
+Ejec2 & -- & 12  & 1.38 \\
+\hline
+Ejec3 & -- & 22  & 1.39 \\
+\hline
+Ejec4 & -- & 12  & 1.38 \\
+\hline
+Ejec5 & -- & 22  & 1.38 \\
+\hline
+Ejec6 & -- & 32  & 1.38 \\
+\hline
+Ejec7 & -- & 22  & 1.38 \\
+\hline
+Ejec8 & -- & 12  & 1.39 \\
+\hline
+Ejec9 & -- & 32  & 1.39 \\
+\hline
+Ejec10 & -- & 22  & 1.38 \\
+\hline
+Ejec11 & -- & 22  & 1.38 \\
+\hline
+Ejec12 & -- & 32  & 1.37 \\
+\hline
+Ejec13 & -- & 22  & 1.39 \\
+\hline
+Ejec14 & -- & 12  & 1.39 \\
+\hline
+Ejec15 & -- & 32  & 1.39 \\
+\hline
+Ejec16 & -- & 22  & 1.39 \\
+\hline
+Ejec17 & -- & 22  & 1.38 \\
+\hline
+Ejec18 & -- & 22  & 1.4 \\
+\hline
+Ejec19 & -- & 42  & 1.38 \\
+\hline
+Ejec20 & -- & 32  & 1.38 \\
+\hline
+Ejec21 & -- & 22  & 1.38 \\
+\hline
+Ejec22 & -- & 22  & 1.38 \\
+\hline
+Ejec23 & -- & 22  & 1.39 \\
+\hline
+Ejec24 & -- & 22  & 1.39 \\
+\hline
+Ejec25 & -- & 12  & 1.38 \\
+\hline
+Ejec26 & -- & 22  & 1.38 \\
+\hline
+Ejec27 & -- & 12  & 1.38 \\
+\hline
+Ejec28 & -- & 42  & 1.39 \\
+\hline
+Ejec29 & -- & 22  & 1.38 \\
+\hline
+Ejec30 & -- & 32  & 1.38 \\
+\hline
+{\bf Mejor} & {\bf -- } & {\bf 12} & {\bf 1.37} \\
+\hline
+{\bf Promedio} & {\bf -- } & {\bf 23.3333333333} & {\bf 1.38366666667} \\
+\hline
+{\bf Peor} & {\bf -- } & {\bf 42} & {\bf 1.4} \\
+\hline
+\end{tabular}
+\end{table}
+\end{document}

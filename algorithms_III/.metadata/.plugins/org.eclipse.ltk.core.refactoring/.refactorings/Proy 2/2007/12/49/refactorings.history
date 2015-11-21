@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<session version="1.0">
+<refactoring accessors="true" comment="Delete 1 element(s) from project 'Proy 2'&#13;&#10;- Original project: 'Proy 2'&#13;&#10;- Original element: 'Prueba.txt'" description="Delete element" element1="Prueba.txt" elements="0" flags="589830" id="org.eclipse.jdt.ui.delete" resources="1" stamp="1196640094609" subPackages="false" version="1.0"/>
+<refactoring comment="Rename resource '/Proy 2/PruebaDFS.txt' to 'Prueba1Prob2.txt'&#13;&#10;- Original project: 'Proy 2'&#13;&#10;- Original element: 'PruebaDFS.txt'" description="Rename resource 'PruebaDFS.txt'" flags="7" id="org.eclipse.jdt.ui.rename.resource" input="PruebaDFS.txt" name="Prueba1Prob2.txt" stamp="1196640742671" version="1.0"/>
+</session>

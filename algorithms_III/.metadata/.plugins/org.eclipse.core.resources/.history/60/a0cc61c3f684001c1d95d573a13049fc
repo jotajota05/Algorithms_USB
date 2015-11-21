@@ -1,0 +1,31 @@
+import java.util.PriorityQueue;
+
+
+public class GraphSPT {
+
+	private double[] wt;
+	private Edge[] spt;
+	
+	GraphSPT(Graph G, int s) { 
+		int V = G.V();
+		wt = new double[V]; 
+		spt = new Edge[V];
+		for (int v = 0; v < V; v++) wt[v] = java.lang.Float.MAX_VALUE;
+		wt[s]=0;
+		PriorityQueue<Double> c=new PriorityQueue<Double>();
+		for(int i=0;i<V;i++) c.add(wt[i]);
+		while (c.size()!=0) {
+			double u=c.element();
+			c.remove();
+			AdjList A=G.getAdjList(s);
+			for (int i=A.beg();!A.end();i=A.nxt()) {
+				if (wt[i]>wt[u]+)
+			}
+		}
+		
+	}
+	
+	Edge pathR(int v) { return spt[v]; }
+	
+	double dist(int v) { return wt[v]; }
+}

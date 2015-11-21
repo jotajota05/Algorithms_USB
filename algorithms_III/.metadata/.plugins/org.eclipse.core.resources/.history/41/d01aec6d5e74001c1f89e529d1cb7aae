@@ -1,0 +1,19 @@
+
+import java.util.*;
+
+public abstract class Grafo {
+	
+	public abstract String Tipo();
+	public abstract Grafo agregarVertice(Vertice v);
+	public abstract Grafo eliminarVertice(Vertice v);
+	public abstract Grafo modificarVertice(Vertice v);
+	public abstract int grado(Vertice v);
+	public abstract LinkedList<Vertice> Vertices();
+	public abstract LinkedList<Lado> Lados();
+	public abstract Grafo agregarLado(Lado l);
+	public abstract Grafo eliminarLado(Lado l);
+	public abstract Grafo modificarLado(Lado l);
+	public abstract LinkedList<LinkedList<Vertice>> adyacentes(Vertice v);
+	public abstract LinkedList<Lado> incidentes(Vertice v);
+	
+}

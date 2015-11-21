@@ -1,0 +1,14 @@
+n
+5
+6
+a
+b
+c
+d
+e
+a e q1 1
+d a q2 1
+e c q3 1
+c b q4 1
+c d q5 1
+b b q6 1

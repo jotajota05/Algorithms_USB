@@ -1,0 +1,710 @@
+program blackjack
+
+					//UNIVERSIDAD SIMON BOLIVAR
+					//LABORATORIO DE ALGORITMOS I
+					//ENERO-MARZO 2007
+					//PROYECTO USB - BLACKJACK
+
+					//PROGRAMADOR:
+					//JUAN GARCIA : 05-38207
+
+|[	
+
+//PROCEDIMIENTOS Y FUNCIONES DEL PROGRAMA
+
+//PROCEDIMIENTO PARA ASIGNAR VALORES ENTEROS DE LAS CARTAS 
+
+	proc valorcarta : (in m:array [] of String,in i:int,in out y :int)
+	
+|[	
+	if 
+	 m[i]="AScorazon " -> y:=1	| m[i]="2corazon " -> y:=2
+	| m[i]="3corazon " -> y:=3	| m[i]="4corazon " -> y:=4
+	| m[i]="5corazon " -> y:=5	| m[i]="6corazon " -> y:=6
+	| m[i]="7corazon " -> y:=7	| m[i]="8corazon " -> y:=8
+	| m[i]="9corazon " -> y:=9	| m[i]="10corazon " -> y:=10
+	| m[i]="Jcorazon " -> y:=10	| m[i]="Qcorazon " -> y:=10
+	| m[i]="Kcorazon " -> y:=10	| m[i]="COcorazon " -> y:=11
+	| m[i]="ASdiamante" -> y:=1	| m[i]="2diamante" -> y:=2
+	| m[i]="3diamante" -> y:=3	| m[i]="4diamante" -> y:=4
+	| m[i]="5diamante" -> y:=5	| m[i]="6diamante" -> y:=6
+	| m[i]="7diamante" -> y:=7	| m[i]="8diamante" -> y:=8
+	| m[i]="9diamante" -> y:=9	| m[i]="10diamante" -> y:=10
+	| m[i]="Jdiamante" -> y:=10	| m[i]="Qdiamante" -> y:=10
+	| m[i]="Kdiamante" -> y:=10	| m[i]="COdiamante" -> y:=11
+	| m[i]="AStrebol" -> y:=1	| m[i]="2trebol" -> y:=2
+	| m[i]="3trebol" -> y:=3	| m[i]="4trebol" -> y:=4
+	| m[i]="5trebol" -> y:=5	| m[i]="6trebol" -> y:=6
+	| m[i]="7trebol" -> y:=7	| m[i]="8trebol" -> y:=8
+	| m[i]="9trebol" -> y:=9	| m[i]="10trebol" -> y:=10
+	| m[i]="Jtrebol" -> y:=10	| m[i]="Qtrebol" -> y:=10
+	| m[i]="Ktrebol" -> y:=10	| m[i]="COtrebol" -> y:=11
+	| m[i]="ASpica" -> y:=1		| m[i]="2pica" -> y:=2
+	| m[i]="3pica" -> y:=3		| m[i]="4pica" -> y:=4
+	| m[i]="5pica" -> y:=5		| m[i]="6pica" -> y:=6
+	| m[i]="7pica" -> y:=7		| m[i]="8pica" -> y:=8
+	| m[i]="9pica" -> y:=9		| m[i]="10pica" -> y:=10
+	| m[i]="Jpica" -> y:=10		| m[i]="Qpica" -> y:=10
+	| m[i]="Kpica" -> y:=10		| m[i]="COpica" -> y:=11
+	| m[i]="" -> y:=0
+	fi
+]|
+
+//PROCEDIMIENTO PARA SEPARAR DE LA CARTA SELECCIONADA LA PINTA, PARA LUEGO DIBUJAR LA CARTA
+
+	proc separarpinta : (in carta:String, in out pinta:String)
+
+|[
+	if length(carta)=5 -> pinta:=substring(carta,1,5)
+	   |length(carta)=6 -> pinta:=substring(carta,2,6)
+       |length(carta)=7 -> pinta:=substring(carta,1,7)
+       |length(carta)=8 -> pinta:=substring(carta,2,8)
+       |length(carta)=9 -> pinta:=substring(carta,1,9)
+       |length(carta)=10 -> pinta:=substring(carta,2,10)
+       |length(carta)=11 -> pinta:=substring(carta,1,11)
+       |length(carta)=12 -> pinta:=substring(carta,2,12)
+	fi
+]|
+
+//PROCEDIMIENTO PARA SEPARAR DE LA CARTA SELECCIONADA EL NUMERO O LETRA, PARA LUEGO DIBUJAR LA CARTA
+
+	proc separarnumero : (in carta:String, in out numeroletra:String)
+	
+|[
+	if length(carta)=5 -> numeroletra:=substring(carta,0,1)
+	   |length(carta)=6 -> numeroletra:=substring(carta,0,2)
+       |length(carta)=7 -> numeroletra:=substring(carta,0,1)
+       |length(carta)=8 -> numeroletra:=substring(carta,0,2)
+       |length(carta)=9 -> numeroletra:=substring(carta,0,1)
+       |length(carta)=10 -> numeroletra:=substring(carta,0,2)
+       |length(carta)=11 -> numeroletra:=substring(carta,0,1)
+       |length(carta)=12 -> numeroletra:=substring(carta,0,2)
+	fi
+]|
+
+//PROCEDIMIENTO PARA DIBUJAR LAS PINTAS DE LAS CARTAS
+
+	proc dibujarpintas : (in pinta:String,in x1:int,in y1:int,in x2:int,in y2:int, in out p:Screen)
+
+|[	var xi:=0:int;
+	var colorrojo:=0777000000:int;
+	var colorblanco:=0777777777:int;
+	var colornegro:=0000000000:int;
+	var colorverde:=0000100000:int;
+	var colorazul:=0000000777:int;
+	var k:=0:int;
+	
+	lineas(x1,x1,y1,y2,1,1,0,0,90,colorblanco,p);
+	addFilledCircle(p,x1,y2,5,colorverde);
+	addFilledCircle(p,x1+5,y2-5,5,colorblanco);
+	addFilledCircle(p,x2,y2,5,colorverde);
+	addFilledCircle(p,x2-5,y2-5,5,colorblanco);
+	addFilledCircle(p,x1,y1,5,colorverde);
+	addFilledCircle(p,x1+5,y1+5,5,colorblanco);
+	addFilledCircle(p,x2,y1,5,colorverde);
+	addFilledCircle(p,x2-5,y1+5,5,colorblanco);
+	
+//DIBUJAR UN CORAZON A UNA CARTA
+	
+	if pinta="corazon " -> 
+
+	addFilledCircle(p,x1+35,y2-35,15,colorrojo);
+	addFilledCircle(p,x1+55,y2-35,15,colorrojo);
+	k:=0;xi:=x1+25;
+	{inv k>=0/\xi>=x1+25}
+	{bound 41-k}
+	do k<=40 ->
+	addColoredLine(p,x1+45,y2-65,xi,y2-45,colorrojo);xi:=xi+1;k:=k+1
+	od
+
+//DIBUJAR UN DIAMANTE A UNA CARTA
+
+	| pinta="diamante" ->
+
+	k:=0;xi:=x1+25;
+	{inv k>=0/\xi>=x1+25}
+	{bound 41-k}
+	do k<=40 ->
+	addColoredLine(p,x1+45,y2-15,xi,y2-45,colorrojo);xi:=xi+1;k:=k+1
+	od;
+	k:=0;xi:=x1+25;
+	{inv k>=0/\xi>=x1+25}
+	{bound 41-k}
+	do k<=40 ->
+	addColoredLine(p,x1+45,y2-75,xi,y2-45,colorrojo);xi:=xi+1;k:=k+1
+	od
+
+//DIBUJAR UN TREBOL A UNA CARTA
+
+	| pinta="trebol" ->
+	
+	addFilledCircle(p,x1+45,y2-30,11,colornegro);
+	addFilledCircle(p,x1+35,y2-45,11,colornegro);
+	addFilledCircle(p,x1+55,y2-45,11,colornegro);
+	k:=0;xi:=x1+40;
+	{inv k>=0/\xi>=x1+40}
+	{bound 11-k}
+	do k<=10 ->
+	addColoredLine(p,x1+45,y2-45,xi,y2-60,colornegro);xi:=xi+1;k:=k+1
+	od
+
+//DIBUJAR UNA PICA A UNA CARTA
+
+	| pinta="pica" ->
+
+	addFilledCircle(p,x1+35,y2-50,15,colornegro);
+	addFilledCircle(p,x1+55,y2-50,15,colornegro);
+	k:=0;xi:=x1+25;
+	{inv k>=0/\xi>=x1+25}
+	{bound 41-k}
+	do k<=40 ->
+	addColoredLine(p,x1+45,y2-20,xi,y2-40,colornegro);xi:=xi+1;k:=k+1
+	od;
+	k:=0;xi:=x1+40;
+	{inv k>=0/\xi>=x1+40}
+	{bound 11-k}
+	do k<=10 ->
+	addColoredLine(p,x1+45,y2-50,xi,y2-70,colornegro);xi:=xi+1;k:=k+1
+	od
+	
+	fi
+	
+]|
+
+//PROCEDIMIENTO PARA DIBUJAR LAS LETRAS Y LOS NUMEROS DE LAS CARTAS
+
+	proc dibujarletrasynumeros : (in numeroletra:String,in x1:int,in y1:int,in x2:int,in y2:int, in out p:Screen)	
+
+|[	
+	var colornegro:=0000000000:int;
+	var colorblanco:=0777777777:int;
+	
+	if numeroletra="AS" ->
+	addColoredLine(p,x1+45,y2-80,x1+25,y2-120,colornegro);
+	addColoredLine(p,x1+45,y2-80,x1+65,y2-120,colornegro);
+	addColoredLine(p,x1+35,y2-100,x1+55,y2-100,colornegro)
+ 	
+	| numeroletra="2" ->
+	addColoredLine(p,x1+25,y2-80,x1+65,y2-80,colornegro);
+	addColoredLine(p,x1+25,y2-120,x1+65,y2-120,colornegro);
+	addColoredLine(p,x1+25,y2-100,x1+65,y2-100,colornegro);
+	addColoredLine(p,x1+65,y2-80,x1+65,y2-100,colornegro);
+ 	addColoredLine(p,x1+25,y2-100,x1+25,y2-120,colornegro)
+
+	| numeroletra="3" -> 	
+	addColoredLine(p,x1+30,y2-80,x1+65,y2-80,colornegro);
+	addColoredLine(p,x1+30,y2-120,x1+65,y2-120,colornegro);
+	addColoredLine(p,x1+35,y2-100,x1+65,y2-100,colornegro);
+	addColoredLine(p,x1+65,y2-80,x1+65,y2-120,colornegro)
+ 	 
+	| numeroletra="4" -> 
+	addColoredLine(p,x1+35,y2-80,x1+35,y2-100,colornegro);
+	addColoredLine(p,x1+55,y2-80,x1+55,y2-120,colornegro);
+	addColoredLine(p,x1+35,y2-100,x1+55,y2-100,colornegro)
+	 
+	| numeroletra="5" -> 
+	addColoredLine(p,x1+25,y2-80,x1+65,y2-80,colornegro);
+	addColoredLine(p,x1+25,y2-120,x1+65,y2-120,colornegro);
+	addColoredLine(p,x1+25,y2-100,x1+65,y2-100,colornegro);
+	addColoredLine(p,x1+25,y2-80,x1+25,y2-100,colornegro);
+ 	addColoredLine(p,x1+65,y2-100,x1+65,y2-120,colornegro)
+	
+	| numeroletra="6" -> 
+	addColoredLine(p,x1+25,y2-80,x1+65,y2-80,colornegro);
+	addColoredLine(p,x1+25,y2-120,x1+65,y2-120,colornegro);
+	addColoredLine(p,x1+25,y2-100,x1+65,y2-100,colornegro);
+	addColoredLine(p,x1+25,y2-80,x1+25,y2-120,colornegro);
+ 	addColoredLine(p,x1+65,y2-100,x1+65,y2-120,colornegro)
+
+	| numeroletra="7" -> 
+	addColoredLine(p,x1+30,y2-80,x1+55,y2-80,colornegro);
+	addColoredLine(p,x1+55,y2-80,x1+55,y2-120,colornegro)
+
+	| numeroletra="8" -> 
+	addColoredLine(p,x1+25,y2-80,x1+65,y2-80,colornegro);
+	addColoredLine(p,x1+25,y2-120,x1+65,y2-120,colornegro);
+	addColoredLine(p,x1+25,y2-100,x1+65,y2-100,colornegro);
+	addColoredLine(p,x1+65,y2-80,x1+65,y2-120,colornegro);
+	addColoredLine(p,x1+25,y2-80,x1+25,y2-120,colornegro)
+
+	| numeroletra="9" -> 	
+	addColoredLine(p,x1+25,y2-80,x1+65,y2-80,colornegro);
+	addColoredLine(p,x1+25,y2-120,x1+65,y2-120,colornegro);
+	addColoredLine(p,x1+25,y2-100,x1+65,y2-100,colornegro);
+	addColoredLine(p,x1+65,y2-80,x1+65,y2-120,colornegro);
+ 	addColoredLine(p,x1+25,y2-80,x1+25,y2-100,colornegro)
+
+	| numeroletra="10" -> 
+	addColoredLine(p,x1+30,y2-80,x1+30,y2-120,colornegro);
+	addColoredLine(p,x1+45,y2-120,x1+65,y2-120,colornegro);
+	addColoredLine(p,x1+45,y2-80,x1+45,y2-120,colornegro);
+	addColoredLine(p,x1+65,y2-80,x1+65,y2-120,colornegro);
+	addColoredLine(p,x1+45,y2-80,x1+65,y2-80,colornegro)
+ 	
+	| numeroletra="J" -> 	
+	addColoredLine(p,x1+35,y2-80,x1+55,y2-80,colornegro);
+	addColoredLine(p,x1+45,y2-80,x1+45,y2-120,colornegro);
+	addColoredLine(p,x1+30,y2-120,x1+45,y2-120,colornegro)
+
+	| numeroletra="Q" -> 
+	addColoredLine(p,x1+25,y2-80,x1+65,y2-80,colornegro);
+	addColoredLine(p,x1+25,y2-120,x1+65,y2-120,colornegro);
+	addColoredLine(p,x1+45,y2-100,x1+75,y2-130,colornegro);
+	addColoredLine(p,x1+65,y2-80,x1+65,y2-120,colornegro);
+ 	addColoredLine(p,x1+25,y2-80,x1+25,y2-120,colornegro)
+
+	| numeroletra="K" -> 
+	addColoredLine(p,x1+25,y2-80,x1+25,y2-120,colornegro);
+	addColoredLine(p,x1+25,y2-100,x1+65,y2-80,colornegro);
+	addColoredLine(p,x1+25,y2-100,x1+65,y2-120,colornegro)	
+
+	| numeroletra="CO" ->
+	addColoredLine(p,x1+45,y2-80,x1+45,y2-120,colornegro);
+	addColoredLine(p,x1+25,y2-80,x1+65,y2-120,colornegro);
+	addColoredLine(p,x1+25,y2-100,x1+65,y2-100,colornegro);
+	addColoredLine(p,x1+65,y2-80,x1+25,y2-120,colornegro)
+ 	
+	fi
+]|
+
+//PROCEDIMIENTO PARA DIBUJAR UNA CARTA COMPLETA
+
+	proc dibujarcarta : (in carta:String,in xi:int,in yi:int,in xf:int,in yf:int,in out y:Screen)
+	
+|[
+	var pinta:="":String;
+	var numeroletra:="":String;
+	separarpinta(carta,pinta);
+	separarnumero(carta,numeroletra);
+	dibujarpintas(pinta,xi,yi,xf,yf,y);
+	dibujarletrasynumeros(numeroletra,xi,xf,yi,yf,y)
+]|
+
+//PROCEDIMIENTO PARA DIBUJAR LINEAS
+
+	proc lineas : (in xi:int,in xf:int,in yi:int,in yf:int,in varxi:int,in varxf:int,in varyi:int,in varyf:int,
+				   in lineas:int,in color:int,in out y:Screen)
+	{pre (xi>=-400)/\(xf>=-400)/\(yi>=-250)/\(yf>=-250)/\(lineas>0)}
+
+|[
+	var k:=0:int;
+	var x1:=xi:int;
+	var x2:=xf:int;
+	var y1:=yi:int;
+	var y2:=yf:int;
+	{inv k>=0}
+	{bound lineas+1-k}
+	do k<=lineas ->
+	addColoredLine(y,x1,y1,x2,y2,color);x1:=x1+varxi;x2:=x2+varxf;y1:=y1+varyi;y2:=y2+varyf;k:=k+1
+	od
+]|
+
+//PROCEDIMIENTO PARA MOSTRAR LA MESA DE JUEGO INICIAL
+
+	proc mostrarmesa : (in nombre:String,in credito:int,in out tablero:Screen)
+
+|[
+	var colorverde:=0000100000:int;
+	var colorblanco:=0777777777:int;
+	var colorazul:=0000000300:int;
+	var colornegro:=0000000000:int;
+	show(tablero);
+	lineas(-400,-400,250,-250,1,1,0,0,800,colorverde,tablero);
+	lineas(180,180,220,80,1,1,0,0,90,colorazul,tablero);
+	lineas(190,190,220,80,1,1,0,0,5,colorblanco,tablero);
+	lineas(255,255,220,80,1,1,0,0,5,colorblanco,tablero);
+	lineas(180,270,90,90,0,0,1,1,5,colorblanco,tablero);
+	lineas(180,270,205,205,0,0,1,1,5,colorblanco,tablero);
+	lineas(225,210,180,150,0,1,0,0,30,colorblanco,tablero);
+	lineas(225,210,120,150,0,1,0,0,30,colorblanco,tablero);
+	addColoredLine(tablero,179,79,172,72,colornegro);
+	lineas(172,172,212,72,2,2,2,2,4,colorblanco,tablero);
+	lineas(173,173,213,73,2,2,2,2,3,colornegro,tablero);
+	lineas(179,269,78,78,-2,-2,-2,-2,4,colorblanco,tablero);
+	lineas(180,270,79,79,-2,-2,-2,-2,3,colornegro,tablero);
+	addText(tablero,"MAZO DE CARTAS",167,55);
+	addText(tablero,"B   L   A   C   K   * * * *   J   A   C   K",-100,230);
+	addText(tablero,"JUGADOR: "+nombre,190,0);
+	addText(tablero,"CREDITO DISPONIBLE: "+credito,190,-60)
+]|
+
+//PROCEDIMIENTO PARA MOSTRAR EL ESTADO INICIAL DEL JUEGO
+
+	proc estadoinicial : (in mano1:array[]of String,in mano2:array[]of String,in apuesta:int,in credito:int,
+						  in vmc:int,in vmj:int,in out tablero:Screen)
+
+|[
+	var colorblanco:=0777777777:int;
+	var colorazul:=0000000300:int;
+	dibujarcarta(mano2[0],-396,-200,-306,-60,tablero);
+	dibujarcarta(mano2[1],-300,-200,-210,-60,tablero);
+	lineas(-396,-396,200,60,1,1,0,0,90,colorazul,tablero);
+	lineas(-387,-387,200,60,1,1,0,0,5,colorblanco,tablero);
+	lineas(-322,-322,200,60,1,1,0,0,5,colorblanco,tablero);
+	lineas(-396,-307,70,70,0,0,1,1,5,colorblanco,tablero);
+	lineas(-396,-307,180,180,0,0,1,1,5,colorblanco,tablero);
+	lineas(-352,-367,160,130,0,1,0,0,30,colorblanco,tablero);
+	lineas(-352,-367,100,130,0,1,0,0,30,colorblanco,tablero);
+	dibujarcarta(mano1[1],-300,60,-210,200,tablero);
+	actualizarmarcador(apuesta,credito,vmc,vmj,"",tablero)
+]|
+
+//PROCEDIMIENTO PARA ACTUALIZAR EL MARCADOR (Nombre,Apuesta,Credito,etc.) EN LA PANTALLA
+
+	proc actualizarmarcador : (in apuesta:int,in credito:int,in ptscrupier:int,in ptsjugador:int,in texto:String,in out y:Screen)
+
+|[
+	eraseTexts(y,190,-30);
+	addText(y,"APUESTA REALIZADA: "+apuesta,190,-30);
+	eraseTexts(y,190,-60);
+	addText(y,"CREDITO DISPONIBLE: "+credito,190,-60);
+	eraseTexts(y,190,-90);
+	addText(y,"MANO DEL CRUPIER: "+ptscrupier,190,-90);
+	eraseTexts(y,190,-120);
+	addText(y,"MANO DEL JUGADOR: "+ptsjugador,190,-120);
+	addText(y,texto,-200,10)
+	
+]|
+
+//PROCEDIMIENTO PARA DAR LA BIENVENIDA AL USUARIO
+
+	proc bienvenida : (in p:Screen,in out s:String)
+
+|[
+	write("");
+	write("           **************  B I E N V E N I D O  ****************");
+	write("");
+	write("                           ******  AL  *******");
+	write("");
+	write("                  *********  USB BLACK JACK  ***********");
+	write("");
+	hide(p);
+	s:=readString("Escribe tu nombre: ");
+	write("")
+]|
+
+//FUNCION PARA PEDIR APUESTA
+	
+	fun pedirapuesta : (in credito:int,in nombre:String) -> int
+	
+|[
+	var apuesta:=0:int;
+	var apuestavalida:=false:boolean;
+	var k:=0:int;
+	k:=0;
+	{inv (k>=0)}
+	{bound 100-k}
+	do
+	!apuestavalida -> apuesta:=readInt(nombre+" Cuanto deseas apostar?:");
+	if apuesta<5 -> write("La apuesta minima es de 5, vuelva a apostar")
+	|apuesta>credito -> write("No posee suficiente credito para realizar esta apuesta")
+	| 5<=apuesta<=credito -> apuestavalida:=true
+	fi;k:=k+1
+	od >> apuesta
+]|
+
+//FUNCION PARA DAR UNA CARTA
+	
+	fun darcarta : (in mazo:array [] of String) -> String
+	
+|[ 
+	var r:=0.0:double;
+	random r;
+	var x:=toInt(r*55):int >> mazo[x]
+]|	
+
+//FUNCION PARA CALCULAR EL VALOR DE LA MANO
+
+	fun calcularvalormano : (in mano:array [] of String) -> int
+	
+|[
+	var valormano:=0:int;
+	var y:=0:int;
+	var k:=0:int;
+	{inv true}
+	{bound 8-k}
+	do k<8 ->
+	valorcarta(mano,k,y);
+	valormano:=valormano+y;
+	k:=k+1
+	od >> valormano
+]|
+
+//PROCEDIMIENTO PARA PEDIR OPCION AL JUGADOR
+
+	proc pediropcion : (in out opcion:int)
+	
+|[
+	var k:=0:int;
+	write("Que desea hacer?");
+	write("1) Pedir una carta");
+	write("2) Plantarse");
+	write("3) Doblar Apuesta");
+	write("4) Salir del juego");
+	k:=0;
+	opcion:=0;
+	{inv true}
+	{bound 10-k}
+	do (opcion<=0)\/(opcion>4) -> 
+		opcion:=readInt("Opcion: ");
+		write("");
+		if (opcion<=0)\/(opcion>4) -> 
+			write(opcion+" no es una opcion valida, seleccione nuevamente");
+			k:=k+1
+		| 0<opcion<=4 -> 
+			k:=k+1
+		fi
+	od
+]|
+
+//PROCEDIMIENTO PARA ELIMINAR TODAS LAS CARTAS DE LOS JUGADORES AL FINAL DE LA MANO
+
+	proc eliminarcartas : (in out mano:array [] of String)
+	
+|[
+	var k:=0:int;
+	{inv true}
+	{bound 8-k}
+	do k<8 -> mano[k]:="";k:=k+1
+	od
+]|
+
+//PROCEDIMIENTO PARA MANEJAR SALIDA DEL JUEGO POR MINIMO DE CREDITO Y PARTIDAS MAXIMAS
+
+	proc salidajuego : (in out salida:array[]of int)
+	
+|[
+	if salida[0]=100 -> 
+		write("Se acabo su numero de partidas disponibles, ADIOS!!!");
+		write("")
+	| salida[0]!=100 -> skip
+	fi;
+	if salida[1]<5 -> 
+		write("No posees suficiente credito para seguir jugando... ADIOS!!!");
+		write("")
+	| salida[1]>=5 -> skip
+	fi
+]|
+
+//INICIO DEL PROGRAMA PRINCIPAL
+
+//DECLARACION DE VARIABLES
+
+	const mazo=["AScorazon ","2corazon ","3corazon ","4corazon ","5corazon ","6corazon ","7corazon ","8corazon ",
+	            "9corazon ","10corazon ","Jcorazon ","Qcorazon ","Kcorazon ","COcorazon ","ASdiamante","2diamante",
+				"3diamante","4diamante","5diamante","6diamante","7diamante","8diamante","9diamante","10diamante",
+				"Jdiamante","Qdiamante","Kdiamante","COdiamante","AStrebol","2trebol","3trebol","4trebol","5trebol",
+				"6trebol","7trebol","8trebol","9trebol","10trebol","Jtrebol","Qtrebol","Ktrebol","COtrebol","ASpica",
+				"2pica","3pica","4pica","5pica","6pica","7pica","8pica","9pica","10pica","Jpica","Qpica","Kpica",
+				"COpica"]:array [] of String;
+	var manojugador:=["","","","","","","",""]: array [] of String;
+	var manocrupier:=["","","","","","","",""]: array [] of String;
+	var nombre:="":String;
+	var p:=0:int;
+	var credito:=0:int;
+	var apuesta:=0:int;
+	var k:=0:int;
+	var z:=0:int;
+	var w:=0:int;
+	var n:=0:int;
+	var y:=0:int;
+	var opcion:=0:int;
+	var valormanojugador:=0:int;
+	var valormanocrupier:=0:int;
+	var finmano:=false:boolean;
+	var salirjuego:=false:boolean;
+	var numerodepartidasmax:=0:int;
+	var terminodejugar:=false:boolean;
+	var salida:=[0,0]:array[]of int;
+	var tablero:=newScreen("BLACK JACK - Mesa de juego",800,500):Screen;
+	var s:="":String;
+	var xi:=0:int;
+	var xf:=0:int;
+	
+//DAR BIENVENIDA AL USUARIO Y PEDIR SU NOMBRE
+		
+	bienvenida(tablero,nombre);
+
+//INICIO DEL CICLO PARA JUGAR MANOS SEGUIDAS SIN SALIR DEL JUEGO
+	
+	numerodepartidasmax:=100;
+	salida[0]:=n;
+	credito:=1000;
+	salida[1]:=credito;
+	{inv true}
+	{bound numerodepartidasmax - n}
+	do (!salirjuego)/\(salida[1]>=5)/\(salida[0]<100) -> 
+	finmano:=false;
+	
+//MOSTRAR MESA DE JUEGO, mostrar al usuario el tablero de juego
+
+	mostrarmesa(nombre,credito,tablero);
+	
+//PEDIR APUESTA, pedir al usuario una apuesta entre un minimo establecido y un credito maximo disponible
+	
+	apuesta:=pedirapuesta(credito,nombre);	
+	write("");
+	credito:=credito-apuesta;
+
+//REPARTIR CARTAS INICIALES, se seleccionan las cartas que se van a reartir tanto al jugador como al crupier
+
+	manojugador[0]:=darcarta(mazo); manojugador[1]:=darcarta(mazo);
+	manocrupier[0]:=darcarta(mazo); manocrupier[1]:=darcarta(mazo);
+	
+//CALCULAR VALORES INICIALES DE LAS MANOS, cálculo de los ptos que posee el usuario y el crupier en su mano
+
+	valormanojugador:=calcularvalormano(manojugador);
+	valorcarta(manocrupier,1,valormanocrupier);
+	
+//MOSTRAR EL ESTADO INICIAL EN PANTALLA, mostrar los detalles actualizados del juego en la pantalla al rapartir las cartas iniciales,puntajes,etc	
+
+	estadoinicial(manocrupier,manojugador,apuesta,credito,valormanocrupier,valormanojugador,tablero);
+	
+//ACCIONES DEL JUGADOR, decision que tomara el jugador despues de saber su puntaje inicial
+	
+	opcion:=0;
+	p:=2;
+	{inv true}
+	{bound 50-w}
+	do (!salirjuego)/\(!finmano)/\(opcion!=2)/\(!((opcion=1)/\(valormanojugador=21))) ->
+		if valormanojugador=21 -> 
+			dibujarcarta(manocrupier[0],-396,60,-306,200,tablero);
+			valormanocrupier:=calcularvalormano(manocrupier);
+			if valormanocrupier=21 ->
+				actualizarmarcador(apuesta,credito,valormanocrupier,valormanojugador,nombre+ " Y EL CRUPIER TIENEN BLACK JACK",tablero);
+				credito:=credito+apuesta;apuesta:=0
+			| valormanocrupier<21 ->
+				actualizarmarcador(apuesta,credito,valormanocrupier,valormanojugador,nombre+ " TIENE BLACK JACK!!!!",tablero);
+				credito:=credito+2*apuesta+apuesta div 2;apuesta:=0					
+			fi;
+			finmano:=true				
+		| valormanojugador<21 -> 
+			xi:=-204;xf:=-114;
+			{inv true}
+			{bound 20-z}
+			do (valormanojugador<21)/\((opcion=0)\/(opcion=1)) ->
+				pediropcion(opcion);
+				if opcion=1 -> 
+					manojugador[p]:=darcarta(mazo);
+					valormanojugador:=calcularvalormano(manojugador);
+					dibujarcarta(manojugador[p],xi,-200,xf,-60,tablero);
+					actualizarmarcador(apuesta,credito,valormanocrupier,valormanojugador,"",tablero);
+					p:=p+1;xi:=xi+96;xf:=xf+96			
+				| opcion=2 -> skip
+				| opcion=3 -> 
+					if (9<=valormanojugador<=11)/\(manojugador[2]="") ->										
+						if credito>=apuesta -> 
+							apuesta:=2*apuesta;
+							credito:=credito-apuesta div 2;
+							manojugador[2]:=darcarta(mazo);
+							valormanojugador:=calcularvalormano(manojugador);
+							dibujarcarta(manojugador[2],-204,-200,-114,-60,tablero);
+							actualizarmarcador(apuesta,credito,valormanocrupier,valormanojugador,"",tablero);
+							opcion:=2
+						| credito<apuesta -> 
+							write("NO posee credito suficiente para realizar esta accion");
+							write("");
+							opcion:=0
+						fi
+					| ((valormanojugador<9)\/(valormanojugador>11))/\(manojugador[2]="") ->				
+						write("Esta opcion no esta disponible porque su mano es menor que 9 o mayor que 11");
+						write("");
+						opcion:=0
+					| (manojugador[2]!="") -> 
+						write("NO puede realizar esta accion porque ya pidio una carta");
+						write("");
+						opcion:=0
+					fi
+				|opcion =4 -> 
+					salirjuego:=true;
+					finmano:=true
+				fi;
+				z:=z+1			
+			od		
+		| valormanojugador>21 -> 
+			addText(tablero,nombre+ " HAS PERDIDO!!!",-200,-10);
+			apuesta:=0;finmano:=true
+		fi;
+		w:=w+1
+	od;
+
+//ACCIONES DEL CRUPIER
+
+	if !finmano ->
+		dibujarcarta(manocrupier[0],-396,60,-306,200,tablero);
+		valormanocrupier:=calcularvalormano(manocrupier);
+		actualizarmarcador(apuesta,credito,valormanocrupier,valormanojugador,"",tablero);
+		terminodejugar:=false;
+		xi:=-204;xf:=-114;p:=2;
+		z:=0;
+		{inv true}
+		{bound 20-z}
+		do (!finmano)/\(!terminodejugar) ->	
+			if valormanocrupier<17 -> 
+				manocrupier[p]:=darcarta(mazo);
+				valormanocrupier:=calcularvalormano(manocrupier);
+				dibujarcarta(manocrupier[p],xi,60,xf,200,tablero);
+				actualizarmarcador(apuesta,credito,valormanocrupier,valormanojugador,"",tablero);
+				p:=p+1;xi:=xi+96;xf:=xf+96
+			| 17<=valormanocrupier<=21 -> 
+				terminodejugar:=true;skip
+			| (valormanocrupier>21)/\((opcion!=3)\/(opcion=3)) -> 
+				addText(tablero,"EL CRUPIER HA PERDIDO Y "+nombre+" HA GANADO ESTA MANO!!!",-200,-10);
+				credito:=credito+2*apuesta;apuesta:=0;
+				finmano:=true
+			fi;
+		z:=z+1
+		od
+	| finmano -> skip
+	fi;
+	n:=n+1;
+	
+//DECISION DEL JUEGO
+
+	if !finmano ->  
+		if valormanocrupier=valormanojugador -> 
+			credito:=credito+apuesta;apuesta:=0;
+			addText(tablero,"HA HABIDO UN EMPATE!!!",-200,-10)
+		| valormanocrupier<valormanojugador -> 
+			credito:=credito+2*apuesta;apuesta:=0;
+			addText(tablero,nombre+" HA GANADO ESTA MANO!!!",-200,-10)
+		| valormanocrupier>valormanojugador -> 
+			apuesta:=0;
+			addText(tablero,"EL CRUPIER HA GANADO ESTA MANO!!!",-200,-10)
+		fi;
+		finmano:=true
+	| finmano -> skip
+	fi;
+	
+//ACTUALIZACION DE LOS VALORES DE LA APUESTA Y EL CREDITO EN PANTALLA
+	
+	actualizarmarcador(apuesta,credito,valormanocrupier,valormanojugador,"",tablero);
+	write("");
+
+//CONDICIONAL PARA ASEGURAR SI EL USUARIO DESEA SALIR DEL JUEGO O NO
+	
+	if salirjuego ->
+		write("Seguro que desea salir de USB-BLACKJACK? (S/N): ");
+		s:=readString("");
+		if (s="s")\/(s="S")\/(s="") -> skip
+		|(s="n")\/(s="N") -> salirjuego:=false;credito:=credito+apuesta
+		fi;
+		write("")
+	| !salirjuego -> 
+		s:=readString("Pulse una tecla para continuar jugando la siguiente mano");
+		write("")
+	fi;
+	
+//CONDICIONAL PARA CULMINAR EL JUEGO DESPUES DE JUGAR EL NUMERO MAXIMO DE PARTIDAS
+	
+	salida[0]:=n; salida[1]:=credito;
+	salidajuego(salida);
+	
+//BORRADO DEL TABLERO Y ELIMINACION DE LAS CARTAS EN LAS MANOS DE LOS JUGADORES
+	
+	eraseAll(tablero);
+	eliminarcartas(manojugador);
+	eliminarcartas(manocrupier)
+	od
+	
+]|

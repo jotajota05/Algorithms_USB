@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<session version="1.0">
+<refactoring comment="Move 1 elements(s) to 'Proy 1/src/Docs'&#13;&#10;- Original project: 'Proy 1'&#13;&#10;- Destination element: 'Proy 1/src/Docs'&#13;&#10;- Original element: 'package-list'" description="Move file" destination="/src&lt;Docs" element1="src/package-list" files="1" flags="589830" folders="0" id="org.eclipse.jdt.ui.move" policy="org.eclipse.jdt.ui.moveResources" qualified="false" references="true" stamp="1191880563687" units="0" version="1.0"/>
+</session>

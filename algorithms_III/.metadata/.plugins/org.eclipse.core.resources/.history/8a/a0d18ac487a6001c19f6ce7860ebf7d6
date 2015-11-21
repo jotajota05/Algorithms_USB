@@ -1,0 +1,39 @@
+import java.util.*;
+
+/**Clase Bellman que permite hallar los caminos de costo maximo*/
+public class Bellman {
+
+	/**Conjunto de vertices utilizados para hhallar los caminos*/
+	public LinkedList<Vertice> T;
+	
+	public Bellman(Grafo G, Vertice s) {
+		for (int i=0;i<G.Vertices().size();i++) 
+			((Actividad)G.Vertices().get(i)).modGrado(((DIGrafo)G).gradoInt(G.Vertices().get(i)));
+		T=new LinkedList<Vertice>();
+		T.addLast(s);
+		((Actividad)s).modCosto(0);
+		((Actividad)s).modPrede(null);
+		LinkedList<Vertice> LV=G.Vertices();
+		for (int i=0;i<LV.size();i++)
+			if (!LV.get(i).obtID().equals(s.obtID()))
+				((Actividad)LV.get(i)).modCosto(Double.POSITIVE_INFINITY);
+		while (T.size() != 0) {
+			Vertice n=T.getLast();
+			T.removeLast();
+			LinkedList<Vertice> LS=((DIGrafo)G).sucesores(n);
+			for (int j=0;j<LS.size();j++) { 
+				Vertice m=LS.get(j);
+				((Actividad)m).modGrado(((Actividad)m).grado-1);
+				if (((Actividad)m).grado==0) { 
+					T.addLast(m);
+				}
+				if (((Actividad)m).costo > ((Actividad)n).costo + ((Arco)G.obtLado(n,m)).costo) { 
+					((Actividad)m).modCosto(((Actividad)n).costo + ((Arco)G.obtLado(n,m)).costo);
+					((Actividad)m).modPrede(n);
+				}
+			}
+		}
+		for (int i=0;i<G.Vertices().size();i++)
+			((Actividad)G.Vertices().get(i)).modTEC(((Actividad)G.Vertices().get(i)).costo);
+	}
+}

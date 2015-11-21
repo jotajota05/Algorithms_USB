@@ -1,0 +1,15 @@
+;; Object Proy Java/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "Proy Java/"
+  :tables (list 
+   (semanticdb-table "ArbolDeJuego.java"
+    :major-mode 'jde-mode
+    :tags '(("ArbolDeJuego" type (:typemodifiers ("abstract") :members (("obtTablero" function (:typemodifiers ("abstract" "public") :type "Tablero") (reparse-symbol class_member_declaration) [744 781]) ("expandir" function (:typemodifiers ("abstract" "public") :type "void") (reparse-symbol class_member_declaration) [1098 1131]) ("decisionSobreTablero" function (:typemodifiers ("abstract" "public") :type "Tablero") (reparse-symbol class_member_declaration) [1204 1251]) ("jugadaOpt" function (:typemodifiers ("abstract" "public") :type "int[]") (reparse-symbol class_member_declaration) [1438 1472])) :type "class") nil [711 1785]))
+    :file "ArbolDeJuego.java"
+    :pointmax 1785
+    )
+   )
+  :file "semantic.cache"
+  :semantic-tag-version "2.0pre4"
+  :semanticdb-version "2.0pre4"
+  )

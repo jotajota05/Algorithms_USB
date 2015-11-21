@@ -1,0 +1,44 @@
+import java.io.IOException;
+public class GrafoCliente {
+
+	public static void main (String[] args) throws IOException {
+		
+		Grafo G=new DIGrafo();
+		
+		Vertice V0=new Vertice("v0");
+		Vertice V1=new Vertice("v1");
+		Vertice V2=new Vertice("v2");
+		Vertice V3=new Vertice("v3");
+	
+		G.agregarVertice(V0);
+		G.agregarVertice(V1);
+		G.agregarVertice(V2);
+		G.agregarVertice(V3);
+		
+		Lado l0=new Arco("l0",V0,V1,1);
+		Lado l1=new Arco("l1",V0,V2,1);
+		Lado l2=new Arco("l2",V0,V3,1);
+		Lado l3=new Arco("l3",V1,V2,1);
+		Lado l4=new Arco("l4",V2,V1,1);
+		
+		G.agregarLado(l0);
+		G.agregarLado(l1);
+		G.agregarLado(l2);
+		G.agregarLado(l3);
+		G.agregarLado(l4);
+		
+		for(int i=0;i<G.incidentes(V0).size();i++) 
+			System.out.println(G.incidentes(V0).get(i).identificador());
+		
+		System.out.println("size vertices antes: "+G.Vertices().size());
+		System.out.println("size lados antes: "+G.Lados().size());
+		
+		G.eliminarVertice(V0);
+		
+		System.out.println("size vertices despues: "+G.Vertices().size());
+		System.out.println("size lados despues: "+G.Lados().size());
+		
+		for(int i=0;i<G.incidentes(V0).size();i++) 
+			System.out.println(G.incidentes(V0).get(i).identificador());
+	}
+}

@@ -1,0 +1,50 @@
+import java.util.*;
+
+
+public class GraphSPT {
+
+	private double[] wt;
+	private int[] spt;
+	
+	GraphSPT(Graph G, int s) { 
+		int V = G.V();
+		wt = new double[V]; 
+		spt = new int[V];
+		Vertice Vs=null;
+		Vertice Vert=null;
+		Vertice VertAd=null;
+		LinkedList<Vertice> L=G.listaVert();
+		System.out.println(L.size());
+		for(int i=0;i<L.size();i++) L.get(i).modCosto(java.lang.Float.MAX_VALUE);
+		Vs=G.obtVert(s);
+		Vs.modCosto(0);
+		while (L.size()!=0) {
+			Vert=G.primero(L);
+			AdjList A=G.getAdjList(Vert.s);
+			for (int i=A.beg();!A.end();i=A.nxt()) {
+				VertAd=G.obtVert(i);
+				if (VertAd.c>Vs.c+costo(G,Vert.s,VertAd.s)) {
+					VertAd.c=Vs.c+costo(G,Vert.s,VertAd.s);
+					VertAd.modAnt(Vert.s);
+				}
+			}
+		}
+		for(int i=0;i<L.size();i++) {
+			wt[i]=L.get(i).c;
+			spt[i]=L.get(i).a;
+		}
+	}
+	
+	public double costo(Graph G,int x, int y) {
+	    boolean found=false;	
+		double costo=0;
+	    Edge[] l=G.lado();
+	    for(int i=0;i<l.length&&!found;i++) 
+	    	if (l[i].v==x && l[i].w==y) costo=l[i].c;
+	    return costo;
+	}
+	
+	int pathR(int v) { return spt[v]; }
+	
+	double dist(int v) { return wt[v]; }
+}

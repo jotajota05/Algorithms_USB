@@ -1,0 +1,2680 @@
+ /* No modifique este archivo, será regenerado en cada compilación */
+ /* Obligaciones de prueba:
+  * Inicialización. id=1
+  * [0 <= readInt("Por favor inserte el numero de agendas que desea manejar. ")]
+  * Línea 424: El invariante se mantiene y decrece la cota - 1/3. id=2
+  * [N:int, k:int :: 
+  *  k < N ==> readInt("Ingrese el Tamano MAX de la Agenda: " + k) > 0]
+  * Línea 424: El invariante se mantiene y decrece la cota - 2/3. id=2
+  * [N:int, k:int :: k < N ==> 0 <= N - (k + 1) + 1]
+  * Línea 424: El invariante se mantiene y decrece la cota - 3/3. id=2
+  * [N:int, k:int :: k < N ==> N - (k + 1) + 1 < N - k + 1]
+  * Corrección de la función pertenece. id=3
+  * [a:Agenda, b:boolean, fechaHNombre:array[][] of String, fh:String, tam:int :: 
+  *  b == (%exists i : 0 <= i < a.tam : fh = a.fechaHNombre[i][0])]
+  * Línea 411: El invariante se mantiene y decrece la cota - 1/5. id=4
+  * [a:Agenda, b:boolean, fechaHNombre:array[][] of String, fh:String, i:int, 
+  *   tam:int :: 
+  *  ((%exists j : 0 <= j < a.tam : a.fechaHNombre[i][0] = fh) \\/ 
+  *      ! (%exists j : 0 <= j < a.tam : a.fechaHNombre[i][0] = fh)) /\\ 
+  *    i < a.tam /\\ ! b ==> 
+  *   (%exists j : 0 <= j < a.tam : a.fechaHNombre[i][0] = fh) \\/ 
+  *    ! (%exists j : 0 <= j < a.tam : a.fechaHNombre[i][0] = fh)]
+  * Línea 411: El invariante se mantiene y decrece la cota - 2/5. id=4
+  * [a:Agenda, b:boolean, fechaHNombre:array[][] of String, fh:String, i:int, 
+  *   tam:int :: 
+  *  (%exists j : 0 <= j < a.tam : a.fechaHNombre[i][0] = fh) /\\ i < a.tam /\\ ! b ==> 
+  *   0 <= a.tam - (i + 1)]
+  * Línea 411: El invariante se mantiene y decrece la cota - 3/5. id=4
+  * [a:Agenda, b:boolean, fechaHNombre:array[][] of String, fh:String, i:int, 
+  *   tam:int :: 
+  *  ! (%exists j : 0 <= j < a.tam : a.fechaHNombre[i][0] = fh) /\\ 
+  *    i < a.tam /\\ ! b ==> 0 <= a.tam - (i + 1)]
+  * Línea 411: El invariante se mantiene y decrece la cota - 4/5. id=4
+  * [a:Agenda, b:boolean, fechaHNombre:array[][] of String, fh:String, i:int, 
+  *   tam:int :: 
+  *  (%exists j : 0 <= j < a.tam : a.fechaHNombre[i][0] = fh) /\\ i < a.tam /\\ ! b ==> 
+  *   a.tam - (i + 1) < a.tam - i]
+  * Línea 411: El invariante se mantiene y decrece la cota - 5/5. id=4
+  * [a:Agenda, b:boolean, fechaHNombre:array[][] of String, fh:String, i:int, 
+  *   tam:int :: 
+  *  ! (%exists j : 0 <= j < a.tam : a.fechaHNombre[i][0] = fh) /\\ 
+  *    i < a.tam /\\ ! b ==> a.tam - (i + 1) < a.tam - i]
+  * Corrección de la función choca - 1/2. id=5
+  * [a:Agenda, chocan:boolean, d:int, duracionPrioridad:array[][] of int, 
+  *   fechaHNombre:array[][] of String, fh:String, tam:int :: 
+  *  (fechaHoraValida(fh) == 
+  *      length(fh) = 12 /\\ 
+  *       (%forall j : 0 <= j < length(fh) : 
+  *         "0" <= substring(fh,j,j + 1) /\\ substring(fh,j,j + 1) <= "9") /\\ 
+  *        esHoraValida(intOfString(substring(fh,8,12))) /\\ 
+  *         esFechaValida(intOfString(substring(fh,0,8)))) /\\ 
+  *    (fechaHoraValida(a.fechaHNombre[x][0]) /\\ 
+  *       fechaHoraValida(fh) /\\ a.duracionPrioridad[x][0] > 0 /\\ d > 0 ==> 
+  *      (seSolapan(a.fechaHNombre[x][0],a.duracionPrioridad[x][0],fh,d) == 
+  *        a.fechaHNombre[x][0] < fh /\\ 
+  *          fh < fin(a.fechaHNombre[x][0],a.duracionPrioridad[x][0]) \\/ 
+  *         a.fechaHNombre[x][0] = fh \\/ 
+  *          fh < a.fechaHNombre[x][0] /\\ a.fechaHNombre[x][0] < fin(fh,d))) ==> 
+  *   fechaHoraValida(fh) /\\ d > 0 /\\ chocan ==> 
+  *    (%exists x : 0 <= x < a.tam : 
+  *     seSolapan(a.fechaHNombre[x][0],a.duracionPrioridad[x][0],fh,d))]
+  * Corrección de la función choca - 2/2. id=5
+  * [a:Agenda, chocan:boolean, d:int, duracionPrioridad:array[][] of int, 
+  *   fechaHNombre:array[][] of String, fh:String, tam:int :: 
+  *  (fechaHoraValida(fh) == 
+  *      length(fh) = 12 /\\ 
+  *       (%forall j : 0 <= j < length(fh) : 
+  *         "0" <= substring(fh,j,j + 1) /\\ substring(fh,j,j + 1) <= "9") /\\ 
+  *        esHoraValida(intOfString(substring(fh,8,12))) /\\ 
+  *         esFechaValida(intOfString(substring(fh,0,8)))) /\\ 
+  *    (fechaHoraValida(a.fechaHNombre[x][0]) /\\ 
+  *       fechaHoraValida(fh) /\\ a.duracionPrioridad[x][0] > 0 /\\ d > 0 ==> 
+  *      (seSolapan(a.fechaHNombre[x][0],a.duracionPrioridad[x][0],fh,d) == 
+  *        a.fechaHNombre[x][0] < fh /\\ 
+  *          fh < fin(a.fechaHNombre[x][0],a.duracionPrioridad[x][0]) \\/ 
+  *         a.fechaHNombre[x][0] = fh \\/ 
+  *          fh < a.fechaHNombre[x][0] /\\ a.fechaHNombre[x][0] < fin(fh,d))) ==> 
+  *   fechaHoraValida(fh) /\\ 
+  *     d > 0 /\\ 
+  *      (%exists x : 0 <= x < a.tam : 
+  *       seSolapan(a.fechaHNombre[x][0],a.duracionPrioridad[x][0],fh,d)) ==> 
+  *    chocan]
+  * Línea 355: El invariante se mantiene y decrece la cota - 1/6. id=6
+  * [a:Agenda, chocan:boolean, fechaHNombre:array[][] of String, k:int, tam:int :: 
+  *  (fechaHoraValida(a.fechaHNombre[k][0]) == 
+  *     length(a.fechaHNombre[k][0]) = 12 /\\ 
+  *      (%forall j : 0 <= j < length(a.fechaHNombre[k][0]) : 
+  *        "0" <= substring(a.fechaHNombre[k][0],j,j + 1) /\\ 
+  *         substring(a.fechaHNombre[k][0],j,j + 1) <= "9") /\\ 
+  *       esHoraValida(intOfString(substring(a.fechaHNombre[k][0],8,12))) /\\ 
+  *        esFechaValida(intOfString(substring(a.fechaHNombre[k][0],0,8)))) ==> 
+  *   k < a.tam /\\ ! chocan ==> fechaHoraValida(a.fechaHNombre[k][0])]
+  * Línea 355: El invariante se mantiene y decrece la cota - 2/6. id=6
+  * [a:Agenda, chocan:boolean, fh:String, k:int, tam:int :: 
+  *  (fechaHoraValida(fh) == 
+  *     length(fh) = 12 /\\ 
+  *      (%forall j : 0 <= j < length(fh) : 
+  *        "0" <= substring(fh,j,j + 1) /\\ substring(fh,j,j + 1) <= "9") /\\ 
+  *       esHoraValida(intOfString(substring(fh,8,12))) /\\ 
+  *        esFechaValida(intOfString(substring(fh,0,8)))) ==> 
+  *   k < a.tam /\\ ! chocan ==> fechaHoraValida(fh)]
+  * Línea 355: El invariante se mantiene y decrece la cota - 3/6. id=6
+  * [a:Agenda, chocan:boolean, duracionPrioridad:array[][] of int, k:int, tam:int :: 
+  *  k < a.tam /\\ ! chocan ==> a.duracionPrioridad[k][0] > 0]
+  * Línea 355: El invariante se mantiene y decrece la cota - 4/6. id=6
+  * [a:Agenda, chocan:boolean, d:int, k:int, tam:int :: 
+  *  k < a.tam /\\ ! chocan ==> d > 0]
+  * Línea 355: El invariante se mantiene y decrece la cota - 5/6. id=6
+  * [a:Agenda, chocan:boolean, k:int, tam:int :: 
+  *  k < a.tam /\\ ! chocan ==> 0 <= a.tam - (k + 1)]
+  * Línea 355: El invariante se mantiene y decrece la cota - 6/6. id=6
+  * [a:Agenda, chocan:boolean, k:int, tam:int :: 
+  *  k < a.tam /\\ ! chocan ==> a.tam - (k + 1) < a.tam - k]
+  * Corrección de la función fechaHoraValida. id=7
+  * [fh:String, valida:boolean :: 
+  *  (esFechaValida(intOfString(substring(fh,0,8))) == 
+  *      (1 <= intOfString(substring(fh,0,8)) mod 100 /\\ 
+  *         intOfString(substring(fh,0,8)) mod 100 <= 30) /\\ 
+  *       (1 <= intOfString(substring(fh,0,8)) div 100 mod 100 /\\ 
+  *          intOfString(substring(fh,0,8)) div 100 mod 100 <= 12) /\\ 
+  *        intOfString(substring(fh,0,8)) div 10000 >= 2007) /\\ 
+  *    (esHoraValida(intOfString(substring(fh,8,12))) == 
+  *      (6 <= intOfString(substring(fh,8,12)) div 100 /\\ 
+  *          intOfString(substring(fh,8,12)) div 100 <= 21) /\\ 
+  *        0 <= intOfString(substring(fh,8,12)) mod 100 /\\ 
+  *         intOfString(substring(fh,8,12)) mod 100 <= 59 \\/ 
+  *       intOfString(substring(fh,8,12)) div 100 = 22 /\\ 
+  *        intOfString(substring(fh,8,12)) mod 100 = 0) ==> 
+  *   (valida == 
+  *     length(fh) = 12 /\\ 
+  *      (%forall j : 0 <= j < length(fh) : 
+  *        "0" <= substring(fh,j,j + 1) /\\ substring(fh,j,j + 1) <= "9") /\\ 
+  *       esHoraValida(intOfString(substring(fh,8,12))) /\\ 
+  *        esFechaValida(intOfString(substring(fh,0,8))))]
+  * Corrección de la función duracionValida. id=8
+  * [d:int, fh:String, valida:boolean :: 
+  *  obtenerMinutos(fh) = intOfString(substring(fh,8,12)) mod 100 /\\ 
+  *    obtenerHora(fh) = intOfString(substring(fh,8,12)) div 100 /\\ 
+  *     obtenerMinutos(fh) = intOfString(substring(fh,8,12)) mod 100 /\\ 
+  *      (fechaHoraValida(fh) == 
+  *        length(fh) = 12 /\\ 
+  *         (%forall j : 0 <= j < length(fh) : 
+  *           "0" <= substring(fh,j,j + 1) /\\ substring(fh,j,j + 1) <= "9") /\\ 
+  *          esHoraValida(intOfString(substring(fh,8,12))) /\\ 
+  *           esFechaValida(intOfString(substring(fh,0,8)))) ==> 
+  *   (valida == 
+  *     fechaHoraValida(fh) /\\ 
+  *      d > 0 /\\ 
+  *       (obtenerMinutos(fh) + d) mod 60 + 
+  *         ((obtenerMinutos(fh) + d) div 60 + obtenerHora(fh)) * 100 <= 
+  *        2200)]
+  * Corrección de la función diaLibre. id=9
+  * [a:Agenda, fecha:String, fechaHNombre:array[][] of String, libre:boolean, 
+  *   tam:int :: 
+  *  obtenerFecha(a.fechaHNombre[i][0]) = substring(a.fechaHNombre[i][0],0,8) /\\ 
+  *    (esFechaValida(intOfString(fecha)) == 
+  *      (1 <= intOfString(fecha) mod 100 /\\ intOfString(fecha) mod 100 <= 30) /\\ 
+  *       (1 <= intOfString(fecha) div 100 mod 100 /\\ 
+  *          intOfString(fecha) div 100 mod 100 <= 12) /\\ 
+  *        intOfString(fecha) div 10000 >= 2007) ==> 
+  *   esFechaValida(intOfString(fecha)) ==> 
+  *    libre = 
+  *     (%forall i : 0 <= i < a.tam : fecha != obtenerFecha(a.fechaHNombre[i][0]))]
+  * Línea 271: El invariante se mantiene y decrece la cota - 1/5. id=10
+  * [a:Agenda, fecha:String, fechaHNombre:array[][] of String, k:int, tam:int :: 
+  *  obtenerFecha(a.fechaHNombre[k][0]) = substring(a.fechaHNombre[k][0],0,8) ==> 
+  *   k < a.tam ==> 
+  *    fecha != obtenerFecha(a.fechaHNombre[k][0]) \\/ 
+  *     fecha = obtenerFecha(a.fechaHNombre[k][0])]
+  * Línea 271: El invariante se mantiene y decrece la cota - 2/5. id=10
+  * [a:Agenda, fecha:String, fechaHNombre:array[][] of String, k:int, tam:int :: 
+  *  obtenerFecha(a.fechaHNombre[k][0]) = substring(a.fechaHNombre[k][0],0,8) ==> 
+  *   k < a.tam /\\ fecha != obtenerFecha(a.fechaHNombre[k][0]) ==> 
+  *    0 <= a.tam - (k + 1)]
+  * Línea 271: El invariante se mantiene y decrece la cota - 3/5. id=10
+  * [a:Agenda, fecha:String, fechaHNombre:array[][] of String, k:int, tam:int :: 
+  *  obtenerFecha(a.fechaHNombre[k][0]) = substring(a.fechaHNombre[k][0],0,8) ==> 
+  *   k < a.tam /\\ fecha != obtenerFecha(a.fechaHNombre[k][0]) ==> 
+  *    a.tam - (k + 1) < a.tam - k]
+  * Línea 271: El invariante se mantiene y decrece la cota - 4/5. id=10
+  * [a:Agenda, fecha:String, fechaHNombre:array[][] of String, k:int, tam:int :: 
+  *  obtenerFecha(a.fechaHNombre[k][0]) = substring(a.fechaHNombre[k][0],0,8) ==> 
+  *   k < a.tam /\\ fecha = obtenerFecha(a.fechaHNombre[k][0]) ==> 
+  *    0 <= a.tam - a.tam]
+  * Línea 271: El invariante se mantiene y decrece la cota - 5/5. id=10
+  * [a:Agenda, fecha:String, fechaHNombre:array[][] of String, k:int, tam:int :: 
+  *  obtenerFecha(a.fechaHNombre[k][0]) = substring(a.fechaHNombre[k][0],0,8) ==> 
+  *   k < a.tam /\\ fecha = obtenerFecha(a.fechaHNombre[k][0]) ==> 
+  *    a.tam - a.tam < a.tam - k]
+  * Corrección de la función cantidadActDia. id=11
+  * [a:Agenda, cantidad:int, fecha:String, fechaHNombre:array[][] of String, tam:int :: 
+  *  obtenerFecha(a.fechaHNombre[i][0]) = substring(a.fechaHNombre[i][0],0,8) /\\ 
+  *    (esFechaValida(intOfString(fecha)) == 
+  *      (1 <= intOfString(fecha) mod 100 /\\ intOfString(fecha) mod 100 <= 30) /\\ 
+  *       (1 <= intOfString(fecha) div 100 mod 100 /\\ 
+  *          intOfString(fecha) div 100 mod 100 <= 12) /\\ 
+  *        intOfString(fecha) div 10000 >= 2007) ==> 
+  *   esFechaValida(intOfString(fecha)) ==> 
+  *    cantidad = 
+  *     (%count i : 0 <= i < a.tam : obtenerFecha(a.fechaHNombre[i][0]) = fecha)]
+  * Línea 255: El invariante se mantiene y decrece la cota - 1/5. id=12
+  * [a:Agenda, fecha:String, fechaHNombre:array[][] of String, k:int, tam:int :: 
+  *  obtenerFecha(a.fechaHNombre[k][0]) = substring(a.fechaHNombre[k][0],0,8) ==> 
+  *   k < a.tam ==> 
+  *    obtenerFecha(a.fechaHNombre[k][0]) = fecha \\/ 
+  *     obtenerFecha(a.fechaHNombre[k][0]) != fecha]
+  * Línea 255: El invariante se mantiene y decrece la cota - 2/5. id=12
+  * [a:Agenda, fecha:String, fechaHNombre:array[][] of String, k:int, tam:int :: 
+  *  obtenerFecha(a.fechaHNombre[k][0]) = substring(a.fechaHNombre[k][0],0,8) ==> 
+  *   k < a.tam /\\ obtenerFecha(a.fechaHNombre[k][0]) = fecha ==> 
+  *    0 <= a.tam - (k + 1)]
+  * Línea 255: El invariante se mantiene y decrece la cota - 3/5. id=12
+  * [a:Agenda, fecha:String, fechaHNombre:array[][] of String, k:int, tam:int :: 
+  *  obtenerFecha(a.fechaHNombre[k][0]) = substring(a.fechaHNombre[k][0],0,8) ==> 
+  *   k < a.tam /\\ obtenerFecha(a.fechaHNombre[k][0]) = fecha ==> 
+  *    a.tam - (k + 1) < a.tam - k]
+  * Línea 255: El invariante se mantiene y decrece la cota - 4/5. id=12
+  * [a:Agenda, fecha:String, fechaHNombre:array[][] of String, k:int, tam:int :: 
+  *  obtenerFecha(a.fechaHNombre[k][0]) = substring(a.fechaHNombre[k][0],0,8) ==> 
+  *   k < a.tam /\\ obtenerFecha(a.fechaHNombre[k][0]) != fecha ==> 
+  *    0 <= a.tam - (k + 1)]
+  * Línea 255: El invariante se mantiene y decrece la cota - 5/5. id=12
+  * [a:Agenda, fecha:String, fechaHNombre:array[][] of String, k:int, tam:int :: 
+  *  obtenerFecha(a.fechaHNombre[k][0]) = substring(a.fechaHNombre[k][0],0,8) ==> 
+  *   k < a.tam /\\ obtenerFecha(a.fechaHNombre[k][0]) != fecha ==> 
+  *    a.tam - (k + 1) < a.tam - k]
+  * Línea 199: El invariante se mantiene y decrece la cota - 1/3. id=13
+  * [a:Agenda, fecha:String, fechaHNombre:array[][] of String, k:int, tam:int :: 
+  *  obtenerFecha(a.fechaHNombre[k][0]) = substring(a.fechaHNombre[k][0],0,8) ==> 
+  *   k < a.tam ==> 
+  *    obtenerFecha(a.fechaHNombre[k][0]) != fecha \\/ 
+  *     obtenerFecha(a.fechaHNombre[k][0]) = fecha]
+  * Línea 199: El invariante se mantiene y decrece la cota - 2/3. id=13
+  * [a:Agenda, fecha:String, fechaHNombre:array[][] of String, k:int, tam:int :: 
+  *  obtenerFecha(a.fechaHNombre[k][0]) = substring(a.fechaHNombre[k][0],0,8) ==> 
+  *   k < a.tam /\\ obtenerFecha(a.fechaHNombre[k][0]) != fecha ==> 
+  *    0 <= a.tam - (k + 1)]
+  * Línea 199: El invariante se mantiene y decrece la cota - 3/3. id=13
+  * [a:Agenda, fecha:String, fechaHNombre:array[][] of String, k:int, tam:int :: 
+  *  obtenerFecha(a.fechaHNombre[k][0]) = substring(a.fechaHNombre[k][0],0,8) ==> 
+  *   k < a.tam /\\ obtenerFecha(a.fechaHNombre[k][0]) != fecha ==> 
+  *    a.tam - (k + 1) < a.tam - k]
+  * Corrección del procedimiento incluirActividades - 1/2. id=14
+  * [MAX:int, a1:Agenda, a2:Agenda, duracionPrioridad:array[][] of int, 
+  *   fechaHNombre:array[][] of String, tam:int :: 
+  *  (fechaHoraValida(a1.fechaHNombre[i][0]) /\\ a1.duracionPrioridad[i][0] > 0 ==> 
+  *     (choca(a2,a1.fechaHNombre[i][0],a1.duracionPrioridad[i][0]) == 
+  *       (%exists x : 0 <= x < a.tam : 
+  *        seSolapan(a.fechaHNombre[x][0],a.duracionPrioridad[x][0],
+  *         a1.fechaHNombre[i][0],a1.duracionPrioridad[i][0])))) ==> 
+  *   ! (%exists i : 0 <= i < a1.tam : 
+  *       choca(a2,a1.fechaHNombre[i][0],a1.duracionPrioridad[i][0])) /\\ 
+  *     a1.tam + a2.tam <= a1.MAX ==> 
+  *    (%forall k : 0 <= k < a2.tam : 
+  *     (%exists i : 0 <= i < a1.tam : 
+  *      a1.fechaHNombre[i][0] = a2.fechaHNombre[k][0] /\\ 
+  *       a1.fechaHNombre[i][1] = a2.fechaHNombre[k][1] /\\ 
+  *        a1.duracionPrioridad[i][0] = a2.duracionPrioridad[k][0] /\\ 
+  *         a1.duracionPrioridad[i][1] = a2.duracionPrioridad[k][1]))]
+  * Corrección del procedimiento incluirActividades - 2/2. id=14
+  * [MAX:int, a1:Agenda, a2:Agenda, duracionPrioridad:array[][] of int, 
+  *   fechaHNombre:array[][] of String, tam:int :: 
+  *  (fechaHoraValida(a1.fechaHNombre[i][0]) /\\ a1.duracionPrioridad[i][0] > 0 ==> 
+  *     (choca(a2,a1.fechaHNombre[i][0],a1.duracionPrioridad[i][0]) == 
+  *       (%exists x : 0 <= x < a.tam : 
+  *        seSolapan(a.fechaHNombre[x][0],a.duracionPrioridad[x][0],
+  *         a1.fechaHNombre[i][0],a1.duracionPrioridad[i][0])))) ==> 
+  *   ! (%exists i : 0 <= i < a1.tam : 
+  *       choca(a2,a1.fechaHNombre[i][0],a1.duracionPrioridad[i][0])) /\\ 
+  *     a1.tam + a2.tam <= a1.MAX ==> 
+  *    (%forall i : 0 <= i < a1.tam : 
+  *     (%exists j : 0 <= j < a2.tam : 
+  *      a1.fechaHNombre[i][0] = a1.fechaHNombre[j][0] /\\ 
+  *       a1.fechaHNombre[i][1] = a1.fechaHNombre[j][1] /\\ 
+  *        a1.duracionPrioridad[i][0] = a1.duracionPrioridad[j][0] /\\ 
+  *         a1.duracionPrioridad[i][1] = a1.duracionPrioridad[j][1]))]
+  * Línea 180: El invariante se mantiene y decrece la cota - 1/9. id=15
+  * [a2:Agenda, fechaHNombre:array[][] of String, k:int, tam:int :: 
+  *  (fechaHoraValida(a2.fechaHNombre[k][0]) == 
+  *     length(a2.fechaHNombre[k][0]) = 12 /\\ 
+  *      (%forall j : 0 <= j < length(a2.fechaHNombre[k][0]) : 
+  *        "0" <= substring(a2.fechaHNombre[k][0],j,j + 1) /\\ 
+  *         substring(a2.fechaHNombre[k][0],j,j + 1) <= "9") /\\ 
+  *       esHoraValida(intOfString(substring(a2.fechaHNombre[k][0],8,12))) /\\ 
+  *        esFechaValida(intOfString(substring(a2.fechaHNombre[k][0],0,8)))) ==> 
+  *   k < a2.tam ==> fechaHoraValida(a2.fechaHNombre[k][0])]
+  * Línea 180: El invariante se mantiene y decrece la cota - 2/9. id=15
+  * [a2:Agenda, duracionPrioridad:array[][] of int, fechaHNombre:array[][] of String, 
+  *   k:int, tam:int :: 
+  *  (duracionValida(a2.fechaHNombre[k][0],a2.duracionPrioridad[k][0]) == 
+  *     fechaHoraValida(a2.fechaHNombre[k][0]) /\\ 
+  *      a2.duracionPrioridad[k][0] > 0 /\\ 
+  *       (obtenerMinutos(a2.fechaHNombre[k][0]) + a2.duracionPrioridad[k][0]) mod 
+  *          60 + 
+  *         ((obtenerMinutos(a2.fechaHNombre[k][0]) + a2.duracionPrioridad[k][0]) div 
+  *             60 + obtenerHora(a2.fechaHNombre[k][0])) * 
+  *          100 <= 
+  *        2200) ==> 
+  *   k < a2.tam ==> 
+  *    duracionValida(a2.fechaHNombre[k][0],a2.duracionPrioridad[k][0])]
+  * Línea 180: El invariante se mantiene y decrece la cota - 3/9. id=15
+  * [a2:Agenda, duracionPrioridad:array[][] of int, k:int, tam:int :: 
+  *  k < a2.tam ==> 0 <= a2.duracionPrioridad[k][1]]
+  * Línea 180: El invariante se mantiene y decrece la cota - 4/9. id=15
+  * [a2:Agenda, duracionPrioridad:array[][] of int, k:int, tam:int :: 
+  *  k < a2.tam ==> a2.duracionPrioridad[k][1] <= 5]
+  * Línea 180: El invariante se mantiene y decrece la cota - 5/9. id=15
+  * [a2:Agenda, fechaHNombre:array[][] of String, k:int, tam:int :: 
+  *  k < a2.tam ==> a2.fechaHNombre[k][1] != ""]
+  * Línea 180: El invariante se mantiene y decrece la cota - 6/9. id=15
+  * [MAX:int, a:Agenda, a2:Agenda, k:int, tam:int :: k < a2.tam ==> a.tam < a.MAX]
+  * Línea 180: El invariante se mantiene y decrece la cota - 7/9. id=15
+  * [a1:Agenda, a2:Agenda, duracionPrioridad:array[][] of int, 
+  *   fechaHNombre:array[][] of String, k:int, tam:int :: 
+  *  (fechaHoraValida(a2.fechaHNombre[k][0]) /\\ a2.duracionPrioridad[k][0] > 0 ==> 
+  *     (choca(a1,a2.fechaHNombre[k][0],a2.duracionPrioridad[k][0]) == 
+  *       (%exists x : 0 <= x < a.tam : 
+  *        seSolapan(a.fechaHNombre[x][0],a.duracionPrioridad[x][0],
+  *         a2.fechaHNombre[k][0],a2.duracionPrioridad[k][0])))) ==> 
+  *   k < a2.tam ==> ! choca(a1,a2.fechaHNombre[k][0],a2.duracionPrioridad[k][0])]
+  * Línea 180: El invariante se mantiene y decrece la cota - 8/9. id=15
+  * [a:Agenda, a2:Agenda, duracionPrioridad:array[][] of int, 
+  *   fechaHNombre:array[][] of String, k:int, tam:int :: 
+  *  k < a2.tam /\\ 
+  *    (%exists i : 0 <= i < a.tam : 
+  *      a.fechaHNombre[i][0] = a2.fechaHNombre[k][0] /\\ 
+  *       a.fechaHNombre[i][1] = a2.fechaHNombre[k][1] /\\ 
+  *        a.duracionPrioridad[i][0] = a2.duracionPrioridad[k][0] /\\ 
+  *         a.duracionPrioridad[i][1] = a2.duracionPrioridad[k][1]) /\\ 
+  *     (%forall i : 0 <= i < a.tam : 
+  *      (%exists j : 0 <= j < a.tam : 
+  *       a.fechaHNombre[i][0] = a.fechaHNombre[j][0] /\\ 
+  *        a.fechaHNombre[i][1] = a.fechaHNombre[j][1] /\\ 
+  *         a.duracionPrioridad[i][0] = a.duracionPrioridad[j][0] /\\ 
+  *          a.duracionPrioridad[i][1] = a.duracionPrioridad[j][1])) ==> 
+  *   0 <= a2.tam - (k + 1)]
+  * Línea 180: El invariante se mantiene y decrece la cota - 9/9. id=15
+  * [a:Agenda, a2:Agenda, duracionPrioridad:array[][] of int, 
+  *   fechaHNombre:array[][] of String, k:int, tam:int :: 
+  *  k < a2.tam /\\ 
+  *    (%exists i : 0 <= i < a.tam : 
+  *      a.fechaHNombre[i][0] = a2.fechaHNombre[k][0] /\\ 
+  *       a.fechaHNombre[i][1] = a2.fechaHNombre[k][1] /\\ 
+  *        a.duracionPrioridad[i][0] = a2.duracionPrioridad[k][0] /\\ 
+  *         a.duracionPrioridad[i][1] = a2.duracionPrioridad[k][1]) /\\ 
+  *     (%forall i : 0 <= i < a.tam : 
+  *      (%exists j : 0 <= j < a.tam : 
+  *       a.fechaHNombre[i][0] = a.fechaHNombre[j][0] /\\ 
+  *        a.fechaHNombre[i][1] = a.fechaHNombre[j][1] /\\ 
+  *         a.duracionPrioridad[i][0] = a.duracionPrioridad[j][0] /\\ 
+  *          a.duracionPrioridad[i][1] = a.duracionPrioridad[j][1])) ==> 
+  *   a2.tam - (k + 1) < a2.tam - k]
+  * Línea 153: El invariante se mantiene y decrece la cota - 1/2. id=16
+  * [a:Agenda, fechaHNombre:array[][] of String, fechaHora:String, k:int, tam:int :: 
+  *  k < a.tam /\\ a.fechaHNombre[k][0] != fechaHora ==> 0 <= a.tam - (k + 1) + 1]
+  * Línea 153: El invariante se mantiene y decrece la cota - 2/2. id=16
+  * [a:Agenda, fechaHNombre:array[][] of String, fechaHora:String, k:int, tam:int :: 
+  *  k < a.tam /\\ a.fechaHNombre[k][0] != fechaHora ==> 
+  *   a.tam - (k + 1) + 1 < a.tam - k + 1]
+  * Corrección del procedimiento listarActividades. id=17
+  * [a:Agenda, fecha:String :: 
+  *  (esFechaValida(intOfString(fecha)) == 
+  *      (1 <= intOfString(fecha) mod 100 /\\ intOfString(fecha) mod 100 <= 30) /\\ 
+  *       (1 <= intOfString(fecha) div 100 mod 100 /\\ 
+  *          intOfString(fecha) div 100 mod 100 <= 12) /\\ 
+  *        intOfString(fecha) div 10000 >= 2007) /\\ 
+  *    (esFechaValida(intOfString(fecha)) ==> 
+  *      diaLibre(a,fecha) = 
+  *       (%forall i : 0 <= i < a.tam : fecha != obtenerFecha(a.fechaHNombre[i][0]))
+  *    ) ==> 
+  *   esFechaValida(intOfString(fecha)) ==> 
+  *    diaLibre(a,fecha) \\/ ! diaLibre(a,fecha)]
+  * Corrección del procedimiento agregarActividad - 1/2. id=18
+  * [MAX:int, a:Agenda, duracion:int, fechaHora:String, nombre:String, prioridad:int, 
+  *   tam:int :: 
+  *  (duracionValida(fechaHora,duracion) == 
+  *      fechaHoraValida(fechaHora) /\\ 
+  *       duracion > 0 /\\ 
+  *        (obtenerMinutos(fechaHora) + duracion) mod 60 + 
+  *          ((obtenerMinutos(fechaHora) + duracion) div 60 + obtenerHora(fechaHora)
+  *           ) * 100 <= 
+  *         2200) /\\ 
+  *    (fechaHoraValida(fechaHora) /\\ duracion > 0 ==> 
+  *       (choca(a,fechaHora,duracion) == 
+  *         (%exists x : 0 <= x < a.tam : 
+  *          seSolapan(a.fechaHNombre[x][0],a.duracionPrioridad[x][0],fechaHora,
+  *           duracion)))) /\\ 
+  *     (fechaHoraValida(fechaHora) == 
+  *       length(fechaHora) = 12 /\\ 
+  *        (%forall j : 0 <= j < length(fechaHora) : 
+  *          "0" <= substring(fechaHora,j,j + 1) /\\ 
+  *           substring(fechaHora,j,j + 1) <= "9") /\\ 
+  *         esHoraValida(intOfString(substring(fechaHora,8,12))) /\\ 
+  *          esFechaValida(intOfString(substring(fechaHora,0,8)))) ==> 
+  *   fechaHoraValida(fechaHora) /\\ 
+  *     duracionValida(fechaHora,duracion) /\\ 
+  *      (0 <= prioridad /\\ prioridad <= 5) /\\ 
+  *       nombre != "" /\\ a.tam < a.MAX /\\ ! choca(a,fechaHora,duracion) ==> 
+  *    a.tam < a.MAX \\/ a.tam >= a.MAX]
+  * Corrección del procedimiento agregarActividad - 2/2. id=18
+  * [MAX:int, a:Agenda, duracion:int, fechaHNombre:array[][] of String, 
+  *   fechaHora:String, nombre:String, prioridad:int, tam:int :: 
+  *  (duracionValida(fechaHora,duracion) == 
+  *      fechaHoraValida(fechaHora) /\\ 
+  *       duracion > 0 /\\ 
+  *        (obtenerMinutos(fechaHora) + duracion) mod 60 + 
+  *          ((obtenerMinutos(fechaHora) + duracion) div 60 + obtenerHora(fechaHora)
+  *           ) * 100 <= 
+  *         2200) /\\ 
+  *    (fechaHoraValida(fechaHora) /\\ duracion > 0 ==> 
+  *       (choca(a,fechaHora,duracion) == 
+  *         (%exists x : 0 <= x < a.tam : 
+  *          seSolapan(a.fechaHNombre[x][0],a.duracionPrioridad[x][0],fechaHora,
+  *           duracion)))) /\\ 
+  *     (fechaHoraValida(fechaHora) == 
+  *       length(fechaHora) = 12 /\\ 
+  *        (%forall j : 0 <= j < length(fechaHora) : 
+  *          "0" <= substring(fechaHora,j,j + 1) /\\ 
+  *           substring(fechaHora,j,j + 1) <= "9") /\\ 
+  *         esHoraValida(intOfString(substring(fechaHora,8,12))) /\\ 
+  *          esFechaValida(intOfString(substring(fechaHora,0,8)))) ==> 
+  *   fechaHoraValida(fechaHora) /\\ 
+  *     duracionValida(fechaHora,duracion) /\\ 
+  *      0 <= prioridad /\\ 
+  *       prioridad <= 5 /\\ 
+  *        nombre != "" /\\ 
+  *         a.tam < a.MAX /\\ ! choca(a,fechaHora,duracion) /\\ a.tam < a.MAX ==> 
+  *    a.fechaHNombre[0][1] != "" \\/ a.fechaHNombre[0][1] = ""]
+  * Corrección de la función nuevaAgenda - 1/3. id=19
+  * [m:int :: m > 0 ==> 0 <= m]
+  * Corrección de la función nuevaAgenda - 2/3. id=19
+  * [MAX:int, m:int, nuevaAgenda:Agenda :: m > 0 ==> nuevaAgenda.MAX = m]
+  * Corrección de la función nuevaAgenda - 3/3. id=19
+  * [m:int, nuevaAgenda:Agenda, tam:int :: m > 0 ==> nuevaAgenda.tam = 0]
+  * Línea 59: El invariante garantiza la postcondición a la salida. id=20
+  * [a:Agenda, fechaHNombre:array[][] of String, i:int, tam:int :: 
+  *  i >= a.tam ==> 
+  *   a.fechaHNombre[a.tam][1] = "" \\/ a.fechaHNombre[a.tam][1] != ""]
+  * Línea 59: El invariante se mantiene y decrece la cota - 1/3. id=21
+  * [a:Agenda, fechaHNombre:array[][] of String, fechaHora:String, i:int, tam:int :: 
+  *  i < a.tam ==> 
+  *   a.fechaHNombre[i][0] < fechaHora \\/ a.fechaHNombre[i][0] >= fechaHora]
+  * Línea 59: El invariante se mantiene y decrece la cota - 2/3. id=21
+  * [a:Agenda, fechaHNombre:array[][] of String, fechaHora:String, i:int, tam:int :: 
+  *  i < a.tam /\\ a.fechaHNombre[i][0] < fechaHora ==> 0 <= a.tam - (i + 1)]
+  * Línea 59: El invariante se mantiene y decrece la cota - 3/3. id=21
+  * [a:Agenda, fechaHNombre:array[][] of String, fechaHora:String, i:int, tam:int :: 
+  *  i < a.tam /\\ a.fechaHNombre[i][0] < fechaHora ==> a.tam - (i + 1) < a.tam - i]
+  * Línea 63: El invariante garantiza la postcondición a la salida - 1/2. id=22
+  * [a:Agenda, j:int, tam:int :: j >= a.tam ==> 0 <= a.tam - a.tam]
+  * Línea 63: El invariante garantiza la postcondición a la salida - 2/2. id=22
+  * [a:Agenda, i:int, j:int, tam:int :: j >= a.tam ==> a.tam - a.tam < a.tam - i]
+  * Línea 63: El invariante se mantiene y decrece la cota - 1/2. id=23
+  * [a:Agenda, j:int, tam:int :: j < a.tam ==> 0 <= a.tam - (j + 1)]
+  * Línea 63: El invariante se mantiene y decrece la cota - 2/2. id=23
+  * [a:Agenda, j:int, tam:int :: j < a.tam ==> a.tam - (j + 1) < a.tam - j]
+  * Línea 97: El invariante se mantiene y decrece la cota - 1/3. id=24
+  * [a:Agenda, fechaHNombre:array[][] of String, fechaHora:String, i:int, tam:int :: 
+  *  i < a.tam ==> 
+  *   a.fechaHNombre[i][0] != fechaHora \\/ a.fechaHNombre[i][0] = fechaHora]
+  * Línea 97: El invariante se mantiene y decrece la cota - 2/3. id=24
+  * [a:Agenda, fechaHNombre:array[][] of String, fechaHora:String, i:int, tam:int :: 
+  *  i < a.tam /\\ a.fechaHNombre[i][0] != fechaHora ==> 0 <= a.tam - (i + 1)]
+  * Línea 97: El invariante se mantiene y decrece la cota - 3/3. id=24
+  * [a:Agenda, fechaHNombre:array[][] of String, fechaHora:String, i:int, tam:int :: 
+  *  i < a.tam /\\ a.fechaHNombre[i][0] != fechaHora ==> a.tam - (i + 1) < a.tam - i
+  * ]
+  * Línea 101: El invariante garantiza la postcondición a la salida - 1/2. id=25
+  * [a:Agenda, j:int, tam:int :: j >= a.tam - 1 ==> 0 <= a.tam - a.tam]
+  * Línea 101: El invariante garantiza la postcondición a la salida - 2/2. id=25
+  * [a:Agenda, i:int, j:int, tam:int :: j >= a.tam - 1 ==> a.tam - a.tam < a.tam - i
+  * ]
+  * Línea 101: El invariante se mantiene y decrece la cota - 1/2. id=26
+  * [a:Agenda, j:int, tam:int :: j < a.tam - 1 ==> 0 <= a.tam - (j + 1) - 1]
+  * Línea 101: El invariante se mantiene y decrece la cota - 2/2. id=26
+  * [a:Agenda, j:int, tam:int :: 
+  *  j < a.tam - 1 ==> a.tam - (j + 1) - 1 < a.tam - j - 1]
+  * Línea 132: El invariante se mantiene y decrece la cota - 1/3. id=27
+  * [a:Agenda, fecha:String, fechaHNombre:array[][] of String, i:int, tam:int :: 
+  *  obtenerFecha(a.fechaHNombre[i][0]) = substring(a.fechaHNombre[i][0],0,8) ==> 
+  *   i < a.tam ==> 
+  *    obtenerFecha(a.fechaHNombre[i][0]) != fecha \\/ 
+  *     obtenerFecha(a.fechaHNombre[i][0]) = fecha]
+  * Línea 132: El invariante se mantiene y decrece la cota - 2/3. id=27
+  * [a:Agenda, fecha:String, fechaHNombre:array[][] of String, i:int, tam:int :: 
+  *  obtenerFecha(a.fechaHNombre[i][0]) = substring(a.fechaHNombre[i][0],0,8) ==> 
+  *   i < a.tam /\\ obtenerFecha(a.fechaHNombre[i][0]) != fecha ==> 
+  *    0 <= a.tam - (i + 1)]
+  * Línea 132: El invariante se mantiene y decrece la cota - 3/3. id=27
+  * [a:Agenda, fecha:String, fechaHNombre:array[][] of String, i:int, tam:int :: 
+  *  obtenerFecha(a.fechaHNombre[i][0]) = substring(a.fechaHNombre[i][0],0,8) ==> 
+  *   i < a.tam /\\ obtenerFecha(a.fechaHNombre[i][0]) != fecha ==> 
+  *    a.tam - (i + 1) < a.tam - i]
+  * Línea 136. Los guardias están definidos. id=28
+  * [fecha:String :: 
+  *  (esFechaValida(intOfString(fecha)) == 
+  *     (1 <= intOfString(fecha) mod 100 /\\ intOfString(fecha) mod 100 <= 30) /\\ 
+  *      (1 <= intOfString(fecha) div 100 mod 100 /\\ 
+  *         intOfString(fecha) div 100 mod 100 <= 12) /\\ 
+  *       intOfString(fecha) div 10000 >= 2007) ==> 
+  *   esFechaValida(intOfString(fecha))]
+  * Línea 136: El invariante garantiza la postcondición a la salida - 1/2. id=29
+  * [a:Agenda, fecha:String, j:int, tam:int :: 
+  *  (esFechaValida(intOfString(fecha)) ==> 
+  *     cantidadActDia(a,fecha) = 
+  *      (%count i : 0 <= i < a.tam : obtenerFecha(a.fechaHNombre[i][0]) = fecha)) ==> 
+  *   j >= cantidadActDia(a,fecha) ==> 0 <= a.tam - a.tam]
+  * Línea 136: El invariante garantiza la postcondición a la salida - 2/2. id=29
+  * [a:Agenda, fecha:String, i:int, j:int, tam:int :: 
+  *  (esFechaValida(intOfString(fecha)) ==> 
+  *     cantidadActDia(a,fecha) = 
+  *      (%count i : 0 <= i < a.tam : obtenerFecha(a.fechaHNombre[i][0]) = fecha)) ==> 
+  *   j >= cantidadActDia(a,fecha) ==> a.tam - a.tam < a.tam - i]
+  * Línea 136: El invariante se mantiene y decrece la cota - 1/3. id=30
+  * [a:Agenda, fecha:String, j:int :: 
+  *  (esFechaValida(intOfString(fecha)) == 
+  *      (1 <= intOfString(fecha) mod 100 /\\ intOfString(fecha) mod 100 <= 30) /\\ 
+  *       (1 <= intOfString(fecha) div 100 mod 100 /\\ 
+  *          intOfString(fecha) div 100 mod 100 <= 12) /\\ 
+  *        intOfString(fecha) div 10000 >= 2007) /\\ 
+  *    (esFechaValida(intOfString(fecha)) ==> 
+  *      cantidadActDia(a,fecha) = 
+  *       (%count i : 0 <= i < a.tam : obtenerFecha(a.fechaHNombre[i][0]) = fecha)) ==> 
+  *   j < cantidadActDia(a,fecha) ==> esFechaValida(intOfString(fecha))]
+  * Línea 136: El invariante se mantiene y decrece la cota - 2/3. id=30
+  * [a:Agenda, fecha:String, j:int :: 
+  *  (esFechaValida(intOfString(fecha)) ==> 
+  *     cantidadActDia(a,fecha) = 
+  *      (%count i : 0 <= i < a.tam : obtenerFecha(a.fechaHNombre[i][0]) = fecha)) ==> 
+  *   j < cantidadActDia(a,fecha) ==> 0 <= cantidadActDia(a,fecha) - (j + 1)]
+  * Línea 136: El invariante se mantiene y decrece la cota - 3/3. id=30
+  * [a:Agenda, fecha:String, j:int :: 
+  *  (esFechaValida(intOfString(fecha)) ==> 
+  *     cantidadActDia(a,fecha) = 
+  *      (%count i : 0 <= i < a.tam : obtenerFecha(a.fechaHNombre[i][0]) = fecha)) ==> 
+  *   j < cantidadActDia(a,fecha) ==> 
+  *    cantidadActDia(a,fecha) - (j + 1) < cantidadActDia(a,fecha) - j]
+  * Línea 204. Los guardias están definidos. id=31
+  * [fecha:String :: 
+  *  (esFechaValida(intOfString(fecha)) == 
+  *     (1 <= intOfString(fecha) mod 100 /\\ intOfString(fecha) mod 100 <= 30) /\\ 
+  *      (1 <= intOfString(fecha) div 100 mod 100 /\\ 
+  *         intOfString(fecha) div 100 mod 100 <= 12) /\\ 
+  *       intOfString(fecha) div 10000 >= 2007) ==> 
+  *   esFechaValida(intOfString(fecha))]
+  * Línea 204: El invariante garantiza la postcondición a la salida - 1/2. id=32
+  * [a:Agenda, fecha:String, j:int, tam:int :: 
+  *  (esFechaValida(intOfString(fecha)) ==> 
+  *     cantidadActDia(a,fecha) = 
+  *      (%count i : 0 <= i < a.tam : obtenerFecha(a.fechaHNombre[i][0]) = fecha)) ==> 
+  *   j >= cantidadActDia(a,fecha) ==> 0 <= a.tam - a.tam]
+  * Línea 204: El invariante garantiza la postcondición a la salida - 2/2. id=32
+  * [_C8=null, a:Agenda, fecha:String, j:int, tam:int :: 
+  *  (esFechaValida(intOfString(fecha)) ==> 
+  *     cantidadActDia(a,fecha) = 
+  *      (%count i : 0 <= i < a.tam : obtenerFecha(a.fechaHNombre[i][0]) = fecha)) ==> 
+  *   j >= cantidadActDia(a,fecha) ==> a.tam - a.tam < _C8]
+  * Línea 204: El invariante se mantiene y decrece la cota - 1/7. id=33
+  * [a:Agenda, duracionPrioridad:array[][] of int, fecha:String, j:int, 
+  *   prioridad:int :: 
+  *  (esFechaValida(intOfString(fecha)) ==> 
+  *     cantidadActDia(a,fecha) = 
+  *      (%count i : 0 <= i < a.tam : obtenerFecha(a.fechaHNombre[i][0]) = fecha)) ==> 
+  *   j < cantidadActDia(a,fecha) ==> 
+  *    a.duracionPrioridad[j][1] <= prioridad \\/ 
+  *     a.duracionPrioridad[j][1] > prioridad]
+  * Línea 204: El invariante se mantiene y decrece la cota - 2/7. id=33
+  * [a:Agenda, duracionPrioridad:array[][] of int, fecha:String, j:int, 
+  *   prioridad:int :: 
+  *  (esFechaValida(intOfString(fecha)) == 
+  *      (1 <= intOfString(fecha) mod 100 /\\ intOfString(fecha) mod 100 <= 30) /\\ 
+  *       (1 <= intOfString(fecha) div 100 mod 100 /\\ 
+  *          intOfString(fecha) div 100 mod 100 <= 12) /\\ 
+  *        intOfString(fecha) div 10000 >= 2007) /\\ 
+  *    (esFechaValida(intOfString(fecha)) ==> 
+  *      cantidadActDia(a,fecha) = 
+  *       (%count i : 0 <= i < a.tam : obtenerFecha(a.fechaHNombre[i][0]) = fecha)) ==> 
+  *   j < cantidadActDia(a,fecha) /\\ a.duracionPrioridad[j][1] <= prioridad ==> 
+  *    esFechaValida(intOfString(fecha))]
+  * Línea 204: El invariante se mantiene y decrece la cota - 3/7. id=33
+  * [a:Agenda, duracionPrioridad:array[][] of int, fecha:String, j:int, 
+  *   prioridad:int :: 
+  *  (esFechaValida(intOfString(fecha)) ==> 
+  *     cantidadActDia(a,fecha) = 
+  *      (%count i : 0 <= i < a.tam : obtenerFecha(a.fechaHNombre[i][0]) = fecha)) ==> 
+  *   j < cantidadActDia(a,fecha) /\\ a.duracionPrioridad[j][1] <= prioridad ==> 
+  *    0 <= cantidadActDia(a,fecha) - (j + 1)]
+  * Línea 204: El invariante se mantiene y decrece la cota - 4/7. id=33
+  * [a:Agenda, duracionPrioridad:array[][] of int, fecha:String, j:int, 
+  *   prioridad:int :: 
+  *  (esFechaValida(intOfString(fecha)) ==> 
+  *     cantidadActDia(a,fecha) = 
+  *      (%count i : 0 <= i < a.tam : obtenerFecha(a.fechaHNombre[i][0]) = fecha)) ==> 
+  *   j < cantidadActDia(a,fecha) /\\ a.duracionPrioridad[j][1] <= prioridad ==> 
+  *    cantidadActDia(a,fecha) - (j + 1) < cantidadActDia(a,fecha) - j]
+  * Línea 204: El invariante se mantiene y decrece la cota - 5/7. id=33
+  * [a:Agenda, duracionPrioridad:array[][] of int, fecha:String, j:int, 
+  *   prioridad:int :: 
+  *  (esFechaValida(intOfString(fecha)) == 
+  *      (1 <= intOfString(fecha) mod 100 /\\ intOfString(fecha) mod 100 <= 30) /\\ 
+  *       (1 <= intOfString(fecha) div 100 mod 100 /\\ 
+  *          intOfString(fecha) div 100 mod 100 <= 12) /\\ 
+  *        intOfString(fecha) div 10000 >= 2007) /\\ 
+  *    (esFechaValida(intOfString(fecha)) ==> 
+  *      cantidadActDia(a,fecha) = 
+  *       (%count i : 0 <= i < a.tam : obtenerFecha(a.fechaHNombre[i][0]) = fecha)) ==> 
+  *   j < cantidadActDia(a,fecha) /\\ a.duracionPrioridad[j][1] > prioridad ==> 
+  *    esFechaValida(intOfString(fecha))]
+  * Línea 204: El invariante se mantiene y decrece la cota - 6/7. id=33
+  * [a:Agenda, duracionPrioridad:array[][] of int, fecha:String, j:int, 
+  *   prioridad:int :: 
+  *  (esFechaValida(intOfString(fecha)) ==> 
+  *     cantidadActDia(a,fecha) = 
+  *      (%count i : 0 <= i < a.tam : obtenerFecha(a.fechaHNombre[i][0]) = fecha)) ==> 
+  *   j < cantidadActDia(a,fecha) /\\ a.duracionPrioridad[j][1] > prioridad ==> 
+  *    0 <= cantidadActDia(a,fecha) - (j + 1)]
+  * Línea 204: El invariante se mantiene y decrece la cota - 7/7. id=33
+  * [a:Agenda, duracionPrioridad:array[][] of int, fecha:String, j:int, 
+  *   prioridad:int :: 
+  *  (esFechaValida(intOfString(fecha)) ==> 
+  *     cantidadActDia(a,fecha) = 
+  *      (%count i : 0 <= i < a.tam : obtenerFecha(a.fechaHNombre[i][0]) = fecha)) ==> 
+  *   j < cantidadActDia(a,fecha) /\\ a.duracionPrioridad[j][1] > prioridad ==> 
+  *    cantidadActDia(a,fecha) - (j + 1) < cantidadActDia(a,fecha) - j]
+  * Línea 228: El invariante garantiza la postcondición a la salida - 1/2. id=34
+  * [a:Agenda, k:int, prioridad:int, tam:int :: 
+  *  k >= a.tam ==> 0 <= 6 - (prioridad + 1)]
+  * Línea 228: El invariante garantiza la postcondición a la salida - 2/2. id=34
+  * [_C10=null, a:Agenda, k:int, prioridad:int, tam:int :: 
+  *  k >= a.tam ==> 6 - (prioridad + 1) < _C10]
+  * Línea 228: El invariante se mantiene y decrece la cota - 1/5. id=35
+  * [a:Agenda, duracionPrioridad:array[][] of int, k:int, prioridad:int, tam:int :: 
+  *  k < a.tam ==> 
+  *   a.duracionPrioridad[k][1] = prioridad \\/ 
+  *    a.duracionPrioridad[k][1] != prioridad]
+  * Línea 228: El invariante se mantiene y decrece la cota - 2/5. id=35
+  * [a:Agenda, duracionPrioridad:array[][] of int, k:int, prioridad:int, tam:int :: 
+  *  k < a.tam /\\ a.duracionPrioridad[k][1] = prioridad ==> 0 <= a.tam - (k + 1)]
+  * Línea 228: El invariante se mantiene y decrece la cota - 3/5. id=35
+  * [a:Agenda, duracionPrioridad:array[][] of int, k:int, prioridad:int, tam:int :: 
+  *  k < a.tam /\\ a.duracionPrioridad[k][1] = prioridad ==> 
+  *   a.tam - (k + 1) < a.tam - k]
+  * Línea 228: El invariante se mantiene y decrece la cota - 4/5. id=35
+  * [a:Agenda, duracionPrioridad:array[][] of int, k:int, prioridad:int, tam:int :: 
+  *  k < a.tam /\\ a.duracionPrioridad[k][1] != prioridad ==> 0 <= a.tam - (k + 1)]
+  * Línea 228: El invariante se mantiene y decrece la cota - 5/5. id=35
+  * [a:Agenda, duracionPrioridad:array[][] of int, k:int, prioridad:int, tam:int :: 
+  *  k < a.tam /\\ a.duracionPrioridad[k][1] != prioridad ==> 
+  *   a.tam - (k + 1) < a.tam - k]
+  * Línea 447: El invariante garantiza la postcondición a la salida - 1/23. id=36
+  * [N:int, numAgenda:int :: 
+  *  numAgenda >= 0 /\\ numAgenda < N ==> 
+  *   readString("Introduzca el numero de su opcion.") = "1" \\/ 
+  *    readString("Introduzca el numero de su opcion.") = "2" \\/ 
+  *     readString("Introduzca el numero de su opcion.") = "3" \\/ 
+  *      readString("Introduzca el numero de su opcion.") = "4" \\/ 
+  *       readString("Introduzca el numero de su opcion.") = "5" \\/ 
+  *        readString("Introduzca el numero de su opcion.") = "6" \\/ 
+  *         readString("Introduzca el numero de su opcion.") = "7" \\/ 
+  *          readString("Introduzca el numero de su opcion.") = "8" \\/ 
+  *           readString("Introduzca el numero de su opcion.") = "9" \\/ 
+  *            readString("Introduzca el numero de su opcion.") = "10" \\/ 
+  *             readString("Introduzca el numero de su opcion.") = "11" \\/ 
+  *              readString("Introduzca el numero de su opcion.") != "1" /\\ 
+  *               readString("Introduzca el numero de su opcion.") != "2" /\\ 
+  *                readString("Introduzca el numero de su opcion.") != "3" /\\ 
+  *                 readString("Introduzca el numero de su opcion.") != "4" /\\ 
+  *                  readString("Introduzca el numero de su opcion.") != "5" /\\ 
+  *                   readString("Introduzca el numero de su opcion.") != "6" /\\ 
+  *                    readString("Introduzca el numero de su opcion.") != "7" /\\ 
+  *                     readString("Introduzca el numero de su opcion.") != "8" /\\ 
+  *                      readString("Introduzca el numero de su opcion.") != "9" /\\ 
+  *                       readString("Introduzca el numero de su opcion.") != 
+  *                         "10" /\\ 
+  *                        readString("Introduzca el numero de su opcion.") != 
+  *                         "11"]
+  * Línea 447: El invariante garantiza la postcondición a la salida - 2/23. id=36
+  * [N:int, numAgenda:int :: 
+  *  numAgenda >= 0 /\\ 
+  *    numAgenda < N /\\ readString("Introduzca el numero de su opcion.") = "5" ==> 
+  *   0 <= 
+  *    readInt(
+  *     "Inserte el numero de la agenda en cuya programacion desea incluir todas las actividades de la agenda actual."
+  *    )]
+  * Línea 447: El invariante garantiza la postcondición a la salida - 3/23. id=36
+  * [Agendas=null, N:int, numAgenda:int :: 
+  *  numAgenda >= 0 /\\ 
+  *    numAgenda < N /\\ readString("Introduzca el numero de su opcion.") = "5" ==> 
+  *   readInt(
+  *     "Inserte el numero de la agenda en cuya programacion desea incluir todas las actividades de la agenda actual."
+  *    ) < 
+  *    length(Agendas,0)]
+  * Línea 447: El invariante garantiza la postcondición a la salida - 4/23. id=36
+  * [N:int, numAgenda:int :: 
+  *  numAgenda >= 0 /\\ 
+  *    numAgenda < N /\\ readString("Introduzca el numero de su opcion.") = "5" ==> 
+  *   0 <= numAgenda]
+  * Línea 447: El invariante garantiza la postcondición a la salida - 5/23. id=36
+  * [Agendas=null, N:int, numAgenda:int :: 
+  *  numAgenda >= 0 /\\ 
+  *    numAgenda < N /\\ readString("Introduzca el numero de su opcion.") = "5" ==> 
+  *   numAgenda < length(Agendas,0)]
+  * Línea 447: El invariante garantiza la postcondición a la salida - 6/23. id=36
+  * [Agendas:array[] of Agenda, N:int, a1:Agenda, duracionPrioridad:array[][] of int, 
+  *   fechaHNombre:array[][] of String, numAgenda:int, tam:int :: 
+  *  (fechaHoraValida(a1.fechaHNombre[i][0]) /\\ a1.duracionPrioridad[i][0] > 0 ==> 
+  *     (choca(Agendas[numAgenda],a1.fechaHNombre[i][0],a1.duracionPrioridad[i][0]) == 
+  *       (%exists x : 0 <= x < a.tam : 
+  *        seSolapan(a.fechaHNombre[x][0],a.duracionPrioridad[x][0],
+  *         a1.fechaHNombre[i][0],a1.duracionPrioridad[i][0])))) ==> 
+  *   numAgenda >= 0 /\\ 
+  *     numAgenda < N /\\ readString("Introduzca el numero de su opcion.") = "5" ==> 
+  *    (%forall i : 0 <= i < a1.tam : 
+  *     ! choca(Agendas[numAgenda],a1.fechaHNombre[i][0],a1.duracionPrioridad[i][0])
+  *    )]
+  * Línea 447: El invariante garantiza la postcondición a la salida - 7/23. id=36
+  * [MAX:int, N:int, a1:Agenda, a2:Agenda, numAgenda:int, tam:int :: 
+  *  numAgenda >= 0 /\\ 
+  *    numAgenda < N /\\ readString("Introduzca el numero de su opcion.") = "5" ==> 
+  *   a1.tam + a2.tam <= a1.MAX]
+  * Línea 447: El invariante garantiza la postcondición a la salida - 8/23. id=36
+  * [N:int, a1:Agenda, a2:Agenda, duracionPrioridad:array[][] of int, 
+  *   fechaHNombre:array[][] of String, k:int, numAgenda:int, tam:int :: 
+  *  numAgenda >= 0 /\\ 
+  *    numAgenda < N /\\ 
+  *     readString("Introduzca el numero de su opcion.") = "5" /\\ 
+  *      (%forall k : 0 <= k < a2.tam : 
+  *        (%exists i : 0 <= i < a1.tam : 
+  *         a1.fechaHNombre[i][0] = a2.fechaHNombre[k][0] /\\ 
+  *          a1.fechaHNombre[i][1] = a2.fechaHNombre[k][1] /\\ 
+  *           a1.duracionPrioridad[i][0] = a2.duracionPrioridad[k][0] /\\ 
+  *            a1.duracionPrioridad[i][1] = a2.duracionPrioridad[k][1])) /\\ 
+  *       (%forall i : 0 <= i < a1.tam : 
+  *        (%exists j : 0 <= j < a2.tam : 
+  *         a1.fechaHNombre[i][0] = a1.fechaHNombre[j][0] /\\ 
+  *          a1.fechaHNombre[i][1] = a1.fechaHNombre[j][1] /\\ 
+  *           a1.duracionPrioridad[i][0] = a1.duracionPrioridad[j][0] /\\ 
+  *            a1.duracionPrioridad[i][1] = a1.duracionPrioridad[j][1])) ==> 
+  *   0 <= 100000 - (k + 1)]
+  * Línea 447: El invariante garantiza la postcondición a la salida - 9/23. id=36
+  * [N:int, _C16=null, a1:Agenda, a2:Agenda, duracionPrioridad:array[][] of int, 
+  *   fechaHNombre:array[][] of String, k:int, numAgenda:int, tam:int :: 
+  *  numAgenda >= 0 /\\ 
+  *    numAgenda < N /\\ 
+  *     readString("Introduzca el numero de su opcion.") = "5" /\\ 
+  *      (%forall k : 0 <= k < a2.tam : 
+  *        (%exists i : 0 <= i < a1.tam : 
+  *         a1.fechaHNombre[i][0] = a2.fechaHNombre[k][0] /\\ 
+  *          a1.fechaHNombre[i][1] = a2.fechaHNombre[k][1] /\\ 
+  *           a1.duracionPrioridad[i][0] = a2.duracionPrioridad[k][0] /\\ 
+  *            a1.duracionPrioridad[i][1] = a2.duracionPrioridad[k][1])) /\\ 
+  *       (%forall i : 0 <= i < a1.tam : 
+  *        (%exists j : 0 <= j < a2.tam : 
+  *         a1.fechaHNombre[i][0] = a1.fechaHNombre[j][0] /\\ 
+  *          a1.fechaHNombre[i][1] = a1.fechaHNombre[j][1] /\\ 
+  *           a1.duracionPrioridad[i][0] = a1.duracionPrioridad[j][0] /\\ 
+  *            a1.duracionPrioridad[i][1] = a1.duracionPrioridad[j][1])) ==> 
+  *   100000 - (k + 1) < _C16]
+  * Línea 447: El invariante garantiza la postcondición a la salida - 10/23. id=36
+  * [N:int, numAgenda:int :: 
+  *  numAgenda >= 0 /\\ 
+  *    numAgenda < N /\\ readString("Introduzca el numero de su opcion.") = "7" ==> 
+  *   0 <= numAgenda]
+  * Línea 447: El invariante garantiza la postcondición a la salida - 11/23. id=36
+  * [Agendas=null, N:int, numAgenda:int :: 
+  *  numAgenda >= 0 /\\ 
+  *    numAgenda < N /\\ readString("Introduzca el numero de su opcion.") = "7" ==> 
+  *   numAgenda < length(Agendas,0)]
+  * Línea 447: El invariante garantiza la postcondición a la salida - 12/23. id=36
+  * [N:int, k:int, numAgenda:int :: 
+  *  numAgenda >= 0 /\\ 
+  *    numAgenda < N /\\ readString("Introduzca el numero de su opcion.") = "7" ==> 
+  *   0 <= 100000 - (k + 1)]
+  * Línea 447: El invariante garantiza la postcondición a la salida - 13/23. id=36
+  * [N:int, _C16=null, k:int, numAgenda:int :: 
+  *  numAgenda >= 0 /\\ 
+  *    numAgenda < N /\\ readString("Introduzca el numero de su opcion.") = "7" ==> 
+  *   100000 - (k + 1) < _C16]
+  * Línea 447: El invariante garantiza la postcondición a la salida - 14/23. id=36
+  * [N:int, numAgenda:int :: 
+  *  numAgenda >= 0 /\\ 
+  *    numAgenda < N /\\ readString("Introduzca el numero de su opcion.") = "9" ==> 
+  *   0 <= numAgenda]
+  * Línea 447: El invariante garantiza la postcondición a la salida - 15/23. id=36
+  * [Agendas=null, N:int, numAgenda:int :: 
+  *  numAgenda >= 0 /\\ 
+  *    numAgenda < N /\\ readString("Introduzca el numero de su opcion.") = "9" ==> 
+  *   numAgenda < length(Agendas,0)]
+  * Línea 447: El invariante garantiza la postcondición a la salida - 16/23. id=36
+  * [N:int, k:int, numAgenda:int :: 
+  *  numAgenda >= 0 /\\ 
+  *    numAgenda < N /\\ readString("Introduzca el numero de su opcion.") = "9" ==> 
+  *   0 <= 100000 - (k + 1)]
+  * Línea 447: El invariante garantiza la postcondición a la salida - 17/23. id=36
+  * [N:int, _C16=null, k:int, numAgenda:int :: 
+  *  numAgenda >= 0 /\\ 
+  *    numAgenda < N /\\ readString("Introduzca el numero de su opcion.") = "9" ==> 
+  *   100000 - (k + 1) < _C16]
+  * Línea 447: El invariante garantiza la postcondición a la salida - 18/23. id=36
+  * [N:int, numAgenda:int :: 
+  *  numAgenda >= 0 /\\ 
+  *    numAgenda < N /\\ readString("Introduzca el numero de su opcion.") = "11" ==> 
+  *   readString("Esta seguro de que desea salir del programa?(S/N)") = "s" \\/ 
+  *    readString("Esta seguro de que desea salir del programa?(S/N)") = "S" \\/ 
+  *     readString("Esta seguro de que desea salir del programa?(S/N)") != "s" /\\ 
+  *      readString("Esta seguro de que desea salir del programa?(S/N)") != "S"]
+  * Línea 447: El invariante garantiza la postcondición a la salida - 19/23. id=36
+  * [N:int, _C16=null, numAgenda:int :: 
+  *  numAgenda >= 0 /\\ 
+  *    numAgenda < N /\\ 
+  *     readString("Introduzca el numero de su opcion.") = "11" /\\ 
+  *      (readString("Esta seguro de que desea salir del programa?(S/N)") = "s" \\/ 
+  *        readString("Esta seguro de que desea salir del programa?(S/N)") = "S"
+  *      ) ==> 
+  *   0 < _C16]
+  * Línea 447: El invariante garantiza la postcondición a la salida - 20/23. id=36
+  * [N:int, k:int, numAgenda:int :: 
+  *  numAgenda >= 0 /\\ 
+  *    numAgenda < N /\\ 
+  *     readString("Introduzca el numero de su opcion.") = "11" /\\ 
+  *      readString("Esta seguro de que desea salir del programa?(S/N)") != "s" /\\ 
+  *       readString("Esta seguro de que desea salir del programa?(S/N)") != "S" ==> 
+  *   0 <= 100000 - (k + 1)]
+  * Línea 447: El invariante garantiza la postcondición a la salida - 21/23. id=36
+  * [N:int, _C16=null, k:int, numAgenda:int :: 
+  *  numAgenda >= 0 /\\ 
+  *    numAgenda < N /\\ 
+  *     readString("Introduzca el numero de su opcion.") = "11" /\\ 
+  *      readString("Esta seguro de que desea salir del programa?(S/N)") != "s" /\\ 
+  *       readString("Esta seguro de que desea salir del programa?(S/N)") != "S" ==> 
+  *   100000 - (k + 1) < _C16]
+  * Línea 447: El invariante garantiza la postcondición a la salida - 22/23. id=36
+  * [N:int, k:int, numAgenda:int :: 
+  *  numAgenda >= 0 /\\ 
+  *    numAgenda < N /\\ 
+  *     readString("Introduzca el numero de su opcion.") != "1" /\\ 
+  *      readString("Introduzca el numero de su opcion.") != "2" /\\ 
+  *       readString("Introduzca el numero de su opcion.") != "3" /\\ 
+  *        readString("Introduzca el numero de su opcion.") != "4" /\\ 
+  *         readString("Introduzca el numero de su opcion.") != "5" /\\ 
+  *          readString("Introduzca el numero de su opcion.") != "6" /\\ 
+  *           readString("Introduzca el numero de su opcion.") != "7" /\\ 
+  *            readString("Introduzca el numero de su opcion.") != "8" /\\ 
+  *             readString("Introduzca el numero de su opcion.") != "9" /\\ 
+  *              readString("Introduzca el numero de su opcion.") != "10" /\\ 
+  *               readString("Introduzca el numero de su opcion.") != "11" ==> 
+  *   0 <= 100000 - (k + 1)]
+  * Línea 447: El invariante garantiza la postcondición a la salida - 23/23. id=36
+  * [N:int, _C16=null, k:int, numAgenda:int :: 
+  *  numAgenda >= 0 /\\ 
+  *    numAgenda < N /\\ 
+  *     readString("Introduzca el numero de su opcion.") != "1" /\\ 
+  *      readString("Introduzca el numero de su opcion.") != "2" /\\ 
+  *       readString("Introduzca el numero de su opcion.") != "3" /\\ 
+  *        readString("Introduzca el numero de su opcion.") != "4" /\\ 
+  *         readString("Introduzca el numero de su opcion.") != "5" /\\ 
+  *          readString("Introduzca el numero de su opcion.") != "6" /\\ 
+  *           readString("Introduzca el numero de su opcion.") != "7" /\\ 
+  *            readString("Introduzca el numero de su opcion.") != "8" /\\ 
+  *             readString("Introduzca el numero de su opcion.") != "9" /\\ 
+  *              readString("Introduzca el numero de su opcion.") != "10" /\\ 
+  *               readString("Introduzca el numero de su opcion.") != "11" ==> 
+  *   100000 - (k + 1) < _C16]
+  * Línea 447: El invariante se mantiene y decrece la cota - 1/4. id=37
+  * [l:int, numAgenda:int :: numAgenda < 0 ==> 0 <= 10 - (l + 1)]
+  * Línea 447: El invariante se mantiene y decrece la cota - 2/4. id=37
+  * [l:int, numAgenda:int :: numAgenda < 0 ==> 10 - (l + 1) < 10 - l]
+  * Línea 447: El invariante se mantiene y decrece la cota - 3/4. id=37
+  * [N:int, l:int, numAgenda:int :: numAgenda >= N ==> 0 <= 10 - (l + 1)]
+  * Línea 447: El invariante se mantiene y decrece la cota - 4/4. id=37
+  * [N:int, l:int, numAgenda:int :: numAgenda >= N ==> 10 - (l + 1) < 10 - l]
+  * Línea 471: El invariante garantiza la postcondición a la salida - 1/2. id=38
+  * [k:int, m:int :: m >= 10 ==> 0 <= 100000 - (k + 1)]
+  * Línea 471: El invariante garantiza la postcondición a la salida - 2/2. id=38
+  * [_C16=null, k:int, m:int :: m >= 10 ==> 100000 - (k + 1) < _C16]
+  * Línea 471: El invariante se mantiene y decrece la cota - 1/3. id=39
+  * [Agendas:array[] of Agenda, MAX:int, m:int, numAgenda:int :: 
+  *  m < 10 ==> 
+  *   readInt("Inserte el numero de actividades que desea agregar: ") <= 
+  *     Agendas[numAgenda].MAX \\/ 
+  *    readInt("Inserte el numero de actividades que desea agregar: ") > 
+  *     Agendas[numAgenda].MAX]
+  * Línea 471: El invariante se mantiene y decrece la cota - 2/3. id=39
+  * [Agendas:array[] of Agenda, MAX:int, m:int, numAgenda:int :: 
+  *  m < 10 /\\ 
+  *    readInt("Inserte el numero de actividades que desea agregar: ") > 
+  *     Agendas[numAgenda].MAX ==> 
+  *   0 <= 10 - (m + 1)]
+  * Línea 471: El invariante se mantiene y decrece la cota - 3/3. id=39
+  * [Agendas:array[] of Agenda, MAX:int, m:int, numAgenda:int :: 
+  *  m < 10 /\\ 
+  *    readInt("Inserte el numero de actividades que desea agregar: ") > 
+  *     Agendas[numAgenda].MAX ==> 
+  *   10 - (m + 1) < 10 - m]
+  * Línea 476: El invariante garantiza la postcondición a la salida. id=40
+  * [j:int, n:int :: j < n]
+  * Línea 478: El invariante garantiza la postcondición a la salida. id=41
+  * [l:int :: l < 10]
+  * Línea 478: El invariante se mantiene y decrece la cota - 1/26. id=42
+  * [l:int, numAgenda:int :: l < 10 ==> 0 <= numAgenda]
+  * Línea 478: El invariante se mantiene y decrece la cota - 2/26. id=42
+  * [Agendas=null, l:int, numAgenda:int :: l < 10 ==> numAgenda < length(Agendas,0)]
+  * Línea 478: El invariante se mantiene y decrece la cota - 3/26. id=42
+  * [l:int :: 
+  *  (fechaHoraValida(readString("Fecha y Hora (aaaammddhhmm): ")) == 
+  *     length(readString("Fecha y Hora (aaaammddhhmm): ")) = 12 /\\ 
+  *      (%forall j : 0 <= j < length(readString("Fecha y Hora (aaaammddhhmm): ")) : 
+  *        "0" <= substring(readString("Fecha y Hora (aaaammddhhmm): "),j,j + 1) /\\ 
+  *         substring(readString("Fecha y Hora (aaaammddhhmm): "),j,j + 1) <= 
+  *          "9") /\\ 
+  *       esHoraValida(
+  *         intOfString(
+  *          substring(readString("Fecha y Hora (aaaammddhhmm): "),8,12))) /\\ 
+  *        esFechaValida(
+  *         intOfString(substring(readString("Fecha y Hora (aaaammddhhmm): "),0,8)
+  *         ))) ==> 
+  *   l < 10 ==> fechaHoraValida(readString("Fecha y Hora (aaaammddhhmm): "))]
+  * Línea 478: El invariante se mantiene y decrece la cota - 4/26. id=42
+  * [l:int :: l < 10 ==> readInt("Duracion en minutos: ") > 0]
+  * Línea 478: El invariante se mantiene y decrece la cota - 5/26. id=42
+  * [Agendas:array[] of Agenda, l:int, numAgenda:int :: 
+  *  (duracionValida(readString("Fecha y Hora (aaaammddhhmm): "),
+  *       readInt("Duracion en minutos: ")) == 
+  *      fechaHoraValida(readString("Fecha y Hora (aaaammddhhmm): ")) /\\ 
+  *       readInt("Duracion en minutos: ") > 0 /\\ 
+  *        (obtenerMinutos(readString("Fecha y Hora (aaaammddhhmm): ")) + 
+  *             readInt("Duracion en minutos: ")) mod 
+  *           60 + 
+  *          ((obtenerMinutos(readString("Fecha y Hora (aaaammddhhmm): ")) + 
+  *                readInt("Duracion en minutos: ")) div 
+  *              60 + 
+  *             obtenerHora(readString("Fecha y Hora (aaaammddhhmm): "))) * 
+  *           100 <= 
+  *         2200) /\\ 
+  *    (fechaHoraValida(readString("Fecha y Hora (aaaammddhhmm): ")) == 
+  *       length(readString("Fecha y Hora (aaaammddhhmm): ")) = 12 /\\ 
+  *        (%forall j : 
+  *          0 <= j < length(readString("Fecha y Hora (aaaammddhhmm): ")) : 
+  *          "0" <= 
+  *            substring(readString("Fecha y Hora (aaaammddhhmm): "),j,j + 1) /\\ 
+  *           substring(readString("Fecha y Hora (aaaammddhhmm): "),j,j + 1) <= 
+  *            "9") /\\ 
+  *         esHoraValida(
+  *           intOfString(
+  *            substring(readString("Fecha y Hora (aaaammddhhmm): "),8,12))) /\\ 
+  *          esFechaValida(
+  *           intOfString(
+  *            substring(readString("Fecha y Hora (aaaammddhhmm): "),0,8)))) /\\ 
+  *     (fechaHoraValida(readString("Fecha y Hora (aaaammddhhmm): ")) /\\ 
+  *         readInt("Duracion en minutos: ") > 0 ==> 
+  *        (choca(Agendas[numAgenda],readString("Fecha y Hora (aaaammddhhmm): "),
+  *           readInt("Duracion en minutos: ")) == 
+  *          (%exists x : 0 <= x < a.tam : 
+  *           seSolapan(a.fechaHNombre[x][0],a.duracionPrioridad[x][0],
+  *            readString("Fecha y Hora (aaaammddhhmm): "),
+  *            readInt("Duracion en minutos: "))))) /\\ 
+  *      (fechaHoraValida(readString("Fecha y Hora (aaaammddhhmm): ")) == 
+  *         length(readString("Fecha y Hora (aaaammddhhmm): ")) = 12 /\\ 
+  *          (%forall j : 
+  *            0 <= j < length(readString("Fecha y Hora (aaaammddhhmm): ")) : 
+  *            "0" <= 
+  *              substring(readString("Fecha y Hora (aaaammddhhmm): "),j,j + 1) /\\ 
+  *             substring(readString("Fecha y Hora (aaaammddhhmm): "),j,j + 1) <= 
+  *              "9") /\\ 
+  *           esHoraValida(
+  *             intOfString(
+  *              substring(readString("Fecha y Hora (aaaammddhhmm): "),8,12))) /\\ 
+  *            esFechaValida(
+  *             intOfString(
+  *              substring(readString("Fecha y Hora (aaaammddhhmm): "),0,8)))) /\\ 
+  *       (esPrioridadValida(readInt("Prioridad: ")) == 
+  *         0 <= readInt("Prioridad: ") /\\ readInt("Prioridad: ") <= 5) ==> 
+  *   l < 10 ==> 
+  *    fechaHoraValida(readString("Fecha y Hora (aaaammddhhmm): ")) \\/ 
+  *     ! fechaHoraValida(readString("Fecha y Hora (aaaammddhhmm): ")) \\/ 
+  *      ! esPrioridadValida(readInt("Prioridad: ")) \\/ 
+  *       choca(Agendas[numAgenda],readString("Fecha y Hora (aaaammddhhmm): "),
+  *         readInt("Duracion en minutos: ")) \\/ 
+  *        ! 
+  *         duracionValida(readString("Fecha y Hora (aaaammddhhmm): "),
+  *          readInt("Duracion en minutos: "))]
+  * Línea 478: El invariante se mantiene y decrece la cota - 6/26. id=42
+  * [Agendas:array[] of Agenda, l:int, numAgenda:int :: 
+  *  (esPrioridadValida(readInt("Prioridad: ")) == 
+  *      0 <= readInt("Prioridad: ") /\\ readInt("Prioridad: ") <= 5) /\\ 
+  *    (duracionValida(readString("Fecha y Hora (aaaammddhhmm): "),
+  *        readInt("Duracion en minutos: ")) == 
+  *       fechaHoraValida(readString("Fecha y Hora (aaaammddhhmm): ")) /\\ 
+  *        readInt("Duracion en minutos: ") > 0 /\\ 
+  *         (obtenerMinutos(readString("Fecha y Hora (aaaammddhhmm): ")) + 
+  *              readInt("Duracion en minutos: ")) mod 
+  *            60 + 
+  *           ((obtenerMinutos(readString("Fecha y Hora (aaaammddhhmm): ")) + 
+  *                 readInt("Duracion en minutos: ")) div 
+  *               60 + 
+  *              obtenerHora(readString("Fecha y Hora (aaaammddhhmm): "))) * 
+  *            100 <= 
+  *          2200) /\\ 
+  *     (fechaHoraValida(readString("Fecha y Hora (aaaammddhhmm): ")) /\\ 
+  *         readInt("Duracion en minutos: ") > 0 ==> 
+  *        (choca(Agendas[numAgenda],readString("Fecha y Hora (aaaammddhhmm): "),
+  *           readInt("Duracion en minutos: ")) == 
+  *          (%exists x : 0 <= x < a.tam : 
+  *           seSolapan(a.fechaHNombre[x][0],a.duracionPrioridad[x][0],
+  *            readString("Fecha y Hora (aaaammddhhmm): "),
+  *            readInt("Duracion en minutos: "))))) /\\ 
+  *      (fechaHoraValida(readString("Fecha y Hora (aaaammddhhmm): ")) == 
+  *         length(readString("Fecha y Hora (aaaammddhhmm): ")) = 12 /\\ 
+  *          (%forall j : 
+  *            0 <= j < length(readString("Fecha y Hora (aaaammddhhmm): ")) : 
+  *            "0" <= 
+  *              substring(readString("Fecha y Hora (aaaammddhhmm): "),j,j + 1) /\\ 
+  *             substring(readString("Fecha y Hora (aaaammddhhmm): "),j,j + 1) <= 
+  *              "9") /\\ 
+  *           esHoraValida(
+  *             intOfString(
+  *              substring(readString("Fecha y Hora (aaaammddhhmm): "),8,12))) /\\ 
+  *            esFechaValida(
+  *             intOfString(
+  *              substring(readString("Fecha y Hora (aaaammddhhmm): "),0,8)))) /\\ 
+  *       (esPrioridadValida(readInt("Prioridad: ")) == 
+  *         0 <= readInt("Prioridad: ") /\\ readInt("Prioridad: ") <= 5) ==> 
+  *   l < 10 ==> 
+  *    esPrioridadValida(readInt("Prioridad: ")) \\/ 
+  *     ! fechaHoraValida(readString("Fecha y Hora (aaaammddhhmm): ")) \\/ 
+  *      ! esPrioridadValida(readInt("Prioridad: ")) \\/ 
+  *       choca(Agendas[numAgenda],readString("Fecha y Hora (aaaammddhhmm): "),
+  *         readInt("Duracion en minutos: ")) \\/ 
+  *        ! 
+  *         duracionValida(readString("Fecha y Hora (aaaammddhhmm): "),
+  *          readInt("Duracion en minutos: "))]
+  * Línea 478: El invariante se mantiene y decrece la cota - 7/26. id=42
+  * [Agendas:array[] of Agenda, l:int, numAgenda:int :: 
+  *  (duracionValida(readString("Fecha y Hora (aaaammddhhmm): "),
+  *       readInt("Duracion en minutos: ")) == 
+  *      fechaHoraValida(readString("Fecha y Hora (aaaammddhhmm): ")) /\\ 
+  *       readInt("Duracion en minutos: ") > 0 /\\ 
+  *        (obtenerMinutos(readString("Fecha y Hora (aaaammddhhmm): ")) + 
+  *             readInt("Duracion en minutos: ")) mod 
+  *           60 + 
+  *          ((obtenerMinutos(readString("Fecha y Hora (aaaammddhhmm): ")) + 
+  *                readInt("Duracion en minutos: ")) div 
+  *              60 + 
+  *             obtenerHora(readString("Fecha y Hora (aaaammddhhmm): "))) * 
+  *           100 <= 
+  *         2200) /\\ 
+  *    (fechaHoraValida(readString("Fecha y Hora (aaaammddhhmm): ")) /\\ 
+  *        readInt("Duracion en minutos: ") > 0 ==> 
+  *       (choca(Agendas[numAgenda],readString("Fecha y Hora (aaaammddhhmm): "),
+  *          readInt("Duracion en minutos: ")) == 
+  *         (%exists x : 0 <= x < a.tam : 
+  *          seSolapan(a.fechaHNombre[x][0],a.duracionPrioridad[x][0],
+  *           readString("Fecha y Hora (aaaammddhhmm): "),
+  *           readInt("Duracion en minutos: "))))) /\\ 
+  *     (fechaHoraValida(readString("Fecha y Hora (aaaammddhhmm): ")) /\\ 
+  *         readInt("Duracion en minutos: ") > 0 ==> 
+  *        (choca(Agendas[numAgenda],readString("Fecha y Hora (aaaammddhhmm): "),
+  *           readInt("Duracion en minutos: ")) == 
+  *          (%exists x : 0 <= x < a.tam : 
+  *           seSolapan(a.fechaHNombre[x][0],a.duracionPrioridad[x][0],
+  *            readString("Fecha y Hora (aaaammddhhmm): "),
+  *            readInt("Duracion en minutos: "))))) /\\ 
+  *      (fechaHoraValida(readString("Fecha y Hora (aaaammddhhmm): ")) == 
+  *         length(readString("Fecha y Hora (aaaammddhhmm): ")) = 12 /\\ 
+  *          (%forall j : 
+  *            0 <= j < length(readString("Fecha y Hora (aaaammddhhmm): ")) : 
+  *            "0" <= 
+  *              substring(readString("Fecha y Hora (aaaammddhhmm): "),j,j + 1) /\\ 
+  *             substring(readString("Fecha y Hora (aaaammddhhmm): "),j,j + 1) <= 
+  *              "9") /\\ 
+  *           esHoraValida(
+  *             intOfString(
+  *              substring(readString("Fecha y Hora (aaaammddhhmm): "),8,12))) /\\ 
+  *            esFechaValida(
+  *             intOfString(
+  *              substring(readString("Fecha y Hora (aaaammddhhmm): "),0,8)))) /\\ 
+  *       (esPrioridadValida(readInt("Prioridad: ")) == 
+  *         0 <= readInt("Prioridad: ") /\\ readInt("Prioridad: ") <= 5) ==> 
+  *   l < 10 ==> 
+  *    ! choca(Agendas[numAgenda],readString("Fecha y Hora (aaaammddhhmm): "),
+  *       readInt("Duracion en minutos: ")) \\/ 
+  *     ! fechaHoraValida(readString("Fecha y Hora (aaaammddhhmm): ")) \\/ 
+  *      ! esPrioridadValida(readInt("Prioridad: ")) \\/ 
+  *       choca(Agendas[numAgenda],readString("Fecha y Hora (aaaammddhhmm): "),
+  *         readInt("Duracion en minutos: ")) \\/ 
+  *        ! 
+  *         duracionValida(readString("Fecha y Hora (aaaammddhhmm): "),
+  *          readInt("Duracion en minutos: "))]
+  * Línea 478: El invariante se mantiene y decrece la cota - 8/26. id=42
+  * [Agendas:array[] of Agenda, l:int, numAgenda:int :: 
+  *  (duracionValida(readString("Fecha y Hora (aaaammddhhmm): "),
+  *       readInt("Duracion en minutos: ")) == 
+  *      fechaHoraValida(readString("Fecha y Hora (aaaammddhhmm): ")) /\\ 
+  *       readInt("Duracion en minutos: ") > 0 /\\ 
+  *        (obtenerMinutos(readString("Fecha y Hora (aaaammddhhmm): ")) + 
+  *             readInt("Duracion en minutos: ")) mod 
+  *           60 + 
+  *          ((obtenerMinutos(readString("Fecha y Hora (aaaammddhhmm): ")) + 
+  *                readInt("Duracion en minutos: ")) div 
+  *              60 + 
+  *             obtenerHora(readString("Fecha y Hora (aaaammddhhmm): "))) * 
+  *           100 <= 
+  *         2200) /\\ 
+  *    (fechaHoraValida(readString("Fecha y Hora (aaaammddhhmm): ")) /\\ 
+  *        readInt("Duracion en minutos: ") > 0 ==> 
+  *       (choca(Agendas[numAgenda],readString("Fecha y Hora (aaaammddhhmm): "),
+  *          readInt("Duracion en minutos: ")) == 
+  *         (%exists x : 0 <= x < a.tam : 
+  *          seSolapan(a.fechaHNombre[x][0],a.duracionPrioridad[x][0],
+  *           readString("Fecha y Hora (aaaammddhhmm): "),
+  *           readInt("Duracion en minutos: "))))) /\\ 
+  *     (fechaHoraValida(readString("Fecha y Hora (aaaammddhhmm): ")) == 
+  *        length(readString("Fecha y Hora (aaaammddhhmm): ")) = 12 /\\ 
+  *         (%forall j : 
+  *           0 <= j < length(readString("Fecha y Hora (aaaammddhhmm): ")) : 
+  *           "0" <= 
+  *             substring(readString("Fecha y Hora (aaaammddhhmm): "),j,j + 1) /\\ 
+  *            substring(readString("Fecha y Hora (aaaammddhhmm): "),j,j + 1) <= 
+  *             "9") /\\ 
+  *          esHoraValida(
+  *            intOfString(
+  *             substring(readString("Fecha y Hora (aaaammddhhmm): "),8,12))) /\\ 
+  *           esFechaValida(
+  *            intOfString(
+  *             substring(readString("Fecha y Hora (aaaammddhhmm): "),0,8)))) /\\ 
+  *      (duracionValida(readString("Fecha y Hora (aaaammddhhmm): "),
+  *          readInt("Duracion en minutos: ")) == 
+  *         fechaHoraValida(readString("Fecha y Hora (aaaammddhhmm): ")) /\\ 
+  *          readInt("Duracion en minutos: ") > 0 /\\ 
+  *           (obtenerMinutos(readString("Fecha y Hora (aaaammddhhmm): ")) + 
+  *                readInt("Duracion en minutos: ")) mod 
+  *              60 + 
+  *             ((obtenerMinutos(readString("Fecha y Hora (aaaammddhhmm): ")) + 
+  *                   readInt("Duracion en minutos: ")) div 
+  *                 60 + 
+  *                obtenerHora(readString("Fecha y Hora (aaaammddhhmm): "))) * 
+  *              100 <= 
+  *            2200) /\\ 
+  *       (esPrioridadValida(readInt("Prioridad: ")) == 
+  *         0 <= readInt("Prioridad: ") /\\ readInt("Prioridad: ") <= 5) ==> 
+  *   l < 10 ==> 
+  *    duracionValida(readString("Fecha y Hora (aaaammddhhmm): "),
+  *      readInt("Duracion en minutos: ")) \\/ 
+  *     ! fechaHoraValida(readString("Fecha y Hora (aaaammddhhmm): ")) \\/ 
+  *      ! esPrioridadValida(readInt("Prioridad: ")) \\/ 
+  *       choca(Agendas[numAgenda],readString("Fecha y Hora (aaaammddhhmm): "),
+  *         readInt("Duracion en minutos: ")) \\/ 
+  *        ! 
+  *         duracionValida(readString("Fecha y Hora (aaaammddhhmm): "),
+  *          readInt("Duracion en minutos: "))]
+  * Línea 478: El invariante se mantiene y decrece la cota - 9/26. id=42
+  * [Agendas:array[] of Agenda, l:int, numAgenda:int :: 
+  *  (esPrioridadValida(readInt("Prioridad: ")) == 
+  *      0 <= readInt("Prioridad: ") /\\ readInt("Prioridad: ") <= 5) /\\ 
+  *    (fechaHoraValida(readString("Fecha y Hora (aaaammddhhmm): ")) /\\ 
+  *        readInt("Duracion en minutos: ") > 0 ==> 
+  *       (choca(Agendas[numAgenda],readString("Fecha y Hora (aaaammddhhmm): "),
+  *          readInt("Duracion en minutos: ")) == 
+  *         (%exists x : 0 <= x < a.tam : 
+  *          seSolapan(a.fechaHNombre[x][0],a.duracionPrioridad[x][0],
+  *           readString("Fecha y Hora (aaaammddhhmm): "),
+  *           readInt("Duracion en minutos: "))))) /\\ 
+  *     (fechaHoraValida(readString("Fecha y Hora (aaaammddhhmm): ")) == 
+  *        length(readString("Fecha y Hora (aaaammddhhmm): ")) = 12 /\\ 
+  *         (%forall j : 
+  *           0 <= j < length(readString("Fecha y Hora (aaaammddhhmm): ")) : 
+  *           "0" <= 
+  *             substring(readString("Fecha y Hora (aaaammddhhmm): "),j,j + 1) /\\ 
+  *            substring(readString("Fecha y Hora (aaaammddhhmm): "),j,j + 1) <= 
+  *             "9") /\\ 
+  *          esHoraValida(
+  *            intOfString(
+  *             substring(readString("Fecha y Hora (aaaammddhhmm): "),8,12))) /\\ 
+  *           esFechaValida(
+  *            intOfString(
+  *             substring(readString("Fecha y Hora (aaaammddhhmm): "),0,8)))) /\\ 
+  *      (duracionValida(readString("Fecha y Hora (aaaammddhhmm): "),
+  *         readInt("Duracion en minutos: ")) == 
+  *        fechaHoraValida(readString("Fecha y Hora (aaaammddhhmm): ")) /\\ 
+  *         readInt("Duracion en minutos: ") > 0 /\\ 
+  *          (obtenerMinutos(readString("Fecha y Hora (aaaammddhhmm): ")) + 
+  *               readInt("Duracion en minutos: ")) mod 
+  *             60 + 
+  *            ((obtenerMinutos(readString("Fecha y Hora (aaaammddhhmm): ")) + 
+  *                  readInt("Duracion en minutos: ")) div 
+  *                60 + 
+  *               obtenerHora(readString("Fecha y Hora (aaaammddhhmm): "))) * 
+  *             100 <= 
+  *           2200) ==> 
+  *   l < 10 /\\ 
+  *     fechaHoraValida(readString("Fecha y Hora (aaaammddhhmm): ")) /\\ 
+  *      esPrioridadValida(readInt("Prioridad: ")) /\\ 
+  *       ! choca(Agendas[numAgenda],readString("Fecha y Hora (aaaammddhhmm): "),
+  *          readInt("Duracion en minutos: ")) /\\ 
+  *        duracionValida(readString("Fecha y Hora (aaaammddhhmm): "),
+  *         readInt("Duracion en minutos: ")) ==> 
+  *    0 <= numAgenda]
+  * Línea 478: El invariante se mantiene y decrece la cota - 10/26. id=42
+  * [Agendas:array[] of Agenda, l:int, numAgenda:int :: 
+  *  (esPrioridadValida(readInt("Prioridad: ")) == 
+  *      0 <= readInt("Prioridad: ") /\\ readInt("Prioridad: ") <= 5) /\\ 
+  *    (fechaHoraValida(readString("Fecha y Hora (aaaammddhhmm): ")) /\\ 
+  *        readInt("Duracion en minutos: ") > 0 ==> 
+  *       (choca(Agendas[numAgenda],readString("Fecha y Hora (aaaammddhhmm): "),
+  *          readInt("Duracion en minutos: ")) == 
+  *         (%exists x : 0 <= x < a.tam : 
+  *          seSolapan(a.fechaHNombre[x][0],a.duracionPrioridad[x][0],
+  *           readString("Fecha y Hora (aaaammddhhmm): "),
+  *           readInt("Duracion en minutos: "))))) /\\ 
+  *     (fechaHoraValida(readString("Fecha y Hora (aaaammddhhmm): ")) == 
+  *        length(readString("Fecha y Hora (aaaammddhhmm): ")) = 12 /\\ 
+  *         (%forall j : 
+  *           0 <= j < length(readString("Fecha y Hora (aaaammddhhmm): ")) : 
+  *           "0" <= 
+  *             substring(readString("Fecha y Hora (aaaammddhhmm): "),j,j + 1) /\\ 
+  *            substring(readString("Fecha y Hora (aaaammddhhmm): "),j,j + 1) <= 
+  *             "9") /\\ 
+  *          esHoraValida(
+  *            intOfString(
+  *             substring(readString("Fecha y Hora (aaaammddhhmm): "),8,12))) /\\ 
+  *           esFechaValida(
+  *            intOfString(
+  *             substring(readString("Fecha y Hora (aaaammddhhmm): "),0,8)))) /\\ 
+  *      (duracionValida(readString("Fecha y Hora (aaaammddhhmm): "),
+  *         readInt("Duracion en minutos: ")) == 
+  *        fechaHoraValida(readString("Fecha y Hora (aaaammddhhmm): ")) /\\ 
+  *         readInt("Duracion en minutos: ") > 0 /\\ 
+  *          (obtenerMinutos(readString("Fecha y Hora (aaaammddhhmm): ")) + 
+  *               readInt("Duracion en minutos: ")) mod 
+  *             60 + 
+  *            ((obtenerMinutos(readString("Fecha y Hora (aaaammddhhmm): ")) + 
+  *                  readInt("Duracion en minutos: ")) div 
+  *                60 + 
+  *               obtenerHora(readString("Fecha y Hora (aaaammddhhmm): "))) * 
+  *             100 <= 
+  *           2200) ==> 
+  *   l < 10 /\\ 
+  *     fechaHoraValida(readString("Fecha y Hora (aaaammddhhmm): ")) /\\ 
+  *      esPrioridadValida(readInt("Prioridad: ")) /\\ 
+  *       ! choca(Agendas[numAgenda],readString("Fecha y Hora (aaaammddhhmm): "),
+  *          readInt("Duracion en minutos: ")) /\\ 
+  *        duracionValida(readString("Fecha y Hora (aaaammddhhmm): "),
+  *         readInt("Duracion en minutos: ")) ==> 
+  *    numAgenda < length(Agendas,0)]
+  * Línea 478: El invariante se mantiene y decrece la cota - 11/26. id=42
+  * [Agendas:array[] of Agenda, l:int, numAgenda:int :: 
+  *  (esPrioridadValida(readInt("Prioridad: ")) == 
+  *      0 <= readInt("Prioridad: ") /\\ readInt("Prioridad: ") <= 5) /\\ 
+  *    (fechaHoraValida(readString("Fecha y Hora (aaaammddhhmm): ")) /\\ 
+  *        readInt("Duracion en minutos: ") > 0 ==> 
+  *       (choca(Agendas[numAgenda],readString("Fecha y Hora (aaaammddhhmm): "),
+  *          readInt("Duracion en minutos: ")) == 
+  *         (%exists x : 0 <= x < a.tam : 
+  *          seSolapan(a.fechaHNombre[x][0],a.duracionPrioridad[x][0],
+  *           readString("Fecha y Hora (aaaammddhhmm): "),
+  *           readInt("Duracion en minutos: "))))) /\\ 
+  *     (fechaHoraValida(readString("Fecha y Hora (aaaammddhhmm): ")) == 
+  *        length(readString("Fecha y Hora (aaaammddhhmm): ")) = 12 /\\ 
+  *         (%forall j : 
+  *           0 <= j < length(readString("Fecha y Hora (aaaammddhhmm): ")) : 
+  *           "0" <= 
+  *             substring(readString("Fecha y Hora (aaaammddhhmm): "),j,j + 1) /\\ 
+  *            substring(readString("Fecha y Hora (aaaammddhhmm): "),j,j + 1) <= 
+  *             "9") /\\ 
+  *          esHoraValida(
+  *            intOfString(
+  *             substring(readString("Fecha y Hora (aaaammddhhmm): "),8,12))) /\\ 
+  *           esFechaValida(
+  *            intOfString(
+  *             substring(readString("Fecha y Hora (aaaammddhhmm): "),0,8)))) /\\ 
+  *      (fechaHoraValida(readString("Fecha y Hora (aaaammddhhmm): ")) == 
+  *         length(readString("Fecha y Hora (aaaammddhhmm): ")) = 12 /\\ 
+  *          (%forall j : 
+  *            0 <= j < length(readString("Fecha y Hora (aaaammddhhmm): ")) : 
+  *            "0" <= 
+  *              substring(readString("Fecha y Hora (aaaammddhhmm): "),j,j + 1) /\\ 
+  *             substring(readString("Fecha y Hora (aaaammddhhmm): "),j,j + 1) <= 
+  *              "9") /\\ 
+  *           esHoraValida(
+  *             intOfString(
+  *              substring(readString("Fecha y Hora (aaaammddhhmm): "),8,12))) /\\ 
+  *            esFechaValida(
+  *             intOfString(
+  *              substring(readString("Fecha y Hora (aaaammddhhmm): "),0,8)))) /\\ 
+  *       (duracionValida(readString("Fecha y Hora (aaaammddhhmm): "),
+  *          readInt("Duracion en minutos: ")) == 
+  *         fechaHoraValida(readString("Fecha y Hora (aaaammddhhmm): ")) /\\ 
+  *          readInt("Duracion en minutos: ") > 0 /\\ 
+  *           (obtenerMinutos(readString("Fecha y Hora (aaaammddhhmm): ")) + 
+  *                readInt("Duracion en minutos: ")) mod 
+  *              60 + 
+  *             ((obtenerMinutos(readString("Fecha y Hora (aaaammddhhmm): ")) + 
+  *                   readInt("Duracion en minutos: ")) div 
+  *                 60 + 
+  *                obtenerHora(readString("Fecha y Hora (aaaammddhhmm): "))) * 
+  *              100 <= 
+  *            2200) ==> 
+  *   l < 10 /\\ 
+  *     fechaHoraValida(readString("Fecha y Hora (aaaammddhhmm): ")) /\\ 
+  *      esPrioridadValida(readInt("Prioridad: ")) /\\ 
+  *       ! choca(Agendas[numAgenda],readString("Fecha y Hora (aaaammddhhmm): "),
+  *          readInt("Duracion en minutos: ")) /\\ 
+  *        duracionValida(readString("Fecha y Hora (aaaammddhhmm): "),
+  *         readInt("Duracion en minutos: ")) ==> 
+  *    fechaHoraValida(readString("Fecha y Hora (aaaammddhhmm): "))]
+  * Línea 478: El invariante se mantiene y decrece la cota - 12/26. id=42
+  * [Agendas:array[] of Agenda, l:int, numAgenda:int :: 
+  *  (esPrioridadValida(readInt("Prioridad: ")) == 
+  *      0 <= readInt("Prioridad: ") /\\ readInt("Prioridad: ") <= 5) /\\ 
+  *    (fechaHoraValida(readString("Fecha y Hora (aaaammddhhmm): ")) /\\ 
+  *        readInt("Duracion en minutos: ") > 0 ==> 
+  *       (choca(Agendas[numAgenda],readString("Fecha y Hora (aaaammddhhmm): "),
+  *          readInt("Duracion en minutos: ")) == 
+  *         (%exists x : 0 <= x < a.tam : 
+  *          seSolapan(a.fechaHNombre[x][0],a.duracionPrioridad[x][0],
+  *           readString("Fecha y Hora (aaaammddhhmm): "),
+  *           readInt("Duracion en minutos: "))))) /\\ 
+  *     (duracionValida(readString("Fecha y Hora (aaaammddhhmm): "),
+  *         readInt("Duracion en minutos: ")) == 
+  *        fechaHoraValida(readString("Fecha y Hora (aaaammddhhmm): ")) /\\ 
+  *         readInt("Duracion en minutos: ") > 0 /\\ 
+  *          (obtenerMinutos(readString("Fecha y Hora (aaaammddhhmm): ")) + 
+  *               readInt("Duracion en minutos: ")) mod 
+  *             60 + 
+  *            ((obtenerMinutos(readString("Fecha y Hora (aaaammddhhmm): ")) + 
+  *                  readInt("Duracion en minutos: ")) div 
+  *                60 + 
+  *               obtenerHora(readString("Fecha y Hora (aaaammddhhmm): "))) * 
+  *             100 <= 
+  *           2200) /\\ 
+  *      (fechaHoraValida(readString("Fecha y Hora (aaaammddhhmm): ")) == 
+  *         length(readString("Fecha y Hora (aaaammddhhmm): ")) = 12 /\\ 
+  *          (%forall j : 
+  *            0 <= j < length(readString("Fecha y Hora (aaaammddhhmm): ")) : 
+  *            "0" <= 
+  *              substring(readString("Fecha y Hora (aaaammddhhmm): "),j,j + 1) /\\ 
+  *             substring(readString("Fecha y Hora (aaaammddhhmm): "),j,j + 1) <= 
+  *              "9") /\\ 
+  *           esHoraValida(
+  *             intOfString(
+  *              substring(readString("Fecha y Hora (aaaammddhhmm): "),8,12))) /\\ 
+  *            esFechaValida(
+  *             intOfString(
+  *              substring(readString("Fecha y Hora (aaaammddhhmm): "),0,8)))) /\\ 
+  *       (duracionValida(readString("Fecha y Hora (aaaammddhhmm): "),
+  *          readInt("Duracion en minutos: ")) == 
+  *         fechaHoraValida(readString("Fecha y Hora (aaaammddhhmm): ")) /\\ 
+  *          readInt("Duracion en minutos: ") > 0 /\\ 
+  *           (obtenerMinutos(readString("Fecha y Hora (aaaammddhhmm): ")) + 
+  *                readInt("Duracion en minutos: ")) mod 
+  *              60 + 
+  *             ((obtenerMinutos(readString("Fecha y Hora (aaaammddhhmm): ")) + 
+  *                   readInt("Duracion en minutos: ")) div 
+  *                 60 + 
+  *                obtenerHora(readString("Fecha y Hora (aaaammddhhmm): "))) * 
+  *              100 <= 
+  *            2200) ==> 
+  *   l < 10 /\\ 
+  *     fechaHoraValida(readString("Fecha y Hora (aaaammddhhmm): ")) /\\ 
+  *      esPrioridadValida(readInt("Prioridad: ")) /\\ 
+  *       ! choca(Agendas[numAgenda],readString("Fecha y Hora (aaaammddhhmm): "),
+  *          readInt("Duracion en minutos: ")) /\\ 
+  *        duracionValida(readString("Fecha y Hora (aaaammddhhmm): "),
+  *         readInt("Duracion en minutos: ")) ==> 
+  *    duracionValida(readString("Fecha y Hora (aaaammddhhmm): "),
+  *     readInt("Duracion en minutos: "))]
+  * Línea 478: El invariante se mantiene y decrece la cota - 13/26. id=42
+  * [Agendas:array[] of Agenda, l:int, numAgenda:int :: 
+  *  (esPrioridadValida(readInt("Prioridad: ")) == 
+  *      0 <= readInt("Prioridad: ") /\\ readInt("Prioridad: ") <= 5) /\\ 
+  *    (fechaHoraValida(readString("Fecha y Hora (aaaammddhhmm): ")) /\\ 
+  *        readInt("Duracion en minutos: ") > 0 ==> 
+  *       (choca(Agendas[numAgenda],readString("Fecha y Hora (aaaammddhhmm): "),
+  *          readInt("Duracion en minutos: ")) == 
+  *         (%exists x : 0 <= x < a.tam : 
+  *          seSolapan(a.fechaHNombre[x][0],a.duracionPrioridad[x][0],
+  *           readString("Fecha y Hora (aaaammddhhmm): "),
+  *           readInt("Duracion en minutos: "))))) /\\ 
+  *     (fechaHoraValida(readString("Fecha y Hora (aaaammddhhmm): ")) == 
+  *        length(readString("Fecha y Hora (aaaammddhhmm): ")) = 12 /\\ 
+  *         (%forall j : 
+  *           0 <= j < length(readString("Fecha y Hora (aaaammddhhmm): ")) : 
+  *           "0" <= 
+  *             substring(readString("Fecha y Hora (aaaammddhhmm): "),j,j + 1) /\\ 
+  *            substring(readString("Fecha y Hora (aaaammddhhmm): "),j,j + 1) <= 
+  *             "9") /\\ 
+  *          esHoraValida(
+  *            intOfString(
+  *             substring(readString("Fecha y Hora (aaaammddhhmm): "),8,12))) /\\ 
+  *           esFechaValida(
+  *            intOfString(
+  *             substring(readString("Fecha y Hora (aaaammddhhmm): "),0,8)))) /\\ 
+  *      (duracionValida(readString("Fecha y Hora (aaaammddhhmm): "),
+  *         readInt("Duracion en minutos: ")) == 
+  *        fechaHoraValida(readString("Fecha y Hora (aaaammddhhmm): ")) /\\ 
+  *         readInt("Duracion en minutos: ") > 0 /\\ 
+  *          (obtenerMinutos(readString("Fecha y Hora (aaaammddhhmm): ")) + 
+  *               readInt("Duracion en minutos: ")) mod 
+  *             60 + 
+  *            ((obtenerMinutos(readString("Fecha y Hora (aaaammddhhmm): ")) + 
+  *                  readInt("Duracion en minutos: ")) div 
+  *                60 + 
+  *               obtenerHora(readString("Fecha y Hora (aaaammddhhmm): "))) * 
+  *             100 <= 
+  *           2200) ==> 
+  *   l < 10 /\\ 
+  *     fechaHoraValida(readString("Fecha y Hora (aaaammddhhmm): ")) /\\ 
+  *      esPrioridadValida(readInt("Prioridad: ")) /\\ 
+  *       ! choca(Agendas[numAgenda],readString("Fecha y Hora (aaaammddhhmm): "),
+  *          readInt("Duracion en minutos: ")) /\\ 
+  *        duracionValida(readString("Fecha y Hora (aaaammddhhmm): "),
+  *         readInt("Duracion en minutos: ")) ==> 
+  *    0 <= readInt("Prioridad: ")]
+  * Línea 478: El invariante se mantiene y decrece la cota - 14/26. id=42
+  * [Agendas:array[] of Agenda, l:int, numAgenda:int :: 
+  *  (esPrioridadValida(readInt("Prioridad: ")) == 
+  *      0 <= readInt("Prioridad: ") /\\ readInt("Prioridad: ") <= 5) /\\ 
+  *    (fechaHoraValida(readString("Fecha y Hora (aaaammddhhmm): ")) /\\ 
+  *        readInt("Duracion en minutos: ") > 0 ==> 
+  *       (choca(Agendas[numAgenda],readString("Fecha y Hora (aaaammddhhmm): "),
+  *          readInt("Duracion en minutos: ")) == 
+  *         (%exists x : 0 <= x < a.tam : 
+  *          seSolapan(a.fechaHNombre[x][0],a.duracionPrioridad[x][0],
+  *           readString("Fecha y Hora (aaaammddhhmm): "),
+  *           readInt("Duracion en minutos: "))))) /\\ 
+  *     (fechaHoraValida(readString("Fecha y Hora (aaaammddhhmm): ")) == 
+  *        length(readString("Fecha y Hora (aaaammddhhmm): ")) = 12 /\\ 
+  *         (%forall j : 
+  *           0 <= j < length(readString("Fecha y Hora (aaaammddhhmm): ")) : 
+  *           "0" <= 
+  *             substring(readString("Fecha y Hora (aaaammddhhmm): "),j,j + 1) /\\ 
+  *            substring(readString("Fecha y Hora (aaaammddhhmm): "),j,j + 1) <= 
+  *             "9") /\\ 
+  *          esHoraValida(
+  *            intOfString(
+  *             substring(readString("Fecha y Hora (aaaammddhhmm): "),8,12))) /\\ 
+  *           esFechaValida(
+  *            intOfString(
+  *             substring(readString("Fecha y Hora (aaaammddhhmm): "),0,8)))) /\\ 
+  *      (duracionValida(readString("Fecha y Hora (aaaammddhhmm): "),
+  *         readInt("Duracion en minutos: ")) == 
+  *        fechaHoraValida(readString("Fecha y Hora (aaaammddhhmm): ")) /\\ 
+  *         readInt("Duracion en minutos: ") > 0 /\\ 
+  *          (obtenerMinutos(readString("Fecha y Hora (aaaammddhhmm): ")) + 
+  *               readInt("Duracion en minutos: ")) mod 
+  *             60 + 
+  *            ((obtenerMinutos(readString("Fecha y Hora (aaaammddhhmm): ")) + 
+  *                  readInt("Duracion en minutos: ")) div 
+  *                60 + 
+  *               obtenerHora(readString("Fecha y Hora (aaaammddhhmm): "))) * 
+  *             100 <= 
+  *           2200) ==> 
+  *   l < 10 /\\ 
+  *     fechaHoraValida(readString("Fecha y Hora (aaaammddhhmm): ")) /\\ 
+  *      esPrioridadValida(readInt("Prioridad: ")) /\\ 
+  *       ! choca(Agendas[numAgenda],readString("Fecha y Hora (aaaammddhhmm): "),
+  *          readInt("Duracion en minutos: ")) /\\ 
+  *        duracionValida(readString("Fecha y Hora (aaaammddhhmm): "),
+  *         readInt("Duracion en minutos: ")) ==> 
+  *    readInt("Prioridad: ") <= 5]
+  * Línea 478: El invariante se mantiene y decrece la cota - 15/26. id=42
+  * [Agendas:array[] of Agenda, l:int, numAgenda:int :: 
+  *  (esPrioridadValida(readInt("Prioridad: ")) == 
+  *      0 <= readInt("Prioridad: ") /\\ readInt("Prioridad: ") <= 5) /\\ 
+  *    (fechaHoraValida(readString("Fecha y Hora (aaaammddhhmm): ")) /\\ 
+  *        readInt("Duracion en minutos: ") > 0 ==> 
+  *       (choca(Agendas[numAgenda],readString("Fecha y Hora (aaaammddhhmm): "),
+  *          readInt("Duracion en minutos: ")) == 
+  *         (%exists x : 0 <= x < a.tam : 
+  *          seSolapan(a.fechaHNombre[x][0],a.duracionPrioridad[x][0],
+  *           readString("Fecha y Hora (aaaammddhhmm): "),
+  *           readInt("Duracion en minutos: "))))) /\\ 
+  *     (fechaHoraValida(readString("Fecha y Hora (aaaammddhhmm): ")) == 
+  *        length(readString("Fecha y Hora (aaaammddhhmm): ")) = 12 /\\ 
+  *         (%forall j : 
+  *           0 <= j < length(readString("Fecha y Hora (aaaammddhhmm): ")) : 
+  *           "0" <= 
+  *             substring(readString("Fecha y Hora (aaaammddhhmm): "),j,j + 1) /\\ 
+  *            substring(readString("Fecha y Hora (aaaammddhhmm): "),j,j + 1) <= 
+  *             "9") /\\ 
+  *          esHoraValida(
+  *            intOfString(
+  *             substring(readString("Fecha y Hora (aaaammddhhmm): "),8,12))) /\\ 
+  *           esFechaValida(
+  *            intOfString(
+  *             substring(readString("Fecha y Hora (aaaammddhhmm): "),0,8)))) /\\ 
+  *      (duracionValida(readString("Fecha y Hora (aaaammddhhmm): "),
+  *         readInt("Duracion en minutos: ")) == 
+  *        fechaHoraValida(readString("Fecha y Hora (aaaammddhhmm): ")) /\\ 
+  *         readInt("Duracion en minutos: ") > 0 /\\ 
+  *          (obtenerMinutos(readString("Fecha y Hora (aaaammddhhmm): ")) + 
+  *               readInt("Duracion en minutos: ")) mod 
+  *             60 + 
+  *            ((obtenerMinutos(readString("Fecha y Hora (aaaammddhhmm): ")) + 
+  *                  readInt("Duracion en minutos: ")) div 
+  *                60 + 
+  *               obtenerHora(readString("Fecha y Hora (aaaammddhhmm): "))) * 
+  *             100 <= 
+  *           2200) ==> 
+  *   l < 10 /\\ 
+  *     fechaHoraValida(readString("Fecha y Hora (aaaammddhhmm): ")) /\\ 
+  *      esPrioridadValida(readInt("Prioridad: ")) /\\ 
+  *       ! choca(Agendas[numAgenda],readString("Fecha y Hora (aaaammddhhmm): "),
+  *          readInt("Duracion en minutos: ")) /\\ 
+  *        duracionValida(readString("Fecha y Hora (aaaammddhhmm): "),
+  *         readInt("Duracion en minutos: ")) ==> 
+  *    readString("Actividad: ") != ""]
+  * Línea 478: El invariante se mantiene y decrece la cota - 16/26. id=42
+  * [Agendas:array[] of Agenda, MAX:int, a:Agenda, l:int, numAgenda:int, tam:int :: 
+  *  (esPrioridadValida(readInt("Prioridad: ")) == 
+  *      0 <= readInt("Prioridad: ") /\\ readInt("Prioridad: ") <= 5) /\\ 
+  *    (fechaHoraValida(readString("Fecha y Hora (aaaammddhhmm): ")) /\\ 
+  *        readInt("Duracion en minutos: ") > 0 ==> 
+  *       (choca(Agendas[numAgenda],readString("Fecha y Hora (aaaammddhhmm): "),
+  *          readInt("Duracion en minutos: ")) == 
+  *         (%exists x : 0 <= x < a.tam : 
+  *          seSolapan(a.fechaHNombre[x][0],a.duracionPrioridad[x][0],
+  *           readString("Fecha y Hora (aaaammddhhmm): "),
+  *           readInt("Duracion en minutos: "))))) /\\ 
+  *     (fechaHoraValida(readString("Fecha y Hora (aaaammddhhmm): ")) == 
+  *        length(readString("Fecha y Hora (aaaammddhhmm): ")) = 12 /\\ 
+  *         (%forall j : 
+  *           0 <= j < length(readString("Fecha y Hora (aaaammddhhmm): ")) : 
+  *           "0" <= 
+  *             substring(readString("Fecha y Hora (aaaammddhhmm): "),j,j + 1) /\\ 
+  *            substring(readString("Fecha y Hora (aaaammddhhmm): "),j,j + 1) <= 
+  *             "9") /\\ 
+  *          esHoraValida(
+  *            intOfString(
+  *             substring(readString("Fecha y Hora (aaaammddhhmm): "),8,12))) /\\ 
+  *           esFechaValida(
+  *            intOfString(
+  *             substring(readString("Fecha y Hora (aaaammddhhmm): "),0,8)))) /\\ 
+  *      (duracionValida(readString("Fecha y Hora (aaaammddhhmm): "),
+  *         readInt("Duracion en minutos: ")) == 
+  *        fechaHoraValida(readString("Fecha y Hora (aaaammddhhmm): ")) /\\ 
+  *         readInt("Duracion en minutos: ") > 0 /\\ 
+  *          (obtenerMinutos(readString("Fecha y Hora (aaaammddhhmm): ")) + 
+  *               readInt("Duracion en minutos: ")) mod 
+  *             60 + 
+  *            ((obtenerMinutos(readString("Fecha y Hora (aaaammddhhmm): ")) + 
+  *                  readInt("Duracion en minutos: ")) div 
+  *                60 + 
+  *               obtenerHora(readString("Fecha y Hora (aaaammddhhmm): "))) * 
+  *             100 <= 
+  *           2200) ==> 
+  *   l < 10 /\\ 
+  *     fechaHoraValida(readString("Fecha y Hora (aaaammddhhmm): ")) /\\ 
+  *      esPrioridadValida(readInt("Prioridad: ")) /\\ 
+  *       ! choca(Agendas[numAgenda],readString("Fecha y Hora (aaaammddhhmm): "),
+  *          readInt("Duracion en minutos: ")) /\\ 
+  *        duracionValida(readString("Fecha y Hora (aaaammddhhmm): "),
+  *         readInt("Duracion en minutos: ")) ==> 
+  *    a.tam < a.MAX]
+  * Línea 478: El invariante se mantiene y decrece la cota - 17/26. id=42
+  * [Agendas:array[] of Agenda, l:int, numAgenda:int :: 
+  *  (esPrioridadValida(readInt("Prioridad: ")) == 
+  *      0 <= readInt("Prioridad: ") /\\ readInt("Prioridad: ") <= 5) /\\ 
+  *    (fechaHoraValida(readString("Fecha y Hora (aaaammddhhmm): ")) /\\ 
+  *        readInt("Duracion en minutos: ") > 0 ==> 
+  *       (choca(Agendas[numAgenda],readString("Fecha y Hora (aaaammddhhmm): "),
+  *          readInt("Duracion en minutos: ")) == 
+  *         (%exists x : 0 <= x < a.tam : 
+  *          seSolapan(a.fechaHNombre[x][0],a.duracionPrioridad[x][0],
+  *           readString("Fecha y Hora (aaaammddhhmm): "),
+  *           readInt("Duracion en minutos: "))))) /\\ 
+  *     (fechaHoraValida(readString("Fecha y Hora (aaaammddhhmm): ")) == 
+  *        length(readString("Fecha y Hora (aaaammddhhmm): ")) = 12 /\\ 
+  *         (%forall j : 
+  *           0 <= j < length(readString("Fecha y Hora (aaaammddhhmm): ")) : 
+  *           "0" <= 
+  *             substring(readString("Fecha y Hora (aaaammddhhmm): "),j,j + 1) /\\ 
+  *            substring(readString("Fecha y Hora (aaaammddhhmm): "),j,j + 1) <= 
+  *             "9") /\\ 
+  *          esHoraValida(
+  *            intOfString(
+  *             substring(readString("Fecha y Hora (aaaammddhhmm): "),8,12))) /\\ 
+  *           esFechaValida(
+  *            intOfString(
+  *             substring(readString("Fecha y Hora (aaaammddhhmm): "),0,8)))) /\\ 
+  *      (fechaHoraValida(readString("Fecha y Hora (aaaammddhhmm): ")) /\\ 
+  *          readInt("Duracion en minutos: ") > 0 ==> 
+  *         (choca(Agendas[numAgenda],readString("Fecha y Hora (aaaammddhhmm): "),
+  *            readInt("Duracion en minutos: ")) == 
+  *           (%exists x : 0 <= x < a.tam : 
+  *            seSolapan(a.fechaHNombre[x][0],a.duracionPrioridad[x][0],
+  *             readString("Fecha y Hora (aaaammddhhmm): "),
+  *             readInt("Duracion en minutos: "))))) /\\ 
+  *       (duracionValida(readString("Fecha y Hora (aaaammddhhmm): "),
+  *          readInt("Duracion en minutos: ")) == 
+  *         fechaHoraValida(readString("Fecha y Hora (aaaammddhhmm): ")) /\\ 
+  *          readInt("Duracion en minutos: ") > 0 /\\ 
+  *           (obtenerMinutos(readString("Fecha y Hora (aaaammddhhmm): ")) + 
+  *                readInt("Duracion en minutos: ")) mod 
+  *              60 + 
+  *             ((obtenerMinutos(readString("Fecha y Hora (aaaammddhhmm): ")) + 
+  *                   readInt("Duracion en minutos: ")) div 
+  *                 60 + 
+  *                obtenerHora(readString("Fecha y Hora (aaaammddhhmm): "))) * 
+  *              100 <= 
+  *            2200) ==> 
+  *   l < 10 /\\ 
+  *     fechaHoraValida(readString("Fecha y Hora (aaaammddhhmm): ")) /\\ 
+  *      esPrioridadValida(readInt("Prioridad: ")) /\\ 
+  *       ! choca(Agendas[numAgenda],readString("Fecha y Hora (aaaammddhhmm): "),
+  *          readInt("Duracion en minutos: ")) /\\ 
+  *        duracionValida(readString("Fecha y Hora (aaaammddhhmm): "),
+  *         readInt("Duracion en minutos: ")) ==> 
+  *    ! 
+  *     choca(Agendas[numAgenda],readString("Fecha y Hora (aaaammddhhmm): "),
+  *      readInt("Duracion en minutos: "))]
+  * Línea 478: El invariante se mantiene y decrece la cota - 18/26. id=42
+  * [Agendas:array[] of Agenda, a:Agenda, duracionPrioridad:array[][] of int, 
+  *   fechaHNombre:array[][] of String, l:int, numAgenda:int, tam:int :: 
+  *  (esPrioridadValida(readInt("Prioridad: ")) == 
+  *      0 <= readInt("Prioridad: ") /\\ readInt("Prioridad: ") <= 5) /\\ 
+  *    (fechaHoraValida(readString("Fecha y Hora (aaaammddhhmm): ")) /\\ 
+  *        readInt("Duracion en minutos: ") > 0 ==> 
+  *       (choca(Agendas[numAgenda],readString("Fecha y Hora (aaaammddhhmm): "),
+  *          readInt("Duracion en minutos: ")) == 
+  *         (%exists x : 0 <= x < a.tam : 
+  *          seSolapan(a.fechaHNombre[x][0],a.duracionPrioridad[x][0],
+  *           readString("Fecha y Hora (aaaammddhhmm): "),
+  *           readInt("Duracion en minutos: "))))) /\\ 
+  *     (fechaHoraValida(readString("Fecha y Hora (aaaammddhhmm): ")) == 
+  *        length(readString("Fecha y Hora (aaaammddhhmm): ")) = 12 /\\ 
+  *         (%forall j : 
+  *           0 <= j < length(readString("Fecha y Hora (aaaammddhhmm): ")) : 
+  *           "0" <= 
+  *             substring(readString("Fecha y Hora (aaaammddhhmm): "),j,j + 1) /\\ 
+  *            substring(readString("Fecha y Hora (aaaammddhhmm): "),j,j + 1) <= 
+  *             "9") /\\ 
+  *          esHoraValida(
+  *            intOfString(
+  *             substring(readString("Fecha y Hora (aaaammddhhmm): "),8,12))) /\\ 
+  *           esFechaValida(
+  *            intOfString(
+  *             substring(readString("Fecha y Hora (aaaammddhhmm): "),0,8)))) /\\ 
+  *      (duracionValida(readString("Fecha y Hora (aaaammddhhmm): "),
+  *         readInt("Duracion en minutos: ")) == 
+  *        fechaHoraValida(readString("Fecha y Hora (aaaammddhhmm): ")) /\\ 
+  *         readInt("Duracion en minutos: ") > 0 /\\ 
+  *          (obtenerMinutos(readString("Fecha y Hora (aaaammddhhmm): ")) + 
+  *               readInt("Duracion en minutos: ")) mod 
+  *             60 + 
+  *            ((obtenerMinutos(readString("Fecha y Hora (aaaammddhhmm): ")) + 
+  *                  readInt("Duracion en minutos: ")) div 
+  *                60 + 
+  *               obtenerHora(readString("Fecha y Hora (aaaammddhhmm): "))) * 
+  *             100 <= 
+  *           2200) ==> 
+  *   l < 10 /\\ 
+  *     fechaHoraValida(readString("Fecha y Hora (aaaammddhhmm): ")) /\\ 
+  *      esPrioridadValida(readInt("Prioridad: ")) /\\ 
+  *       ! choca(Agendas[numAgenda],readString("Fecha y Hora (aaaammddhhmm): "),
+  *          readInt("Duracion en minutos: ")) /\\ 
+  *        duracionValida(readString("Fecha y Hora (aaaammddhhmm): "),
+  *          readInt("Duracion en minutos: ")) /\\ 
+  *         (%exists i : 0 <= i < a.tam : 
+  *           a.fechaHNombre[i][0] = readString("Fecha y Hora (aaaammddhhmm): ") /\\ 
+  *            a.fechaHNombre[i][1] = readString("Actividad: ") /\\ 
+  *             a.duracionPrioridad[i][0] = readInt("Duracion en minutos: ") /\\ 
+  *              a.duracionPrioridad[i][1] = readInt("Prioridad: ")) /\\ 
+  *          (%forall i : 0 <= i < a.tam : 
+  *           (%exists j : 0 <= j < a.tam : 
+  *            a.fechaHNombre[i][0] = a.fechaHNombre[j][0] /\\ 
+  *             a.fechaHNombre[i][1] = a.fechaHNombre[j][1] /\\ 
+  *              a.duracionPrioridad[i][0] = a.duracionPrioridad[j][0] /\\ 
+  *               a.duracionPrioridad[i][1] = a.duracionPrioridad[j][1])) ==> 
+  *    0 < 10 - l]
+  * Línea 478: El invariante se mantiene y decrece la cota - 19/26. id=42
+  * [l:int :: 
+  *  (fechaHoraValida(readString("Fecha y Hora (aaaammddhhmm): ")) == 
+  *     length(readString("Fecha y Hora (aaaammddhhmm): ")) = 12 /\\ 
+  *      (%forall j : 0 <= j < length(readString("Fecha y Hora (aaaammddhhmm): ")) : 
+  *        "0" <= substring(readString("Fecha y Hora (aaaammddhhmm): "),j,j + 1) /\\ 
+  *         substring(readString("Fecha y Hora (aaaammddhhmm): "),j,j + 1) <= 
+  *          "9") /\\ 
+  *       esHoraValida(
+  *         intOfString(
+  *          substring(readString("Fecha y Hora (aaaammddhhmm): "),8,12))) /\\ 
+  *        esFechaValida(
+  *         intOfString(substring(readString("Fecha y Hora (aaaammddhhmm): "),0,8)
+  *         ))) ==> 
+  *   l < 10 /\\ ! fechaHoraValida(readString("Fecha y Hora (aaaammddhhmm): ")) ==> 
+  *    0 <= 10 - (l + 1)]
+  * Línea 478: El invariante se mantiene y decrece la cota - 20/26. id=42
+  * [l:int :: 
+  *  (esPrioridadValida(readInt("Prioridad: ")) == 
+  *     0 <= readInt("Prioridad: ") /\\ readInt("Prioridad: ") <= 5) ==> 
+  *   l < 10 /\\ ! esPrioridadValida(readInt("Prioridad: ")) ==> 0 <= 10 - (l + 1)
+  * ]
+  * Línea 478: El invariante se mantiene y decrece la cota - 21/26. id=42
+  * [Agendas:array[] of Agenda, l:int, numAgenda:int :: 
+  *  (fechaHoraValida(readString("Fecha y Hora (aaaammddhhmm): ")) /\\ 
+  *      readInt("Duracion en minutos: ") > 0 ==> 
+  *     (choca(Agendas[numAgenda],readString("Fecha y Hora (aaaammddhhmm): "),
+  *        readInt("Duracion en minutos: ")) == 
+  *       (%exists x : 0 <= x < a.tam : 
+  *        seSolapan(a.fechaHNombre[x][0],a.duracionPrioridad[x][0],
+  *         readString("Fecha y Hora (aaaammddhhmm): "),
+  *         readInt("Duracion en minutos: "))))) ==> 
+  *   l < 10 /\\ 
+  *     choca(Agendas[numAgenda],readString("Fecha y Hora (aaaammddhhmm): "),
+  *      readInt("Duracion en minutos: ")) ==> 
+  *    0 <= 10 - (l + 1)]
+  * Línea 478: El invariante se mantiene y decrece la cota - 22/26. id=42
+  * [l:int :: 
+  *  (duracionValida(readString("Fecha y Hora (aaaammddhhmm): "),
+  *      readInt("Duracion en minutos: ")) == 
+  *     fechaHoraValida(readString("Fecha y Hora (aaaammddhhmm): ")) /\\ 
+  *      readInt("Duracion en minutos: ") > 0 /\\ 
+  *       (obtenerMinutos(readString("Fecha y Hora (aaaammddhhmm): ")) + 
+  *            readInt("Duracion en minutos: ")) mod 
+  *          60 + 
+  *         ((obtenerMinutos(readString("Fecha y Hora (aaaammddhhmm): ")) + 
+  *               readInt("Duracion en minutos: ")) div 
+  *             60 + 
+  *            obtenerHora(readString("Fecha y Hora (aaaammddhhmm): "))) * 
+  *          100 <= 
+  *        2200) ==> 
+  *   l < 10 /\\ 
+  *     ! 
+  *      duracionValida(readString("Fecha y Hora (aaaammddhhmm): "),
+  *       readInt("Duracion en minutos: ")) ==> 
+  *    0 <= 10 - (l + 1)]
+  * Línea 478: El invariante se mantiene y decrece la cota - 23/26. id=42
+  * [l:int :: 
+  *  (fechaHoraValida(readString("Fecha y Hora (aaaammddhhmm): ")) == 
+  *     length(readString("Fecha y Hora (aaaammddhhmm): ")) = 12 /\\ 
+  *      (%forall j : 0 <= j < length(readString("Fecha y Hora (aaaammddhhmm): ")) : 
+  *        "0" <= substring(readString("Fecha y Hora (aaaammddhhmm): "),j,j + 1) /\\ 
+  *         substring(readString("Fecha y Hora (aaaammddhhmm): "),j,j + 1) <= 
+  *          "9") /\\ 
+  *       esHoraValida(
+  *         intOfString(
+  *          substring(readString("Fecha y Hora (aaaammddhhmm): "),8,12))) /\\ 
+  *        esFechaValida(
+  *         intOfString(substring(readString("Fecha y Hora (aaaammddhhmm): "),0,8)
+  *         ))) ==> 
+  *   l < 10 /\\ ! fechaHoraValida(readString("Fecha y Hora (aaaammddhhmm): ")) ==> 
+  *    10 - (l + 1) < 10 - l]
+  * Línea 478: El invariante se mantiene y decrece la cota - 24/26. id=42
+  * [l:int :: 
+  *  (esPrioridadValida(readInt("Prioridad: ")) == 
+  *     0 <= readInt("Prioridad: ") /\\ readInt("Prioridad: ") <= 5) ==> 
+  *   l < 10 /\\ ! esPrioridadValida(readInt("Prioridad: ")) ==> 
+  *    10 - (l + 1) < 10 - l]
+  * Línea 478: El invariante se mantiene y decrece la cota - 25/26. id=42
+  * [Agendas:array[] of Agenda, l:int, numAgenda:int :: 
+  *  (fechaHoraValida(readString("Fecha y Hora (aaaammddhhmm): ")) /\\ 
+  *      readInt("Duracion en minutos: ") > 0 ==> 
+  *     (choca(Agendas[numAgenda],readString("Fecha y Hora (aaaammddhhmm): "),
+  *        readInt("Duracion en minutos: ")) == 
+  *       (%exists x : 0 <= x < a.tam : 
+  *        seSolapan(a.fechaHNombre[x][0],a.duracionPrioridad[x][0],
+  *         readString("Fecha y Hora (aaaammddhhmm): "),
+  *         readInt("Duracion en minutos: "))))) ==> 
+  *   l < 10 /\\ 
+  *     choca(Agendas[numAgenda],readString("Fecha y Hora (aaaammddhhmm): "),
+  *      readInt("Duracion en minutos: ")) ==> 
+  *    10 - (l + 1) < 10 - l]
+  * Línea 478: El invariante se mantiene y decrece la cota - 26/26. id=42
+  * [l:int :: 
+  *  (duracionValida(readString("Fecha y Hora (aaaammddhhmm): "),
+  *      readInt("Duracion en minutos: ")) == 
+  *     fechaHoraValida(readString("Fecha y Hora (aaaammddhhmm): ")) /\\ 
+  *      readInt("Duracion en minutos: ") > 0 /\\ 
+  *       (obtenerMinutos(readString("Fecha y Hora (aaaammddhhmm): ")) + 
+  *            readInt("Duracion en minutos: ")) mod 
+  *          60 + 
+  *         ((obtenerMinutos(readString("Fecha y Hora (aaaammddhhmm): ")) + 
+  *               readInt("Duracion en minutos: ")) div 
+  *             60 + 
+  *            obtenerHora(readString("Fecha y Hora (aaaammddhhmm): "))) * 
+  *          100 <= 
+  *        2200) ==> 
+  *   l < 10 /\\ 
+  *     ! 
+  *      duracionValida(readString("Fecha y Hora (aaaammddhhmm): "),
+  *       readInt("Duracion en minutos: ")) ==> 
+  *    10 - (l + 1) < 10 - l]
+  * Línea 499: El invariante garantiza la postcondición a la salida - 1/2. id=43
+  * [k:int, l:int :: l >= 10 ==> 0 <= 100000 - (k + 1)]
+  * Línea 499: El invariante garantiza la postcondición a la salida - 2/2. id=43
+  * [_C16=null, k:int, l:int :: l >= 10 ==> 100000 - (k + 1) < _C16]
+  * Línea 499: El invariante se mantiene y decrece la cota - 1/12. id=44
+  * [l:int, numAgenda:int :: l < 10 ==> 0 <= numAgenda]
+  * Línea 499: El invariante se mantiene y decrece la cota - 2/12. id=44
+  * [Agendas=null, l:int, numAgenda:int :: l < 10 ==> numAgenda < length(Agendas,0)]
+  * Línea 499: El invariante se mantiene y decrece la cota - 3/12. id=44
+  * [Agendas:array[] of Agenda, l:int, numAgenda:int :: 
+  *  (pertenece(Agendas[numAgenda],
+  *      readString("Fecha y Hora de la actividad que desea eliminar: ")) == 
+  *     (%exists i : 0 <= i < a.tam : 
+  *      readString("Fecha y Hora de la actividad que desea eliminar: ") = 
+  *       a.fechaHNombre[i][0])) ==> 
+  *   l < 10 ==> 
+  *    pertenece(Agendas[numAgenda],
+  *      readString("Fecha y Hora de la actividad que desea eliminar: ")) \\/ 
+  *     ! 
+  *      pertenece(Agendas[numAgenda],
+  *       readString("Fecha y Hora de la actividad que desea eliminar: "))]
+  * Línea 499: El invariante se mantiene y decrece la cota - 4/12. id=44
+  * [Agendas:array[] of Agenda, l:int, numAgenda:int :: 
+  *  (fechaHoraValida(
+  *       readString("Fecha y Hora de la actividad que desea eliminar: ")) == 
+  *      length(readString("Fecha y Hora de la actividad que desea eliminar: ")) = 
+  *        12 /\\ 
+  *       (%forall j : 
+  *         0 <= j < 
+  *          length(
+  *           readString("Fecha y Hora de la actividad que desea eliminar: ")) : 
+  *         "0" <= 
+  *           substring(
+  *            readString("Fecha y Hora de la actividad que desea eliminar: "),j,
+  *            j + 1) /\\ 
+  *          substring(
+  *            readString("Fecha y Hora de la actividad que desea eliminar: "),j,
+  *            j + 1) <= 
+  *           "9") /\\ 
+  *        esHoraValida(
+  *          intOfString(
+  *           substring(
+  *            readString("Fecha y Hora de la actividad que desea eliminar: "),8,
+  *            12))) /\\ 
+  *         esFechaValida(
+  *          intOfString(
+  *           substring(
+  *            readString("Fecha y Hora de la actividad que desea eliminar: "),0,8
+  *           )))) /\\ 
+  *    (pertenece(Agendas[numAgenda],
+  *        readString("Fecha y Hora de la actividad que desea eliminar: ")) == 
+  *       (%exists i : 0 <= i < a.tam : 
+  *        readString("Fecha y Hora de la actividad que desea eliminar: ") = 
+  *         a.fechaHNombre[i][0])) /\\ 
+  *     (fechaHoraValida(
+  *        readString("Fecha y Hora de la actividad que desea eliminar: ")) == 
+  *       length(readString("Fecha y Hora de la actividad que desea eliminar: ")) = 
+  *         12 /\\ 
+  *        (%forall j : 
+  *          0 <= j < 
+  *           length(
+  *            readString("Fecha y Hora de la actividad que desea eliminar: ")) : 
+  *          "0" <= 
+  *            substring(
+  *             readString("Fecha y Hora de la actividad que desea eliminar: "),j,
+  *             j + 1) /\\ 
+  *           substring(
+  *             readString("Fecha y Hora de la actividad que desea eliminar: "),j,
+  *             j + 1) <= 
+  *            "9") /\\ 
+  *         esHoraValida(
+  *           intOfString(
+  *            substring(
+  *             readString("Fecha y Hora de la actividad que desea eliminar: "),8,
+  *             12))) /\\ 
+  *          esFechaValida(
+  *           intOfString(
+  *            substring(
+  *             readString("Fecha y Hora de la actividad que desea eliminar: "),0,
+  *             8)))) ==> 
+  *   l < 10 /\\ 
+  *     pertenece(Agendas[numAgenda],
+  *      readString("Fecha y Hora de la actividad que desea eliminar: ")) ==> 
+  *    fechaHoraValida(
+  *      readString("Fecha y Hora de la actividad que desea eliminar: ")) \\/ 
+  *     ! 
+  *      fechaHoraValida(
+  *       readString("Fecha y Hora de la actividad que desea eliminar: "))]
+  * Línea 499: El invariante se mantiene y decrece la cota - 5/12. id=44
+  * [Agendas:array[] of Agenda, l:int, numAgenda:int :: 
+  *  (pertenece(Agendas[numAgenda],
+  *       readString("Fecha y Hora de la actividad que desea eliminar: ")) == 
+  *      (%exists i : 0 <= i < a.tam : 
+  *       readString("Fecha y Hora de la actividad que desea eliminar: ") = 
+  *        a.fechaHNombre[i][0])) /\\ 
+  *    (fechaHoraValida(
+  *       readString("Fecha y Hora de la actividad que desea eliminar: ")) == 
+  *      length(readString("Fecha y Hora de la actividad que desea eliminar: ")) = 
+  *        12 /\\ 
+  *       (%forall j : 
+  *         0 <= j < 
+  *          length(
+  *           readString("Fecha y Hora de la actividad que desea eliminar: ")) : 
+  *         "0" <= 
+  *           substring(
+  *            readString("Fecha y Hora de la actividad que desea eliminar: "),j,
+  *            j + 1) /\\ 
+  *          substring(
+  *            readString("Fecha y Hora de la actividad que desea eliminar: "),j,
+  *            j + 1) <= 
+  *           "9") /\\ 
+  *        esHoraValida(
+  *          intOfString(
+  *           substring(
+  *            readString("Fecha y Hora de la actividad que desea eliminar: "),8,
+  *            12))) /\\ 
+  *         esFechaValida(
+  *          intOfString(
+  *           substring(
+  *            readString("Fecha y Hora de la actividad que desea eliminar: "),0,8
+  *           )))) ==> 
+  *   l < 10 /\\ 
+  *     pertenece(Agendas[numAgenda],
+  *       readString("Fecha y Hora de la actividad que desea eliminar: ")) /\\ 
+  *      fechaHoraValida(
+  *       readString("Fecha y Hora de la actividad que desea eliminar: ")) ==> 
+  *    0 <= numAgenda]
+  * Línea 499: El invariante se mantiene y decrece la cota - 6/12. id=44
+  * [Agendas:array[] of Agenda, l:int, numAgenda:int :: 
+  *  (pertenece(Agendas[numAgenda],
+  *       readString("Fecha y Hora de la actividad que desea eliminar: ")) == 
+  *      (%exists i : 0 <= i < a.tam : 
+  *       readString("Fecha y Hora de la actividad que desea eliminar: ") = 
+  *        a.fechaHNombre[i][0])) /\\ 
+  *    (fechaHoraValida(
+  *       readString("Fecha y Hora de la actividad que desea eliminar: ")) == 
+  *      length(readString("Fecha y Hora de la actividad que desea eliminar: ")) = 
+  *        12 /\\ 
+  *       (%forall j : 
+  *         0 <= j < 
+  *          length(
+  *           readString("Fecha y Hora de la actividad que desea eliminar: ")) : 
+  *         "0" <= 
+  *           substring(
+  *            readString("Fecha y Hora de la actividad que desea eliminar: "),j,
+  *            j + 1) /\\ 
+  *          substring(
+  *            readString("Fecha y Hora de la actividad que desea eliminar: "),j,
+  *            j + 1) <= 
+  *           "9") /\\ 
+  *        esHoraValida(
+  *          intOfString(
+  *           substring(
+  *            readString("Fecha y Hora de la actividad que desea eliminar: "),8,
+  *            12))) /\\ 
+  *         esFechaValida(
+  *          intOfString(
+  *           substring(
+  *            readString("Fecha y Hora de la actividad que desea eliminar: "),0,8
+  *           )))) ==> 
+  *   l < 10 /\\ 
+  *     pertenece(Agendas[numAgenda],
+  *       readString("Fecha y Hora de la actividad que desea eliminar: ")) /\\ 
+  *      fechaHoraValida(
+  *       readString("Fecha y Hora de la actividad que desea eliminar: ")) ==> 
+  *    numAgenda < length(Agendas,0)]
+  * Línea 499: El invariante se mantiene y decrece la cota - 7/12. id=44
+  * [Agendas:array[] of Agenda, a:Agenda, fechaHNombre:array[][] of String, l:int, 
+  *   numAgenda:int, tam:int :: 
+  *  (pertenece(Agendas[numAgenda],
+  *       readString("Fecha y Hora de la actividad que desea eliminar: ")) == 
+  *      (%exists i : 0 <= i < a.tam : 
+  *       readString("Fecha y Hora de la actividad que desea eliminar: ") = 
+  *        a.fechaHNombre[i][0])) /\\ 
+  *    (fechaHoraValida(
+  *       readString("Fecha y Hora de la actividad que desea eliminar: ")) == 
+  *      length(readString("Fecha y Hora de la actividad que desea eliminar: ")) = 
+  *        12 /\\ 
+  *       (%forall j : 
+  *         0 <= j < 
+  *          length(
+  *           readString("Fecha y Hora de la actividad que desea eliminar: ")) : 
+  *         "0" <= 
+  *           substring(
+  *            readString("Fecha y Hora de la actividad que desea eliminar: "),j,
+  *            j + 1) /\\ 
+  *          substring(
+  *            readString("Fecha y Hora de la actividad que desea eliminar: "),j,
+  *            j + 1) <= 
+  *           "9") /\\ 
+  *        esHoraValida(
+  *          intOfString(
+  *           substring(
+  *            readString("Fecha y Hora de la actividad que desea eliminar: "),8,
+  *            12))) /\\ 
+  *         esFechaValida(
+  *          intOfString(
+  *           substring(
+  *            readString("Fecha y Hora de la actividad que desea eliminar: "),0,8
+  *           )))) ==> 
+  *   l < 10 /\\ 
+  *     pertenece(Agendas[numAgenda],
+  *       readString("Fecha y Hora de la actividad que desea eliminar: ")) /\\ 
+  *      fechaHoraValida(
+  *       readString("Fecha y Hora de la actividad que desea eliminar: ")) ==> 
+  *    (%exists i : 0 <= i < a.tam : 
+  *     a.fechaHNombre[i][0] = 
+  *      readString("Fecha y Hora de la actividad que desea eliminar: "))]
+  * Línea 499: El invariante se mantiene y decrece la cota - 8/12. id=44
+  * [Agendas:array[] of Agenda, l:int, numAgenda:int :: 
+  *  (pertenece(Agendas[numAgenda],
+  *       readString("Fecha y Hora de la actividad que desea eliminar: ")) == 
+  *      (%exists i : 0 <= i < a.tam : 
+  *       readString("Fecha y Hora de la actividad que desea eliminar: ") = 
+  *        a.fechaHNombre[i][0])) /\\ 
+  *    (fechaHoraValida(
+  *       readString("Fecha y Hora de la actividad que desea eliminar: ")) == 
+  *      length(readString("Fecha y Hora de la actividad que desea eliminar: ")) = 
+  *        12 /\\ 
+  *       (%forall j : 
+  *         0 <= j < 
+  *          length(
+  *           readString("Fecha y Hora de la actividad que desea eliminar: ")) : 
+  *         "0" <= 
+  *           substring(
+  *            readString("Fecha y Hora de la actividad que desea eliminar: "),j,
+  *            j + 1) /\\ 
+  *          substring(
+  *            readString("Fecha y Hora de la actividad que desea eliminar: "),j,
+  *            j + 1) <= 
+  *           "9") /\\ 
+  *        esHoraValida(
+  *          intOfString(
+  *           substring(
+  *            readString("Fecha y Hora de la actividad que desea eliminar: "),8,
+  *            12))) /\\ 
+  *         esFechaValida(
+  *          intOfString(
+  *           substring(
+  *            readString("Fecha y Hora de la actividad que desea eliminar: "),0,8
+  *           )))) ==> 
+  *   l < 10 /\\ 
+  *     pertenece(Agendas[numAgenda],
+  *       readString("Fecha y Hora de la actividad que desea eliminar: ")) /\\ 
+  *      fechaHoraValida(
+  *       readString("Fecha y Hora de la actividad que desea eliminar: ")) ==> 
+  *    0 < 10 - l]
+  * Línea 499: El invariante se mantiene y decrece la cota - 9/12. id=44
+  * [Agendas:array[] of Agenda, l:int, numAgenda:int :: 
+  *  (pertenece(Agendas[numAgenda],
+  *       readString("Fecha y Hora de la actividad que desea eliminar: ")) == 
+  *      (%exists i : 0 <= i < a.tam : 
+  *       readString("Fecha y Hora de la actividad que desea eliminar: ") = 
+  *        a.fechaHNombre[i][0])) /\\ 
+  *    (fechaHoraValida(
+  *       readString("Fecha y Hora de la actividad que desea eliminar: ")) == 
+  *      length(readString("Fecha y Hora de la actividad que desea eliminar: ")) = 
+  *        12 /\\ 
+  *       (%forall j : 
+  *         0 <= j < 
+  *          length(
+  *           readString("Fecha y Hora de la actividad que desea eliminar: ")) : 
+  *         "0" <= 
+  *           substring(
+  *            readString("Fecha y Hora de la actividad que desea eliminar: "),j,
+  *            j + 1) /\\ 
+  *          substring(
+  *            readString("Fecha y Hora de la actividad que desea eliminar: "),j,
+  *            j + 1) <= 
+  *           "9") /\\ 
+  *        esHoraValida(
+  *          intOfString(
+  *           substring(
+  *            readString("Fecha y Hora de la actividad que desea eliminar: "),8,
+  *            12))) /\\ 
+  *         esFechaValida(
+  *          intOfString(
+  *           substring(
+  *            readString("Fecha y Hora de la actividad que desea eliminar: "),0,8
+  *           )))) ==> 
+  *   l < 10 /\\ 
+  *     pertenece(Agendas[numAgenda],
+  *       readString("Fecha y Hora de la actividad que desea eliminar: ")) /\\ 
+  *      ! 
+  *       fechaHoraValida(
+  *        readString("Fecha y Hora de la actividad que desea eliminar: ")) ==> 
+  *    0 <= 10 - (l + 1)]
+  * Línea 499: El invariante se mantiene y decrece la cota - 10/12. id=44
+  * [Agendas:array[] of Agenda, l:int, numAgenda:int :: 
+  *  (pertenece(Agendas[numAgenda],
+  *       readString("Fecha y Hora de la actividad que desea eliminar: ")) == 
+  *      (%exists i : 0 <= i < a.tam : 
+  *       readString("Fecha y Hora de la actividad que desea eliminar: ") = 
+  *        a.fechaHNombre[i][0])) /\\ 
+  *    (fechaHoraValida(
+  *       readString("Fecha y Hora de la actividad que desea eliminar: ")) == 
+  *      length(readString("Fecha y Hora de la actividad que desea eliminar: ")) = 
+  *        12 /\\ 
+  *       (%forall j : 
+  *         0 <= j < 
+  *          length(
+  *           readString("Fecha y Hora de la actividad que desea eliminar: ")) : 
+  *         "0" <= 
+  *           substring(
+  *            readString("Fecha y Hora de la actividad que desea eliminar: "),j,
+  *            j + 1) /\\ 
+  *          substring(
+  *            readString("Fecha y Hora de la actividad que desea eliminar: "),j,
+  *            j + 1) <= 
+  *           "9") /\\ 
+  *        esHoraValida(
+  *          intOfString(
+  *           substring(
+  *            readString("Fecha y Hora de la actividad que desea eliminar: "),8,
+  *            12))) /\\ 
+  *         esFechaValida(
+  *          intOfString(
+  *           substring(
+  *            readString("Fecha y Hora de la actividad que desea eliminar: "),0,8
+  *           )))) ==> 
+  *   l < 10 /\\ 
+  *     pertenece(Agendas[numAgenda],
+  *       readString("Fecha y Hora de la actividad que desea eliminar: ")) /\\ 
+  *      ! 
+  *       fechaHoraValida(
+  *        readString("Fecha y Hora de la actividad que desea eliminar: ")) ==> 
+  *    10 - (l + 1) < 10 - l]
+  * Línea 499: El invariante se mantiene y decrece la cota - 11/12. id=44
+  * [Agendas:array[] of Agenda, l:int, numAgenda:int :: 
+  *  (pertenece(Agendas[numAgenda],
+  *      readString("Fecha y Hora de la actividad que desea eliminar: ")) == 
+  *     (%exists i : 0 <= i < a.tam : 
+  *      readString("Fecha y Hora de la actividad que desea eliminar: ") = 
+  *       a.fechaHNombre[i][0])) ==> 
+  *   l < 10 /\\ 
+  *     ! 
+  *      pertenece(Agendas[numAgenda],
+  *       readString("Fecha y Hora de la actividad que desea eliminar: ")) ==> 
+  *    0 <= 10 - (l + 1)]
+  * Línea 499: El invariante se mantiene y decrece la cota - 12/12. id=44
+  * [Agendas:array[] of Agenda, l:int, numAgenda:int :: 
+  *  (pertenece(Agendas[numAgenda],
+  *      readString("Fecha y Hora de la actividad que desea eliminar: ")) == 
+  *     (%exists i : 0 <= i < a.tam : 
+  *      readString("Fecha y Hora de la actividad que desea eliminar: ") = 
+  *       a.fechaHNombre[i][0])) ==> 
+  *   l < 10 /\\ 
+  *     ! 
+  *      pertenece(Agendas[numAgenda],
+  *       readString("Fecha y Hora de la actividad que desea eliminar: ")) ==> 
+  *    10 - (l + 1) < 10 - l]
+  * Línea 516: El invariante garantiza la postcondición a la salida - 1/2. id=45
+  * [k:int, l:int :: l >= 10 ==> 0 <= 100000 - (k + 1)]
+  * Línea 516: El invariante garantiza la postcondición a la salida - 2/2. id=45
+  * [_C16=null, k:int, l:int :: l >= 10 ==> 100000 - (k + 1) < _C16]
+  * Línea 516: El invariante se mantiene y decrece la cota - 1/7. id=46
+  * [l:int :: 
+  *  (esFechaValida(intOfString(readString("Fecha: "))) == 
+  *     (1 <= intOfString(readString("Fecha: ")) mod 100 /\\ 
+  *        intOfString(readString("Fecha: ")) mod 100 <= 30) /\\ 
+  *      (1 <= intOfString(readString("Fecha: ")) div 100 mod 100 /\\ 
+  *         intOfString(readString("Fecha: ")) div 100 mod 100 <= 12) /\\ 
+  *       intOfString(readString("Fecha: ")) div 10000 >= 2007) ==> 
+  *   l < 10 ==> 
+  *    esFechaValida(intOfString(readString("Fecha: "))) \\/ 
+  *     ! esFechaValida(intOfString(readString("Fecha: ")))]
+  * Línea 516: El invariante se mantiene y decrece la cota - 2/7. id=46
+  * [l:int, numAgenda:int :: 
+  *  (esFechaValida(intOfString(readString("Fecha: "))) == 
+  *     (1 <= intOfString(readString("Fecha: ")) mod 100 /\\ 
+  *        intOfString(readString("Fecha: ")) mod 100 <= 30) /\\ 
+  *      (1 <= intOfString(readString("Fecha: ")) div 100 mod 100 /\\ 
+  *         intOfString(readString("Fecha: ")) div 100 mod 100 <= 12) /\\ 
+  *       intOfString(readString("Fecha: ")) div 10000 >= 2007) ==> 
+  *   l < 10 /\\ esFechaValida(intOfString(readString("Fecha: "))) ==> 
+  *    0 <= numAgenda]
+  * Línea 516: El invariante se mantiene y decrece la cota - 3/7. id=46
+  * [Agendas=null, l:int, numAgenda:int :: 
+  *  (esFechaValida(intOfString(readString("Fecha: "))) == 
+  *     (1 <= intOfString(readString("Fecha: ")) mod 100 /\\ 
+  *        intOfString(readString("Fecha: ")) mod 100 <= 30) /\\ 
+  *      (1 <= intOfString(readString("Fecha: ")) div 100 mod 100 /\\ 
+  *         intOfString(readString("Fecha: ")) div 100 mod 100 <= 12) /\\ 
+  *       intOfString(readString("Fecha: ")) div 10000 >= 2007) ==> 
+  *   l < 10 /\\ esFechaValida(intOfString(readString("Fecha: "))) ==> 
+  *    numAgenda < length(Agendas,0)]
+  * Línea 516: El invariante se mantiene y decrece la cota - 4/7. id=46
+  * [l:int :: 
+  *  (esFechaValida(intOfString(readString("Fecha: "))) == 
+  *     (1 <= intOfString(readString("Fecha: ")) mod 100 /\\ 
+  *        intOfString(readString("Fecha: ")) mod 100 <= 30) /\\ 
+  *      (1 <= intOfString(readString("Fecha: ")) div 100 mod 100 /\\ 
+  *         intOfString(readString("Fecha: ")) div 100 mod 100 <= 12) /\\ 
+  *       intOfString(readString("Fecha: ")) div 10000 >= 2007) ==> 
+  *   l < 10 /\\ esFechaValida(intOfString(readString("Fecha: "))) ==> 
+  *    esFechaValida(intOfString(readString("Fecha: ")))]
+  * Línea 516: El invariante se mantiene y decrece la cota - 5/7. id=46
+  * [l:int :: 
+  *  (esFechaValida(intOfString(readString("Fecha: "))) == 
+  *     (1 <= intOfString(readString("Fecha: ")) mod 100 /\\ 
+  *        intOfString(readString("Fecha: ")) mod 100 <= 30) /\\ 
+  *      (1 <= intOfString(readString("Fecha: ")) div 100 mod 100 /\\ 
+  *         intOfString(readString("Fecha: ")) div 100 mod 100 <= 12) /\\ 
+  *       intOfString(readString("Fecha: ")) div 10000 >= 2007) ==> 
+  *   l < 10 /\\ esFechaValida(intOfString(readString("Fecha: "))) ==> 0 < 10 - l]
+  * Línea 516: El invariante se mantiene y decrece la cota - 6/7. id=46
+  * [l:int :: 
+  *  (esFechaValida(intOfString(readString("Fecha: "))) == 
+  *     (1 <= intOfString(readString("Fecha: ")) mod 100 /\\ 
+  *        intOfString(readString("Fecha: ")) mod 100 <= 30) /\\ 
+  *      (1 <= intOfString(readString("Fecha: ")) div 100 mod 100 /\\ 
+  *         intOfString(readString("Fecha: ")) div 100 mod 100 <= 12) /\\ 
+  *       intOfString(readString("Fecha: ")) div 10000 >= 2007) ==> 
+  *   l < 10 /\\ ! esFechaValida(intOfString(readString("Fecha: "))) ==> 
+  *    0 <= 10 - (l + 1)]
+  * Línea 516: El invariante se mantiene y decrece la cota - 7/7. id=46
+  * [l:int :: 
+  *  (esFechaValida(intOfString(readString("Fecha: "))) == 
+  *     (1 <= intOfString(readString("Fecha: ")) mod 100 /\\ 
+  *        intOfString(readString("Fecha: ")) mod 100 <= 30) /\\ 
+  *      (1 <= intOfString(readString("Fecha: ")) div 100 mod 100 /\\ 
+  *         intOfString(readString("Fecha: ")) div 100 mod 100 <= 12) /\\ 
+  *       intOfString(readString("Fecha: ")) div 10000 >= 2007) ==> 
+  *   l < 10 /\\ ! esFechaValida(intOfString(readString("Fecha: "))) ==> 
+  *    10 - (l + 1) < 10 - l]
+  * Línea 528: El invariante garantiza la postcondición a la salida - 1/2. id=47
+  * [k:int, l:int :: l >= 10 ==> 0 <= 100000 - (k + 1)]
+  * Línea 528: El invariante garantiza la postcondición a la salida - 2/2. id=47
+  * [_C16=null, k:int, l:int :: l >= 10 ==> 100000 - (k + 1) < _C16]
+  * Línea 528: El invariante se mantiene y decrece la cota - 1/7. id=48
+  * [l:int :: 
+  *  (fechaHoraValida(readString("Fecha: ")) == 
+  *     length(readString("Fecha: ")) = 12 /\\ 
+  *      (%forall j : 0 <= j < length(readString("Fecha: ")) : 
+  *        "0" <= substring(readString("Fecha: "),j,j + 1) /\\ 
+  *         substring(readString("Fecha: "),j,j + 1) <= "9") /\\ 
+  *       esHoraValida(intOfString(substring(readString("Fecha: "),8,12))) /\\ 
+  *        esFechaValida(intOfString(substring(readString("Fecha: "),0,8)))) ==> 
+  *   l < 10 ==> 
+  *    fechaHoraValida(readString("Fecha: ")) \\/ 
+  *     ! fechaHoraValida(readString("Fecha: "))]
+  * Línea 528: El invariante se mantiene y decrece la cota - 2/7. id=48
+  * [l:int, numAgenda:int :: 
+  *  (fechaHoraValida(readString("Fecha: ")) == 
+  *     length(readString("Fecha: ")) = 12 /\\ 
+  *      (%forall j : 0 <= j < length(readString("Fecha: ")) : 
+  *        "0" <= substring(readString("Fecha: "),j,j + 1) /\\ 
+  *         substring(readString("Fecha: "),j,j + 1) <= "9") /\\ 
+  *       esHoraValida(intOfString(substring(readString("Fecha: "),8,12))) /\\ 
+  *        esFechaValida(intOfString(substring(readString("Fecha: "),0,8)))) ==> 
+  *   l < 10 /\\ fechaHoraValida(readString("Fecha: ")) ==> 0 <= numAgenda]
+  * Línea 528: El invariante se mantiene y decrece la cota - 3/7. id=48
+  * [Agendas=null, l:int, numAgenda:int :: 
+  *  (fechaHoraValida(readString("Fecha: ")) == 
+  *     length(readString("Fecha: ")) = 12 /\\ 
+  *      (%forall j : 0 <= j < length(readString("Fecha: ")) : 
+  *        "0" <= substring(readString("Fecha: "),j,j + 1) /\\ 
+  *         substring(readString("Fecha: "),j,j + 1) <= "9") /\\ 
+  *       esHoraValida(intOfString(substring(readString("Fecha: "),8,12))) /\\ 
+  *        esFechaValida(intOfString(substring(readString("Fecha: "),0,8)))) ==> 
+  *   l < 10 /\\ fechaHoraValida(readString("Fecha: ")) ==> 
+  *    numAgenda < length(Agendas,0)]
+  * Línea 528: El invariante se mantiene y decrece la cota - 4/7. id=48
+  * [l:int :: 
+  *  (fechaHoraValida(readString("Fecha: ")) == 
+  *     length(readString("Fecha: ")) = 12 /\\ 
+  *      (%forall j : 0 <= j < length(readString("Fecha: ")) : 
+  *        "0" <= substring(readString("Fecha: "),j,j + 1) /\\ 
+  *         substring(readString("Fecha: "),j,j + 1) <= "9") /\\ 
+  *       esHoraValida(intOfString(substring(readString("Fecha: "),8,12))) /\\ 
+  *        esFechaValida(intOfString(substring(readString("Fecha: "),0,8)))) ==> 
+  *   l < 10 /\\ fechaHoraValida(readString("Fecha: ")) ==> 
+  *    fechaHoraValida(readString("Fecha: "))]
+  * Línea 528: El invariante se mantiene y decrece la cota - 5/7. id=48
+  * [l:int :: 
+  *  (fechaHoraValida(readString("Fecha: ")) == 
+  *     length(readString("Fecha: ")) = 12 /\\ 
+  *      (%forall j : 0 <= j < length(readString("Fecha: ")) : 
+  *        "0" <= substring(readString("Fecha: "),j,j + 1) /\\ 
+  *         substring(readString("Fecha: "),j,j + 1) <= "9") /\\ 
+  *       esHoraValida(intOfString(substring(readString("Fecha: "),8,12))) /\\ 
+  *        esFechaValida(intOfString(substring(readString("Fecha: "),0,8)))) ==> 
+  *   l < 10 /\\ fechaHoraValida(readString("Fecha: ")) ==> 0 < 10 - l]
+  * Línea 528: El invariante se mantiene y decrece la cota - 6/7. id=48
+  * [l:int :: 
+  *  (fechaHoraValida(readString("Fecha: ")) == 
+  *     length(readString("Fecha: ")) = 12 /\\ 
+  *      (%forall j : 0 <= j < length(readString("Fecha: ")) : 
+  *        "0" <= substring(readString("Fecha: "),j,j + 1) /\\ 
+  *         substring(readString("Fecha: "),j,j + 1) <= "9") /\\ 
+  *       esHoraValida(intOfString(substring(readString("Fecha: "),8,12))) /\\ 
+  *        esFechaValida(intOfString(substring(readString("Fecha: "),0,8)))) ==> 
+  *   l < 10 /\\ ! fechaHoraValida(readString("Fecha: ")) ==> 0 <= 10 - (l + 1)]
+  * Línea 528: El invariante se mantiene y decrece la cota - 7/7. id=48
+  * [l:int :: 
+  *  (fechaHoraValida(readString("Fecha: ")) == 
+  *     length(readString("Fecha: ")) = 12 /\\ 
+  *      (%forall j : 0 <= j < length(readString("Fecha: ")) : 
+  *        "0" <= substring(readString("Fecha: "),j,j + 1) /\\ 
+  *         substring(readString("Fecha: "),j,j + 1) <= "9") /\\ 
+  *       esHoraValida(intOfString(substring(readString("Fecha: "),8,12))) /\\ 
+  *        esFechaValida(intOfString(substring(readString("Fecha: "),0,8)))) ==> 
+  *   l < 10 /\\ ! fechaHoraValida(readString("Fecha: ")) ==> 
+  *    10 - (l + 1) < 10 - l]
+  * Línea 546: El invariante garantiza la postcondición a la salida - 1/2. id=49
+  * [k:int, l:int :: l >= 10 ==> 0 <= 100000 - (k + 1)]
+  * Línea 546: El invariante garantiza la postcondición a la salida - 2/2. id=49
+  * [_C16=null, k:int, l:int :: l >= 10 ==> 100000 - (k + 1) < _C16]
+  * Línea 546: El invariante se mantiene y decrece la cota - 1/12. id=50
+  * [l:int :: 
+  *  (esFechaValida(intOfString(readString("Fecha: "))) == 
+  *      (1 <= intOfString(readString("Fecha: ")) mod 100 /\\ 
+  *         intOfString(readString("Fecha: ")) mod 100 <= 30) /\\ 
+  *       (1 <= intOfString(readString("Fecha: ")) div 100 mod 100 /\\ 
+  *          intOfString(readString("Fecha: ")) div 100 mod 100 <= 12) /\\ 
+  *        intOfString(readString("Fecha: ")) div 10000 >= 2007) /\\ 
+  *    (esPrioridadValida(readInt("Prioridad: ")) == 
+  *       0 <= readInt("Prioridad: ") /\\ readInt("Prioridad: ") <= 5) /\\ 
+  *     (esFechaValida(intOfString(readString("Fecha: "))) == 
+  *       (1 <= intOfString(readString("Fecha: ")) mod 100 /\\ 
+  *          intOfString(readString("Fecha: ")) mod 100 <= 30) /\\ 
+  *        (1 <= intOfString(readString("Fecha: ")) div 100 mod 100 /\\ 
+  *           intOfString(readString("Fecha: ")) div 100 mod 100 <= 12) /\\ 
+  *         intOfString(readString("Fecha: ")) div 10000 >= 2007) ==> 
+  *   l < 10 ==> 
+  *    esFechaValida(intOfString(readString("Fecha: "))) \\/ 
+  *     ! esFechaValida(intOfString(readString("Fecha: "))) \\/ 
+  *      ! esPrioridadValida(readInt("Prioridad: "))]
+  * Línea 546: El invariante se mantiene y decrece la cota - 2/12. id=50
+  * [l:int :: 
+  *  (esFechaValida(intOfString(readString("Fecha: "))) == 
+  *      (1 <= intOfString(readString("Fecha: ")) mod 100 /\\ 
+  *         intOfString(readString("Fecha: ")) mod 100 <= 30) /\\ 
+  *       (1 <= intOfString(readString("Fecha: ")) div 100 mod 100 /\\ 
+  *          intOfString(readString("Fecha: ")) div 100 mod 100 <= 12) /\\ 
+  *        intOfString(readString("Fecha: ")) div 10000 >= 2007) /\\ 
+  *    (esPrioridadValida(readInt("Prioridad: ")) == 
+  *      0 <= readInt("Prioridad: ") /\\ readInt("Prioridad: ") <= 5) ==> 
+  *   l < 10 ==> 
+  *    esPrioridadValida(readInt("Prioridad: ")) \\/ 
+  *     ! esFechaValida(intOfString(readString("Fecha: "))) \\/ 
+  *      ! esPrioridadValida(readInt("Prioridad: "))]
+  * Línea 546: El invariante se mantiene y decrece la cota - 3/12. id=50
+  * [l:int, numAgenda:int :: 
+  *  (esPrioridadValida(readInt("Prioridad: ")) == 
+  *      0 <= readInt("Prioridad: ") /\\ readInt("Prioridad: ") <= 5) /\\ 
+  *    (esFechaValida(intOfString(readString("Fecha: "))) == 
+  *      (1 <= intOfString(readString("Fecha: ")) mod 100 /\\ 
+  *         intOfString(readString("Fecha: ")) mod 100 <= 30) /\\ 
+  *       (1 <= intOfString(readString("Fecha: ")) div 100 mod 100 /\\ 
+  *          intOfString(readString("Fecha: ")) div 100 mod 100 <= 12) /\\ 
+  *        intOfString(readString("Fecha: ")) div 10000 >= 2007) ==> 
+  *   l < 10 /\\ 
+  *     esFechaValida(intOfString(readString("Fecha: "))) /\\ 
+  *      esPrioridadValida(readInt("Prioridad: ")) ==> 
+  *    0 <= numAgenda]
+  * Línea 546: El invariante se mantiene y decrece la cota - 4/12. id=50
+  * [Agendas=null, l:int, numAgenda:int :: 
+  *  (esPrioridadValida(readInt("Prioridad: ")) == 
+  *      0 <= readInt("Prioridad: ") /\\ readInt("Prioridad: ") <= 5) /\\ 
+  *    (esFechaValida(intOfString(readString("Fecha: "))) == 
+  *      (1 <= intOfString(readString("Fecha: ")) mod 100 /\\ 
+  *         intOfString(readString("Fecha: ")) mod 100 <= 30) /\\ 
+  *       (1 <= intOfString(readString("Fecha: ")) div 100 mod 100 /\\ 
+  *          intOfString(readString("Fecha: ")) div 100 mod 100 <= 12) /\\ 
+  *        intOfString(readString("Fecha: ")) div 10000 >= 2007) ==> 
+  *   l < 10 /\\ 
+  *     esFechaValida(intOfString(readString("Fecha: "))) /\\ 
+  *      esPrioridadValida(readInt("Prioridad: ")) ==> 
+  *    numAgenda < length(Agendas,0)]
+  * Línea 546: El invariante se mantiene y decrece la cota - 5/12. id=50
+  * [l:int :: 
+  *  (esFechaValida(intOfString(readString("Fecha: "))) == 
+  *      (1 <= intOfString(readString("Fecha: ")) mod 100 /\\ 
+  *         intOfString(readString("Fecha: ")) mod 100 <= 30) /\\ 
+  *       (1 <= intOfString(readString("Fecha: ")) div 100 mod 100 /\\ 
+  *          intOfString(readString("Fecha: ")) div 100 mod 100 <= 12) /\\ 
+  *        intOfString(readString("Fecha: ")) div 10000 >= 2007) /\\ 
+  *    (esPrioridadValida(readInt("Prioridad: ")) == 
+  *       0 <= readInt("Prioridad: ") /\\ readInt("Prioridad: ") <= 5) /\\ 
+  *     (esFechaValida(intOfString(readString("Fecha: "))) == 
+  *       (1 <= intOfString(readString("Fecha: ")) mod 100 /\\ 
+  *          intOfString(readString("Fecha: ")) mod 100 <= 30) /\\ 
+  *        (1 <= intOfString(readString("Fecha: ")) div 100 mod 100 /\\ 
+  *           intOfString(readString("Fecha: ")) div 100 mod 100 <= 12) /\\ 
+  *         intOfString(readString("Fecha: ")) div 10000 >= 2007) ==> 
+  *   l < 10 /\\ 
+  *     esFechaValida(intOfString(readString("Fecha: "))) /\\ 
+  *      esPrioridadValida(readInt("Prioridad: ")) ==> 
+  *    esFechaValida(intOfString(readString("Fecha: ")))]
+  * Línea 546: El invariante se mantiene y decrece la cota - 6/12. id=50
+  * [l:int :: 
+  *  (esPrioridadValida(readInt("Prioridad: ")) == 
+  *      0 <= readInt("Prioridad: ") /\\ readInt("Prioridad: ") <= 5) /\\ 
+  *    (esFechaValida(intOfString(readString("Fecha: "))) == 
+  *      (1 <= intOfString(readString("Fecha: ")) mod 100 /\\ 
+  *         intOfString(readString("Fecha: ")) mod 100 <= 30) /\\ 
+  *       (1 <= intOfString(readString("Fecha: ")) div 100 mod 100 /\\ 
+  *          intOfString(readString("Fecha: ")) div 100 mod 100 <= 12) /\\ 
+  *        intOfString(readString("Fecha: ")) div 10000 >= 2007) ==> 
+  *   l < 10 /\\ 
+  *     esFechaValida(intOfString(readString("Fecha: "))) /\\ 
+  *      esPrioridadValida(readInt("Prioridad: ")) ==> 
+  *    0 <= readInt("Prioridad: ")]
+  * Línea 546: El invariante se mantiene y decrece la cota - 7/12. id=50
+  * [l:int :: 
+  *  (esPrioridadValida(readInt("Prioridad: ")) == 
+  *      0 <= readInt("Prioridad: ") /\\ readInt("Prioridad: ") <= 5) /\\ 
+  *    (esFechaValida(intOfString(readString("Fecha: "))) == 
+  *      (1 <= intOfString(readString("Fecha: ")) mod 100 /\\ 
+  *         intOfString(readString("Fecha: ")) mod 100 <= 30) /\\ 
+  *       (1 <= intOfString(readString("Fecha: ")) div 100 mod 100 /\\ 
+  *          intOfString(readString("Fecha: ")) div 100 mod 100 <= 12) /\\ 
+  *        intOfString(readString("Fecha: ")) div 10000 >= 2007) ==> 
+  *   l < 10 /\\ 
+  *     esFechaValida(intOfString(readString("Fecha: "))) /\\ 
+  *      esPrioridadValida(readInt("Prioridad: ")) ==> 
+  *    readInt("Prioridad: ") <= 5]
+  * Línea 546: El invariante se mantiene y decrece la cota - 8/12. id=50
+  * [l:int :: 
+  *  (esPrioridadValida(readInt("Prioridad: ")) == 
+  *      0 <= readInt("Prioridad: ") /\\ readInt("Prioridad: ") <= 5) /\\ 
+  *    (esFechaValida(intOfString(readString("Fecha: "))) == 
+  *      (1 <= intOfString(readString("Fecha: ")) mod 100 /\\ 
+  *         intOfString(readString("Fecha: ")) mod 100 <= 30) /\\ 
+  *       (1 <= intOfString(readString("Fecha: ")) div 100 mod 100 /\\ 
+  *          intOfString(readString("Fecha: ")) div 100 mod 100 <= 12) /\\ 
+  *        intOfString(readString("Fecha: ")) div 10000 >= 2007) ==> 
+  *   l < 10 /\\ 
+  *     esFechaValida(intOfString(readString("Fecha: "))) /\\ 
+  *      esPrioridadValida(readInt("Prioridad: ")) ==> 
+  *    0 < 10 - l]
+  * Línea 546: El invariante se mantiene y decrece la cota - 9/12. id=50
+  * [l:int :: 
+  *  (esFechaValida(intOfString(readString("Fecha: "))) == 
+  *     (1 <= intOfString(readString("Fecha: ")) mod 100 /\\ 
+  *        intOfString(readString("Fecha: ")) mod 100 <= 30) /\\ 
+  *      (1 <= intOfString(readString("Fecha: ")) div 100 mod 100 /\\ 
+  *         intOfString(readString("Fecha: ")) div 100 mod 100 <= 12) /\\ 
+  *       intOfString(readString("Fecha: ")) div 10000 >= 2007) ==> 
+  *   l < 10 /\\ ! esFechaValida(intOfString(readString("Fecha: "))) ==> 
+  *    0 <= 10 - (l + 1)]
+  * Línea 546: El invariante se mantiene y decrece la cota - 10/12. id=50
+  * [l:int :: 
+  *  (esPrioridadValida(readInt("Prioridad: ")) == 
+  *     0 <= readInt("Prioridad: ") /\\ readInt("Prioridad: ") <= 5) ==> 
+  *   l < 10 /\\ ! esPrioridadValida(readInt("Prioridad: ")) ==> 0 <= 10 - (l + 1)
+  * ]
+  * Línea 546: El invariante se mantiene y decrece la cota - 11/12. id=50
+  * [l:int :: 
+  *  (esFechaValida(intOfString(readString("Fecha: "))) == 
+  *     (1 <= intOfString(readString("Fecha: ")) mod 100 /\\ 
+  *        intOfString(readString("Fecha: ")) mod 100 <= 30) /\\ 
+  *      (1 <= intOfString(readString("Fecha: ")) div 100 mod 100 /\\ 
+  *         intOfString(readString("Fecha: ")) div 100 mod 100 <= 12) /\\ 
+  *       intOfString(readString("Fecha: ")) div 10000 >= 2007) ==> 
+  *   l < 10 /\\ ! esFechaValida(intOfString(readString("Fecha: "))) ==> 
+  *    10 - (l + 1) < 10 - l]
+  * Línea 546: El invariante se mantiene y decrece la cota - 12/12. id=50
+  * [l:int :: 
+  *  (esPrioridadValida(readInt("Prioridad: ")) == 
+  *     0 <= readInt("Prioridad: ") /\\ readInt("Prioridad: ") <= 5) ==> 
+  *   l < 10 /\\ ! esPrioridadValida(readInt("Prioridad: ")) ==> 
+  *    10 - (l + 1) < 10 - l]
+  * Línea 562: El invariante garantiza la postcondición a la salida - 1/8. id=51
+  * [l:int, numAgenda:int :: l >= 10 ==> 0 <= numAgenda]
+  * Línea 562: El invariante garantiza la postcondición a la salida - 2/8. id=51
+  * [Agendas=null, l:int, numAgenda:int :: l >= 10 ==> numAgenda < length(Agendas,0)
+  * ]
+  * Línea 562: El invariante garantiza la postcondición a la salida - 3/8. id=51
+  * [fh:String, l:int :: 
+  *  (esFechaValida(intOfString(fh)) == 
+  *     (1 <= intOfString(fh) mod 100 /\\ intOfString(fh) mod 100 <= 30) /\\ 
+  *      (1 <= intOfString(fh) div 100 mod 100 /\\ 
+  *         intOfString(fh) div 100 mod 100 <= 12) /\\ 
+  *       intOfString(fh) div 10000 >= 2007) ==> 
+  *   l >= 10 ==> esFechaValida(intOfString(fh))]
+  * Línea 562: El invariante garantiza la postcondición a la salida - 4/8. id=51
+  * [Agendas:array[] of Agenda, fh:String, l:int, numAgenda:int :: 
+  *  (esFechaValida(intOfString(fh)) ==> 
+  *     diaLibre(Agendas[numAgenda],fh) = 
+  *      (%forall i : 0 <= i < a.tam : fh != obtenerFecha(a.fechaHNombre[i][0]))) ==> 
+  *   l >= 10 ==> 
+  *    diaLibre(Agendas[numAgenda],fh) = true \\/ 
+  *     diaLibre(Agendas[numAgenda],fh) = false]
+  * Línea 562: El invariante garantiza la postcondición a la salida - 5/8. id=51
+  * [Agendas:array[] of Agenda, fh:String, k:int, l:int, numAgenda:int :: 
+  *  (esFechaValida(intOfString(fh)) ==> 
+  *     diaLibre(Agendas[numAgenda],fh) = 
+  *      (%forall i : 0 <= i < a.tam : fh != obtenerFecha(a.fechaHNombre[i][0]))) ==> 
+  *   l >= 10 /\\ diaLibre(Agendas[numAgenda],fh) = true ==> 0 <= 100000 - (k + 1)]
+  * Línea 562: El invariante garantiza la postcondición a la salida - 6/8. id=51
+  * [Agendas:array[] of Agenda, _C16=null, fh:String, k:int, l:int, numAgenda:int :: 
+  *  (esFechaValida(intOfString(fh)) ==> 
+  *     diaLibre(Agendas[numAgenda],fh) = 
+  *      (%forall i : 0 <= i < a.tam : fh != obtenerFecha(a.fechaHNombre[i][0]))) ==> 
+  *   l >= 10 /\\ diaLibre(Agendas[numAgenda],fh) = true ==> 100000 - (k + 1) < _C16
+  * ]
+  * Línea 562: El invariante garantiza la postcondición a la salida - 7/8. id=51
+  * [Agendas:array[] of Agenda, fh:String, k:int, l:int, numAgenda:int :: 
+  *  (esFechaValida(intOfString(fh)) ==> 
+  *     diaLibre(Agendas[numAgenda],fh) = 
+  *      (%forall i : 0 <= i < a.tam : fh != obtenerFecha(a.fechaHNombre[i][0]))) ==> 
+  *   l >= 10 /\\ diaLibre(Agendas[numAgenda],fh) = false ==> 0 <= 100000 - (k + 1)]
+  * Línea 562: El invariante garantiza la postcondición a la salida - 8/8. id=51
+  * [Agendas:array[] of Agenda, _C16=null, fh:String, k:int, l:int, numAgenda:int :: 
+  *  (esFechaValida(intOfString(fh)) ==> 
+  *     diaLibre(Agendas[numAgenda],fh) = 
+  *      (%forall i : 0 <= i < a.tam : fh != obtenerFecha(a.fechaHNombre[i][0]))) ==> 
+  *   l >= 10 /\\ diaLibre(Agendas[numAgenda],fh) = false ==> 
+  *    100000 - (k + 1) < _C16]
+  * Línea 562: El invariante se mantiene y decrece la cota - 1/9. id=52
+  * [l:int :: 
+  *  (esFechaValida(intOfString(readString("Fecha: "))) == 
+  *     (1 <= intOfString(readString("Fecha: ")) mod 100 /\\ 
+  *        intOfString(readString("Fecha: ")) mod 100 <= 30) /\\ 
+  *      (1 <= intOfString(readString("Fecha: ")) div 100 mod 100 /\\ 
+  *         intOfString(readString("Fecha: ")) div 100 mod 100 <= 12) /\\ 
+  *       intOfString(readString("Fecha: ")) div 10000 >= 2007) ==> 
+  *   l < 10 ==> 
+  *    esFechaValida(intOfString(readString("Fecha: "))) \\/ 
+  *     ! esFechaValida(intOfString(readString("Fecha: ")))]
+  * Línea 562: El invariante se mantiene y decrece la cota - 2/9. id=52
+  * [l:int, numAgenda:int :: 
+  *  (esFechaValida(intOfString(readString("Fecha: "))) == 
+  *     (1 <= intOfString(readString("Fecha: ")) mod 100 /\\ 
+  *        intOfString(readString("Fecha: ")) mod 100 <= 30) /\\ 
+  *      (1 <= intOfString(readString("Fecha: ")) div 100 mod 100 /\\ 
+  *         intOfString(readString("Fecha: ")) div 100 mod 100 <= 12) /\\ 
+  *       intOfString(readString("Fecha: ")) div 10000 >= 2007) ==> 
+  *   l < 10 /\\ esFechaValida(intOfString(readString("Fecha: "))) ==> 
+  *    0 <= numAgenda]
+  * Línea 562: El invariante se mantiene y decrece la cota - 3/9. id=52
+  * [Agendas=null, l:int, numAgenda:int :: 
+  *  (esFechaValida(intOfString(readString("Fecha: "))) == 
+  *     (1 <= intOfString(readString("Fecha: ")) mod 100 /\\ 
+  *        intOfString(readString("Fecha: ")) mod 100 <= 30) /\\ 
+  *      (1 <= intOfString(readString("Fecha: ")) div 100 mod 100 /\\ 
+  *         intOfString(readString("Fecha: ")) div 100 mod 100 <= 12) /\\ 
+  *       intOfString(readString("Fecha: ")) div 10000 >= 2007) ==> 
+  *   l < 10 /\\ esFechaValida(intOfString(readString("Fecha: "))) ==> 
+  *    numAgenda < length(Agendas,0)]
+  * Línea 562: El invariante se mantiene y decrece la cota - 4/9. id=52
+  * [l:int :: 
+  *  (esFechaValida(intOfString(readString("Fecha: "))) == 
+  *     (1 <= intOfString(readString("Fecha: ")) mod 100 /\\ 
+  *        intOfString(readString("Fecha: ")) mod 100 <= 30) /\\ 
+  *      (1 <= intOfString(readString("Fecha: ")) div 100 mod 100 /\\ 
+  *         intOfString(readString("Fecha: ")) div 100 mod 100 <= 12) /\\ 
+  *       intOfString(readString("Fecha: ")) div 10000 >= 2007) ==> 
+  *   l < 10 /\\ esFechaValida(intOfString(readString("Fecha: "))) ==> 
+  *    esFechaValida(intOfString(readString("Fecha: ")))]
+  * Línea 562: El invariante se mantiene y decrece la cota - 5/9. id=52
+  * [Agendas:array[] of Agenda, l:int, numAgenda:int :: 
+  *  (esFechaValida(intOfString(readString("Fecha: "))) ==> 
+  *      diaLibre(Agendas[numAgenda],readString("Fecha: ")) = 
+  *       (%forall i : 0 <= i < a.tam : 
+  *        readString("Fecha: ") != obtenerFecha(a.fechaHNombre[i][0]))) /\\ 
+  *    (esFechaValida(intOfString(readString("Fecha: "))) == 
+  *       (1 <= intOfString(readString("Fecha: ")) mod 100 /\\ 
+  *          intOfString(readString("Fecha: ")) mod 100 <= 30) /\\ 
+  *        (1 <= intOfString(readString("Fecha: ")) div 100 mod 100 /\\ 
+  *           intOfString(readString("Fecha: ")) div 100 mod 100 <= 12) /\\ 
+  *         intOfString(readString("Fecha: ")) div 10000 >= 2007) /\\ 
+  *     (esFechaValida(intOfString(readString("Fecha: "))) ==> 
+  *       diaLibre(Agendas[numAgenda],readString("Fecha: ")) = 
+  *        (%forall i : 0 <= i < a.tam : 
+  *         readString("Fecha: ") != obtenerFecha(a.fechaHNombre[i][0]))) ==> 
+  *   l < 10 /\\ esFechaValida(intOfString(readString("Fecha: "))) ==> 
+  *    diaLibre(Agendas[numAgenda],readString("Fecha: ")) = true \\/ 
+  *     diaLibre(Agendas[numAgenda],readString("Fecha: ")) = false]
+  * Línea 562: El invariante se mantiene y decrece la cota - 6/9. id=52
+  * [Agendas:array[] of Agenda, l:int, numAgenda:int :: 
+  *  (esFechaValida(intOfString(readString("Fecha: "))) ==> 
+  *      diaLibre(Agendas[numAgenda],readString("Fecha: ")) = 
+  *       (%forall i : 0 <= i < a.tam : 
+  *        readString("Fecha: ") != obtenerFecha(a.fechaHNombre[i][0]))) /\\ 
+  *    (esFechaValida(intOfString(readString("Fecha: "))) == 
+  *      (1 <= intOfString(readString("Fecha: ")) mod 100 /\\ 
+  *         intOfString(readString("Fecha: ")) mod 100 <= 30) /\\ 
+  *       (1 <= intOfString(readString("Fecha: ")) div 100 mod 100 /\\ 
+  *          intOfString(readString("Fecha: ")) div 100 mod 100 <= 12) /\\ 
+  *        intOfString(readString("Fecha: ")) div 10000 >= 2007) ==> 
+  *   l < 10 /\\ 
+  *     esFechaValida(intOfString(readString("Fecha: "))) /\\ 
+  *      diaLibre(Agendas[numAgenda],readString("Fecha: ")) = true ==> 
+  *    0 < 10 - l]
+  * Línea 562: El invariante se mantiene y decrece la cota - 7/9. id=52
+  * [Agendas:array[] of Agenda, l:int, numAgenda:int :: 
+  *  (esFechaValida(intOfString(readString("Fecha: "))) ==> 
+  *      diaLibre(Agendas[numAgenda],readString("Fecha: ")) = 
+  *       (%forall i : 0 <= i < a.tam : 
+  *        readString("Fecha: ") != obtenerFecha(a.fechaHNombre[i][0]))) /\\ 
+  *    (esFechaValida(intOfString(readString("Fecha: "))) == 
+  *      (1 <= intOfString(readString("Fecha: ")) mod 100 /\\ 
+  *         intOfString(readString("Fecha: ")) mod 100 <= 30) /\\ 
+  *       (1 <= intOfString(readString("Fecha: ")) div 100 mod 100 /\\ 
+  *          intOfString(readString("Fecha: ")) div 100 mod 100 <= 12) /\\ 
+  *        intOfString(readString("Fecha: ")) div 10000 >= 2007) ==> 
+  *   l < 10 /\\ 
+  *     esFechaValida(intOfString(readString("Fecha: "))) /\\ 
+  *      diaLibre(Agendas[numAgenda],readString("Fecha: ")) = false ==> 
+  *    0 < 10 - l]
+  * Línea 562: El invariante se mantiene y decrece la cota - 8/9. id=52
+  * [l:int :: 
+  *  (esFechaValida(intOfString(readString("Fecha: "))) == 
+  *     (1 <= intOfString(readString("Fecha: ")) mod 100 /\\ 
+  *        intOfString(readString("Fecha: ")) mod 100 <= 30) /\\ 
+  *      (1 <= intOfString(readString("Fecha: ")) div 100 mod 100 /\\ 
+  *         intOfString(readString("Fecha: ")) div 100 mod 100 <= 12) /\\ 
+  *       intOfString(readString("Fecha: ")) div 10000 >= 2007) ==> 
+  *   l < 10 /\\ ! esFechaValida(intOfString(readString("Fecha: "))) ==> 
+  *    0 <= 10 - (l + 1)]
+  * Línea 562: El invariante se mantiene y decrece la cota - 9/9. id=52
+  * [l:int :: 
+  *  (esFechaValida(intOfString(readString("Fecha: "))) == 
+  *     (1 <= intOfString(readString("Fecha: ")) mod 100 /\\ 
+  *        intOfString(readString("Fecha: ")) mod 100 <= 30) /\\ 
+  *      (1 <= intOfString(readString("Fecha: ")) div 100 mod 100 /\\ 
+  *         intOfString(readString("Fecha: ")) div 100 mod 100 <= 12) /\\ 
+  *       intOfString(readString("Fecha: ")) div 10000 >= 2007) ==> 
+  *   l < 10 /\\ ! esFechaValida(intOfString(readString("Fecha: "))) ==> 
+  *    10 - (l + 1) < 10 - l]
+  * Línea 586: El invariante garantiza la postcondición a la salida - 1/2. id=53
+  * [k:int, l:int :: l >= 10 ==> 0 <= 100000 - (k + 1)]
+  * Línea 586: El invariante garantiza la postcondición a la salida - 2/2. id=53
+  * [_C16=null, k:int, l:int :: l >= 10 ==> 100000 - (k + 1) < _C16]
+  * Línea 586: El invariante se mantiene y decrece la cota - 1/7. id=54
+  * [l:int :: 
+  *  (esFechaValida(intOfString(readString("Fecha: "))) == 
+  *     (1 <= intOfString(readString("Fecha: ")) mod 100 /\\ 
+  *        intOfString(readString("Fecha: ")) mod 100 <= 30) /\\ 
+  *      (1 <= intOfString(readString("Fecha: ")) div 100 mod 100 /\\ 
+  *         intOfString(readString("Fecha: ")) div 100 mod 100 <= 12) /\\ 
+  *       intOfString(readString("Fecha: ")) div 10000 >= 2007) ==> 
+  *   l < 10 ==> 
+  *    esFechaValida(intOfString(readString("Fecha: "))) \\/ 
+  *     ! esFechaValida(intOfString(readString("Fecha: ")))]
+  * Línea 586: El invariante se mantiene y decrece la cota - 2/7. id=54
+  * [l:int, numAgenda:int :: 
+  *  (esFechaValida(intOfString(readString("Fecha: "))) == 
+  *     (1 <= intOfString(readString("Fecha: ")) mod 100 /\\ 
+  *        intOfString(readString("Fecha: ")) mod 100 <= 30) /\\ 
+  *      (1 <= intOfString(readString("Fecha: ")) div 100 mod 100 /\\ 
+  *         intOfString(readString("Fecha: ")) div 100 mod 100 <= 12) /\\ 
+  *       intOfString(readString("Fecha: ")) div 10000 >= 2007) ==> 
+  *   l < 10 /\\ esFechaValida(intOfString(readString("Fecha: "))) ==> 
+  *    0 <= numAgenda]
+  * Línea 586: El invariante se mantiene y decrece la cota - 3/7. id=54
+  * [Agendas=null, l:int, numAgenda:int :: 
+  *  (esFechaValida(intOfString(readString("Fecha: "))) == 
+  *     (1 <= intOfString(readString("Fecha: ")) mod 100 /\\ 
+  *        intOfString(readString("Fecha: ")) mod 100 <= 30) /\\ 
+  *      (1 <= intOfString(readString("Fecha: ")) div 100 mod 100 /\\ 
+  *         intOfString(readString("Fecha: ")) div 100 mod 100 <= 12) /\\ 
+  *       intOfString(readString("Fecha: ")) div 10000 >= 2007) ==> 
+  *   l < 10 /\\ esFechaValida(intOfString(readString("Fecha: "))) ==> 
+  *    numAgenda < length(Agendas,0)]
+  * Línea 586: El invariante se mantiene y decrece la cota - 4/7. id=54
+  * [l:int :: 
+  *  (esFechaValida(intOfString(readString("Fecha: "))) == 
+  *     (1 <= intOfString(readString("Fecha: ")) mod 100 /\\ 
+  *        intOfString(readString("Fecha: ")) mod 100 <= 30) /\\ 
+  *      (1 <= intOfString(readString("Fecha: ")) div 100 mod 100 /\\ 
+  *         intOfString(readString("Fecha: ")) div 100 mod 100 <= 12) /\\ 
+  *       intOfString(readString("Fecha: ")) div 10000 >= 2007) ==> 
+  *   l < 10 /\\ esFechaValida(intOfString(readString("Fecha: "))) ==> 
+  *    esFechaValida(intOfString(readString("Fecha: ")))]
+  * Línea 586: El invariante se mantiene y decrece la cota - 5/7. id=54
+  * [l:int :: 
+  *  (esFechaValida(intOfString(readString("Fecha: "))) == 
+  *     (1 <= intOfString(readString("Fecha: ")) mod 100 /\\ 
+  *        intOfString(readString("Fecha: ")) mod 100 <= 30) /\\ 
+  *      (1 <= intOfString(readString("Fecha: ")) div 100 mod 100 /\\ 
+  *         intOfString(readString("Fecha: ")) div 100 mod 100 <= 12) /\\ 
+  *       intOfString(readString("Fecha: ")) div 10000 >= 2007) ==> 
+  *   l < 10 /\\ esFechaValida(intOfString(readString("Fecha: "))) ==> 0 < 10 - l]
+  * Línea 586: El invariante se mantiene y decrece la cota - 6/7. id=54
+  * [l:int :: 
+  *  (esFechaValida(intOfString(readString("Fecha: "))) == 
+  *     (1 <= intOfString(readString("Fecha: ")) mod 100 /\\ 
+  *        intOfString(readString("Fecha: ")) mod 100 <= 30) /\\ 
+  *      (1 <= intOfString(readString("Fecha: ")) div 100 mod 100 /\\ 
+  *         intOfString(readString("Fecha: ")) div 100 mod 100 <= 12) /\\ 
+  *       intOfString(readString("Fecha: ")) div 10000 >= 2007) ==> 
+  *   l < 10 /\\ ! esFechaValida(intOfString(readString("Fecha: "))) ==> 
+  *    0 <= 10 - (l + 1)]
+  * Línea 586: El invariante se mantiene y decrece la cota - 7/7. id=54
+  * [l:int :: 
+  *  (esFechaValida(intOfString(readString("Fecha: "))) == 
+  *     (1 <= intOfString(readString("Fecha: ")) mod 100 /\\ 
+  *        intOfString(readString("Fecha: ")) mod 100 <= 30) /\\ 
+  *      (1 <= intOfString(readString("Fecha: ")) div 100 mod 100 /\\ 
+  *         intOfString(readString("Fecha: ")) div 100 mod 100 <= 12) /\\ 
+  *       intOfString(readString("Fecha: ")) div 10000 >= 2007) ==> 
+  *   l < 10 /\\ ! esFechaValida(intOfString(readString("Fecha: "))) ==> 
+  *    10 - (l + 1) < 10 - l]
+  */

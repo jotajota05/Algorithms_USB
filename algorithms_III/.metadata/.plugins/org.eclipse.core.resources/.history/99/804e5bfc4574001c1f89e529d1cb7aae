@@ -1,0 +1,46 @@
+import java.io.IOException;
+public class GrafoCliente {
+
+	public static void main (String[] args) throws IOException {
+		
+		/*Grafo G=new DIGrafo();
+		Vertice v=new Vertice("hola");
+		Vertice w=new Vertice("chao");
+		G.agregarVertice(v);
+		G.agregarVertice(w);
+		System.out.println(G.Vertices().size());
+		G.eliminarVertice(v);
+		System.out.println(G.Vertices().size());*/
+		Archivo A=new Archivo("grafo.txt");
+		Grafo G=A.leerGrafo();
+		System.out.println(G.Tipo());
+		System.out.println(G.Vertices().size());
+		System.out.println(G.Lados().size());
+		Vertice V=new Vertice("6");
+		G.eliminarVertice(V);
+		System.out.println("Vertices al final"+G.Vertices().size());
+		/*Vertice V0=new Vertice("Jotis");
+		Vertice V1=new Vertice("yo");
+		Vertice V2=new Vertice("tu");
+		G.agregarVertice(V);
+		G.agregarVertice(V0);
+		G.agregarVertice(V1);
+		G.agregarVertice(V2);
+		Lado l1=new Arista("e0",V,V0,1);
+		Lado l2=new Arista("e1",V0,V1,1);
+		Lado l3=new Arista("e2",V2,V0,1);
+		Lado l4=new Arista("e3",V,V1,1);
+		G.agregarLado(l1);
+		G.agregarLado(l2);
+		G.agregarLado(l3);
+		//System.out.println(G.Vertices().size());
+		//System.out.println(G.Lados().size());
+		G.agregarLado(l4);
+		LinkedList<Vertice> list=V0.crearListAdj(G);
+		LinkedList<Vertice> list2=V.crearListAdj(G);
+		System.out.println(list.size());
+		System.out.println(list2.size());*/
+		
+		
+	}
+}

@@ -1,0 +1,9 @@
+public abstract class Graph 
+{
+    public abstract int V();
+    public abstract int E();
+    public abstract boolean directed();
+    public abstract void insert(Edge e);
+    public abstract void remove(Edge e);
+    public abstract AdjList getAdjList(int v);
+}

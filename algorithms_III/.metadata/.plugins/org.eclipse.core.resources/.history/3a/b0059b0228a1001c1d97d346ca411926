@@ -1,0 +1,136 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
+/**Clase que permite leerun grafo desde un archivo de texto y permite representar un 
+ *grafo*/
+public class Archivo {
+	
+	/**Campo identificador del archivo que se va a leer*/
+	public String nomArchivo;
+	
+	/**Constructor de la clase*/
+	public Archivo(String nomArchivo) {
+		this.nomArchivo = nomArchivo;
+	}
+	
+	/**Metodo para leer un grafo de un archivo de texto*/
+	public void leerGrafoProblema1() throws IOException {
+		NDGrafo G = new NDGrafo();
+    	int i;
+    	int numPruebas=0,numPtos=0;
+    	double coorX=0,coorY=0;
+
+    	// Se pasa el nombre del archivo por la linea de comando
+    	BufferedReader in = new BufferedReader( new FileReader(nomArchivo) );
+    	String s;
+    	String[] tok;
+    	
+		// Se lee el numero de pruebas
+		if( (s = in.readLine()) != null ){
+		tok = s.split("\\b\\s");
+		numPruebas = Integer.valueOf( tok[0].trim() ).intValue();
+		}
+
+		for(int j=0;j<numPruebas;j++) {
+			
+			G = new NDGrafo();
+			s=in.readLine();
+			if (s.equals("")) System.out.println("\nPRUEBA #"+(j+1)+"\n");
+			
+			// Se lee el numero de puntos
+			if( (s = in.readLine()) != null ){
+			tok = s.split("\\b\\s");
+			numPtos = Integer.valueOf( tok[0].trim() ).intValue();
+			}
+			
+			if (numPtos<=0 || numPtos>100) {
+				System.out.println("La prueba "+(j+1)+" no se puede realizar pq el numero de puntos es menor que 0 o mayor que 100");
+				continue;
+			}
+					
+			// Se leen los ptos de los vertices del grafo
+			for( i = 0; i < numPtos; i++ ){
+				if( (s = in.readLine()) != null ){
+					tok = s.split("\\b\\s");
+					coorX = (new Double(tok[0].trim())).doubleValue();
+					coorY = (new Double(tok[1].trim())).doubleValue();
+					G.agregarVertice(new Punto(""+i,coorX,coorY));
+				}
+			}
+			
+			Problema1 P=new Problema1(G);
+			System.out.print("La longitud minima necesaria para unir ");
+			System.out.println("todos los vertices es: "+P.longitud()+"\n");
+		}
+	
+    	in.close();
+    	
+	}
+	
+	public Grafo leerGrafoProblema2() throws IOException {
+		Grafo G = new DIGrafo();
+    	int numAct=0,numArcos=0,i=0;
+    	String VertIni,VertFin,IdArco;
+    	double costo;
+
+    	// Se pasa el nombre del archivo por la linea de comando
+    	BufferedReader in = new BufferedReader( new FileReader(nomArchivo) );
+    	String s;
+    	String[] tok;
+    	
+    	// Se lee el numero de actividades
+    	if( (s = in.readLine()) != null ){
+    	    tok = s.split("\\b\\s");
+    	    numAct = Integer.valueOf( tok[0].trim() ).intValue();
+    	    System.out.println( "Numero de actividades: "+tok[0].trim() );
+    	}
+    	
+    	// Se leen las actividades
+    	for( i = 0; i < numAct; i++ ){
+    	    if( (s = in.readLine()) != null ){
+    		tok = s.split("\\b\\s");
+    		System.out.println( "Actividad "+(i+1)+": "+tok[0].trim());
+    		G.agregarVertice(new Actividad(tok[0].trim()));
+    	    }
+    	}
+
+    	// Se lee el numero de arcos
+    	if( (s = in.readLine()) != null ){
+    	    tok = s.split("\\b\\s");
+    	    numArcos = Integer.valueOf( tok[0].trim() ).intValue();
+    	    System.out.println( "Numero de arcos: "+tok[0].trim() );
+    	}
+
+    	// Se leen los arcos del grafo
+    	for( i = 0; i < numArcos; i++ ){
+    	    if( (s = in.readLine()) != null ){
+    		tok = s.split("\\b\\s");
+    		System.out.println(tok[0].trim()+" "+tok[1].trim()+" "+tok[2].trim()+" "+tok[3].trim());
+    		IdArco = tok[0].trim();
+    		VertIni = tok[1].trim();
+    		VertFin = tok[2].trim();
+    		costo = Double.valueOf(tok[3].trim()).doubleValue();
+    		G.agregarLado(new Arco(IdArco,G.obtVert(VertIni),G.obtVert(VertFin),costo));
+    	    }
+    	}
+    	
+    	//Se lee el vertice inicial y final
+    	if( (s = in.readLine()) != null ){
+            tok = s.split("\\b\\s");
+            System.out.println( "Vertice inicial: "+tok[0].trim() );
+            System.out.println( "Vertice final: "+tok[1].trim() );
+            ((DIGrafo)G).modVertIni(tok[0].trim());
+            ((DIGrafo)G).modVertFin(tok[1].trim());
+        }
+    	
+    	System.out.println( "\n*** Fin de la lectura del archivo "+nomArchivo+" ***\n" );
+    	in.close();
+    	
+    	for (int k=0;k<G.Vertices().size();k++) 
+			((Actividad)G.Vertices().get(k)).modGrado(((DIGrafo)G).gradoInt(G.Vertices().get(k)));
+    
+    	return G;
+	}
+	
+}

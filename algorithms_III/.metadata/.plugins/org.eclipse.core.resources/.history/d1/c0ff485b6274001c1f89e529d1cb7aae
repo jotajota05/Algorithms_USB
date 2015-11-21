@@ -1,0 +1,180 @@
+import java.util.*;
+
+public class DIGrafo extends Grafo {
+	
+	public String id;
+	public LinkedList<Vertice> cjtoVertices;
+	public LinkedList<Lado> cjtoLados;
+	public LinkedList<LinkedList<String>> listaDeAd;
+	
+	public DIGrafo() {
+		id = "Digrafo";
+		cjtoVertices = new LinkedList<Vertice>();
+		cjtoLados = new LinkedList<Lado>();
+		listaDeAd = new LinkedList<LinkedList<String>>();
+	}
+	
+	public String Tipo() {
+		return id;
+	}
+	
+	public Grafo agregarVertice(Vertice v){
+		boolean existe=false;
+		for(int i=0;i<cjtoVertices.size()&&!existe;i++) 
+			existe=v.id.equals(cjtoVertices.get(i).id);
+		if (!existe) cjtoVertices.addFirst(v);
+		else System.out.println("Este vertice ya existe en el grafo");
+		return this;
+	}
+	
+	public Grafo eliminarVertice(Vertice v) {
+		int i = cjtoVertices.indexOf(v);
+		cjtoVertices.remove(i);
+		LinkedList<Lado> list=incidentes(v);
+		for(int j=0;j<list.size();j++) eliminarLado(list.get(j));
+		return this;
+	}
+	
+	public Grafo modificarVertice(Vertice v) {
+		return this;
+	}
+	
+	public int grado(Vertice v) {
+		return this.incidentes(v).size();
+	}
+	
+	public int gradoInt(Vertice v) {
+		LinkedList<Lado> lados = this.Lados();
+		int gradoInt = 0;
+		for (int i = 0;i<lados.size();i++){
+			if (lados.get(i).vertFin()==v) gradoInt++;
+		}	
+		return gradoInt;
+	}
+	
+	public int gradoExt(Vertice v) {
+		LinkedList<Lado> lados = this.Lados();
+		int gradoExt = 0;
+		for (int i = 0;i<lados.size();i++){
+			if (lados.get(i).vertIni()==v) gradoExt++;
+		}	
+		return gradoExt;
+	}
+	
+	public LinkedList<Vertice> Vertices() {
+		return cjtoVertices;
+	}
+	
+	public LinkedList<Lado> Lados() {
+		return cjtoLados;
+	}
+	
+	public Grafo agregarLado(Lado l) {
+		boolean existe=false;
+		for(int i=0;i<cjtoLados.size()&&!existe;i++)
+			existe=cjtoLados.get(i).identificador().equals(l.identificador())||
+				   (cjtoLados.get(i).vertIni().id.equals(l.vertIni().id)&&
+					cjtoLados.get(i).vertFin().id.equals(l.vertFin().id));
+		if (!existe) cjtoLados.addFirst(l);
+		else System.out.println("Este arco ya existe en el grafo");
+		return this;
+	}
+	
+	public Grafo eliminarLado(Lado l) {
+		int i=cjtoLados.indexOf(l);
+		cjtoLados.remove(i);
+		return this;
+	}
+	
+	public Grafo modificarLado(Lado l) {
+		System.out.println("Datos del lado que puede modificar: ");
+		System.out.println("1)Identificador");
+		System.out.println("2)Vertice inicial");
+		System.out.println("3)Vertice final");
+		System.out.println("4)Peso");
+		int opcion = Console.readInt("Indique el numero del dato que desea modificar: ");
+		String nuevoDato;
+		int nuevoPeso;
+		Lado ladoModificado = null;
+		int i;
+		boolean b = false;
+		Vertice nuevoVert = null;
+		switch (opcion){
+			case 1:
+				nuevoDato = Console.readString("Indique el nuevo identificador: ");
+				ladoModificado = new Arco(nuevoDato,l.vertIni(),l.vertFin(),l.peso());
+				System.out.println("id lado modificado: "+ladoModificado.identificador());
+				break;
+			case 2:
+				nuevoDato = Console.readString("Indique el identificador del nuevo Vertice Inicial: ");
+				for (i=0;i<cjtoVertices.size()&&!b;i++){
+					if (cjtoVertices.get(i).id==nuevoDato){  
+						nuevoVert = cjtoVertices.get(i);
+						b = true;
+					}		
+				}
+				if (b)
+				ladoModificado = new Arco(l.identificador(),nuevoVert,l.vertFin(),l.peso());
+				else System.out.println("El vertice que introdujo no pertenece al grafo.");
+				break;
+				
+			case 3:	
+				nuevoDato = Console.readString("Indique el identificador del nuevo Vertice Final: ");
+				for (i=0;i<cjtoVertices.size()&&!b;i++){
+					if (cjtoVertices.get(i).id==nuevoDato){  
+						nuevoVert = cjtoVertices.get(i);
+						b = true;
+					}		
+				}
+				if (b)
+				ladoModificado = new Arco(l.identificador(),l.vertIni(),nuevoVert,l.peso());
+				else System.out.println("El vertice que introdujo no pertenece al grafo.");
+				break;
+			case 4:
+				nuevoPeso = Console.readInt("Indique el nuevo peso: ");
+				ladoModificado = new Arco(l.identificador(),l.vertIni(),l.vertFin(),nuevoPeso);
+				break;
+			default:
+				System.out.print("La opcion no es valida.");
+		}
+		if (ladoModificado!=null){
+		i=this.Lados().indexOf(l);
+		this.Lados().remove(i);
+		this.Lados().add(i,ladoModificado);
+		System.out.println(this.Lados().size());
+		}
+		return this;
+	}
+	
+	
+	public LinkedList<Vertice> adyacentes(Vertice v) {
+		LinkedList<Vertice> list2 = new LinkedList<Vertice>();
+		for(int i=0;i<Vertices().size();i++) {
+			if (v.esLado(this,v,Vertices().get(i))) {
+				list2.addFirst(Vertices().get(i));
+			}
+		}
+		return list2;
+	}
+	
+	public LinkedList<Lado> incidentes(Vertice v) {
+		LinkedList<Lado> ladosInc = new LinkedList<Lado>();
+		for (int i = 0;i<Lados().size();i++){
+			System.out.println("entra en el for con"+i);
+			if (Lados().get(i).vertIni().id.equals(v.id)||
+				Lados().get(i).vertFin().id.equals(v.id))
+				ladosInc.addFirst(Lados().get(i));
+		}
+	
+		return ladosInc;
+	}
+	
+	public LinkedList<Vertice> sucesores(Vertice v) {
+		return null;
+	}
+	
+	public LinkedList<Vertice> predecesores(Vertice v) {
+		return null;
+	}
+	
+}

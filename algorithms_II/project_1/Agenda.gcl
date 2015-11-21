@@ -1,0 +1,685 @@
+data type Agenda
+
+|[
+
+//MODELO DE REPRESENTACION
+	const MAX : int
+	var fechaHNombre : array[MAX][2]of String
+	var duracionPrioridad : array[MAX][2]of int
+	var tam : int
+	
+//INVARIANTE DE REPRESENTACION
+	
+	{inv (0<=tam<=MAX)/\(MAX>0)/\(length(fechaHNombre,0)=MAX)/\(length(fechaHNombre,1)=2)
+	/\(length(duracionPrioridad,0)=MAX)/\(length(duracionPrioridad,1)=2)/\
+	(%forall i:0<=i<tam:fechaHNombre[i][0]<fechaHNombre[i+1][0])/\
+	(%forall i:0<=i<tam:0<=duracionPrioridad[i][1]<=5)/\
+	(%forall i:0<=i<tam:duracionValida(fechaHNombre[i][0],duracionPrioridad[i][0]))/\
+	(%forall i:0<=i<tam:fechaHoraValida(fechaHNombre[i][0]))/\
+	(%forall i:0<=i<tam:fechaHNombre[i][1]!="")}
+	/*(%forall i:0<=i<tam:!(%exists j:(0<=j<tam)/\
+	(j!=i):seSolapan(fechaHNombre[i][0],duracionPrioridad[i][0], 
+		             fechaHNombre[j][0],duracionPrioridad[j][0])))*/
+	
+//RELACION DE ACOPLAMIENTO
+
+	implements Agenda {
+	nombre = {%set i : 0<=i<tam : fechaHValida[i][0],fechaHValida[i][1]},
+	duracion = {%set i : 0<=i<tam : fechaHValida[i][0],duracionPrioridad[i][0]},
+	prioridad = {%set i : 0<=i<tam : fechaHValida[i][0],duracionPrioridad[i][1]}
+}
+
+//OPERACIONES
+
+//FUNCION PARA CREAR UNA AGENDA NUEVA
+
+	fun nuevaAgenda : (m:int) -> Agenda
+	{pre m>0}
+	{post (nuevaAgenda.MAX=m)/\(nuevaAgenda.tam=0)}
+	= Agenda(m,%[i,j :m,2:""]%,%[f,c:m,2: 0 ]%,0)
+	
+//PROCEDIMIENTO PARA AGREGAR UNA ACTIVIDAD
+
+	proc agregarActividad : (in a:Agenda,in fechaHora:String, in duracion:int, 
+							 in prioridad:int, in nombre:String)
+	{pre fechaHoraValida(fechaHora)/\(duracionValida(fechaHora, duracion))/\
+	(0<=prioridad<=5)/\(nombre !="")/\(a.tam < a.MAX)/\!(choca(a,fechaHora,duracion))}
+	{post /*(a.tam=a.tam+1)/\*/
+	(%exists i:0<=i<a.tam:(a.fechaHNombre[i][0]=fechaHora)/\
+	(a.fechaHNombre[i][1] = nombre)/\(a.duracionPrioridad[i][0] = duracion)/\
+	(a.duracionPrioridad[i][1] = prioridad))/*/\
+	(%forall i:0<=i<a0.tam:(%exists j:0<=j<a.tam:
+	(a0.fechaHNombre[i][0]=a.fechaHNombre[j][0])/\
+	(a0.fechaHNombre[i][1] = a.fechaHNombre[j][1])/\
+	(a0.duracionPrioridad[i][0] = a.duracionPrioridad[j][0])/\
+	(a0.duracionPrioridad[i][1] = a.duracionPrioridad[j][1])))*/}
+|[
+		var k:=a.tam-1:int;
+		var j:=0:int;
+		if a.tam<a.MAX ->	
+			a.tam:=a.tam+1;
+			if (a.fechaHNombre[0][0]!="") ->
+				{inv -1<=k<a.tam}
+				{bound k+1}
+				do k>=0  -> 
+					if fechaHora<=a.fechaHNombre[k][0] ->
+						j:=k;
+						{inv /*(%forall j:0<=j<=k:
+							 a.fechaHNombre[j+1][0]=a.fechaHNombre'[j][0]/\
+							 a.fechaHNombre[j+1][1]=a.fechaHNombre'[j][1]/\
+							 a.duracionPrioridad[j+1][0]=a.duracionPrioridad'[j][0]/\
+							 a.duracionPrioridad[j+1][1]=a.duracionPrioridad'[j][1])/\
+							 (0<=j<=k)*/true}
+						{bound j+1}
+						do j>=k ->  
+						   a.fechaHNombre[j+1][0]:=a.fechaHNombre[j][0];
+						   a.fechaHNombre[j+1][1]:=a.fechaHNombre[j][1];
+						   a.duracionPrioridad[j+1][0]:=a.duracionPrioridad[j][0];
+						   a.duracionPrioridad[j+1][1]:=a.duracionPrioridad[j][1];
+						   j:=j-1
+						od;
+						a.fechaHNombre[k][0]:=fechaHora;
+						a.fechaHNombre[k][1]:=nombre;
+						a.duracionPrioridad[k][0]:=duracion;
+						a.duracionPrioridad[k][1]:=prioridad
+					| fechaHora>a.fechaHNombre[k][0] -> skip
+					fi;
+					k:=k-1
+				od;
+				if a.fechaHNombre[a.tam-1][0]="" -> 
+					a.fechaHNombre[a.tam-1][0]:=fechaHora;
+					a.fechaHNombre[a.tam-1][1]:=nombre;
+					a.duracionPrioridad[a.tam-1][0]:=duracion;
+					a.duracionPrioridad[a.tam-1][1]:=prioridad
+				| a.fechaHNombre[a.tam-1][0]!="" -> skip
+				fi
+			| (a.fechaHNombre[0][0]="") ->  a.fechaHNombre[0][0]:=fechaHora;
+											a.fechaHNombre[0][1]:=nombre;
+											a.duracionPrioridad[0][0]:=duracion;
+											a.duracionPrioridad[0][1]:=prioridad
+			fi
+		| a.tam>=a.MAX -> write("La agenda esta llena")
+		fi
+        ]|
+	
+//PROCEDIMIENTO PARA ELIMINAR UNA ACTIVIDAD
+
+	proc eliminarActividad : (in out a:Agenda, in fechaHora:String)
+	{pre (%exists i:0<=i<a.tam:a.fechaHNombre[i][0]=fechaHora)}
+|[
+	var i:=0:int;
+	var j:=0:int;
+	if a.tam<=0 -> write("La agenda no contiene actividades")
+	| a.tam>0 ->  
+		{inv 0<=i<=a.tam/\(%forall k:0<=k<i:a.fechaHNombre[k][0]!=fechaHora)\/
+		     a.fechaHNombre[0][0]=fechaHora}
+		{bound a.tam-i}
+		do i<a.tam -> if a.fechaHNombre[i][0]!=fechaHora -> i:=i+1
+					|  a.fechaHNombre[i][0]=fechaHora -> j:=i;
+					   {inv /*(%forall k:0<=k<a.tam-1:
+							 a.fechaHNombre[k][0]=a.fechaHNombre'[k+1][0]/\
+							 a.fechaHNombre[k][1]=a.fechaHNombre'[k+1][1]/\
+							 a.duracionPrioridad[k][0]=a.duracionPrioridad'[k+1][0]/\
+							 a.duracionPrioridad[k][1]=a.duracionPrioridad'[k+1][1])/\
+							 (0<=h<a.tam-1)*/true}
+					   {bound a.tam-j-1}
+					   do j<a.tam-1 ->
+						 a.fechaHNombre[j][0]:=a.fechaHNombre[j+1][0];
+						 a.fechaHNombre[j][1]:=a.fechaHNombre[j+1][1];
+						 a.duracionPrioridad[j][0]:=a.duracionPrioridad[j+1][0];
+						 a.duracionPrioridad[j][1]:=a.duracionPrioridad[j+1][1];
+						 j:=j+1
+					   od
+					   ;i:=a.tam
+					fi
+		od;
+		a.tam:=a.tam-1
+	fi
+]|
+
+	
+//PROCEDIMIENTO PARA LISTAR LAS ACTIVIDADES EN UN DIA
+
+	proc listarActividades : (in a:Agenda, in fecha:String )
+	{pre esFechaValida(intOfString(fecha))}
+	/*{ post Esta escrita en pantalla la secuencia ordenada sin repeticiones formada por
+    	los elementos del conjunto
+		{i : (0<=i<a.tam)/\(fecha+"0600")<=a.fechaHNombre[i][0]<=(fecha+"2200"):
+		(a.fechaHNombre[i][0],a.fechaHNombre[i][1],
+		a.duracionPrioridad[i][0],a.duracionPrioridad[i][1])}}*/
+|[
+	var i:=0:int;
+	var j:=0:int;
+	
+	if a.tam>0 ->
+		if diaLibre(a,fecha) -> write("No hay actividades programadas para ese dia")
+		| !diaLibre(a,fecha) ->
+		 {inv 0<=i<=a.tam/\(%forall k:0<=k<i:obtenerFecha(a.fechaHNombre[k][0])!=fecha)\/
+			  obtenerFecha(a.fechaHNombre[0][0])=fecha}{bound a.tam-i}
+		 do i<a.tam -> 
+		    if obtenerFecha(a.fechaHNombre[i][0])!=fecha -> i:=i+1
+	        |  obtenerFecha(a.fechaHNombre[i][0])=fecha -> 
+	            {inv 0<=j<=cantidadActDia(a,fecha)}
+				{bound cantidadActDia(a,fecha)-j}
+	            do j<cantidadActDia(a,fecha) ->
+	            write(a.fechaHNombre[j][0]+" "+a.fechaHNombre[j][1]);
+	            j:=j+1
+	            od;i:=a.tam
+			fi		
+		 od
+	    fi	
+	| a.tam=0 -> write("No existen actividades que listar")
+	fi
+]|
+			 
+//FUNCION PARA BUSCAR UNA ACTIVIDAD
+
+    fun buscarActividad : (a:Agenda, fechaHora:String) -> String
+	{pre fechaHoraValida(fechaHora)}
+|[
+	var k:=0:int;
+	var nombre:="":String;
+	{inv 0<=k<=a.tam/\((%forall i:0<=i<k:a.fechaHNombre[i][0]!=fechaHora)\/
+	                    a.fechaHNombre[0][0]=fechaHora)}
+	{bound a.tam-k}
+	do (k<a.tam)/\(a.fechaHNombre[k][0]!=fechaHora) -> k:=k+1
+	od;
+	if k<a.tam -> nombre:="La actividad programada es: "+a.fechaHNombre[k][1]
+	| k>=a.tam -> nombre:="Para esta fecha no hay actividad asignada"
+	fi >> nombre
+]|
+
+//PROCEDIMIENTO PARA INCLUIR UNA ACTIVIDAD
+
+	proc incluirActividades : (in out a1:Agenda, in a2:Agenda)
+   {pre !(%exists i:0<=i<a1.tam:choca(a2,a1.fechaHNombre[i][0],a1.duracionPrioridad[i][0]))
+		 /\(a1.tam+a2.tam<=a1.MAX)}
+	{post /*(a1.tam=a1.tam+a2.tam)/\*/(%forall k:0<=k<a2.tam:(%exists i:0<=i<a1.tam:
+	      (a1.fechaHNombre[i][0]=a2.fechaHNombre[k][0])/\
+		  (a1.fechaHNombre[i][1]=a2.fechaHNombre[k][1])/\
+		  (a1.duracionPrioridad[i][0]=a2.duracionPrioridad[k][0])/\
+		  (a1.duracionPrioridad[i][1]=a2.duracionPrioridad[k][1])))/*/\
+		  (%forall i:0<=i<a10.tam:(%exists j:0<=j<a1.tam:
+		  (a10.fechaHNombre[i][0]=a1.fechaHNombre[j][0])/\
+		  (a10.fechaHNombre[i][1]=a1.fechaHNombre[j][1])/\
+		  (a10.duracionPrioridad[i][0]=a1.duracionPrioridad[j][0])/\
+		  (a10.duracionPrioridad[i][1]=a1.duracionPrioridad[j][1])))*/}
+           
+|[
+	var k:=0:int;
+	{inv 0<=k<=a2.tam/\(%forall i:0<=i<k:(%exists j:0<=j<a1.tam:
+	                    a1.fechaHNombre[j][0]=a2.fechaHNombre[i][0]/\
+						a1.fechaHNombre[j][1]=a2.fechaHNombre[i][1]/\
+						a1.duracionPrioridad[j][0]=a2.duracionPrioridad[i][0]/\
+						a1.duracionPrioridad[j][0]=a2.duracionPrioridad[i][0]))}
+	{bound a2.tam-k}
+	do k<a2.tam -> agregarActividad(a1,a2.fechaHNombre[k][0],a2.duracionPrioridad[k][0],
+									a2.duracionPrioridad[k][1],a2.fechaHNombre[k][1]);
+					k:=k+1
+	od
+]|
+		  
+//PROCEDIMIENTO PARA LISTAR LAS ACTIVIDADES MAS IMPORTANTES
+
+	proc listarActividadesImportantes : (in a:Agenda, in fecha:String, in prioridad:int)
+	{pre esFechaValida(intOfString(fecha))/\(0<=prioridad<=5)}
+	/*{post //Esta escrita en pantalla la secuencia ordenada sin repeticionesformada por 
+	   los elementos del conjunto
+		{i : (0<=i<a.tam)/\(fecha + “0600”)<=a.fechaHNombre[i][0]<=(fecha+"2200")/\
+		(a.duracionPrioridad[i][1]<=prioridad):
+		(a.fechaHNombre[i][0], a.fechaHNombre[i][1],a.duracionPrioridad[i][0],
+		 a.duracionPrioridad[i][1])}}*/
+|[
+	var k:=0:int;
+	var j:=0:int;
+	
+	if a.tam>0 ->
+		if diaLibre(a,fecha) -> write("No existen actividades programadas")
+		| !diaLibre(a,fecha) ->
+			{inv 0<=k<=a.tam}{bound a.tam-k}
+			 do k<a.tam -> 
+			    if obtenerFecha(a.fechaHNombre[k][0])!=fecha -> k:=k+1
+		        |  obtenerFecha(a.fechaHNombre[k][0])=fecha -> 
+				    j:=k;
+		            {inv 0<=j<=cantidadActDia(a,fecha)}{bound cantidadActDia(a,fecha)-j}
+		            do j<cantidadActDia(a,fecha) ->
+		              if a.duracionPrioridad[j][1]<=prioridad ->
+					     write(a.fechaHNombre[j][0]+" "+a.fechaHNombre[j][1])
+					  | a.duracionPrioridad[j][1]>prioridad -> skip
+		              fi;			  
+		              j:=j+1
+		            od;k:=a.tam
+				fi		
+			 od
+			fi
+	| a.tam=0 -> write("No hay actividades que listar")
+	fi
+]|
+
+//PROCEDIMIENTO PARA LISTAR LAS ACTIVIDADES`POR PRIORIDAD
+
+	proc listarActividadesPorPrioridad : (in a:Agenda)
+	{pre true}
+	/*{post //Esta escrita en pantalla la secuencia ordenada sin repeticionesformada por 
+	   los elementos del conjunto
+	   {i : 0<=i<a.tam : (a.duracionPrioridad[i][1],a.fechaHNombre[i][0],
+	   a.fechaHNombre[i][1],a.duracionPrioridad[i][0])}}*/
+|[
+	if a.tam>0->
+	    var k:=0:int;
+		var prioridad:=0:int;
+		{inv 0<=prioridad<=6}{bound 6-prioridad}
+		do prioridad<6 ->
+		   {inv 0<=k<=a.tam}{bound a.tam-k}
+		   do k<a.tam -> 
+		    if a.duracionPrioridad[k][1]=prioridad -> 
+			   write(a.fechaHNombre[k][0]+" "+a.fechaHNombre[k][1])
+			| a.duracionPrioridad[k][1]!=prioridad -> skip
+	        fi;
+	        k:=k+1
+		   od;
+	       prioridad:=prioridad+1;k:=0
+	    od	 
+	| a.tam=0 -> write("No existen actividades para listar")
+	fi
+]|
+
+//FUNCION PARA SABER CUANTAS ACTIVIDADES ESTAN REGISTRADAS EN LA AGENDA
+
+    fun cantidadActividades : (a:Agenda) -> int
+	{pre true}
+	{post cantidadActividades = a.tam}
+	= a.tam
+
+//FUNCION PARA SABER CUANTAS ACTIVIDADES SE TIENEN PROGRAMADAS EN UN DIA
+
+	fun cantidadActDia : (a:Agenda,fecha:String) -> int
+	{pre esFechaValida(intOfString(fecha))}
+	{post cantidadActDia = (%count i:0<=i<a.tam:obtenerFecha(a.fechaHNombre[i][0])=fecha)}
+|[
+	var k:=0:int;
+	var cantidad:=0:int;
+	{inv 0<=k<=a.tam}
+	{bound a.tam-k}
+	do k<a.tam -> if obtenerFecha(a.fechaHNombre[k][0])=fecha -> cantidad:=cantidad+1
+                  | obtenerFecha(a.fechaHNombre[k][0])!=fecha -> skip
+				  fi;
+				  k:=k+1
+	od >> cantidad
+]|
+
+//FUNCION PARA SABER SI UN DIA ESTA LIBRE DE ACTIVIDADES
+    fun diaLibre : (a:Agenda,fecha:String) -> boolean
+	{pre esFechaValida(intOfString(fecha))}
+	{post diaLibre = (%forall i: 0<=i<a.tam: fecha!=obtenerFecha(a.fechaHNombre[i][0]))}
+|[	
+	var k:=0:int;
+	var libre:=true:boolean;
+	{inv 0<=k<=a.tam}{bound a.tam-k}
+	do k<a.tam -> if fecha!=obtenerFecha(a.fechaHNombre[k][0]) -> k:=k+1
+	              |  fecha=obtenerFecha(a.fechaHNombre[k][0]) -> libre:=false;k:=a.tam
+                  fi
+    od >>libre
+]|	
+	
+//FUNCION PARA SABER SI UNA DURACION ES VALIDA
+
+	fun duracionValida : (fh:String, d:int) -> boolean
+	{pre true}
+	{post duracionValida == (fechaHoraValida(fh))/\(d>0)/\((((obtenerMinutos(fh)+d) mod 60)
+							+(((obtenerMinutos(fh)+d) div 60)+obtenerHora(fh))*100)<=2200)}
+|[
+    var valida:=false:boolean;
+	if fechaHoraValida(fh) ->
+	    if 0<d ->
+		    if substring(fin(fh,d),8,12)<="2200" -> valida:=true
+			| substring(fin(fh,d),8,12)>"2200" -> skip
+			fi
+		|	d<0 ->skip
+		fi
+	| !fechaHoraValida(fh) -> skip
+    fi >>valida
+]|
+
+//FUNCION PARA SABER SI UNA FECHA Y UNA HORA SON VALIDAS
+
+	fun fechaHoraValida : (fh:String) -> boolean
+	{pre true}
+	{post fechaHoraValida == (length(fh)=12)/\
+							 (%forall j:0<=j<length(fh):"0"<=substring(fh,j,j+1)<="9")/\
+							 (esHoraValida(intOfString(substring(fh, 8, 12))))/\
+							 (esFechaValida(intOfString(substring(fh, 0, 8))))}
+|[
+	var valida:=false:boolean;
+	if length(fh)!=12 -> skip
+	|  length(fh)=12 -> 
+	    if (%forall j:0<=j<length(fh):"0"<=substring(fh,j,j+1)<="9") ->
+		    var fecha:=intOfString(substring(fh,0,8)):int;
+            var hora:=intOfString(substring(fh,8,12)):int;
+            if esFechaValida(fecha)/\esHoraValida(hora) -> valida:=true
+            | !esFechaValida(fecha)\/!esHoraValida(hora) ->skip
+            fi
+	    | (%exists j:0<=j<length(fh):substring(fh,j,j+1)<"0"\/substring(fh,j,j+1)>"9") ->
+				skip
+		fi
+    fi  >> valida
+]|
+
+//FUNCION PARA SABER SI UNA FECHA ES VALIDA
+
+	fun esFechaValida : (f:int) -> boolean
+	{pre true}
+	{post esFechaValida == (1<=(f mod 100)<=30)/\(1<=((f div 100) mod 100)<=12)/\
+	((f div 10000)>=2007)}
+	= (1<=(f mod 100)<=30)/\(1<=((f div 100) mod 100)<=12)/\((f div 10000)>=2007)
+
+//FUNCION PARA SABER SI UNA HORA ES VALIDA
+
+	fun esHoraValida : (h:int) -> boolean
+	{pre true}
+	{post esHoraValida == ((6<=(h div 100)<=21)/\(0<=(h mod 100)<=59))\/(((h div 100)=22)/\
+	((h mod 100)=0))}
+	= ((6<=(h div 100)<=21)/\(0<=(h mod 100)<=59))\/(((h div 100)=22)/\((h mod 100)=0))
+	
+//FUNCION PARA SABER SI LA PRIORIDAD ES VALIDA
+
+	fun esPrioridadValida : (in p:int) -> boolean
+	{pre true}
+	{post esPrioridadValida == 0<=p<=5}
+	= 0<=p<=5
+
+//FUNCIONES PARA SABER SI DOS ACTIVIDADES SE SOLAPAN
+
+	fun seSolapan : (fh1:String, d1:int, fh2:String, d2:int) -> boolean 
+	{pre fechaHoraValida(fh1)/\fechaHoraValida(fh2)/\(d1>0)/\(d2>0)}
+	{post seSolapan == ((fh1<fh2)/\((fh2<fin(fh1,d1))))\/(fh1=fh2)\/
+	((fh2<fh1)/\(fh1 < fin(fh2, d2)))}
+	= ((fh1<fh2)/\((fh2<fin(fh1,d1))))\/(fh1=fh2)\/((fh2<fh1)/\(fh1 < fin(fh2, d2)))
+
+//FUNCION CHOCA
+
+	fun choca : (a:Agenda, fh:String, d:int) -> boolean
+	{pre fechaHoraValida(fh)/\(d > 0)}
+	{post choca == (%exists x: 0<=x<a.tam:seSolapan(a.fechaHNombre[x][0],
+													a.duracionPrioridad[x][0],fh,d))}
+|[
+	var k:=0:int;
+	var chocan:=false:boolean;
+	{inv 0<=k<=a.tam}
+	{bound a.tam-k}
+	do (k<a.tam)/\!chocan -> chocan:=seSolapan(a.fechaHNombre[k][0],
+											   a.duracionPrioridad[k][0],fh,d);
+							 k:=k+1
+	od >> chocan
+]|
+
+//FUNCION PARA OBTENER MINUTOS
+
+	fun obtenerMinutos : (fh:String) -> int
+	{pre true}
+	{post obtenerMinutos = (intOfString(substring(fh, 8, 12)) mod 100)}
+	= (intOfString(substring(fh, 8, 12)) mod 100)
+
+//FUNCION PARA OBTENER HORA
+
+	fun obtenerHora : (fh:String) -> int
+	{pre true}
+	{post obtenerHora = (intOfString(substring(fh, 8, 12)) div 100)}
+	= (intOfString(substring(fh, 8, 12)) div 100)
+
+//FUNCION  PARA OBTENER FECHA
+
+	fun obtenerFecha : (fh:String) -> String
+	{pre true}
+	{post obtenerFecha = substring(fh,0,8)}
+	= substring(fh,0,8)
+
+//FUNCION PARA OBTENER EL FIN DEL STRING DE LA FECHA HORA EN Q TERMINA LA ACTIVIDAD
+
+	fun fin : (fh:String,d:int) -> String
+	{pre true}
+	{post true}
+	/*{post fin = substring(fh, 0, 8)+((obtenerHora(fh)+
+	((obtenerMinutos(fh)+d) div 60)))<(10 => "0" | "")+
+	(((obtenerMinutos(fh) + d) mod 60)+(obtenerHora(fh) + 
+	((obtenerMinutos(fh) + d) div 60))*100)}*/
+|[
+    var finall:="":String;
+    var minn:=obtenerMinutos(fh):int;
+	var hora:=obtenerHora(fh):int;
+	var suma:=d+minn:int;
+	minn:=(suma) mod 60;
+	hora:=(hora+((suma) div 60));
+    if hora<10 -> finall:=substring(fh,0,8)+"0"+((hora*100)+minn)
+	|  hora>=10 -> finall:=substring(fh,0,8)+((hora*100)+minn)
+	fi
+	>> finall
+]|
+
+//FUNCION PARA SABER SI UNA ACTIVIDAD PERTENCE A LA AGENDA
+
+   fun pertenece : (a:Agenda, fh:String) -> boolean
+    { pre true }
+    { post pertenece == (%exists i : 0 <= i < a.tam : fh = a.fechaHNombre[i][0]) }
+|[
+	var b:=false:boolean;
+	var i:=0:int;
+	{inv  b == ((%exists j:0<=j<i:fh = a.fechaHNombre[j][0])/\(0<=i<=a.tam))}
+	{bound a.tam-i}
+	do (i<a.tam)/\!(b) -> b:=a.fechaHNombre[i][0]=fh;i:=i+1
+	od >> b
+]|
+		
+//PROGRAMA CLIENTE
+
+	write("");write("Buenos Dias. Bienvenido a USB Agenda Electronica.");write("");
+    const N=readInt("Por favor inserte el numero de agendas que desea manejar: "):int;
+	write("");
+    var Agendas:=%[i:N:nuevaAgenda(1)]%:array[]of Agenda;
+	var k:=0:int;
+	
+	{inv 0<=k<=N+1}
+	{bound N-k+1}
+	do k<N ->Agendas[k]:=nuevaAgenda(readInt("Ingrese el Tamano MAX de la Agenda"+k+": "));
+	k:=k+1
+	od;
+    
+    var numAgenda:=0:int;
+    var j:=0:int;
+	var l:=0:int;
+	var m:=0:int;
+    var opcion:="":String;
+	var bool:=false:boolean;
+	var validez:=true:boolean;
+	var nombre:="":String;
+	var fh:="":String;
+	var d:=0:int;
+	var p:=0:int;
+	var esta:=true:boolean;
+
+    {inv 0<=k<=100000}{bound 100000-k}
+    do k<100000 -> opcion:="";
+
+	write("");
+	numAgenda:=readInt("Ingrese el numero de la agenda con la que desea trabajar (0-"+(N-1)+")");
+	l:=0;
+	{inv 0<=l<=10}{bound 10-l}
+	do numAgenda<0\/numAgenda>=N -> 
+	  write("No existe la Agenda "+numAgenda);
+	  numAgenda:=readInt("Introduzca el numero de una agenda existente.");
+	  l:=l+1
+	od;
+    l:=0;	
+    write("");write("Menu de opciones:");write("");
+    write("1.-Agregar actividades.");
+    write("2.-Eliminar una actividad.");
+    write("3.-Obtener una lista de todas las actividades programadas para un dia.");
+    write("4.-Buscar una actividad dada la fecha y hora de su programación.");
+    write("5.-Incluir todas las actividades de la agenda en la programacion de otra.");
+    write("6.-Obtener una lista de las actividades de mayor prioridad en una día.");
+    write("7.-Obtener una lista de todas las actividades ordenadas de menor a mayor prioridad.");
+    write("8.-Verificar si un dia esta libre de actividades.");
+    write("9.-Obtener el numero de actividades programadas en la agenda.");
+    write("10.-Obtener el numero de actividades programadas en un dia.");
+    write("11.-Salir del Sistema.");write("");
+	
+    
+    opcion:=readString("Introduzca el numero de su opcion.");write("");
+	
+    if opcion="1" -> m:=0;
+		{inv 0<=m<=10}
+		{bound 10-m}
+		do m<10 -> 
+			var n:=readInt("Inserte el numero de actividades que desea agregar: "):int;
+			if (n+Agendas[numAgenda].tam)<=Agendas[numAgenda].MAX -> m:=10;j:=0;
+				{inv 0<=j<=n}{bound n-j}
+				do j<n -> l:=0;
+					{inv 0<=l<=10}
+					{bound 10-l}
+					do l<10 ->
+				       nombre:=readString("Actividad: ");
+				       fh:=readString("Fecha y Hora (aaaammddhhmm): ");
+				       d:=readInt("Duracion en minutos: ");
+				       p:=readInt("Prioridad: ");write("");
+					   validez:=fechaHoraValida(fh)/\esPrioridadValida(p) /\
+								!(choca(Agendas[numAgenda],fh,d))/\(duracionValida(fh,d));
+					   if validez -> 
+							agregarActividad(Agendas[numAgenda],fh,d,p,nombre);
+							 j:=j+1;l:=10
+					   | !validez -> 
+							write("Algun dato es incompatible,vuelva a ingresarlos");l:=l+1
+					   fi
+					od
+				od
+			| (n+Agendas[numAgenda].tam)>Agendas[numAgenda].MAX ->  
+						write("No posee espacio para tantas actividades (Maximo = "+((Agendas[numAgenda].MAX)-(Agendas[numAgenda].tam))+")");
+						m:=m+1
+			fi
+		od
+	   
+    |  opcion="2" ->
+		l:=0;
+		{inv 0<=l<=10}
+		{bound 10-l}
+		do l<10 ->
+			fh:=readString("Fecha y Hora de la actividad que desea eliminar: ");
+			validez:=fechaHoraValida(fh);
+			if validez -> 
+				esta:=pertenece(Agendas[numAgenda],fh);
+				if esta -> eliminarActividad(Agendas[numAgenda],fh);l:=10
+				| !esta -> 
+					write("Para la fecha que ingreso no existe actividad para eliminar")
+				;l:=10
+				fi	
+			| !validez -> write("Algun dato es incompatible,vuelva a ingresarlos");l:=l+1
+			fi
+		od
+       
+
+    |  opcion="3" ->
+		l:=0;
+		{inv 0<=l<=10}
+		{bound 10-l}
+		do l<10 ->
+			fh:=readString("Fecha: ");
+			validez:=esFechaValida(intOfString(fh));
+			if validez -> listarActividades(Agendas[numAgenda],fh);l:=10
+			| !validez -> write("Algun dato es incompatible,vuelva a ingresarlos");l:=l+1
+			fi
+		od
+
+    | opcion="4" ->
+		l:=0;
+		{inv 0<=l<=10}
+		{bound 10-l}
+		do l<10 ->
+			fh:=readString("Fecha: ");
+			validez:=fechaHoraValida(fh);
+			if validez -> nombre:=buscarActividad(Agendas[numAgenda],fh);l:=10
+			| !validez -> write("Algun dato es incompatible,vuelva a ingresarlos");l:=l+1
+			fi
+		od;
+		write(nombre)
+	
+    | opcion="5" ->
+		var chocan:=false:boolean;
+		var r:=0:int;
+		j:=readInt("Inserte el numero de la agenda en cuya programacion desea incluir todas las actividades de la agenda actual.");
+		{inv true}
+		{bound Agendas[numAgenda].tam-r}
+		do r<Agendas[numAgenda].tam /\ !chocan ->
+			chocan:=choca(Agendas[j],Agendas[numAgenda].fechaHNombre[r][0],
+						  Agendas[numAgenda].duracionPrioridad[r][0]);
+			r:=r+1
+		od;
+		if !chocan ->
+			if Agendas[j].MAX>=Agendas[j].tam+Agendas[numAgenda].tam ->
+				incluirActividades(Agendas[j],Agendas[numAgenda]);
+				write("Las actividades de la agenda "+numAgenda+" han sido incluidas en la agenda "+j)
+			| Agendas[j].MAX<Agendas[j].tam+Agendas[numAgenda].tam ->
+				write("No se pueden incluir las actividades dado que el tamano maximo de la agenda es muy pequeno")
+			fi
+		| chocan -> write("Existen dos actividades mque chocan,entonces no se pueden incluir")
+		fi
+	| opcion="6" ->
+		l:=0;
+		{inv 0<=l<=10}
+		{bound 10-l}
+		do l<10 ->
+			fh:=readString("Fecha: ");
+			p:=readInt("Prioridad: ");
+			validez:=esFechaValida(intOfString(fh))/\esPrioridadValida(p);
+			if validez -> listarActividadesImportantes(Agendas[numAgenda],fh,p);l:=10
+			| !validez -> write("Algun dato es incompatible,vuelva a ingresarlos");l:=l+1
+			fi
+		od
+		
+	| opcion="7" ->
+	    listarActividadesPorPrioridad(Agendas[numAgenda])
+	
+    | opcion="8" -> 
+		l:=0;
+		{inv 0<=l<=10}
+		{bound 10-l}
+		do l<10 ->
+			fh:=readString("Fecha: ");
+			validez:=esFechaValida(intOfString(fh));
+			if validez -> 
+				bool:=diaLibre(Agendas[numAgenda],fh);
+				if bool=true -> write("No hay actividades programadas en esta fecha.")
+				|  bool=false -> write("Este dia no esta libre de actividades.")
+				fi;l:=10
+			| !validez -> write("Algun dato es incompatible,vuelva a ingresarlos");l:=l+1
+			fi
+		od
+
+    | opcion="9" ->	  
+      j:=cantidadActividades(Agendas[numAgenda]);
+	  write("El numero de actividades programas en la agenda es "+j)
+	  
+	| opcion="10" ->
+		 l:=0;
+		{inv 0<=l<=10}
+		{bound 10-l}
+		do l<10 ->
+			fh:=readString("Fecha: ");
+			validez:=esFechaValida(intOfString(fh));
+			if validez -> j:=cantidadActDia(Agendas[numAgenda],fh);l:=10
+			| !validez -> write("Algun dato es incompatible,vuelva a ingresarlos");l:=l+1
+			fi
+		od;
+		write("El numero de actividades programas para ese dia es "+j)
+	  
+	| opcion="11" -> 
+      opcion:=readString("Esta seguro de que desea salir del programa?(S/N)");
+      if opcion="s"\/opcion="S" -> k:=99999
+      |  opcion!="s"/\opcion!="S" -> skip
+      fi
+	| opcion!="1"/\opcion!="2"/\opcion!="3"/\opcion!="4"/\opcion!="5"/\opcion!="6"
+	  /\opcion!="7"/\opcion!="8"/\opcion!="9"/\opcion!="10"/\opcion!="11" -> 
+      write("Esa opcion no es valida.")  
+    fi;
+    k:=k+1
+	
+	od	
+]|

@@ -1,0 +1,17 @@
+6
+a
+b
+c
+d
+e
+fin
+8
+A a b 1
+B a d 1
+C b c 1
+D c d 1
+E c fin 1
+F d b 1
+G d e 1
+H e fin 1
+a fin

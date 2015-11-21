@@ -1,0 +1,22 @@
+8
+a
+b
+c
+d
+e
+f
+g
+fin
+11
+A a b 2 
+B a e 2
+C b c 3
+D b d 3
+E b e 3
+F c f 4
+G c g 4
+H e fin 3
+I f fin 2 
+J g fin 1
+K d f 2
+a fin

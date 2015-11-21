@@ -1,0 +1,122 @@
+import java.util.*;
+
+public class GraphMatrizAdj extends Graph 
+{
+    private int Vcnt, Ecnt;
+    private boolean digraph;
+    private boolean adj[][];
+    private Edge lados[];
+    private LinkedList<Vertice> L;
+
+    public GraphMatrizAdj(int V,int E, boolean flag){
+        Vcnt = V; 
+        Ecnt = 0; 
+        digraph = flag;
+        adj = new boolean[V][V];
+        lados = new Edge[E];
+    }
+    
+    public int V() { return Vcnt; }
+    
+    public  int E() { return Ecnt; }
+    
+    public boolean directed() { return digraph; }
+    
+    public void insert(Edge e){ 
+    	int v = e.v, w = e.w;
+		if (!existe(e.v,L)) {
+			Vertice V=new Vertice(e.v,0);
+			L.add(V);
+		}
+        if (adj[v][w] == false) 
+	    lados[Ecnt]=e;
+        Ecnt++;
+        adj[v][w] = true;
+        if (!digraph) 
+	    adj[w][v] = true; 
+    } 
+    
+    public void remove(Edge e){ 
+	int v = e.v, w = e.w;
+        if (adj[v][w] == true) 
+	    Ecnt--;
+        adj[v][w] = false;
+        if (!digraph) 
+	    adj[w][v] = false; 
+    } 
+    
+    private boolean edge(int v, int w){ 
+	return adj[v][w]; 
+    }
+    
+    public Edge[] lado() {
+    	return lados;
+    }
+    
+    public LinkedList<Vertice> listaVert() {
+    	return L;
+    }
+    
+    public Vertice primero(LinkedList<Vertice> L) {
+		Vertice primero=null;
+		boolean menor;
+		boolean elmenor=false;
+		for(int i=0;i<L.size()&&!elmenor;i++) {
+			menor=true;
+			for(int j=0;j<L.size()&&menor;j++) {
+				if (L.get(i).c>L.get(j).c) menor=false;
+			}
+			if (menor) elmenor=true;
+			primero=L.get(i);
+		}
+		return primero;
+	}
+	
+    public Vertice obtVert(int s) {
+    	Vertice v=null;
+    	boolean found=true;
+    	for(int i=0;i<L.size()&&!found;i++) 
+    		if (L.get(i).s==s) {
+    			found=true;
+    			v=L.get(i);
+    		}
+    	return v;
+    }
+    public AdjList getAdjList(int v){ 
+	return new AdjArray(v); 
+    }
+    
+    private class AdjArray implements AdjList{
+	private int i, v;
+	
+	AdjArray(int v){ 
+	    this.v = v; 
+	    i = -1;
+	}
+  
+	public int beg(){ 
+	    i = -1; 
+	    return nxt(); 
+	}
+	    
+	public int nxt(){
+	    for (i++; i < V(); i++)
+		if (edge(v, i) == true) 
+		    return i;
+	    return -1;
+	}
+	    
+	public boolean end(){ 
+	    return i >= V(); 
+	}
+    }
+    
+    public boolean existe(int i,LinkedList<Vertice> L) {
+		boolean existe=false;
+		if (L!=null)
+			for(int j=0;j<L.size()&&!existe;j++)
+				existe=L.get(j).s==i;
+		else return true;
+		return existe;
+	}
+}

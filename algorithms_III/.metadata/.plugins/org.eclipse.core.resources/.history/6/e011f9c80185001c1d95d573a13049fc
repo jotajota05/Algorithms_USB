@@ -1,0 +1,43 @@
+import java.util.*;
+
+
+public class GraphSPT {
+
+	private double[] wt;
+	private Edge[] spt;
+	
+	GraphSPT(Graph G, int s) { 
+		int V = G.V();
+		wt = new double[V]; 
+		spt = new Edge[V];
+		for (int v = 0; v < V; v++) wt[v] = 
+		wt[s]=0;
+		LinkedList<Vertice> L=G.listaVert();
+		for(int i=0;i<L.size();i++) L.get(i).modCosto(java.lang.Float.MAX_VALUE); 
+		while (L.size()!=0) {
+			Vertice Vert=G.primero(L);
+			AdjList A=G.getAdjList(s);
+			for (int i=A.beg();!A.end();i=A.nxt()) {
+				Edge e=new
+				if (wt[i]>wt[s]+costo(G,u,i)) {
+					wt[i]=wt[u]+costo(G,u,i);
+					spt[i]
+				}
+			}
+		}
+		
+	}
+	
+	public double costo(Graph G,int x, int y) {
+	    boolean found=false;	
+		double costo=0;
+	    Edge[] l=G.lado();
+	    for(int i=0;i<l.length&&!found;i++) 
+	    	if (l[i].v==x && l[i].w==y) costo=l[i].c;
+	    return costo;
+	}
+	
+	Edge pathR(int v) { return spt[v]; }
+	
+	double dist(int v) { return wt[v]; }
+}
